@@ -2,61 +2,63 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
-.UserLogued
-{
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.UserLogued {
     padding: 10px;
     line-height: 16px;
     font-size: 13px;
@@ -72,20 +74,20 @@ body {
     background: -ms-linear-gradient(top, #0294a3 0%, #015b64 100%); /* IE10+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0294a3', endColorstr='#015b64',GradientType=0 ); /* IE6-9 */
     background: linear-gradient(top, #0294a3 0%, #015b64 100%); /* W3C */
-    width: auto; 
+    width: auto;
     position: absolute;
     right: 0px;
     top: 0px;
     text-align: right;
 }
 
-.UserLogued a {
-    color: white;
-}
+    .UserLogued a {
+        color: white;
+    }
 
-.UserLogued a:hover {
-    color: white;
-}
+        .UserLogued a:hover {
+            color: white;
+        }
 
 .bodyLoggedLayout {
     background: url(~/img/banner3.jpg) no-repeat center center fixed;
@@ -99,15 +101,18 @@ body {
     color: #fff;
     background-color: #19986a;
     border-color: #19986a;
-    border-radius: 5px !important;
+    padding: 10px 20px;
+    border-radius: 10px !important;
+    transition: .4s;
 }
 
-.yanaButton:hover {
-    color: #fff;
-    background-color: #16bb7f;
-    border-color: #16bb7f;
-    border-radius: 5px !important;
-}
+    .yanaButton:hover {
+        color: #fff;
+        background-color: #16bb7f;
+        border-color: #16bb7f;
+        padding: 10px 20px;
+        border-radius: 10px !important;
+    }
 
 .yanaButtonGrey {
     color: #fff;
@@ -116,9 +121,9 @@ body {
     border-radius: 5px !important;
 }
 
-.yanaButtonGrey:hover {
-    color: #fff;
-    background-color: #b2b2b2;
-    border-color: #16bb7f;
-    border-radius: 5px !important;
-}
+    .yanaButtonGrey:hover {
+        color: #fff;
+        background-color: #b2b2b2;
+        border-color: #16bb7f;
+        border-radius: 5px !important;
+    }

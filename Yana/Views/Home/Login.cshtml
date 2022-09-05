@@ -110,26 +110,26 @@
         </div>
         @using (Html.BeginForm("Login", "Home", FormMethod.Post))
         {
-        <form role="form">
-            <fieldset>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Password" name="Password" type="password" value="">
-                </div>
-                <div style="text-align: center;">
-                    <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
-                </div>
-            </fieldset>
-        @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
+            <form role="form">
+                <fieldset>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Password" name="Password" type="password" value="">
+                    </div>
+                    <div style="text-align: center;">
+                        <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </fieldset>
+                
+                @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
 
-        </form>
-
-        <div style="text-align: center; padding: 1em;">
-            <button type="submit" class="btn yanaButton">Ingresar</button>
-        </div> 
+                <div style="text-align: center; padding: 1em;">
+                    <button type="submit" class="btn yanaButton">Ingresar</button>
+                </div>
+            </form>
         }
     </div>
-    
+
 </div>
