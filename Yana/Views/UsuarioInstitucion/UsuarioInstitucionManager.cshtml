@@ -1,0 +1,289 @@
+﻿@model Yana.Models.DomainEntities.Usuario
+@{
+    ViewData["Title"] = "UsuarioInstitucionManager";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<!-- Css datepicker -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+<link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
+<!-- js datepicker -->
+<script src="~/js/notificaciones/bootstrap.min.js"></script>
+<script src="~/js/notificaciones/moment-v2.18.1.js"></script>
+<script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            try {
+
+                document.forms["frmUsuario"].submit();
+            } catch (err) {
+                alert(err.Description);
+            }
+        }
+    }
+
+    function IsValid() {
+        HideDivMessageP();
+
+        var field;
+
+        field = $("#Nombre").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Nombre.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Apellido").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Apellido.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Dni").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el DNI/Otro tipo de Documento.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#FechaNacimiento").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar la Fecha de Nacimiento.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Sexo").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe seleccionar el Sexo.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#IdInstitucion").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe seleccionar la Institución.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Email").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Email.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        if (!IsEmail(field)) {
+            $("#lblErrorP").text("El E-mail ingresado es inválido.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        return true;
+    }
+
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+    });
+
+    function EliminarUsuarioInstitucion() {
+
+        var idUsuarioInstitucion = @Model.IdUsuario;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteUsuarioInstitucion", "UsuarioInstitucion")',
+            data: { idUsuarioInstitucion: idUsuarioInstitucion },
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("UsuarioInstitucionList", "UsuarioInstitucion")');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminación de Usuario Institución</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                ¿Seguro que desea eliminar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                <button type="button" class="btn yanaButton" onclick="EliminarUsuarioInstitucion();"><i class='fa fa-check-square fa-lg'></i>Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            string titulo = Model.IdUsuario == 0 ? "Nuevo Usuario Institución" : "Modificar Usuario Institución";
+                        }
+                        @titulo
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @{
+                            if (Model.IdUsuario == 0)
+                            {
+                                <label style="font-style: italic; font-size: 15px; color: purple;">Importante: cuando se crea un nuevo usuario institución, la contraseña por defecto para el ingreso al sistema es su DNI.</label><br /><br />
+                            }
+                        }
+                        @using (Html.BeginForm("UsuarioInstitucionManager", "UsuarioInstitucion", Model, FormMethod.Post, false, new { id = "frmUsuario" }))
+                        {
+                            <hidden value="@Model.IdPerfil" id="IdPerfil" name="IdPerfil" />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Nombre*</label>
+                                        <input class="form-control" placeholder="" id="Nombre" name="Nombre" type="text" value="@Model.Nombre" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Apellido*</label>
+                                        <input class="form-control" placeholder="" id="Apellido" name="Apellido" type="text" value="@Model.Apellido" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>DNI/Otro tipo de Documento*</label>
+                                        <input class="form-control" placeholder="" id="Dni" name="Dni" type="text" value="@Model.Dni" autofocus>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Fecha de Nacimiento*</label>
+                                        <div class='input-group date' id='datetimepicker0'>
+                                            <input type='text' class="form-control" name="FechaNacimiento" id="FechaNacimiento" value="@Model.FechaNacimiento" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Sexo*</label>
+                                        @Html.DropDownListFor(x => x.Sexo, (IEnumerable<SelectListItem>)ViewBag.Sexos, "SELECCIONAR",
+                                           new { style = "width:100%; text-align:left; ", @class = "form-control", id = "Sexo", name = "Sexo" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Institución*</label>
+                                        @Html.DropDownListFor(x => x.IdInstitucion, (IEnumerable<SelectListItem>)ViewBag.Instituciones, "SELECCIONAR",
+                                           new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdInstitucion", name = "IdInstitucion" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>E-mail*</label>
+                                        <input class="form-control" placeholder="" id="Email" name="Email" type="text" value="@Model.Email" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Teléfono Particular</label>
+                                        <input class="form-control" placeholder="" id="TelefonoParticular" name="TelefonoParticular" type="text" value="@Model.TelefonoParticular" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Celular</label>
+                                        <input class="form-control" placeholder="" id="Celular" name="Celular" type="text" value="@Model.Celular" autofocus>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @{
+                                    if (Model.IdUsuario != 0)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#deleteModal"><i class='fa fa-trash fa-lg'></i>Eliminar</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-8"></div>
+                                    }
+                                }
+                                <div class="col-md-2">
+                                    <button onclick="window.location.assign('@Url.Action("UsuarioInstitucionList", "UsuarioInstitucion")'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button onclick="PostForm(); return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker0').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+    });
+</script>
+
+
+

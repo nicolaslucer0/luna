@@ -1,0 +1,23 @@
+
+Mercado: datos concretos
+El contexto relata la historia hacia atras, que da pie al problema que estamos resolviendo.
+El contexto termina donde empieza el problema.
+Problema: model canvas, qué problema estamos resolviendo.
+Solución: apartado tecnico: en la descripcion contar las caracteristicas principales del proyecto, no a nivel CU o Req., sino a nivel caracteristicas. Caracteristicas principales de lo que estamos resolviendo.
+
+Funcionamiento: gráfico de lo que dibujamos. paso 1, paso 2, paso 3.
+Algun flujo si usamos una API.
+
+Competencia: identificar competencia internacional o nacional, directa (hace lo mismo que nosotros, del que nos tenemos que diferenciar) o indirecta (ofrece algo parecido pero no igual). Estoy resolviendo el problema, la persona con mi competencia indirecta lo puede resolver pero le falta algo..., eso es la indirecta.
+Fortalezas y debilidades de la competencia. Tablita con "Autenticacion en 2 pasos, competencia 1 tachado, 2 tachado, nosotros tilde).
+Justificacion: por que es un proyecto disruptivo: no existe en el mercado porque estamos trayendo algo nuevo. (Blockchain, APIs).
+Ventaja competitiva: cual es la direrencia: acuerdos, algo que garantice el mercado en Argentina. Que beneficios estamos aportando a nuestros clientes.
+Modelo de negocio: como va a generar ingresos a lo largo del tiempo. En qué momento mis ingresos superan a los costos. 1000 usuarios a los 6 meses, y a los 6 meses los ingreos superaron a los costos.
+Riesgos técnicos/funcionales tiene el proyecto: hardware que no funciones, api que deje de funcionar, que la api deje de ser gratuita.
+Qué especialistas estamos involucrando en el proyecto.
+Tecnologías involucradas.
+Bibliografía: sitio de interes, para tal concepto, tenerlo mas claro, dirigite a tal libro.
+Glosario: si durante la lectura del documento hay algún termino que a ojos de buen mormón, vamos al glosario lo entedemos.
+Y además, validation board, segunda versión.
+
+

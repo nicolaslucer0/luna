@@ -1,0 +1,12 @@
+.modal-content {
+    background: darkgray !important;
+}
+
+.modal-title, .radio-inline {
+    font-size: medium;
+    color: beige;
+}
+
+.modal-header .close{
+    margin-top: -20px !important;
+}

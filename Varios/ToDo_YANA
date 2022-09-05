@@ -1,0 +1,51 @@
+
+ToDo YANA:
+
+- Agregar seguridad a nivel controllers, para que si el usuario no está logueado, redirija al login y despues a la vista donde quería llegar.  #DIEGO
+- singleton x facade. #DIEGO
+
+- ABM de Pacientes: agregar subgrilla de GrupoFamiliar con conflictos  #DIEGO
+- Cambio de visualización de pacientes de jqgrid a modo tarjetas.  #DIEGO
+- Agregar filtro FechaDesde/Hasta en Dashboards de gráficos #DIEGO
+
+#DONE
+
+- Agregar opción de recuperación de claves con link vía email con dato encriptado y controller que reciba peticiones desde el link y permita cambiar la clave. La pantalla de pedido de recuperación de clave debe incluir un captcha.
+- Dar vida a gráficos agregados para ExpoProyecto.
+- ABM de Pacientes: agregar subgrilla de Patologias.
+- En ABM RegistroDiario, agregar combos faltantes.
+- Reestructurar Menú.
+- En ABM de Notificaciones, agregar subgrilla de NotificacionOpcion.
+- ABM de Usuarios Psicólogos
+- ABM de Usuarios Instituciones
+- Agregar gráfico de dispersión.
+- Agregar control de texto enriquecido en ABM de Seguimiento
+- ABM de respuestas de notificaciones. #DIEGO
+- Agregar nuevos campos de FechaNacimiento y Sexo en UsuarioInstitucion, Paciente, y Profesional.#DIEGO
+- Agregar envío de mails para aviso de notificaciones. #NACHO / #DIEGO
+- Creacion de usuario institucion por admin, vinculandolos con institucion para el admin. #OK
+- Creacion de psicologos por usuario institucion, y visualizacion de solo sus psicologos. #OK
+- Psicologo vea sus pacientes #OK
+- Seguimientos solo se ven los de un paciente #OK
+- Paciente vea sus registros diarios  #OK
+- Institucion/Profesional: ve registros diarios accediendo desde paciente y filtrando #OK
+- ABMRegistroDiario: no guarda el idpaciente  #DIEGO  #OK
+- ABMRegistroDiario: sacar botón "NUEVO" para usuario != paciente  #DIEGO  #OK
+- ABMSeguimientoPaciente: se guardan IdProfesional y IdPaciente en null  #DIEGO   #OK
+- ABMSeguimientoPaciente: no se está pasando id de paciente en la redirección al list despues de guardar  #DIEGO   #OK
+- Registro diario: formato de fecha en grid   #DIEGO   #OK
+- Modificar repositorios de graficos para filtros por perfil  #DIEGO
+- Llenar gráfico de dispersión con datos reales.  #DIEGO
+
+- En ABM de Notificaciones, modificar guardado para que además de generar N Notificaciones, genere N NotificacionOpcion para cada Notificacion. #NACHO
+- En ABM de Notificaciones, agregar botón de "Generar a partir de Notificacion Existente", que lleva a una pantalla con notificaciones ya generadas agrupadas por IdGrupo, que genera una precarga del ABM de Notificaciones.  #NACHO
+- En ABM de Notifaciones, agregar botón para creación de Notificacion standard, donde se muestren como para crear fijo, 3 notificacion opcion, con seleccion de rango horario para mañana/tarde/noche  #NACHO
+
+- ABMNotificaciones: validacion de datos invalidos para 12:00AM, 1 día   #NACHO
+
+- Script Datos  #LITTLE
+
+- Implementar Twilio para notificaciones vía whatsapp, o buscar proveedor de envío de SMS con período de pruebas. #DIEGO
+	
+	
+	

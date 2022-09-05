@@ -1,0 +1,403 @@
+﻿@model Yana.Models.DomainEntities.Usuario
+@{
+    ViewData["Title"] = "PacienteManager";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<!-- Css datepicker -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+<link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
+<!-- js datepicker -->
+<script src="~/js/notificaciones/bootstrap.min.js"></script>
+<script src="~/js/notificaciones/moment-v2.18.1.js"></script>
+<script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            try {
+                var gridData1 = jQuery("#jqPatologias").getRowData();
+                var postData1 = JSON.stringify(gridData1);
+                $("#txSerializedPatologias").val(postData1);
+
+                document.forms["frmUsuario"].submit();
+            } catch (err) {
+                alert(err.Description);
+            }
+        }
+    }
+
+    function IsValid() {
+        HideDivMessageP();
+
+        var field;
+
+        field = $("#Nombre").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Nombre.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Apellido").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Apellido.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Dni").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el DNI/Otro tipo de Documento.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#FechaNacimiento").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar la Fecha de Nacimiento.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Sexo").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe seleccionar el Sexo.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        field = $("#Email").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Email.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        if (!IsEmail(field)) {
+            $("#lblErrorP").text("El E-mail ingresado es inválido.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        return true;
+    }
+
+    function AddPatologia() {
+        HideDivMessageP();
+
+        var idPatologia = $('#cboPatologia').val();
+        var nombrePatologia = $("#cboPatologia option:selected").text();
+
+        var ids = jQuery("#jqPatologias").jqGrid('getDataIDs');
+
+        for (var i = 0; i < ids.length; i++) {
+            var sintomaGrid = $("#jqPatologias").jqGrid('getRowData')[i].idPatologia;
+            if (parseInt(sintomaGrid) == parseInt(idPatologia)) {
+                $("#lblErrorP").text("La patología seleccionada ya está vinculada al paciente.");
+                ShowDivMessageP();
+                return false;
+            }
+        }
+
+        var datarow = { idPatologia: idPatologia, nombrePatologia: nombrePatologia };
+        var su = jQuery("#jqPatologias").jqGrid('addRowData', idPatologia, datarow);
+        if (!su) alert("Error al agregar");
+    }
+
+    function DelPatologia() {
+        HideDivMessageP();
+
+        var gr = jQuery("#jqPatologias").jqGrid('getGridParam', 'selrow');
+
+        if (gr != null) {
+            $("#jqPatologias").jqGrid('delRowData', gr);
+        } else {
+            $("#lblErrorP").text("Debe seleccionar la Patología a eliminar.");
+            ShowDivMessageP();
+            return false;
+        }
+    }
+
+    $(window).bind('resize', function () {
+        $("#jqPatologias").setGridWidth($("#divPanelBody").width() - 20);
+    }).trigger('resize');
+
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+    });
+
+    function EliminarPaciente() {
+
+        var idPaciente = @Model.IdUsuario;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeletePaciente", "Paciente")',
+            data: { idPaciente: idPaciente },
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("PacienteList", "Paciente")');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+
+        var decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
+            var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
+            if (jqXHR.responseText.charAt(0) === '[') {
+                try {
+                    errorInfo = $.parseJSON(jqXHR.responseText);
+                    errorText = "";
+                    for (i = 0; i < errorInfo.length; i++) {
+                        if (errorText.length !== 0) {
+                            errorText += "<hr/>";
+                        }
+                        errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
+                    }
+                } catch (e) {
+                }
+            } else {
+                html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
+                if (html !== null && html.length > 1) {
+                    errorText = html[1];
+                }
+            }
+            return errorText;
+        };
+
+        //jQuery("#jqPatologias").tableDnD();
+        $('#jqPatologias').jqGrid({
+            url: '@Url.Action("GetPatologiasByIdPaciente", "Paciente", new { idPaciente = Model.IdUsuario })',
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['IdPatologia', 'Patologías del Paciente'],
+            colModel: [
+                { name: 'idPatologia', index: 'idPatologia', key: true, hidden: true },
+                { name: 'nombrePatologia', index: 'nombrePatologia', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
+            ],
+            pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
+            rowNum: 10000, rowList: [10, 20, 30], sortname: 'idPatologia', sortorder: 'desc', rownumbers: true, viewrecords: true,
+            height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
+            jsonReader: { cell: "" },
+            caption: '',
+            loadError: function (jqXHR, textStatus, errorThrown) {
+                $('#' + this.id + '_err').remove();
+                $('#jqPatologias').closest('div.ui-jqgrid').before(
+                    '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
+                    ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
+                    decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
+            },
+            loadComplete: function () {
+                $('#' + this.id + '_err').remove();
+            },
+            gridComplete: function() {
+                $("#_empty", "#jqPatologias").addClass("nodrag nodrop");
+                //jQuery("#jqPatologias").tableDnDUpdate();
+            },
+            onclickSubmit: function (options) {
+                options.processing = true;
+                $.jgrid.hideModal("#delmodjqPatologias",
+                {
+                    gb: "#gbox_jqPatologias",
+                    jqm: options.jqModal,
+                    onClose: options.onClose
+                });
+            }
+        });
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminación de Paciente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                ¿Seguro que desea eliminar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                <button type="button" class="btn yanaButton" onclick="EliminarPaciente();"><i class='fa fa-check-square fa-lg'></i>Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            string titulo = Model.IdUsuario == 0 ? "Nuevo Paciente" : "Modificar Paciente";
+                        }
+                        @titulo
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @{
+                            if (Model.IdUsuario == 0)
+                            {
+                                <label style="font-style: italic; font-size: 15px; color: purple;">Importante: cuando se crea un nuevo paciente, la contraseña por defecto para el ingreso al sistema es su DNI.</label><br /><br />
+                            }
+                        }
+                        @using (Html.BeginForm("PacienteManager", "Paciente", Model, FormMethod.Post, false, new { id = "frmUsuario" }))
+                        {
+                            <hidden value="@Model.IdPerfil" id="IdPerfil" name="IdPerfil" />
+                            @Html.HiddenFor(u => u.SerializedPatologias, new { id = "txSerializedPatologias" })
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Nombre*</label>
+                                        <input class="form-control" placeholder="" id="Nombre" name="Nombre" type="text" value="@Model.Nombre" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Apellido*</label>
+                                        <input class="form-control" placeholder="" id="Apellido" name="Apellido" type="text" value="@Model.Apellido" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>DNI/Otro tipo de Documento*</label>
+                                        <input class="form-control" placeholder="" id="Dni" name="Dni" type="text" value="@Model.Dni" autofocus>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Fecha de Nacimiento*</label>
+                                        <div class='input-group date' id='datetimepicker0'>
+                                            <input type='text' class="form-control" name="FechaNacimiento" id="FechaNacimiento" value="@Model.FechaNacimiento" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Sexo*</label>
+                                        @Html.DropDownListFor(x => x.Sexo, (IEnumerable<SelectListItem>)ViewBag.Sexos, "SELECCIONAR",
+                                           new { style = "width:100%; text-align:left; ", @class = "form-control", id = "Sexo", name = "Sexo" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>E-mail*</label>
+                                        <input class="form-control" placeholder="" id="Email" name="Email" type="text" value="@Model.Email" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Teléfono Particular</label>
+                                        <input class="form-control" placeholder="" id="TelefonoParticular" name="TelefonoParticular" type="text" value="@Model.TelefonoParticular" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" style="text-align: left;">
+                                        <label>Celular</label>
+                                        <input class="form-control" placeholder="" id="Celular" name="Celular" type="text" value="@Model.Celular" autofocus>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-inline" style="text-align: left; vertical-align: middle; height: auto;">
+                                <div class="form-group" style="text-align: left;">
+                                    <label>Patología</label>
+                                </div>
+                                @Html.DropDownList("cboPatologia", (IEnumerable<SelectListItem>)ViewBag.Patologias, new { style = "width:30%; text-align:left;", @class = "form-control", id = "cboPatologia" })
+                                <button type="button" class="btn btn-success" title="Agregar Patología" onclick="AddPatologia(); return false;">
+                                    <span class='fa fa-plus fa-lg'></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" title="Eliminar Patología" onclick="DelPatologia(); return false;">
+                                    <span class='fa fa-trash fa-lg'></span>
+                                </button>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="jqPatologias" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                </div>
+                            </div>
+                            <br /><br />
+                            <div class="row">
+                                @{
+                                    if (Model.IdUsuario != 0)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#deleteModal"><i class='fa fa-trash fa-lg'></i>Eliminar</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-8"></div>
+                                    }
+                                }
+                                <div class="col-md-2">
+                                    <button onclick="window.location.assign('@Url.Action("PacienteList", "Paciente")'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button onclick="PostForm(); return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker0').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+    });
+</script>
+

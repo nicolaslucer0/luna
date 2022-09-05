@@ -1,0 +1,433 @@
+﻿@using Yana.Helpers;
+@using Yana.Enums;
+@{
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var url1 = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
+            $.get(url1, {}, function (data) {
+                
+                var categorias = [];
+                var series = [];
+
+                var firstElement = true;
+
+                $.each(data, function (i, obj) {
+                    if (firstElement) {
+                        $.each(obj['listCategory'], function (i2, category) {
+                            categorias.push(category);
+                        }); 
+
+                        firstElement = false;
+                    }
+
+                    var dataArray = [];
+
+                    $.each(obj['listValue'], function (i2, obj2) {
+                        dataArray.push(obj2);
+                    });
+
+                    series.push({
+                        name: '' + obj['nameSerie'] + '',
+                        color: obj['Color'],
+                        data: dataArray
+                    });
+
+                });
+
+                bindRegistrosDiariosPaciente(categorias, series);
+            });
+
+        function bindRegistrosDiariosPaciente(categorias, seriesData) {
+            $('#container1').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: '',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: categorias
+                },
+                yAxis: {
+                    title: {
+                        text: 'Cantidad de Registros Diarios'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: seriesData
+            });
+        }
+
+        var url2 = '@Url.Action("GetEmocionesUltimaSemana", "Home")';
+            $.get(url2, {}, function (data) {
+                
+                var categorias = [];
+                var series = [];
+
+                var firstElement = true;
+
+                $.each(data, function (i, obj) {
+                    if (firstElement) {
+                        $.each(obj['listCategory'], function (i2, category) {
+                            categorias.push(category);
+                        }); 
+
+                        firstElement = false;
+                    }
+
+                    var dataArray = [];
+
+                    $.each(obj['listValue'], function (i2, obj2) {
+                        dataArray.push(obj2);
+                    });
+
+                    series.push({
+                        name: '' + obj['nameSerie'] + '',
+                        color: obj['Color'],
+                        data: dataArray
+                    });
+
+                });
+
+                bindEmocionesSemana(categorias, series);
+            });
+
+        function bindEmocionesSemana(categorias, seriesData) {
+            $('#container2').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: '',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: categorias
+                },
+                yAxis: {
+                    title: {
+                        text: 'Cantidad de Registros Diarios'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: seriesData
+            });
+        }
+
+        var url3 = '@Url.Action("GetRespuestasNotificaciones", "Home")';
+            $.get(url3, {}, function (data) {
+                
+                var categorias = [];
+                var series = [];
+
+                var firstElement = true;
+
+                $.each(data, function (i, obj) {
+                    if (firstElement) {
+                        $.each(obj['listCategory'], function (i2, category) {
+                            categorias.push(category);
+                        }); 
+
+                        firstElement = false;
+                    }
+
+                    var dataArray = [];
+
+                    $.each(obj['listValue'], function (i2, obj2) {
+                        dataArray.push(obj2);
+                    });
+
+                    series.push({
+                        name: '' + obj['nameSerie'] + '',
+                        color: obj['Color'],
+                        data: dataArray
+                    });
+
+                });
+
+                bindRespuestaNotificaciones(categorias, series);
+            });
+
+        function bindRespuestaNotificaciones(categorias, seriesData) {
+            $('#container3').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: categorias
+                },
+                yAxis: {
+                    title: {
+                        text: 'Cantidad de respuesta a notificaciones'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 2,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: seriesData
+            });
+        }
+
+        var url4 = '@Url.Action("GetPacientesPorPatologia", "Home")';
+
+        $.get(url4, {}, function (data) {
+
+            var series = [];
+
+            $.each(data, function (i, obj) {
+                series.push({
+                    name: '' + obj['nameSerie'] + '',
+                    y: obj['value'],
+                    selected: obj['selected'],
+                    sliced: obj['sliced']
+                });
+            });
+
+            bindPacientesPatologia(series);
+        });
+
+        function bindPacientesPatologia(seriesData) {
+            $('#container4').highcharts({
+                chart: {
+                    type: 'pie',
+                    options3d: {
+                        enabled: true,
+                        alpha: 45,
+                        beta: 0
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name} ({point.y})',
+                            style: {
+                                width: '90px'
+                            }
+                        }
+                    },
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b><br/>'
+                },
+                series: [{
+                    name: 'Total',
+                    colorByPoint: true,
+                    data: seriesData,
+                    pointWidth: 30
+                }]
+            });
+        }
+
+        if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente)) {
+            $.get('@Url.Action("DispersionRegistroDiario", "Home")', null, function (content) {
+                $("#container5").html(content);
+            });
+
+            $.get('@Url.Action("DispersionNotificacionesRespondidas", "Home")', null, function(content){
+                $("#container6").html(content);
+            });
+        }
+    });
+</script>
+
+<div class="container" style="width: 100%">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Dashboard - Gráficos Seguimiento
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <h1 class="page-header"></h1>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-bar-chart"></i>&nbsp;Respuestas a Notificaciones</h4>
+                                    </div>
+                                    <div class="panel-body" id="container3" style="height: 400px; margin: 0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <h1 class="page-header"></h1>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4><i class="fa fa-fw fa-pie-chart"></i>&nbsp;Pacientes por Patologías</h4>
+                                    </div>
+                                    <div class="panel-body" id="container4" style="height: 400px; margin: 0 auto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body" id="divPanelBody">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                    <h1 class="page-header"></h1>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4><i class="fa fa-fw fa-line-chart"></i>&nbsp;Registros diarios cargados por paciente</h4>
+                                        </div>
+                                        <div class="panel-body" id="container1" style="height: 400px; margin: 0 auto">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                    <h1 class="page-header"></h1>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4><i class="fa fa-fw fa-line-chart"></i>&nbsp;Emociones por paciente en Registros Diarios</h4>
+                                        </div>
+                                        <div class="panel-body" id="container2" style="height: 400px; margin: 0 auto">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                        {
+                            <div class="panel-body" id="divPanelBody">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-12">
+                                            <h1 class="page-header"></h1>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4><i class="fa fa-fw fa-area-chart"></i>&nbsp;Registros Diarios x Edad x Sexo</h4>
+                                                </div>
+                                                <div id="container5" class="panel-body" style="height: 450px; margin: 0 auto">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-12">
+                                            <h1 class="page-header"></h1>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4><i class="fa fa-fw fa-area-chart"></i>&nbsp;Notificaciones Respondidas x Edad x Sexo</h4>
+                                                </div>
+                                                <div id="container6" class="panel-body" style="height: 450px; margin: 0 auto">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,162 @@
+﻿@using Yana.Helpers
+@using Yana.Models.WrapperEntities
+@{ var menuItems = UserCache.MenuItems; }
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+    <!-- meta charec set -->
+    <meta charset="utf-8">
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- Page Title -->
+    <title>YANA ~ Si lo sentís, importa</title>
+    <!-- Meta Description -->
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Fontawesome Icon font -->
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <!-- Twitter Bootstrap css -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- jquery.fancybox  -->
+    <link rel="stylesheet" href="~/css/jquery.fancybox.css">
+    <!-- animate -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- Main Stylesheet -->
+    <!--<link rel="stylesheet" href="~/css/main.css">-->
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/siteLoggedLayout.css">
+
+    <!-- media-queries -->
+    <link rel="stylesheet" href="~/css/media-queries.css">
+    <link rel="stylesheet" href="~/css/creative.css" type="text/css">
+
+    <!-- Modernizer Script for old Browsers -->
+    <script src="~/js/modernizr-2.6.2.min.js"></script>
+
+    <script src="~/js/jquery.js"></script>
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-2.2.1.js" type="text/javascript"></script>
+
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <script src="~/js/jquery-ui.js" type="text/javascript"></script>
+
+    <script src='@Url.Content("~/js/grid.locale-es.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/js/jquery.jqGrid.min.js")' type="text/javascript"></script>
+
+    <script src='@Url.Content("~/js/jquery-ui.min.js")' type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/css/Menu.css" />
+
+    <link href='@Url.Content("~/css/jquery-ui.css")' rel="stylesheet" type="text/css" />
+    <link href='@Url.Content("~/css/ui.jqgrid.css")' rel="stylesheet" type="text/css" />
+
+    <script src='@Url.Content("~/js/bootstrap.js")' type="text/javascript"></script>
+    <link href='@Url.Content("~/css/bootstrap-dialog.min.css")' rel="stylesheet" type="text/css" />
+    <script src='@Url.Content("~/js/bootstrap-dialog.min.js")' type="text/javascript"></script>
+
+    <!-- Essential jQuery Plugins
+    ================================================== -->
+    <!-- <script src="~/js/jquery-ui.min.js" type="text/javascript"></script>-->
+    <!-- Single Page Nav -->
+    <script src="~/js/jquery.singlePageNav.min.js"></script>
+    <!-- Twitter Bootstrap -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- jquery.fancybox.pack -->
+    <script src="~/js/jquery.fancybox.pack.js"></script>
+    <!-- jquery.mixitup.min -->
+    <script src="~/js/jquery.mixitup.min.js"></script>
+    <!-- jquery.parallax -->
+    <script src="~/js/jquery.parallax-1.1.3.js"></script>
+    <!-- jquery.countTo -->
+    <script src="~/js/jquery-countTo.js"></script>
+    <!-- jquery.appear -->
+    <script src="~/js/jquery.appear.js"></script>
+    <!-- Contact form validation -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <!-- Google Map -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <!-- jquery easing -->
+    <script src="~/js/jquery.easing.min.js"></script>
+    <!-- Custom Functions -->
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/validators.js"></script>
+
+    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/highcharts.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/highcharts-3d.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/modules/exporting.js")' type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div style="margin-left: 5px; margin-right: 5px; margin-top: 5px;">
+        @if (UserCache.MenuItems != null)
+        {
+            <ul id="menu">
+                <li>
+                    <img src="~/img/logo1.png" height="15" style="margin-top: 5px;" />
+                </li>
+                @if (menuItems != null)
+                {
+                    foreach (var parentMenu in menuItems.Where(p => p.IdParent == 0 || p.IdParent == null).OrderBy(x => x.Orden))
+                    {
+                        <li>
+                            @if (!string.IsNullOrEmpty(parentMenu.Action))
+                            {
+                                <a href="#" onclick="window.location.assign('@Url.Action(parentMenu.Action, parentMenu.Controller)') ">@parentMenu.Descripcion</a>
+                            }
+                            else
+                            {
+                                <a href="#">@parentMenu.Descripcion</a>
+                            }
+
+                            @if (menuItems.Any(p => p.IdParent == parentMenu.IdMenuItem))
+                            {
+                                <ul>
+                                    @foreach (var itemNivel1 in menuItems.Where(p => p.IdParent == parentMenu.IdMenuItem).OrderBy(x => x.Orden))
+                                    {
+                                        if (!menuItems.Any(p => p.IdParent == itemNivel1.IdMenuItem))
+                                        {
+                                            <li><a href="#" onclick="window.location.assign('@Url.Action(itemNivel1.Action, itemNivel1.Controller)') ">@itemNivel1.Descripcion</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="#">@itemNivel1.Descripcion</a>
+                                                <ul>
+                                                    @foreach (var itemNivel2 in menuItems.Where(p => p.IdParent == itemNivel1.IdMenuItem).OrderBy(x => x.Orden))
+                                                    {
+                                                        <li><a href="#" onclick="window.location.assign('@Url.Action(itemNivel2.Action, itemNivel2.Controller)') ">@itemNivel2.Descripcion</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+                <li>
+                    @Html.ActionLink("Salir", "Logout", "Home")
+                </li>
+            </ul>
+        }
+    </div>
+    <br />
+    @RenderBody()    
+</body>
+</html>

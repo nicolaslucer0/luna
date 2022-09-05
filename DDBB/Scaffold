@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=ASUS\SQL2014;Database=Yana;Trusted_Connection=True;" -Context "YanaContext" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/DomainEntities -f

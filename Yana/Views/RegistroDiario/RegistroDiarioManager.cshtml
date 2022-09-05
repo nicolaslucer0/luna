@@ -1,0 +1,179 @@
+﻿@model Yana.Models.DomainEntities.RegistroDiario;
+@using Yana.Helpers;
+@using Yana.Enums;
+@{
+    ViewData["Title"] = "RegistroDiarioManager";
+Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            var formData = $('#frmRegistroDiario').serialize();
+            $.ajax({
+                url: '@Url.Action("RegistroDiarioManager", "RegistroDiario")',
+                type: "POST",
+                data: formData,
+                success: function (result) {
+                    window.location.assign("../RegistroDiarioList");
+                }
+            });
+        }
+    }
+
+    function ResponderRegistroDiario() {
+
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            var formData = $('#frmRegistroDiarioRespuesta').serialize();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("RegistroDiarioRespuestaManager", "RegistroDiario")',
+            data: formData,
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("RegistroDiarioList", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="responderModal" tabindex="-1" role="dialog" aria-labelledby="responderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Respuesta Registro Diario</h5>
+                <div class="panel-body" id="divPanelBody">
+                    @{ var respuesta = Model.RegistroDiarioRespuesta.FirstOrDefault(x => x.IdRegistroDiario == Model.IdRegistroDiario);}
+                    @using (Html.BeginForm("RegistroDiarioRespuestaManager", "RegistroDiario", respuesta, FormMethod.Post, false, new { id = "frmRegistroDiarioRespuesta" }))
+                    {
+                        if (respuesta != null)
+                        {
+                            <input id="IdRegistroDiarioRespuesta" name="IdRegistroDiarioRespuesta" value="@respuesta.IdRegistroDiarioRespuesta" style="display:none;" />
+                            <input id="IdRegistroDiario" name="IdRegistroDiario" value="@Model.IdRegistroDiario" style="display:none;" />
+                            <input id="IdPaciente" name="IdPaciente" value="@Model.IdPaciente" style="display:none;" />
+                            <div class="form-group" style="text-align: left;">
+                                <label>Nota</label>
+                                <textarea required name="Nota" rows="5" class="form-control" autofocus>@respuesta.Nota</textarea>
+                                <div class="modal-footer">
+                                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
+                                    {
+                                        <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                                        <button onclick="ResponderRegistroDiario();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn yanaButton" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <input id="IdRegistroDiarioRespuesta" name="IdRegistroDiarioRespuesta" value="" style="display:none;" />
+                            <input id="IdRegistroDiario" name="IdRegistroDiario" value="@Model.IdRegistroDiario" style="display:none;" />
+                            <input id="IdPaciente" name="IdPaciente" value="@Model.IdPaciente" style="display:none;" />
+                            <div class="form-group" style="text-align: left;">
+                                <label>Nota</label>
+                                <textarea required name="Nota" rows="5" class="form-control" autofocus></textarea>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                                    <button onclick="ResponderRegistroDiario();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            string titulo = @Model.IdRegistroDiario == 0 ? "Nuevo Registro Diario" : "Registro Diario";
+                        }
+                        @titulo
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @using (Html.BeginForm("RegistroDiarioManager", "RegistroDiario", Model, FormMethod.Post, false, new { id = "frmRegistroDiario" }))
+                        {
+                            <input id="IdRegistroDiario" name="IdRegistroDiario" value="@Model.IdRegistroDiario" style="display:none;" />
+                            <div class="form-group" style="text-align: left;">
+                                <label>Situacion</label>
+                                <input type="text" required name="Situacion" value="@Model.Situacion" class="form-control" autofocus />
+                                <label>Motivo Situacion</label>
+                                <input type="text" required name="MotivoSituacion" value="@Model.MotivoSituacion" class="form-control" autofocus />
+                                <label>Tipo Emocion</label>
+                                @Html.DropDownListFor(x => x.IdTipoEmocion, (IEnumerable<SelectListItem>)ViewBag.Emociones, "SELECCIONAR",
+                                            new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocion", required = true })
+                                <label>Intensidad</label>
+                                <input type="number" min="1" max="100" value="@Model.IntensidadEmocion" required name="IntensidadEmocion" class="form-control" autofocus />
+                                <label>Pensamiento Automatico</label>
+                                <input type="text" required name="PensamientoAutomatico" value="@Model.PensamientoAutomatico" class="form-control" autofocus />
+                                <label>Grado de Creencia</label>
+                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaPensamientoAutomatico" required name="GradoCreenciaPensamientoAutomatico" class="form-control" autofocus />
+                                <label>Respuesta Racional</label>
+                                <input type="text" required name="RespuestaRacional" value="@Model.RespuestaRacional" class="form-control" autofocus />
+                                <label>Grado de Creencia</label>
+                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaRespuestaRacional" required name="GradoCreenciaRespuestaRacional" class="form-control" autofocus />
+                                <label>Emocion resultado</label>
+                                @Html.DropDownListFor(x => x.IdTipoEmocionResultado, (IEnumerable<SelectListItem>)ViewBag.EmocionesResultado, "SELECCIONAR",
+                                            new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocionResultado", required = true })
+                                <label>Grado Creencia resultado</label>
+                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaResultado" required name="GradoCreenciaResultado" class="form-control" autofocus />
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button onclick="window.location.assign('@Url.Action("RegistroDiarioList", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                </div>
+
+                                @{
+                                    if (Model.IdRegistroDiario == 0)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2">
+                                            <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                        </div>
+                                    }
+                                    else if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional) || Model.RegistroDiarioRespuesta != null && Model.RegistroDiarioRespuesta.Any() != false)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#responderModal"><i class='fa fa-reply fa-lg'></i>Respuesta</button>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

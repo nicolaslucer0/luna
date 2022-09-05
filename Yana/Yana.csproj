@@ -1,0 +1,182 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Twilio" Version="5.35.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\font-awesome.min.css" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\jquery-ui.min.css" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\ref.css" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\source-sans-pro.css" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\highcharts.html" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-114x114.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-120x120.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-144x144.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-152x152.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-180x180.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-57x57.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-60x60.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-72x72.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\apple-touch-icon-76x76.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\favicon-160x160.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\favicon-16x16.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\favicon-192x192.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\favicon-32x32.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\favicon-96x96.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\Highcharts.svg" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\splash.svg" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\images\sprite.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\js\jquery-1.11.3.min.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\js\jquery-ui.min.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\api\js\ref.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-column-interactive\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-column-null-values\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-column-stacking-grouping\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-pie-donut\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-pie\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\3d-scatter-draggable\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-basic\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-inverted\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-missing\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-negative\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-stacked-percent\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\area-stacked\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\arearange-line\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\arearange\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\areaspline\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\bar-basic\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\bar-negative-stack\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\bar-stacked\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\box-plot\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\bubble-3d\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\bubble\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-basic\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-drilldown\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-negative\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-parsed\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-placement\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-rotated-labels\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-stacked-and-grouped\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-stacked-percent\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\column-stacked\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\columnrange\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo-dual-axes\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo-meteogram\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo-multi-axes\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo-regression\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo-timeline\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\combo\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\dynamic-click-to-add\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\dynamic-master-detail\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\dynamic-update\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\error-bar\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\funnel\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-activity\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-clock\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-dual\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-solid\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-speedometer\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\gauge-vu-meter\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\heatmap-canvas\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\heatmap\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\line-ajax\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\line-basic\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\line-labels\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\line-log-axis\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\line-time-series\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-basic\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-donut\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-drilldown\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-gradient\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-legend\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-monochrome\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pie-semi-circle\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\polar-spider\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\polar-wind-rose\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\polar\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\polygon\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\pyramid\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\renderer\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\scatter\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\sparkline\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\spline-inverted\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\spline-irregular-time\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\spline-plot-bands\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\spline-symbols\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\synchronized-charts\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\treemap-coloraxis\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\treemap-large-dataset\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\treemap-with-levels\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\examples\waterfall\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\gfx\vml-radial-gradient.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\highslide\close.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\highslide\closeX.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\highslide\outlines\rounded-white.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\highslide\resize.gif" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\highslide\zoomout.cur" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\meteogram-symbols-30px.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\search.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\skies.jpg" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\snow.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\graphics\sun.png" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\index.htm" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\adapters\standalone-framework.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\adapters\standalone-framework.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts-3d.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts-3d.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts-more.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts-more.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\highcharts.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\boost.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\boost.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\broken-axis.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\broken-axis.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\canvas-tools.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\canvas-tools.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\data.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\data.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\drilldown.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\drilldown.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\exporting.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\exporting.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\funnel.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\funnel.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\heatmap.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\heatmap.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\no-data-to-display.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\no-data-to-display.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\offline-exporting.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\offline-exporting.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\solid-gauge.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\solid-gauge.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\treemap.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\modules\treemap.src.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\dark-blue.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\dark-green.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\dark-unica.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\gray.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\grid-light.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\grid.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\sand-signika.js" />
+    <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\skies.js" />
+  </ItemGroup>
+
+</Project>

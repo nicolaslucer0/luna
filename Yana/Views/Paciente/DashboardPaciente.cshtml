@@ -1,0 +1,66 @@
+﻿@model List<Yana.Models.DomainEntities.Notificacion>
+@using Yana.Models.Enums;
+@{
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<script type="text/javascript" language="javascript">
+
+    function Answer(id) {
+        location.href = "@Url.Action("NotificacionRespuesta", "Notificacion")" + "?idNotificacion=" + id;
+    };
+
+</script>
+
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Notificaciones Pendientes
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @{
+                            if (Model.Any())
+                            {
+                                @foreach (Yana.Models.DomainEntities.Notificacion notificacion in Model)
+                                {
+                                    double minutosVencidos = (Convert.ToDateTime(DateTime.Now) - Convert.ToDateTime(notificacion.FechaHora)).TotalMinutes;
+                                    string notificationCssClass = string.Empty;
+
+                                    if (minutosVencidos > 0 && minutosVencidos <= (int)EnumLimiteVencimientoNotificacion.AlDia)
+                                    {
+                                        notificationCssClass = "alert alert-success";
+                                    }
+                                    else if (Math.Abs(minutosVencidos) > (int)EnumLimiteVencimientoNotificacion.AlDia && Math.Abs(minutosVencidos) <= (int)EnumLimiteVencimientoNotificacion.Demorada)
+                                    {
+                                        notificationCssClass = "alert alert-warning";
+                                    }
+                                    else if (Math.Abs(minutosVencidos) > (int)EnumLimiteVencimientoNotificacion.Demorada)
+                                    {
+                                        notificationCssClass = "alert alert-danger";
+                                    }
+                                    <div class="@notificationCssClass" role="alert">
+                                        <label style="font-size: 10px;">@notificacion.FechaHora.ToString()</label><br />
+                                        @notificacion.Mensaje
+                                        <br /><br />
+                                        <div style="text-align: center;">
+                                            <button class="btn yanaButtonGrey" onclick="Answer(@notificacion.IdNotificacion);"><i class='fa fa-comment-o fa-lg'></i>Responder</button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    No hay notificaciones pendientes.
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿@model Yana.Models.DomainEntities.Usuario
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+
+
+<script>
+
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#lblErrorP").text("El Email Ingresado no pertenece a ningún usuario.");
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    function RecuperarPassword() {
+
+        var email = $("#email").val();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ForgotPassword", "Home")',
+            data: { email: email },
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("Index", "Home")');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Recuperá tu contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="divMessagesP" class="ui-corner-all" style="display: none; margin-top: 0">
+                    <p align="left">
+                        <div class="alert alert-danger" style="text-align: left;">
+                            <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+                        </div>
+                    </p>
+                </div>
+                <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email" required="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn yanaButtonGrey" onclick="HideDivMessageP();" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                <button type="submit" onclick="RecuperarPassword();" id="recuperar" class="btn yanaButton">Recuperar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row card">
+    <div class="col-xs-12 col-md-7 login-image-container">
+        <img class="login-image" src="/img/login.jpg" />
+    </div>
+    <div class="col-xs-12 col-md-5 card-body">
+        <div class="logo-yana">
+            <h2 class="panel-title">YANA - Ingreso</h2>
+        </div>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+        <form role="form">
+            <fieldset>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" placeholder="Password" name="Password" type="password" value="">
+                </div>
+                <div style="text-align: center;">
+                    <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
+                </div>
+            </fieldset>
+        @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
+
+        </form>
+
+        <div style="text-align: center; padding: 1em;">
+            <button type="submit" class="btn yanaButton">Ingresar</button>
+        </div> 
+        }
+    </div>
+    
+</div>

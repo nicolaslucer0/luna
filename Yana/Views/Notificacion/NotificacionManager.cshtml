@@ -1,0 +1,528 @@
+﻿@using Yana.Enums
+@model Yana.Models.WrapperEntities.NotificacionWrapper
+
+@{
+    ViewData["Title"] = "NotificacionManager";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<!-- Css Notificaciones -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+<link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
+
+<!-- Js Notificaciones -->
+@*<script src="~/js/notificaciones/jquery-v3.2.1.js"></script>*@
+<script src="~/js/notificaciones/bootstrap.min.js"></script>
+<script src="~/js/notificaciones/moment-v2.18.1.js"></script>
+<script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            var gridData1 = jQuery("#jqOpciones").getRowData();
+            var postData1 = JSON.stringify(gridData1);
+            $("#txSerializedOpciones").val(postData1);
+
+            @*var formData = $('#frmNotificacion').serialize();
+            $.ajax({
+                url: '@Url.Action("NotificacionManager", "Notificacion")',
+                type: "POST",
+                data: formData,
+                success: function (data) {
+                    window.location.assign("./NotificacionList?idPaciente=" + @Model.IdPaciente);
+                },
+                failure: function (data) {
+                    alert("failure");
+                }
+            });*@
+
+            document.forms["frmNotificacion"].submit();
+        }
+    }
+
+    function IsValid() {
+        HideDivMessageP();
+
+        var field;
+
+        field = $("#Mensaje").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe completar todos los campos de requeridos para crear una notificación.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        var tipoNotificacion = @Model.IdNotificacion;
+
+        if (parseInt(tipoNotificacion) == -1) {
+            //04:00 AM - 11:59 AM
+            var hhM = $("#HoraM").val().split(":")[0];
+            var adM = $("#HoraM").val().split(":")[1].split(" ")[1].trim();
+            
+            if (adM == "PM" || (parseInt(hhM) < 4 || parseInt(hhM) > 11)) {
+                $("#lblErrorP").text("El horario de la mañana debe ser entre las 04:00 AM y las 11:59 AM");
+                ShowDivMessageP();
+                return false;
+            }
+
+            //12:00 PM - 07:59 PM
+            var hhT = $("#HoraT").val().split(":")[0];
+            var adT = $("#HoraT").val().split(":")[1].split(" ")[1].trim();
+
+            if (adT == "AM" || (parseInt(hhT) != 12 && (parseInt(hhT) < 1 || parseInt(hhT) > 7))) {
+                $("#lblErrorP").text("El horario de la tarde debe ser entre las 12:00 PM y las 07:59 PM");
+                ShowDivMessageP();
+                return false;
+            }
+
+            //08:00 PM - 03:59 AM
+            var hhN = $("#HoraN").val().split(":")[0];
+            var adN = $("#HoraN").val().split(":")[1].split(" ")[1].trim();
+
+            if ((adN == "AM" && parseInt(hhN) > 3) || (adN == "PM" && (parseInt(hhN) < 8 || parseInt(hhN) > 11))) {
+                $("#lblErrorP").text("El horario de la noche debe ser entre las 08:00 PM y las 03:59 AM");
+                ShowDivMessageP();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function AddOpcion() {
+        HideDivMessageP();
+
+        var descripcionOpcion = $("#DescripcionOpcion").val();
+
+        if (!descripcionOpcion.trim()) {
+            return false;
+        }
+
+        var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
+        
+        var maxValue = 0;
+
+        for (var i = 0; i < ids.length; i++) {
+            var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
+            
+            var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
+            if (parseInt(currentIdent) > parseInt(maxValue))
+                maxValue = currentIdent;
+
+            if (opcionGrid.trim() === descripcionOpcion.trim()) {
+                $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
+                ShowDivMessageP();
+                return false;
+            }
+        }
+        
+        maxValue++;
+
+        var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
+        var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
+        if (!su) alert("Error al agregar");
+
+        $("#DescripcionOpcion").val("");
+        $("#DescripcionOpcion").focus();
+    }
+
+    function DelOpcion() {
+        HideDivMessageP();
+
+        var gr = jQuery("#jqOpciones").jqGrid('getGridParam', 'selrow');
+
+        if (gr != null) {
+            $("#jqOpciones").jqGrid('delRowData', gr);
+        } else {
+            $("#lblErrorP").text("Debe seleccionar la Opción a eliminar.");
+            ShowDivMessageP();
+            return false;
+        }
+    }
+    
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    function ShowDivMessageW() {
+        scroll(0, 0);
+        $("#divMessagesW").show("slow", function () { });
+    }
+
+    function HideDivMessageW() {
+        $("#divMessagesW").hide();
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+
+        if ($("#lblWarning").text().length > 0)
+            ShowDivMessageW();
+    });
+
+    function EliminarNotificacion() {
+
+        var idNotificacion = @Model.IdNotificacion;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteNotificacion", "Notificacion")',
+            data: { idNotificacion: idNotificacion },
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("NotificacionList", "Notificacion")');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+
+        var decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
+            var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
+            if (jqXHR.responseText.charAt(0) === '[') {
+                try {
+                    errorInfo = $.parseJSON(jqXHR.responseText);
+                    errorText = "";
+                    for (i = 0; i < errorInfo.length; i++) {
+                        if (errorText.length !== 0) {
+                            errorText += "<hr/>";
+                        }
+                        errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
+                    }
+                } catch (e) {
+                }
+            } else {
+                html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
+                if (html !== null && html.length > 1) {
+                    errorText = html[1];
+                }
+            }
+            return errorText;
+        };
+
+        //jQuery("#jqPatologias").tableDnD();
+        try {
+            $('#jqOpciones').jqGrid({
+                url: '@Url.Action("GetOpcionesByIdNotificacion", "Notificacion", new { idNotificacion = Model.IdNotificacion })',
+                datatype: 'json',
+                mtype: 'POST',
+                colNames: ['IdNotificacionOpcion', 'Opciones'],
+                colModel: [
+                    { name: 'idNotificacionOpcion', index: 'idNotificacionOpcion', key: true, hidden: true },
+                    { name: 'descripcionOpcion', index: 'descripcionOpcion', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
+                ],
+                pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
+                rowNum: 10000, rowList: [10, 20, 30], sortname: 'idNotificacionOpcion', sortorder: 'desc', rownumbers: true, viewrecords: true,
+                height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
+                jsonReader: { cell: "" },
+                caption: '',
+                loadError: function (jqXHR, textStatus, errorThrown) {
+                    $('#' + this.id + '_err').remove();
+                    $('#jqOpciones').closest('div.ui-jqgrid').before(
+                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
+                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
+                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
+                },
+                loadComplete: function () {
+                    $('#' + this.id + '_err').remove();
+                },
+                gridComplete: function () {
+                    $("#_empty", "#jqOpciones").addClass("nodrag nodrop");
+                    //jQuery("#jqPatologias").tableDnDUpdate();
+                },
+                onclickSubmit: function (options) {
+                    options.processing = true;
+                    $.jgrid.hideModal("#delmodjqOpciones",
+                        {
+                            gb: "#gbox_jqOpciones",
+                            jqm: options.jqModal,
+                            onClose: options.onClose
+                        });
+                }
+            });
+        }
+        catch (err) {
+            alert(err.description);
+        }
+    });
+
+    $(window).bind('resize', function () {
+        $("#jqOpciones").setGridWidth($("#divPanelBody").width() - 20);
+    }).trigger('resize');
+</script>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Notificación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                ¿Seguro que desea eliminar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                <button type="button" class="btn yanaButton" onclick="EliminarNotificacion();"><i class='fa fa-check-square fa-lg'></i>Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="width: 90%;">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            string titulo = Model.IdNotificacion <= 0 ? "Nueva Notificación" : "Editar Notificación";
+                        }
+                        @titulo
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div id="divMessagesW" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-warning" style="text-align: left;">
+                                <label id="lblWarning" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageWARNING"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @using (Html.BeginForm("NotificacionManager", "Notificacion", Model, FormMethod.Post, false, new { id = "frmNotificacion" }))
+                        {
+                            <input id="IdNotificacion" name="IdNotificacion" value="@Model.IdNotificacion" style="display:none;" />
+                            <input id="IdPaciente" name="IdPaciente" value="@Model.IdPaciente" style="display:none;" />
+                            <input id="IdEstadoNotificacion" name="IdEstadoNotificacion" value="@Model.IdEstadoNotificacion" style="display:none;" />
+                            @Html.HiddenFor(u => u.SerializedOpciones, new { id = "txSerializedOpciones" })
+
+                            string habilitar = Model.IdNotificacion == -1 ? "disabled" : "";
+
+                            <div class="form-group" style="text-align: left; margin-top: 0">
+                                <label for="message">Mensaje (20 caracteres mín, 100 max) :</label>
+                                <textarea id="Mensaje" required="required" class="form-control" name="Mensaje" @habilitar data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10">@Model.Mensaje</textarea>
+                            </div>
+
+
+                            if (Model.IdNotificacion != -1)
+                            {
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <label>Desde:</label>
+                                        <div class="form-group" style="width: 100%">
+                                            <div class='input-group date' id='datetimepicker0'>
+                                                <input type='text' class="form-control" required="required" name="FechaDesde" value="@Model.FechaDesde" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label>Definir Hora:</label>
+                                        <div class="form-group" style="width: 100%">
+                                            <div class='input-group date' id='datetimepicker2'>
+                                                <input type='text' class="form-control" required="required" name="Hora" value="@Convert.ToDateTime(Model.FechaDesde).TimeOfDay" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label>Cant. Dias:</label>
+                                        <input type="number" class="form-control" value="@Model.CantDias" min="1" max="7" step="1" name="CantDias" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Periodicidad Horas:</label>
+                                        <input type="number" class="form-control" value="@Model.CadaXhoras" min="0" max="24" step="1" name="CadaXhoras" />
+                                    </div>
+
+
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <label>Desde:</label>
+                                        <div class="form-group" style="width: 100%">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input type='text' class="form-control" required="required" name="FechaDesde" value="@Model.FechaDesde" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-1">
+                                        <label>Dias:</label>
+                                        <input type="number" class="form-control" value="@Model.CantDias" min="1" max="7" step="1" name="CantDias" />
+                                    </div>
+
+                                    <div class="col-md-3" align="center">
+                                        <label>Horario Mañana: (04:00 AM - 11:59 AM)</label>
+                                        <div class="form-group" style="width: 50%">
+                                            <div class='input-group date' id='datetimepicker3'>
+                                                <input type='text' class="form-control" required="required" name="HoraM" id="HoraM" value="@Convert.ToDateTime(Model.Maniana).TimeOfDay" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3" align="center">
+                                        <label>Horario Tarde: (12:00 PM - 07:59 PM)</label>
+                                        <div class="form-group" style="width: 50%">
+                                            <div class='input-group date' id='datetimepicker4'>
+                                                <input type='text' class="form-control" required="required" name="HoraT" id="HoraT" value="@Convert.ToDateTime(Model.Tarde).TimeOfDay" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3" align="center">
+                                        <label>Horario Noche: (08:00 PM - 03:59 AM)</label>
+                                        <div class="form-group" style="width: 50%">
+                                            <div class='input-group date' id='datetimepicker5'>
+                                                <input type='text' class="form-control" required="required" name="HoraN" id="HoraN" value="@Convert.ToDateTime(Model.Noche).TimeOfDay" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
+                            <br />
+                            <div class="form-inline" style="text-align: left; vertical-align: middle; height: auto; ">
+                                <div class="form-group" style="text-align: left;">
+                                    <label>Opción</label>
+                                </div>
+                                <input class="form-control" @habilitar placeholder="" id="DescripcionOpcion" name="DescripcionOpcion" type="text" autofocus>
+                                <button type="button" class="btn btn-success" @habilitar title="Agregar Opción" onclick="AddOpcion(); return false;">
+                                    <span class='fa fa-plus fa-lg'></span>
+                                </button>
+                                <button type="button" class="btn btn-danger" @habilitar title="Eliminar Opción" onclick="DelOpcion(); return false;">
+                                    <span class='fa fa-trash fa-lg'></span>
+                                </button>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="jqOpciones" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                </div>
+                            </div>
+                            <br /><br />
+                            <div class="row" align="right">
+
+                                @{
+                                    if (Model.IdNotificacion > 0 && !Model.Copia)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2 col-sm-12">
+                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#deleteModal"><i class='fa fa-trash fa-lg'></i>Eliminar</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-8 col-sm-12"></div>
+                                    }
+                                }
+                                <div class="col-md-2 col-sm-12">
+                                    @{
+                                        if (Model.Copia)
+                                        {
+                                            <button onclick="window.location.assign('@Url.Action("NotificacionCopyList", "Notificacion", new { idPaciente = Model.IdPaciente })'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+
+                                        }
+                                        else
+                                        {
+                                            <button onclick="window.location.assign('@Url.Action("NotificacionList", "Notificacion", new { idPaciente = Model.IdPaciente })'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-2 col-sm-12">
+                                    <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+            format: 'LT'
+        });
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
+        });
+        $('#datetimepicker4').datetimepicker({
+            format: 'LT'
+        });
+        $('#datetimepicker5').datetimepicker({
+            format: 'LT'
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker0').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+    });
+</script>
+
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>

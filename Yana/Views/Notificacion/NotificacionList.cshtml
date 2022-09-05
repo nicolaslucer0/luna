@@ -1,0 +1,192 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+    int idPaciente = ViewBag.IdPaciente;
+}
+
+<script type="text/javascript" language="javascript">
+
+    function Create() {
+        window.location.assign("./NotificacionManager/0?idPaciente="+ @idPaciente);
+    };
+
+    function Copy() {
+        window.location.assign("./NotificacionCopyList?idPaciente="+ @idPaciente);
+    };
+
+    function Standar() {
+        window.location.assign("./NotificacionStandarManager?idPaciente="+ @idPaciente);
+    };
+
+    function Edit(idNotificacion) {
+        window.location.assign("./NotificacionManager?idNotificacion=" + idNotificacion + "&idPaciente=" + @idPaciente);
+    };
+
+    $(window).bind('resize', function () {
+        $("#list").setGridWidth($("#panelHead").width());
+    }).trigger('resize');
+
+    $(document).ready(function () {
+        var myGrid = $('#list'),
+            decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
+                var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
+                if (jqXHR.responseText.charAt(0) === '[') {
+                    try {
+                        errorInfo = $.parseJSON(jqXHR.responseText);
+                        errorText = "";
+                        for (i = 0; i < errorInfo.length; i++) {
+                            if (errorText.length !== 0) {
+                                errorText += "<hr/>";
+                            }
+                            errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
+                        }
+                    }
+                    catch (e) { }
+                } else {
+                    html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
+                    if (html !== null && html.length > 1) {
+                        errorText = html[1];
+                    }
+                }
+                return errorText;
+            };
+
+        try {
+
+            myGrid.jqGrid({
+                url: '@Url.Action("GetNotificaciones", "Notificacion", new {idPaciente = idPaciente})',
+                datatype: 'json',
+                mtype: 'POST',
+                colNames: ['Cód.', 'Fecha', 'Mensaje', 'Estado', 'Respuesta', ''],
+                colModel: [
+                    {
+                        name: 'idNotificacion',
+                        index: 'idNotificacion',
+                        key: true,
+                        width: 50,
+                        align: 'center',
+                        search: false,
+                        hidden: false,
+                        sorttype: 'int'
+                    },
+                    {
+                        name: 'fecha',
+                        index: 'fecha',
+                        align: 'center',
+                        search: false,
+                        width: 100,
+                        formatter: "date",
+                        formatoptions: { srcformat: "ISO8601Long", newformat: "d/m/Y h:i A" }
+                    },
+                    { name: 'mensaje', index: 'mensaje', align: 'left', search: true, },
+                    { name: 'estado', index: 'estado', align: 'center', search: false, width: 80 },
+                    { name: 'respuesta', index: 'respuesta', align: 'left', search: false },
+                    { name: 'action', index: 'action', align: 'center', sortable: false, search: false, width: 50 }
+                ],
+                pager: '#pager',
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                sortname: 'idNotificacion',
+                sortorder: 'desc',
+                rownumbers: true,
+                viewrecords: true,
+                height: 'auto',
+                gridview: true,
+                loadonce: true,
+                jsonReader: { cell: "" },
+                caption: 'Notificaciones',
+                loadError: function (jqXHR, textStatus, errorThrown) {
+                    // remove error div if exist
+                    $('#' + this.id + '_err').remove();
+                    // insert div with the error description before the grid
+                    myGrid.closest('div.ui-jqgrid').before(
+                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
+                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
+                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
+                },
+                gridComplete: function () {
+                    var ids = myGrid.jqGrid('getDataIDs');
+                    for (var i = 0; i < ids.length; i++) {
+                        var rowId = ids[i];
+
+                        var checkOut = "<button onclick=\"Edit(" + rowId + ");\" title='Editar/Eliminar' class='btn yanaButton' ><i class='fa fa-pencil fa-lg'></i><i class='fa fa-trash fa-lg' style='margin-left: 5px;'></i></button>";
+
+                        myGrid.jqGrid('setRowData', rowId, { action: checkOut });
+                    }
+                }
+            });
+        }
+        catch (err) {
+            alert("Error:" + err.message);
+        }
+
+        myGrid.jqGrid('navGrid', '#pager', { add: false, edit: false, del: false },
+            {}, {}, {}, { multipleSearch: true, overlay: false });
+        myGrid.jqGrid('filterToolbar', { autosearch: true, stringResult: false, defaultSearch: 'cn' });
+        myGrid.jqGrid('navButtonAdd', '#pager',
+            {
+                caption: "Filtrar", title: "Mostrar/Ocultar barra de filtro",
+                buttonicon: 'ui-icon-pin-s',
+                onClickButton: function () { myGrid[0].toggleToolbar(); }
+            });
+        myGrid.jqGrid('navGrid', "#pager", { edit: false, add: false, del: false });
+
+        $("#list").setGridWidth($("#panelHead").width());
+    });
+</script>
+
+<br />
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="panelHead">
+                        Notificaciones programadas para: @ViewBag.NombrePaciente
+                    </div>
+                    <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong><label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>
+                                        <button class="btn yanaButton" onclick="Create();"><i class="fa fa-plus-square fa-lg"></i>Nueva Notificación</button>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <p>
+                                        <button class="btn yanaButton" onclick="Copy();"><i class="fa fa-copy fa-lg"></i>Copiar Notificación</button>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-right">
+                                    <p>
+                                        <button class="btn yanaButton" onclick="Standar();"><i class="fa fa-clipboard fa-lg"></i>Notificación Standard</button>
+                                    </p>
+                                </div>
+
+
+                            </div>
+                            <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
+                            <div id="pager" class="scroll" style="text-align: center;">
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2">
+                                    <button onclick="window.location.assign('@Url.Action("PacienteList", "Paciente")'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>0
+    </div>
+</div>
+

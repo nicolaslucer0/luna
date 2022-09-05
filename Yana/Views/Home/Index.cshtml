@@ -1,0 +1,535 @@
+﻿@using Yana.Enums
+
+@{
+    //ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("AddEarlyAdopter", "Home", FormMethod.Post))
+{
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enterate de las novedades de Yana</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email">
+                    <br />
+                    <div style="text-align: center;">
+                        <label class="radio-inline">
+                            <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Profesional)" checked>Profesional
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Paciente)">Paciente
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Otro)">Otro
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn yanaButton">Suscribirse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!--
+Home Slider
+==================================== -->
+<section id="slider">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators bullet -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        </ol>
+        <!-- End Indicators bullet -->
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+
+            <!-- single slide -->
+            <div class="item active" style="background-image: url(img/banner3.jpg);">
+                <div class="carousel-caption">
+                    <h2 data-wow-duration="700ms" data-wow-delay="500ms" class="wow bounceInDown animated"><span> Y A N A</span></h2>
+                    <h3 data-wow-duration="1000ms" class="wow slideInLeft animated"><span class="color">Si lo sentís,</span> importa.</h3>
+                    <p data-wow-duration="1000ms" class="wow slideInRight animated">Una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
+                    <br />
+                    <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#exampleModal">
+                        Conocenos
+                    </button>
+
+
+                    <ul class="social-links text-center">
+                        <li><a href="https://www.facebook.com/yanapsico.oficial"><i class="fa fa-facebook fa-lg"></i></a></li>
+                        <li><a href="https://www.instagram.com/yanapsico.oficial"><i class="fa fa-instagram fa-lg"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end single slide -->
+            <!-- single slide -->
+            <div class="item" style="background-image: url(img/banner4.jpg);">
+                <div class="carousel-caption">
+                    <h2 data-wow-duration="700ms" data-wow-delay="500ms" class="wow bounceInDown animated"><span> Y A N A</span></h2>
+                    <h3 data-wow-duration="1000ms" class="wow slideInLeft animated"><span class="color">Si lo sentís,</span> importa.</h3>
+                    <p data-wow-duration="1000ms" class="wow slideInRight animated">Una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
+                    <br />
+                    <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#exampleModal">
+                        Conocenos
+                    </button>
+
+                    <ul class="social-links text-center">
+                        <li><a href="https://www.facebook.com/yanapsico.oficial"><i class="fa fa-facebook fa-lg"></i></a></li>
+                        <li><a href="https://www.instagram.com/yanapsico.oficial"><i class="fa fa-instagram fa-lg"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end single slide -->
+
+        </div>
+        <!-- End Wrapper for slides -->
+
+    </div>
+</section>
+
+<!--
+End Home SliderEnd
+==================================== -->
+<!--
+Features
+==================================== -->
+
+<section id="features" class="features">
+    <div class="container">
+        <div class="row">
+
+            <div class="sec-title text-center mb50 wow bounceInDown animated" data-wow-duration="500ms">
+                <h2>Psicólogos</h2>
+                <div class="devider"><i class="fa fa-book fa-lg"></i></div>
+                <div class="sec-sub-title text-center">
+                    <p>
+                        YANA ofrece una serie de herramientas para el tratamiento y seguimiento de diferentes patologías.
+                        Nos enfocamos en brindar información precisa y detallada,
+                        como así brindar una mayor sensación de acompañamiento durante el tratamiento
+                    </p>
+                </div>
+            </div>
+
+            <!-- service item -->
+            <div class="col-md-4 wow fadeInLeft" data-wow-duration="500ms">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-bullhorn fa-2x"></i>
+                    </div>
+
+                    <div class="service-desc">
+                        <h3>Notificaciones programadas / personalizadas</h3>
+                        <p style="text-align: justify">
+                            A traves de notificaciones preestablecidas obtendremos la información necesaria para diseñar nuestras estadisticas
+                            y facilitar la deteccion de patrones. Con la posibilidad de generar notificaciones programadas,
+                            el paciente se sentira más contenido
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- end service item -->
+            <!-- service item -->
+            <div class="col-md-4 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-pencil fa-2x"></i>
+                    </div>
+
+                    <div class="service-desc">
+                        <h3>Registro diario de pensamiento</h3>
+                        <p style="text-align: justify">
+                            A traves de esta funcionalidad, no sera necesario llevar ningun tipo de anotador para llevar el registro.
+                            Simplemente con tu smartphone podras ingresar en nuestro sitio y cargar lo ocurrido.
+                            Además, podrás verificar las devoluciones de tu psicologo o ver el historico de los registros
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- end service item -->
+            <!-- service item -->
+            <div class="col-md-4 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="900ms">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fa fa-2x"> <img src="img/est4.png" /></i>
+                    </div>
+
+                    <div class="service-desc">
+                        <h3>Estadísticas</h3>
+                        <p style="text-align: justify"><br /> Mediante nuestras estadisticas del estado emocional se podrán detectar patrones o picos de los diferentes estados emocionales</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end service item -->
+
+        </div>
+    </div>
+</section>
+
+<!--
+End Features
+==================================== -->
+<!--
+Our Works
+==================================== -->
+
+<section id="works" class="works clearfix">
+    <div class="container">
+        <div class="row">
+
+            <div class="sec-title text-center">
+                <h2>Pacientes</h2>
+                <div class="devider"><i class="fa fa-book fa-lg"></i></div>
+            </div>
+
+            <div class="sec-sub-title text-center">
+                <p>
+                    Con YANA, sentiras un seguimiento más cercano de tu tratamiento.
+                    Trabajamos en conjunto con profesionales para mejorar la calidad de nuestro
+                    servicio y brindarte asistencia de forma eficaz.
+                </p>
+            </div>
+
+            @*<div class="work-filter wow fadeInRight animated" data-wow-duration="500ms" style="display: none;">
+                <ul class="text-center">
+                    <li><a href="javascript:;" data-filter="all" class="active filter">All</a></li>
+                    <li><a href="javascript:;" data-filter=".branding" class="filter">Branding</a></li>
+                    <li><a href="javascript:;" data-filter=".web" class="filter">web</a></li>
+                    <li><a href="javascript:;" data-filter=".logo-design" class="filter">logo design</a></li>
+                    <li><a href="javascript:;" data-filter=".photography" class="filter">photography</a></li>
+                </ul>
+            </div>*@
+
+        </div>
+    </div>
+
+    <div class="project-wrapper" style="display: none;">
+
+        <figure class="mix work-item branding">
+            <img src="img/works/item-1.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-1.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item web">
+            <img src="img/works/item-2.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-2.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item logo-design">
+            <img src="img/works/item-3.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-3.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item photography">
+            <img src="img/works/item-4.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-4.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item branding">
+            <img src="img/works/item-5.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-5.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item web">
+            <img src="img/works/item-6.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-6.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item logo-design">
+            <img src="img/works/item-7.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-7.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+        <figure class="mix work-item photography">
+            <img src="img/works/item-8.jpg" alt="">
+            <figcaption class="overlay">
+                <a class="fancybox" rel="works" title="Write Your Image Caption Here" href="img/works/item-8.jpg"><i class="fa fa-eye fa-lg"></i></a>
+                <h4>Labore et dolore magnam</h4>
+                <p>Photography</p>
+            </figcaption>
+        </figure>
+
+    </div>
+
+
+</section>
+
+<!--
+End Our Works
+==================================== -->
+<!--
+Meet Our Team
+==================================== -->
+
+<section id="team" class="team" style="display: none;">
+    <div class="container">
+        <div class="row">
+
+            <div class="sec-title text-center wow fadeInUp animated" data-wow-duration="700ms">
+                <h2>Acerca de YANA</h2>
+                <div class="devider"><i class="fa fa-book fa-lg"></i></div>
+            </div>
+
+            <div class="sec-sub-title text-center wow fadeInRight animated" data-wow-duration="500ms">
+                <p>
+                    Actualmente problemas como la ansiedad o la depresión son cada vez más frecuentes. <br />
+                    Se estima que para el 2020 la depresión será la enfermedad más común entre personas de 19 a 39 años. <br /> <br />
+                    Hoy en día para acompañar el tratamiento, se utilizan métodos rudimentarios que obligan
+                    al paciente <br /> a cargar con objetos adicionales en su vida, como un anotador. <br /> <br />
+                    YANA es una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes,
+                    enfocada en captar emociones a través de notificaciones y registro diario de pensamiento.
+                    De esta forma, mediante métricas, permite obtener estadísticas del estado emocional
+                    logrando que el psicólogo pueda actuar de forma más eficiente.
+                </p>
+            </div>
+
+            <!-- single member -->
+            <figure class="team-member col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms">
+                <div class="member-thumb">
+                    <img src="img/team/member-1.png" alt="Team Member" class="img-responsive">
+                    <figcaption class="overlay">
+                        <h5>voluptatem quia voluptas </h5>
+                        <p>sit aspernatur aut odit aut fugit,</p>
+                        <ul class="social-links text-center">
+                            <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        </ul>
+                    </figcaption>
+                </div>
+                <h4>John Filmr Doe</h4>
+                <span>Managing Director</span>
+            </figure>
+            <!-- end single member -->
+            <!-- single member -->
+            <figure class="team-member col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                <div class="member-thumb">
+                    <img src="img/team/member-2.png" alt="Team Member" class="img-responsive">
+                    <figcaption class="overlay">
+                        <h5>voluptatem quia voluptas </h5>
+                        <p>sit aspernatur aut odit aut fugit,</p>
+                        <ul class="social-links text-center">
+                            <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        </ul>
+                    </figcaption>
+                </div>
+                <h4>Martin Matrone</h4>
+                <span>Lead Developer</span>
+            </figure>
+            <!-- end single member -->
+            <!-- single member -->
+            <figure class="team-member col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                <div class="member-thumb">
+                    <img src="img/team/member-3.png" alt="Team Member" class="img-responsive">
+                    <figcaption class="overlay">
+                        <h5>voluptatem quia voluptas </h5>
+                        <p>sit aspernatur aut odit aut fugit,</p>
+                        <ul class="social-links text-center">
+                            <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        </ul>
+                    </figcaption>
+                </div>
+                <h4>Steve Flaulkin</h4>
+                <span>Sr. UI Designer</span>
+            </figure>
+            <!-- end single member -->
+            <!-- single member -->
+            <figure class="team-member col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                <div class="member-thumb">
+                    <img src="img/team/member-1.png" alt="Team Member" class="img-responsive">
+                    <figcaption class="overlay">
+                        <h5>voluptatem quia voluptas </h5>
+                        <p>sit aspernatur aut odit aut fugit,</p>
+                        <ul class="social-links text-center">
+                            <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        </ul>
+                    </figcaption>
+                </div>
+                <h4>John Filmr Doe</h4>
+                <span>Managing Director</span>
+            </figure>
+            <!-- end single member -->
+
+        </div>
+    </div>
+</section>
+
+<!--
+End Meet Our Team
+==================================== -->
+<!--
+Some fun facts
+==================================== -->
+
+<section id="facts" class="facts">
+    <div class="parallax-overlay">
+        <div class="container">
+            <div class="row number-counters">
+
+                <div class="sec-title text-center mb50 wow rubberBand animated" data-wow-duration="1000ms">
+                    <h2>YANA en números</h2>
+                    <div class="devider"><i class="fa fa-book fa-lg"></i></div>
+                </div>
+
+                <!-- first count item -->
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms">
+                    <div class="counters-item">
+                        <i class="fa fa-user-md fa-3x"></i>
+                        <strong data-to="@ViewBag.CantidadProfesionales">0</strong>
+                        <!-- Set Your Number here. i,e. data-to="56" -->
+                        <p>Profesionales utilizan esta herramienta</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="counters-item">
+                        <i class="fa fa-users fa-3x"></i>
+                        <strong data-to="@ViewBag.CantidadPacientes">0</strong>
+                        <!-- Set Your Number here. i,e. data-to="56" -->
+                        <p>Pacientes registrados</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="counters-item">
+                        <i class="fa fa-bullhorn fa-3x"></i>
+                        <strong data-to="@ViewBag.CantidadNotificaciones">0</strong>
+                        <!-- Set Your Number here. i,e. data-to="56" -->
+                        <p>Notificaciones generadas</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="counters-item">
+                        <i class="fa fa-pencil fa-3x"></i>
+                        <strong data-to="@ViewBag.CantidadRegistrosDiarios">0</strong>
+                        <!-- Set Your Number here. i,e. data-to="56" -->
+                        <p>Registros diarios de pensamiento cargados</p>
+                    </div>
+                </div>
+                <!-- end first count item -->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
+End Some fun facts
+==================================== -->
+<!--
+Contact Us
+==================================== -->
+
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="row mb50">
+
+            <div class="sec-title text-center mb50 wow fadeInDown animated" data-wow-duration="500ms">
+            <h2>Contacto</h2>
+            <div class="devider"><i class="fa fa-book fa-lg"></i></div>
+        </div>
+
+            <div class="sec-sub-title text-center wow rubberBand animated" data-wow-duration="1000ms">
+            <p>Si te interesa contar con los servicios de YANA, dejanos tus datos y un asesor comercial se pondrá en contacto a la brevedad</p>
+        </div>
+
+            <!-- contact address -->
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 wow fadeInLeft animated" data-wow-duration="500ms">
+                <div class="contact-address">
+                    <h3>YANA ~ si lo sentís, importa.</h3>
+                    <p>Florencio Varela 1903 (B1754JEC)</p>
+                    <p>San Justo, Buenos Aires, Argentina</p>
+                    <p>(+5411) 4480-8900</p>
+                </div>
+            </div>
+            <!-- end contact address -->
+
+            
+                <!-- contact form -->
+                <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="contact-form">
+                        <h3>Dejanos tus datos!</h3>
+                        @using (Html.BeginForm("AddContact", "Home", FormMethod.Post))
+                        {
+                            <div class="input-group name-email">
+                                <div class="input-field">
+                                    <input type="text" name="name" id="name" placeholder="Nombre" class="form-control" required=""  oninvalid="this.setCustomValidity('Este campo es obligatorio')"
+                                           oninput="this.setCustomValidity('')">
+                                </div>
+                                <div class="input-field">
+                                    <input type="email" name="email" id="email" placeholder="Email" class="form-control" required=""  oninvalid="this.setCustomValidity('Ingrese un email válido')"
+                                           oninput="this.setCustomValidity('')">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <textarea name="message" id="message" placeholder="Mensaje" class="form-control"  oninvalid="this.setCustomValidity('Este campo es obligatorio')" oninput="this.setCustomValidity('')"></textarea>
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" id="form-submit" class="pull-right" value="Enviar mensaje">
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- end contact form -->
+
+            <!-- footer social links -->
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                <ul class="footer-social">
+                    <li><a href="https://www.facebook.com/yanapsico.oficial"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href="https://www.instagram.com/yanapsico.oficial"><i class="fa fa-instagram fa-lg"></i></a></li>
+                </ul>
+            </div>
+            <!-- end footer social links -->
+
+        </div>
+    </div>
+
+
+
+</section>
+
+<!--
+End Contact Us
+==================================== -->

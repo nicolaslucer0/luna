@@ -1,0 +1,92 @@
+﻿@model Yana.Models.DomainEntities.NotificacionRespuesta
+@{
+    ViewData["Title"] = "NotificacionRespuestaMensaje";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            var formData = $('#frmNotificacionRespuesta').serialize();
+
+            $.ajax({
+                url: '@Url.Action("NotificacionRespuestaManager", "Notificacion")',
+                type: "POST",
+                data: formData,
+                success: function (result) {
+                    window.location.assign("../Paciente/DashboardPaciente");
+                }
+            });
+        }
+    }
+
+    function IsValid() {
+        HideDivMessageP();
+
+        var field;
+
+        field = $("#Respuesta").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar la Respuesta.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        return true;
+    }
+
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+    });
+
+</script>
+
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Respuesta de Notificación
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @using (Html.BeginForm("NotificacionRespuestaManager", "Notificacion", Model, FormMethod.Post, false, new { id = "frmNotificacionRespuesta" }))
+                        {
+                            <input id="IdNotificacion" name="IdNotificacion" value="@Model.IdNotificacion" style="display:none;" />
+                            <div class="form-group" style="text-align: left;">
+                                <label>Respuesta*</label>
+                                <input type="text" class="form-control" placeholder="" id="Respuesta" name="Respuesta" value="@Model.Respuesta" maxlength="200" autofocus />
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

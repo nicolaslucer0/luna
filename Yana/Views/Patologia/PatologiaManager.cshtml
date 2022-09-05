@@ -1,0 +1,159 @@
+﻿@model Yana.Models.DomainEntities.Patologia
+@{
+    ViewData["Title"] = "PatologiaManager";
+    Layout = "~/Views/Shared/_LoggedLayout.cshtml";
+}
+
+<script>
+    function PostForm() {
+        if (IsValid()) {
+            $("#lblErrorP").text("");
+
+            var formData = $('#frmPatologia').serialize();
+            $.ajax({
+                url: '@Url.Action("PatologiaManager", "Patologia")',
+                type: "POST",
+                data: formData,
+                success: function (result) {
+                    window.location.assign("../PatologiaList");
+                }
+            });
+        }
+    }
+
+    function IsValid() {
+        HideDivMessageP();
+
+        var field;
+
+        field = $("#Nombre").val();
+        if (field.length == 0) {
+            $("#lblErrorP").text("Debe ingresar el Nombre de la Patología.");
+            ShowDivMessageP();
+            return false;
+        }
+
+        return true;
+    }
+
+    function ShowDivMessageP() {
+        scroll(0, 0);
+        $("#divMessagesP").show("slow", function () { });
+    }
+
+    function HideDivMessageP() {
+        $("#divMessagesP").hide();
+    }
+
+    $(document).ready(function () {
+        if ($("#lblErrorP").text().length > 0)
+            ShowDivMessageP();
+    });
+
+    function EliminarPatologia() {
+
+        var idPatologia = @Model.IdPatologia;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeletePatologia", "Patologia")',
+            data: { idPatologia: idPatologia},
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                $("#lblError").text(data.errorMessage);
+                if (data.errorMessage.length > 0) {
+                    ShowDivMessageP();
+                }
+                else {
+                    window.location.assign('@Url.Action("PatologiaList", "Patologia")');
+                }
+            },
+            failure: function (data) {
+                alert("failure");
+            }
+        });
+    }
+
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminación de Patología</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                ¿Seguro que desea eliminar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn yanaButtonGrey" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                <button type="button" class="btn yanaButton" onclick="EliminarPatologia();"><i class='fa fa-check-square fa-lg'></i>Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @{
+                            string titulo = Model.IdPatologia == 0 ? "Nueva Patologia" : "Editar Patologia";
+                        }
+                        @titulo
+                    </div>
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none;">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
+                            </div>
+                        </p>
+                    </div>
+                    <div class="panel-body" id="divPanelBody">
+                        @using (Html.BeginForm("PatologiaManager", "Patologia", Model, FormMethod.Post, false, new { id = "frmPatologia" }))
+                        {
+                            <input id="IdPatologia" name="IdPatologia" value="@Model.IdPatologia" style="display:none;" />
+                            <div class="form-group" style="text-align: left;">
+                                <label>Nombre*</label>
+                                <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" autofocus />
+                            </div>
+                            <div class="form-group" style="text-align: left;">
+                                <label>Descripción</label>
+                                <input type="text" class="form-control" id="Descripcion" name="Descripcion" maxlength="200" value="@Model.Descripcion" />
+                            </div>
+                            <br />
+                            <div class="row">
+
+                                @{
+                                    if (Model.IdPatologia != 0)
+                                    {
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#deleteModal"><i class='fa fa-trash fa-lg'></i>Eliminar</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-8"></div>
+                                    }
+                                }
+                                <div class="col-md-2">
+                                    <button onclick="window.location.assign('@Url.Action("PatologiaList", "Patologia")')" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
