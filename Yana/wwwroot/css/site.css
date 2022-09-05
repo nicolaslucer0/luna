@@ -102,7 +102,7 @@ body {
     background-color: #19986a;
     border-color: #19986a;
     padding: 10px 20px;
-    border-radius: 10px !important;
+    border-radius: 20px !important;
     transition: .4s;
 }
 
@@ -111,7 +111,7 @@ body {
         background-color: #16bb7f;
         border-color: #16bb7f;
         padding: 10px 20px;
-        border-radius: 10px !important;
+        border-radius: 20px !important;
     }
 
 .yanaButtonGrey {

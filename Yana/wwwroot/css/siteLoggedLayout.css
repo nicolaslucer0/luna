@@ -46,6 +46,7 @@ i {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 60%;
 }
 
 .card-body {
@@ -82,5 +83,6 @@ header h1 {
 @media only screen and (max-width: 800px) {
     .card {
         flex-direction: column;
+        width: 70%;
     }
 }
