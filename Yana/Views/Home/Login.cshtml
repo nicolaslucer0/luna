@@ -42,94 +42,95 @@
         });
     }
 </script>
+<body class="login-body">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recuperá tu contraseña</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="divMessagesP" class="ui-corner-all" style="display: none; margin-top: 0">
+                        <p align="left">
+                            <div class="alert alert-danger" style="text-align: left;">
+                                <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+                            </div>
+                        </p>
+                    </div>
+                    <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email" required="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn yanaButtonGrey" onclick="HideDivMessageP();" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
+                    <button type="submit" onclick="RecuperarPassword();" id="recuperar" class="btn yanaButton">Recuperar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Recuperá tu contraseña</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+    <header id="navigation" class="navbar-fixed-top navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- responsive nav button -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars fa-2x"></i>
                 </button>
+                <!-- /responsive nav button -->
+                <!-- logo -->
+                <a class="navbar-brand" href="/">
+                    <h1 id="logo">
+                        <img src="/img/logo1.png" alt="Brandi">
+                    </h1>
+                </a>
+                <!-- /logo -->
             </div>
-            <div class="modal-body">
-                <div id="divMessagesP" class="ui-corner-all" style="display: none; margin-top: 0">
-                    <p align="left">
-                        <div class="alert alert-danger" style="text-align: left;">
-                            <label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;"></label>
+
+            <!-- main nav -->
+            <nav class="collapse navbar-collapse navbar-right" role="navigation">
+                <ul id="nav" class="nav navbar-nav">
+                    <li class="current"><a href="/#/">Inicio</a></li>
+                </ul>
+            </nav>
+            <!-- /main nav -->
+
+        </div>
+    </header>
+
+    <div class="row card">
+        <div class="col-xs-12 col-md-7 login-image-container">
+            <img class="login-image" src="/img/login.jpg" />
+        </div>
+        <div class="col-xs-12 col-md-5 card-body">
+            <div class="logo-yana">
+                <h2 class="panel-title">YANA - Ingreso</h2>
+            </div>
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+            {
+                <form role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
                         </div>
-                    </p>
-                </div>
-                <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email" required="">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn yanaButtonGrey" onclick="HideDivMessageP();" data-dismiss="modal"><i class='fa fa-undo fa-lg'></i>Cancelar</button>
-                <button type="submit" onclick="RecuperarPassword();" id="recuperar" class="btn yanaButton">Recuperar</button>
-            </div>
-        </div>
-    </div>
-</div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Password" name="Password" type="password" value="">
+                        </div>
+                        <div style="text-align: center;">
+                            <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
+                        </div>
+                    </fieldset>
 
-<header id="navigation" class="navbar-fixed-top navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <!-- responsive nav button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <i class="fa fa-bars fa-2x"></i>
-            </button>
-            <!-- /responsive nav button -->
-            <!-- logo -->
-            <a class="navbar-brand" href="/">
-                <h1 id="logo">
-                    <img src="/img/logo1.png" alt="Brandi">
-                </h1>
-            </a>
-            <!-- /logo -->
+                    @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
+
+                    <div style="text-align: center; padding: 1em;">
+                        <button type="submit" class="btn yanaButton">Ingresar</button>
+                    </div>
+                </form>
+            }
         </div>
 
-        <!-- main nav -->
-        <nav class="collapse navbar-collapse navbar-right" role="navigation">
-            <ul id="nav" class="nav navbar-nav">
-                <li class="current"><a href="/#/">Inicio</a></li>
-            </ul>
-        </nav>
-        <!-- /main nav -->
-
     </div>
-</header>
-
-<div class="row card">
-    <div class="col-xs-12 col-md-7 login-image-container">
-        <img class="login-image" src="/img/login.jpg" />
-    </div>
-    <div class="col-xs-12 col-md-5 card-body">
-        <div class="logo-yana">
-            <h2 class="panel-title">YANA - Ingreso</h2>
-        </div>
-        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-        {
-            <form role="form">
-                <fieldset>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Password" name="Password" type="password" value="">
-                    </div>
-                    <div style="text-align: center;">
-                        <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
-                    </div>
-                </fieldset>
-                
-                @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
-
-                <div style="text-align: center; padding: 1em;">
-                    <button type="submit" class="btn yanaButton">Ingresar</button>
-                </div>
-            </form>
-        }
-    </div>
-
-</div>
+</body>
