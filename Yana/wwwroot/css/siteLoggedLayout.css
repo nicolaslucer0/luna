@@ -19,13 +19,13 @@
     text-align: right;
 }
 
-    .UserLogued a {
-        color: white;
-    }
+.UserLogued a {
+    color: white;
+}
 
-        .UserLogued a:hover {
-            color: white;
-        }
+.UserLogued a:hover {
+    color: white;
+}
 
 .login-body {
     background-size: cover;
@@ -85,4 +85,10 @@ header h1 {
         flex-direction: column;
         width: 70%;
     }
+}
+
+.form-control:focus {
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

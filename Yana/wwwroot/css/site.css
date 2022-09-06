@@ -1,16 +1,21 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,400&display=swap');
+
 
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
 }
-
+*{
+    font-family: 'Poppins';
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
     font-size: 14px;
+    font-family: Poppins !important;
 }
 
 @media (min-width: 768px) {
@@ -99,20 +104,23 @@ body {
 
 .yanaButton {
     color: #fff;
-    background-color: #19986a;
-    border-color: #19986a;
+    background-color: #0feb9e;
+    border-color: #0feb9e;
     padding: 10px 20px;
     border-radius: 20px !important;
     transition: .4s;
+    font-family: Poppins !important;
+    text-transform: none !important;
+    font-weight: 200;
 }
 
-    .yanaButton:hover {
-        color: #fff;
-        background-color: #16bb7f;
-        border-color: #16bb7f;
-        padding: 10px 20px;
-        border-radius: 20px !important;
-    }
+.yanaButton:hover {
+    color: #fff;
+    background-color: #16bb7f;
+    border-color: #16bb7f;
+    padding: 10px 20px;
+    border-radius: 20px !important;
+}
 
 .yanaButtonGrey {
     color: #fff;
@@ -121,9 +129,40 @@ body {
     border-radius: 5px !important;
 }
 
-    .yanaButtonGrey:hover {
-        color: #fff;
-        background-color: #b2b2b2;
-        border-color: #16bb7f;
-        border-radius: 5px !important;
-    }
+.yanaButtonGrey:hover {
+    color: #fff;
+    background-color: #b2b2b2;
+    border-color: #16bb7f;
+    border-radius: 5px !important;
+}
+
+
+
+.ui-jqgrid td {
+    background: white !important;
+    color: black !important;
+    border-color: lightgrey !important;
+}
+.ui-jqgrid th {
+    background: white !important;
+    color: black !important;
+    border-color: lightgrey !important;
+}
+
+.ui-jqgrid div {
+    background: white !important;
+    color: black !important;
+    border-color: lightgrey !important;
+}
+
+input {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    background: #fff !important;
+    border-radius: 31px !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px !important;
+    color: #8f8fa1 !important;
+    line-height: 1.2 !important;
+}
