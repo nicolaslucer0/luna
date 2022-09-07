@@ -65,7 +65,7 @@ h4, h5, h6 {
 }
 
 span.color {
-	color: #0feb9e;
+	color: #6385DC;
 }
 
 body > section,
@@ -499,7 +499,8 @@ nav li a {
 }
 
 .parallax-overlay {
-	background-color: rgba(6,32,51,.8);
+	background-color: #6385DC;
+	color: white;
 	padding: 70px 0;
 }
 
@@ -607,7 +608,7 @@ label.error {
 }
 
 .footer-social {
-  margin-top: 17px;
+	margin-top: 17px;
 }
 
 .footer-social li a {
@@ -629,9 +630,9 @@ label.error {
 
 
 .footer {
-  background-color: #1ea78d;
-  border-top: 5px solid #062033;
-  color: #fff;
+	background-color: #6385DC;
+	border-top: 5px solid #062033;
+	color: #fff;
 }
 
 .footer a:hover {
@@ -705,4 +706,12 @@ label.error {
   position: fixed;
   right: 25px;
   z-index: 9;
+}
+
+.blue-text {
+	color: #6385DC !important;
+}
+
+.white-text {
+	color: white !important;
 }
