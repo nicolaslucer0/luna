@@ -2,34 +2,11 @@
 /*	Preloader
 /* ========================================================================= */
 
-jQuery(window).load(function(){
-
-	$("#preloader").fadeOut("slow");
-
-});
 
 
 $(document).ready(function(){
 
-	/* ========================================================================= */
-	/*	Menu item highlighting
-	/* ========================================================================= */
 
-	jQuery('#nav').singlePageNav({
-		offset: jQuery('#nav').outerHeight(),
-		filter: ':not(.external)',
-		speed: 1200,
-		currentClass: 'current',
-		easing: 'easeInOutExpo',
-		updateHash: true,
-		beforeStart: function() {
-			console.log('begin scrolling');
-		},
-		onComplete: function() {
-			console.log('done scrolling');
-		}
-	});
-	
    
 	
 	/* ========================================================================= */
@@ -45,50 +22,7 @@ $(document).ready(function(){
 	});
 	
 	
-	/* ========================================================================= */
-	/*	Portfolio Filtering
-	/* ========================================================================= */	
-	
-	
-    // portfolio filtering
 
-    $(".project-wrapper").mixItUp();
-	
-	
-	$(".fancybox").fancybox({
-		padding: 0,
-
-		openEffect : 'elastic',
-		openSpeed  : 650,
-
-		closeEffect : 'elastic',
-		closeSpeed  : 550,
-
-		closeClick : true,
-	});
-	
-	/* ========================================================================= */
-	/*	Parallax
-	/* ========================================================================= */	
-	
-	$('#facts').parallax("50%", 0.3);
-	
-	/* ========================================================================= */
-	/*	Timer count
-	/* ========================================================================= */
-
-	"use strict";
-    $(".number-counters").appear(function () {
-        $(".number-counters [data-to]").each(function () {
-            var e = $(this).attr("data-to");
-            $(this).delay(6e3).countTo({
-                from: 50,
-                to: e,
-                speed: 3e3,
-                refreshInterval: 50
-            })
-        })
-    });
 	
 	/* ========================================================================= */
 	/*	Back to Top

@@ -6,96 +6,52 @@
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <head>
-    <!-- meta charec set -->
     <meta charset="utf-8">
-    <!-- Always force latest IE rendering engine or request Chrome Frame -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!-- Page Title -->
-    <title>YANA ~ Si lo sentís, importa</title>
-    <!-- Meta Description -->
+    <title>Luna ~ Si lo sentís, importa</title>
     <meta name="description" content="YANA ~ Si lo sentís, importa">
     <meta name="keywords" content="yana, psicologia, seguimiento, notificaciones, pacientes, psicologos">
     <meta name="author" content="YANA">
-    <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="~/css/modal.css">
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-    <!-- CSS
-    ================================================== -->
-    <!-- Fontawesome Icon font -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- Twitter Bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- jquery.fancybox  -->
-    <link rel="stylesheet" href="css/jquery.fancybox.css">
-    <!-- animate -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/bootstrap-5.2.1.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/site.css">
-    <!-- media-queries -->
     <link rel="stylesheet" href="css/media-queries.css">
-
-    <!-- Modernizer Script for old Browsers -->
     <script src="js/modernizr-2.6.2.min.js"></script>
 
 </head>
 <body>
-
-
-<!-- preloader -->
-<div id="preloader">
-    <img src="img/mariposa.gif" alt="Preloader">
-</div>
-<!-- end preloader -->
-<!--
-Fixed Navigation
-==================================== -->
-<header id="navigation" class="navbar-fixed-top navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <!-- responsive nav button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <i class="fa fa-bars fa-2x"></i>
+<nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+            <div class="navbar-brand">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- /responsive nav button -->
-            <!-- logo -->
-            <a class="navbar-brand" href="#body">
-                <h1 id="logo">
-                    <img src="img/logo1.png" alt="Brandi">
-                </h1>
-            </a>
-            <!-- /logo -->
         </div>
 
-        <!-- main nav -->
-        <nav class="collapse navbar-collapse navbar-right" role="navigation">
-            <ul id="nav" class="nav navbar-nav">
-                <li class="current"><a href="#slider">Inicio</a></li>
-                <li><a href="#features">Soy psicólogo</a></li>
-                <li><a href="#works">Soy paciente</a></li>
-                <li><a href="#team">Acerca de YANA</a></li>
-                <li><a href="#contact">Contacto</a></li>
-                <li><a href="#" onclick="window.location.assign('@Url.Action("Login", "Home")') ">Ingresar</a></li>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul id="nav" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item current"><a class="nav-link" href="#slider">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#features">Soy psicólogo</a></li>
+                <li class="nav-item"><a class="nav-link" href="#works">Soy paciente</a></li>
+                <li class="nav-item"><a class="nav-link" href="#team">Acerca de YANA</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="window.location.assign('@Url.Action("Login", "Home")') ">Ingresar</a></li>
             </ul>
-        </nav>
-        <!-- /main nav -->
+        </div>
 
     </div>
-</header>
-<!--
-End Fixed Navigation
-==================================== -->
+</nav>
 
 @RenderBody()
-
 
     <footer id="footer" class="footer">
         <div class="container">
@@ -156,45 +112,17 @@ End Fixed Navigation
 
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
-    <!-- Essential jQuery Plugins
-    ================================================== -->
-    <!-- Main jQuery -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <!-- Single Page Nav -->
+
+    <script src="js/jquery-3.6.1.min.js"></script>
     <script src="js/jquery.singlePageNav.min.js"></script>
-    <!-- Twitter Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- jquery.fancybox.pack -->
+    <script src="js/bootstrap-5.2.1.min.js"></script>
     <script src="js/jquery.fancybox.pack.js"></script>
-    <!-- jquery.mixitup.min -->
     <script src="js/jquery.mixitup.min.js"></script>
-    <!-- jquery.parallax -->
     <script src="js/jquery.parallax-1.1.3.js"></script>
-    <!-- jquery.countTo -->
     <script src="js/jquery-countTo.js"></script>
-    <!-- jquery.appear -->
     <script src="js/jquery.appear.js"></script>
-    <!-- Contact form validation -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-    <!-- Google Map -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <!-- jquery easing -->
-    <script src="js/jquery.easing.min.js"></script>
-    <!-- jquery easing -->
-    <script src="js/wow.min.js"></script>
-    <script>
-        var wow = new WOW({
-            boxClass: 'wow',      // animated element css class (default is wow)
-            animateClass: 'animated', // animation css class (default is animated)
-            offset: 120,          // distance to the element when triggering the animation (default is 0)
-            mobile: false,       // trigger animations on mobile devices (default is true)
-            live: true        // act on asynchronously loaded content (default is true)
-        }
-        );
-        wow.init();
-    </script>
-    <!-- Custom Functions -->
     <script src="js/custom.js"></script>
 
     <script type="text/javascript">

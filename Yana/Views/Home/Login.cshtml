@@ -42,8 +42,7 @@
         });
     }
 </script>
-<body class="login-body">
-    <!-- Modal -->
+<body>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -71,34 +70,24 @@
         </div>
     </div>
 
-    <header id="navigation" class="navbar-fixed-top navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <!-- responsive nav button -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars fa-2x"></i>
-                </button>
-                <!-- /responsive nav button -->
-                <!-- logo -->
-                <a class="navbar-brand" href="/">
-                    <h1 id="logo">
-                        <img src="/img/logo1.png" alt="Brandi">
-                    </h1>
-                </a>
-                <!-- /logo -->
-            </div>
-
-            <!-- main nav -->
-            <nav class="collapse navbar-collapse navbar-right" role="navigation">
-                <ul id="nav" class="nav navbar-nav">
-                    <li class="current"><a href="/#/">Inicio</a></li>
-                </ul>
-            </nav>
-            <!-- /main nav -->
-
+<nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+            <div class="navbar-brand">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
-    </header>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul id="nav" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item current"><a class="nav-link" href="#slider">Inicio</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+</nav>
 
     <div class="row card">
         <div class="col-xs-12 col-md-7 login-image-container">

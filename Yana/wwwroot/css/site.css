@@ -103,23 +103,24 @@ body {
 }
 
 .yanaButton {
-    color: #fff;
-    background-color: #6385DC;
-    border-color: #6385DC;
-    padding: 10px 20px;
     border-radius: 20px !important;
-    transition: .4s;
-    font-family: Poppins !important;
-    text-transform: none !important;
-    font-weight: 200;
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%);
+    margin: 5px auto;
+    padding: 10px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
 }
 
 .yanaButton:hover {
-    color: #fff;
-    background-color: #16bb7f;
-    border-color: #16bb7f;
-    padding: 10px 20px;
-    border-radius: 20px !important;
+    background-position: right center; /* change the direction of the change here */
+    color: white !important;
+    text-decoration: none;
 }
 
 .yanaButtonGrey {
@@ -157,7 +158,6 @@ body {
 
 input {
     position: relative !important;
-    display: block !important;
     width: 100% !important;
     background: #fff !important;
     border-radius: 31px !important;
@@ -165,4 +165,6 @@ input {
     font-size: 12px !important;
     color: #8f8fa1 !important;
     line-height: 1.2 !important;
+    padding: 1em !important;
+    margin: 1em;
 }
