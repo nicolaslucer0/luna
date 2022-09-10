@@ -46,10 +46,16 @@
 <body>
     <div class="dashboard">
 
-        <div class="sidebar">
 
-            @if (UserCache.MenuItems != null)
-            {
+
+        @if (UserCache.MenuItems != null)
+        {
+            <div class="sidebar">
+                <div class="user-profile">
+                    <div class="user-image"><img src="~/img/team/1.png" /></div>
+                    <div class="user-name">Nicolas</div>
+                </div>
+
                 <div class="sidebar-menu">
 
                     @if (menuItems != null)
@@ -60,11 +66,7 @@
                             {
                                 <a href="#" onclick="window.location.assign('@Url.Action(parentMenu.Action, parentMenu.Controller)') ">@parentMenu.Descripcion</a>
                             }
-                            else
-                            {
-                                <a href="#">@parentMenu.Descripcion</a>
-                            }
-
+                            
                             @if (menuItems.Any(p => p.IdParent == parentMenu.IdMenuItem))
                             {
                                 @foreach (var itemNivel1 in menuItems.Where(p => p.IdParent == parentMenu.IdMenuItem).OrderBy(x => x.Orden))
@@ -85,20 +87,18 @@
                             }
                         }
                     }
-                    
+
                 </div>
 
-                <div class="user-profile">
-                    <div class="user-image"><img src="~/img/team/1.png" /></div>
-                    <div class="user-name">Nicolas</div>
-                    <a>
-                        @Html.ActionLink("Salir", "Logout", "Home")
-                    </a>
+                <div class="logout-button">
+                    <a>@Html.ActionLink("Salir", "Logout", "Home")</a>
+                    <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
                 </div>
-            }
+            </div>
+                }
+            
+            @RenderBody()
         </div>
-        @RenderBody()
-    </div>
 
 </body>
 </html>

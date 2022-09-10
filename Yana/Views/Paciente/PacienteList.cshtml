@@ -127,13 +127,16 @@
 </script>
 
 <br />
-<div class="container">
+<div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading" id="panelHead">
-                        Pacientes
+                    <div class="flex-container">
+                        <div class="panel-heading" id="panelHead">
+                            Pacientes
+                        </div>
+                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
                     </div>
                     <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
                         <p align="left">
@@ -145,12 +148,8 @@
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            <p>
-                                <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
-                            </p>
                             <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
-                            <div id="pager" class="scroll" style="text-align: center;">
-                            </div>
+                            <div id="pager" class="scroll" style="text-align: center;"></div>
                         </div>
                     </div>
                 </div>

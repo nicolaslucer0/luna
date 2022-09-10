@@ -249,11 +249,7 @@
             $('#container4').highcharts({
                 chart: {
                     type: 'pie',
-                    options3d: {
-                        enabled: true,
-                        alpha: 45,
-                        beta: 0
-                    }
+                    
                 },
                 title: {
                     text: ''
@@ -276,7 +272,7 @@
                     pie: {
                         allowPointSelect: true,
                         cursor: 'pointer',
-                        depth: 35,
+                        depth: 0,
                         dataLabels: {
                             enabled: true,
                             format: '{point.name} ({point.y})',
@@ -317,7 +313,7 @@
     });
 </script>
 
-<div class="container" style="width: 100%">
+<div class="container dashboard-content" style="width: 100%">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

@@ -44,10 +44,20 @@
         <div class="row mb50">
             <div class="col-md-12">
                 <div class="panel panel-default">
+                    
                     <h1>Hola, Nicolas</h1>
-
+                    
                     <div class="panel-heading" id="panelHead">
+                        <div class="flex-container">
+
                         Registro Diario
+                        @{
+                            if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                            {
+                                <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Registro Diario</button>
+                            }
+                        }
+                        </div>
                     </div>
                     <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
                         <p align="left">
@@ -59,14 +69,6 @@
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            @{
-                                if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                                {
-                                    <p>
-                                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Registro Diario</button>
-                                    </p>
-                                }
-                            }
                             <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="pager" class="scroll" style="text-align: center;">
                             </div>
