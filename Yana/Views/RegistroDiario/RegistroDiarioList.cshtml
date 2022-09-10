@@ -4,7 +4,10 @@
     ViewData["Title"] = "RegistroDiarioList";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
-
+<script type="text/javascript" language="javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.0.custom/jquery-ui.min.js"type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="/js/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/js/src/i18n/grid.locale-es.js" type="text/javascript"></script>
 <script type="text/javascript" language="javascript">
 
     function Create() {
@@ -27,103 +30,16 @@
     }).trigger('resize');
 
     $(document).ready(function () {
-        var myGrid = $('#list'),
-            decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
-                var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
-                if (jqXHR.responseText.charAt(0) === '[') {
-                    try {
-                        errorInfo = $.parseJSON(jqXHR.responseText);
-                        errorText = "";
-                        for (i = 0; i < errorInfo.length; i++) {
-                            if (errorText.length !== 0) {
-                                errorText += "<hr/>";
-                            }
-                            errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
-                        }
-                    }
-                    catch (e) { }
-                } else {
-                    html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
-                    if (html !== null && html.length > 1) {
-                        errorText = html[1];
-                    }
-                }
-                return errorText;
-            };
-
-        try {
-
-            myGrid.jqGrid({
-                url: '@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })',
-                datatype: 'json',
-                mtype: 'POST',
-                colNames: ['Codigo', 'Fecha','Situacion','Motivo Situacion','Tipo Emocion','Pensamiento Automatico','Emociones Resultado','Respuesta',''],
-                colModel: [
-                    { name: 'idRegistroDiario', index: 'idRegistroDiario', key: true, width: 45, align: 'center', search: false, sorttype: 'int' },
-                    { name: 'fecha', index: 'fecha', align: 'center', search: true, sorttype: 'date', formatter: 'date', formatoptions: { srcformat: "ISO8601Long", newformat: "d/m/Y h:i A" } },
-                    { name: 'situacion', index: 'situacion', align: 'left', search: true },
-                    { name: 'motivoSituacion', index: 'motivoSituacion', align: 'left', search: true },
-                    { name: 'tipoEmocion', index: 'tipoEmocion', align: 'center', search: true },
-                    { name: 'pensamientoAutomatico', index: 'pensamientoAutomatico', align: 'left', search: true },
-                    { name: 'emocionesResultado', index: 'emocionesResultado', align: 'center', search: true },
-                    { name: 'registroDiarioRespuesta', index: 'registroDiarioRespuesta', align: 'center', width:80, formatter: imageFormatter, search: false },
-                    { name: 'action', index: 'action', width: 60, align: 'center', sortable: false, search: false }
-                ],
-                pager: '#pager',
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                sortname: 'RegistroDiario',
-                sortorder: 'desc',
-                rownumbers: true,
-                viewrecords: true,
-                height: 'auto',
-                gridview: true,
-                loadonce: true,
-                jsonReader: { cell: "" },
-                caption: 'RegistrosDiarios',
-                loadError: function (jqXHR, textStatus, errorThrown) {
-                    // remove error div if exist
-                    $('#' + this.id + '_err').remove();
-                    // insert div with the error description before the grid
-                    myGrid.closest('div.ui-jqgrid').before(
-                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-                },
-
-                   gridComplete: function () {
-                    var ids = myGrid.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var rowId = ids[i];
-
-                        var checkOut = "<button onclick=\"VerMas(" + rowId + ");\" title='VerMàs' class='btn yanaButton' ><i class='fa fa-book fa-lg' style='margin-left: 5px;'></i></button>";
-
-                        myGrid.jqGrid('setRowData', rowId, { action: checkOut });
-                    }
-                }
-            });
-        }
-        catch (err) {
-            alert("Error:" + err.message);
-        }
-
-        myGrid.jqGrid('navGrid', '#pager', { add: false, edit: false, del: false },
-            {}, {}, {}, { multipleSearch: true, overlay: false });
-        myGrid.jqGrid('filterToolbar', { autosearch: true, stringResult: false, defaultSearch: 'cn' });
-        myGrid.jqGrid('navButtonAdd', '#pager',
-            {
-                caption: "Filtrar", title: "Mostrar/Ocultar barra de filtro",
-                buttonicon: 'ui-icon-pin-s',
-                onClickButton: function () { myGrid[0].toggleToolbar(); }
-            });
-        myGrid.jqGrid('navGrid', "#pager", { edit: false, add: false, del: false });
-
-        $("#list").setGridWidth($("#panelHead").width());
+        var myGrid = '@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })';
+        $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })', function (data) {
+            console.log("Datos tabla: ",data);
+            $('.panel-body').append(data);
+        });
     });
 </script>
 
 <br />
-<div class="container dashboard-content" style="width: 90%">
+<div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row mb50">
             <div class="col-md-12">

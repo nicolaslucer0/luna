@@ -63,7 +63,7 @@ values
 ('Trastornos del animo','',0,getdate(),1),
 ('Trastornos somatomorfos','',0,getdate(),1),
 ('Trastornos disociativos','',0,getdate(),1),
-('Trastornos de la conducta alimentaria, sexuales, sueño, etc','',0,getdate(),1),
+('Trastornos de la conducta alimentaria, sexuales, sueï¿½o, etc','',0,getdate(),1),
 ('Trastornos de ansiedad','',0,getdate(),1),
 ('Ezquizofrenia','',0,getdate(),1),
 ('Trastornos ezquizofreniforme','',0,getdate(),1),
@@ -145,7 +145,7 @@ values
 (4,'Hermano',3,'Presente',0,getdate(),1),
 (6,'Padre',1,'Presente',0,getdate(),1),
 (6,'Madre',2,'Presente',0,getdate(),1),
-(6,'Hermana',4,'Mala Relaciòn',0,getdate(),1);
+(6,'Hermana',4,'Mala Relaciï¿½n',0,getdate(),1);
 
 
 insert into TipoEmocion
@@ -161,7 +161,7 @@ values
 
 insert into RegistroDiario
 values
-(3,'Rendir un parcial','Bajo rendimiento',7,90,'Pensar que la facultad no es para mi',80,'Pedir ayuda a compañeros',50,50,1,0,getdate(),1),
+(3,'Rendir un parcial','Bajo rendimiento',7,90,'Pensar que la facultad no es para mi',80,'Pedir ayuda a compaï¿½eros',50,50,1,0,getdate(),1),
 (3,'Guardar Compras','Guardar Compras',3,70,'Pensar que habia ratas escondidas',80,'Pedir que alguien revise el lugar',50,50,1,0,getdate(),1),
 (3,'Ver fotos de ratas','Ver fotos de ratas',5,80,'Son muy feos y me dan asco',80,'Ver que son solo fotos',50,100,2,0,getdate(),1),
 (4,'Entrevista laboral','Bajo rendimiento',7,90,'Pensar que el empleo no es para mi',80,'Pedir ayuda a familiares',50,50,1,0,getdate(),1),
