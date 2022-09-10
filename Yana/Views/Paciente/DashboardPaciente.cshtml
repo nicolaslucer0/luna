@@ -12,14 +12,13 @@
 
 </script>
 
-<div class="container">
+<div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Notificaciones Pendientes
-                    </div>
+                    <h1>Hola, Nicolas</h1>
+                    
                     <div class="panel-body" id="divPanelBody">
                         @{
                             if (Model.Any())
@@ -42,7 +41,7 @@
                                         notificationCssClass = "alert alert-danger";
                                     }
                                     <div class="@notificationCssClass" role="alert">
-                                        <label style="font-size: 10px;">@notificacion.FechaHora.ToString()</label><br />
+                                        <label style="font-size: 10px;">@notificacion.FechaHora.ToString()</label>
                                         @notificacion.Mensaje
                                         <br /><br />
                                         <div style="text-align: center;">
@@ -53,7 +52,7 @@
                             }
                             else
                             {
-                                <div class="alert alert-success" role="alert">
+                                <div class="section" role="alert">
                                     No hay notificaciones pendientes.
                                 </div>
                             }

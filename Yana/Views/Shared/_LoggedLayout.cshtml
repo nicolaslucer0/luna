@@ -1,6 +1,8 @@
 ﻿@using Yana.Helpers
 @using Yana.Models.WrapperEntities
-@{ var menuItems = UserCache.MenuItems; }
+@{
+    var menuItems = UserCache.MenuItems;
+}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -42,18 +44,18 @@
 </head>
 
 <body>
-    <div style="margin-left: 5px; margin-right: 5px; margin-top: 5px;">
-        @if (UserCache.MenuItems != null)
-        {
-            <ul id="menu">
-                <li>
-                    <img src="~/img/logo1.png" height="15" style="margin-top: 5px;" />
-                </li>
-                @if (menuItems != null)
-                {
-                    foreach (var parentMenu in menuItems.Where(p => p.IdParent == 0 || p.IdParent == null).OrderBy(x => x.Orden))
+    <div class="dashboard">
+
+        <div class="sidebar">
+
+            @if (UserCache.MenuItems != null)
+            {
+                <div class="sidebar-menu">
+
+                    @if (menuItems != null)
                     {
-                        <li>
+                        foreach (var parentMenu in menuItems.Where(p => p.IdParent == 0 || p.IdParent == null).OrderBy(x => x.Orden))
+                        {
                             @if (!string.IsNullOrEmpty(parentMenu.Action))
                             {
                                 <a href="#" onclick="window.location.assign('@Url.Action(parentMenu.Action, parentMenu.Controller)') ">@parentMenu.Descripcion</a>
@@ -65,37 +67,39 @@
 
                             @if (menuItems.Any(p => p.IdParent == parentMenu.IdMenuItem))
                             {
-                                <ul>
-                                    @foreach (var itemNivel1 in menuItems.Where(p => p.IdParent == parentMenu.IdMenuItem).OrderBy(x => x.Orden))
+                                @foreach (var itemNivel1 in menuItems.Where(p => p.IdParent == parentMenu.IdMenuItem).OrderBy(x => x.Orden))
+                                {
+                                    if (!menuItems.Any(p => p.IdParent == itemNivel1.IdMenuItem))
                                     {
-                                        if (!menuItems.Any(p => p.IdParent == itemNivel1.IdMenuItem))
+                                        <a href="#" onclick="window.location.assign('@Url.Action(itemNivel1.Action, itemNivel1.Controller)') ">@itemNivel1.Descripcion</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#">@itemNivel1.Descripcion</a>
+                                        @foreach (var itemNivel2 in menuItems.Where(p => p.IdParent == itemNivel1.IdMenuItem).OrderBy(x => x.Orden))
                                         {
-                                            <li><a href="#" onclick="window.location.assign('@Url.Action(itemNivel1.Action, itemNivel1.Controller)') ">@itemNivel1.Descripcion</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li>
-                                                <a href="#">@itemNivel1.Descripcion</a>
-                                                <ul>
-                                                    @foreach (var itemNivel2 in menuItems.Where(p => p.IdParent == itemNivel1.IdMenuItem).OrderBy(x => x.Orden))
-                                                    {
-                                                        <li><a href="#" onclick="window.location.assign('@Url.Action(itemNivel2.Action, itemNivel2.Controller)') ">@itemNivel2.Descripcion</a></li>
-                                                    }
-                                                </ul>
-                                            </li>
+                                            <a href="#" onclick="window.location.assign('@Url.Action(itemNivel2.Action, itemNivel2.Controller)') ">@itemNivel2.Descripcion</a>
                                         }
                                     }
-                                </ul>
+                                }
                             }
-                        </li>
+                        }
                     }
-                }
-                <li>
-                    @Html.ActionLink("Salir", "Logout", "Home")
-                </li>
-            </ul>
-        }
+                    
+                </div>
+
+                <div class="user-profile">
+                    <div class="user-image"><img src="~/img/team/1.png" /></div>
+                    <div class="user-name">Nicolas</div>
+                    <a>
+                        @Html.ActionLink("Salir", "Logout", "Home")
+                    </a>
+                </div>
+            }
+        </div>
+        @RenderBody()
     </div>
-    @RenderBody()    
+
 </body>
 </html>
+

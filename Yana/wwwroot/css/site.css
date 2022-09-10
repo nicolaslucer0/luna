@@ -48,10 +48,7 @@ html {
     min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
+
 
 .footer {
     position: absolute;
@@ -166,5 +163,7 @@ input {
     color: #8f8fa1 !important;
     line-height: 1.2 !important;
     padding: 1em !important;
-    margin: 1em;
+    margin: 1em auto;
+    border: none !important;
+    background: #efefef !important;
 }
