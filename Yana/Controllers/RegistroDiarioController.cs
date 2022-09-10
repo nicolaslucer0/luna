@@ -62,26 +62,9 @@ namespace Yana.Controllers
 
                 var totalRecords = registroDiarios.Count();
 
-                JsonResult json = Json(new
-                {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in registroDiarios
-                            select new
-                            {
-                                idRegistroDiario = item.IdRegistroDiario,
-                                fecha = item.FechaModificacion,
-                                situacion = item.Situacion,
-                                motivoSituacion = item.MotivoSituacion,
-                                tipoEmocion = item.IdTipoEmocionNavigation != null ? item.IdTipoEmocionNavigation.Descripcion : string.Empty,
-                                pensamientoAutomatico = item.PensamientoAutomatico,
-                                emocionesResultado = item.IdTipoEmocionResultadoNavigation != null ? item.IdTipoEmocionResultadoNavigation.Descripcion : string.Empty,
-                                registroDiarioRespuesta = item.RegistroDiarioRespuesta != null && item.RegistroDiarioRespuesta.Any() != false ? 1 : 0,
-                            }).OrderByDescending(x => x.idRegistroDiario).ToArray()
-                });
+                return Json(new {registroDiarios});
 
-                return json;
+                
             }
             catch (Exception ex)
             {
