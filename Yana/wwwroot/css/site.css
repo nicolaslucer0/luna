@@ -112,6 +112,9 @@ html {
     box-shadow: 0 0 20px #eee;
     border-radius: 10px;
     display: block;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
 }
 
 .yanaButton:hover {
@@ -154,16 +157,12 @@ html {
 }
 
 input {
-    position: relative !important;
-    width: 100% !important;
-    background: #fff !important;
-    border-radius: 31px !important;
     font-family: 'Poppins', sans-serif;
-    font-size: 12px !important;
-    color: #8f8fa1 !important;
-    line-height: 1.2 !important;
-    padding: 1em !important;
-    margin: 1em auto;
-    border: none !important;
-    background: #efefef !important;
+   padding: 10px !important;
+   
+}
+
+.emoji {
+    font-size: 20px;
+    text-align: center;
 }

@@ -124,56 +124,91 @@ Layout = "~/Views/Shared/_LoggedLayout.cshtml";
                         {
                             <input id="IdRegistroDiario" name="IdRegistroDiario" value="@Model.IdRegistroDiario" style="display:none;" />
                             <div class="form-group" style="text-align: left;">
-                                <label>Situacion</label>
-                                <input type="text" required name="Situacion" value="@Model.Situacion" class="form-control" autofocus />
-                                <label>Motivo Situacion</label>
-                                <input type="text" required name="MotivoSituacion" value="@Model.MotivoSituacion" class="form-control" autofocus />
-                                <label>Tipo Emocion</label>
-                                @Html.DropDownListFor(x => x.IdTipoEmocion, (IEnumerable<SelectListItem>)ViewBag.Emociones, "SELECCIONAR",
-                                            new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocion", required = true })
-                                <label>Intensidad</label>
-                                <input type="number" min="1" max="100" value="@Model.IntensidadEmocion" required name="IntensidadEmocion" class="form-control" autofocus />
-                                <label>Pensamiento Automatico</label>
-                                <input type="text" required name="PensamientoAutomatico" value="@Model.PensamientoAutomatico" class="form-control" autofocus />
-                                <label>Grado de Creencia</label>
-                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaPensamientoAutomatico" required name="GradoCreenciaPensamientoAutomatico" class="form-control" autofocus />
-                                <label>Respuesta Racional</label>
-                                <input type="text" required name="RespuestaRacional" value="@Model.RespuestaRacional" class="form-control" autofocus />
-                                <label>Grado de Creencia</label>
-                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaRespuestaRacional" required name="GradoCreenciaRespuestaRacional" class="form-control" autofocus />
-                                <label>Emocion resultado</label>
-                                @Html.DropDownListFor(x => x.IdTipoEmocionResultado, (IEnumerable<SelectListItem>)ViewBag.EmocionesResultado, "SELECCIONAR",
-                                            new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocionResultado", required = true })
-                                <label>Grado Creencia resultado</label>
-                                <input type="number" min="0" max="100" value="@Model.GradoCreenciaResultado" required name="GradoCreenciaResultado" class="form-control" autofocus />
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <button onclick="window.location.assign('@Url.Action("RegistroDiarioList", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Situacion</label>
+                                    <input type="text" required class="form-control" name="Situacion" value="@Model.Situacion" autofocus placeholder="Describe la situacion">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Por que te sentis asi?</label>
+                                    <input type="text" required class="form-control" name="MotivoSituacion" value="@Model.MotivoSituacion" autofocus placeholder="Describe el motivo de la situacion">
                                 </div>
 
-                                @{
-                                    if (Model.IdRegistroDiario == 0)
-                                    {
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-2">
-                                            <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Que tipo de emocion sentiste?</label>
+                                        @Html.DropDownListFor(x => x.IdTipoEmocion, (IEnumerable<SelectListItem>)ViewBag.Emociones, "SELECCIONAR",
+                                                new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocion", required = true })
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Con que intensidad lo sentiste?</label>
+                                        <input type="range" min="1" max="100" required class="form-range" name="Situacion" value="@Model.IntensidadEmocion" autofocus placeholder="Intensidad">
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Cual fue el pensamiento Automatico?</label>
+                                            <input type="text" required class="form-control" name="MotivoSituacion" value="@Model.MotivoSituacion" autofocus placeholder="Describe el motivo de la situacion">
                                         </div>
-                                    }
-                                    else if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional) || Model.RegistroDiarioRespuesta != null && Model.RegistroDiarioRespuesta.Any() != false)
-                                    {
-                                        <div class="col-md-6"></div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#responderModal"><i class='fa fa-reply fa-lg'></i>Respuesta</button>
+                                        <div class="col mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Grado de Creencia</label>
+                                            <input type="range" min="0" max="100" value="@Model.GradoCreenciaPensamientoAutomatico" class="form-range" name="GradoCreenciaPensamientoAutomatico" autofocus placeholder="Describe el motivo de la situacion">
                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Respuesta Racional</label>
+                                            <input type="text" required name="RespuestaRacional" value="@Model.RespuestaRacional" class="form-control" autofocus placeholder="Cual fue tu respuesta racional?">
+                                        </div>
+
+                                        <div class="col mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Grado de Creencia</label>
+                                            <input type="range" min="0" max="100" value="@Model.GradoCreenciaRespuestaRacional" name="GradoCreenciaRespuestaRacional" class="form-range" autofocus placeholder="Describe el motivo de la situacion">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Al final de todo, que tipo de emocion sentiste?</label>
+                                            @Html.DropDownListFor(x => x.IdTipoEmocionResultado, (IEnumerable<SelectListItem>)ViewBag.EmocionesResultado, "SELECCIONAR",
+                                                    new { style = "width:100%; text-align:left; ", @class = "form-control", id = "IdTipoEmocionResultado", required = true })
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Grado de creencia resultado</label>
+                                            <input type="range" min="0" max="100" value="@Model.GradoCreenciaRespuestaRacional" name="GradoCreenciaResultado" class="form-range" autofocus placeholder="Describe el motivo de la situacion">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 d-flex justify-content-center">
+                                        <button onclick="window.location.assign('@Url.Action("RegistroDiarioList", "RegistroDiario", new { idPaciente = ViewBag.IdPaciente })'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                                    </div>
+
+                                    @{
+                                        if (Model.IdRegistroDiario == 0)
+                                        {
+                                            
+                                            <div class="col-md-6 d-flex justify-content-center">
+                                                <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                            </div>
+                                        }
+                                        else if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional) || Model.RegistroDiarioRespuesta != null && Model.RegistroDiarioRespuesta.Any() != false)
+                                        {
+                                            
+                                            <div class="col-md-6 d-flex justify-content-center">
+                                                <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#responderModal"><i class='fa fa-reply fa-lg'></i>Respuesta</button>
+                                            </div>
+                                        }
                                     }
+                                </div>
                                 }
                             </div>
-                        }
-                    </div>
-                </div>
-            </div>
+                                </div>
+                            </div>
         </div>
     </div>
 </div>
