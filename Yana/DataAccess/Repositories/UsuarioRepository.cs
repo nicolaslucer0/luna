@@ -15,7 +15,7 @@ namespace Yana.DataAccess.Repositories
     {
         public List<Usuario> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Usuario> usuarios = (from ctx in context.Usuario
                                           where !ctx.BajaLogica
@@ -26,7 +26,7 @@ namespace Yana.DataAccess.Repositories
 
         public Usuario Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Usuario usuario = (from ctx in context.Usuario
                                         .Include(x => x.ProfesionalInstitucion)
@@ -40,7 +40,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(Usuario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.Password = Sha1.Encode(entity.Dni.ToString());
 
@@ -57,7 +57,7 @@ namespace Yana.DataAccess.Repositories
 
         internal IEnumerable<Usuario> GetByIdPerfil(EnumPerfilUsuario perfilUsuario)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Usuario> usuarios = (from ctx in context.Usuario
                                             .Include(x => x.ProfesionalInstitucion)
@@ -72,7 +72,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(Usuario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Usuario usuario = (from ctx in context.Usuario
                                    where !ctx.BajaLogica
@@ -102,7 +102,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Usuario usuario = context.Usuario.FirstOrDefault(a => a.IdUsuario == id);
                 
@@ -120,7 +120,7 @@ namespace Yana.DataAccess.Repositories
         {
             string encodePassword = Sha1.Encode(password);
 
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Usuario usuario = (from ctx in context.Usuario
                                         .Include(x => x.UsuarioInstitucion)
@@ -135,7 +135,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<MenuItemWrapper> GetMenuItemsByUser(int idUsuario)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<int> perfilMenuItemsUser = context.Usuario
                                                     .Include(x => x.IdPerfilNavigation)
@@ -167,7 +167,7 @@ namespace Yana.DataAccess.Repositories
 
         public Usuario GetByEmail(string email)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Usuario usuario = (from ctx in context.Usuario
                     where !ctx.BajaLogica
@@ -179,7 +179,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Usuario> GetPacientes()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Usuario> usuarios = (from ctx in context.Usuario
                                           where !ctx.BajaLogica
@@ -191,7 +191,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Usuario> GetPacientesWithRegistroDiario()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Usuario> usuarios = (from ctx in context.Usuario
                                             .Include(x => x.RegistroDiario)
@@ -204,7 +204,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Usuario> GetPacientesWithNotificaciones()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Usuario> usuarios = (from ctx in context.Usuario
                                             .Include(x => x.NotificacionIdPacienteNavigation)
@@ -217,7 +217,7 @@ namespace Yana.DataAccess.Repositories
 
         public int GetCantidadUsuariosByPerfil(EnumPerfilUsuario perfilUsuario)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 int cantidadUsuarios = (from ctx in context.Usuario
                                         where !ctx.BajaLogica

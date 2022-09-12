@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Yana.Models.DomainEntities
 {
-    public partial class YanaContext : DbContext
+    public partial class LunaContext : DbContext
     {
-        public YanaContext()
+        public LunaContext()
         {
         }
 
-        public YanaContext(DbContextOptions<YanaContext> options)
+        public LunaContext(DbContextOptions<LunaContext> options)
             : base(options)
         {
         }
@@ -53,7 +53,7 @@ namespace Yana.Models.DomainEntities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;User=sa;Password=Strong.Pwd-123;");
+                optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=True");
             }
         }
 

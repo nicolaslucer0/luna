@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoFamiliar grupoFamiliar = context.GrupoFamiliar.FirstOrDefault(a=> a.IdGrupoFamiliar ==id);
                 if(grupoFamiliar != null)
@@ -26,7 +26,7 @@ namespace Yana.DataAccess.Repositories
 
         public GrupoFamiliar Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoFamiliar grupoFamiliar = (from ctx in context.GrupoFamiliar
                                                where !ctx.BajaLogica
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<GrupoFamiliar> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<GrupoFamiliar> grupoFamiliar = (from ctx in context.GrupoFamiliar
                                                      where !ctx.BajaLogica
@@ -51,7 +51,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(GrupoFamiliar entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -66,7 +66,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(GrupoFamiliar entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoFamiliar grupoFamiliar = (from ctx in context.GrupoFamiliar
                                                where !ctx.BajaLogica

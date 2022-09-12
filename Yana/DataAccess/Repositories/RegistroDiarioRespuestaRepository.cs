@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiarioRespuesta registroDiarioRespuesta = context.RegistroDiarioRespuesta.FirstOrDefault(a => a.IdRegistroDiarioRespuesta == id);
                 
@@ -27,7 +27,7 @@ namespace Yana.DataAccess.Repositories
 
         public RegistroDiarioRespuesta Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiarioRespuesta registroDiarioRespuesta = (from ctx in context.RegistroDiarioRespuesta
                                                                    where !ctx.BajaLogica
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<RegistroDiarioRespuesta> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<RegistroDiarioRespuesta> registroDiario = (from ctx in context.RegistroDiarioRespuesta
                                                                 where !ctx.BajaLogica
@@ -50,7 +50,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(RegistroDiarioRespuesta entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -67,7 +67,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(RegistroDiarioRespuesta entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiarioRespuesta registroDiarioRespuesta = (from ctx in context.RegistroDiarioRespuesta
                                                                    where !ctx.BajaLogica

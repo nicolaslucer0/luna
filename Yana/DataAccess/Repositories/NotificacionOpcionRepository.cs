@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 NotificacionOpcion notificacion = context.NotificacionOpcion.FirstOrDefault(a => a.IdNotificacionOpcion == id);
                 
@@ -27,7 +27,7 @@ namespace Yana.DataAccess.Repositories
 
         public NotificacionOpcion Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 NotificacionOpcion notificacion = (from ctx in context.NotificacionOpcion
                                                    where !ctx.BajaLogica
@@ -40,7 +40,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<NotificacionOpcion> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<NotificacionOpcion> notificacion = (from ctx in context.NotificacionOpcion
                                                          where !ctx.BajaLogica
@@ -52,7 +52,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(NotificacionOpcion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -67,7 +67,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(NotificacionOpcion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 NotificacionOpcion notificacion = (from ctx in context.NotificacionOpcion
                                                    where !ctx.BajaLogica
@@ -86,7 +86,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<NotificacionOpcion> GetByIdNotificacion(int idNotificacion)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<NotificacionOpcion> notificacionOpciones = (from ctx in context.NotificacionOpcion
                                                          where !ctx.BajaLogica

@@ -13,7 +13,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Notificacion notificacion = context.Notificacion.FirstOrDefault(a => a.IdNotificacion == id);
                 
@@ -29,7 +29,7 @@ namespace Yana.DataAccess.Repositories
 
         public Notificacion Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Notificacion notificacion = (from ctx in context.Notificacion
                                              where !ctx.BajaLogica
@@ -42,7 +42,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Notificacion> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Notificacion> notificacion = (from ctx in context.Notificacion
                                                    where !ctx.BajaLogica
@@ -54,7 +54,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(Notificacion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.IdEstadoNotificacion = 1;
                 entity.BajaLogica = false;
@@ -70,7 +70,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(Notificacion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Notificacion notificacion = (from ctx in context.Notificacion
                                              where !ctx.BajaLogica
@@ -90,7 +90,7 @@ namespace Yana.DataAccess.Repositories
 
         public IEnumerable<Notificacion> GetAllByProfesionalAndPaciente(int idProfesional, int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Notificacion> notificaciones = (from ctx in context.Notificacion
                                                         .Include(n => n.IdEstadoNotificacionNavigation)
@@ -118,7 +118,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Notificacion> GetAllByIdGrupo(int idGrupo)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Notificacion> notificacion = (from ctx in context.Notificacion
                     where !ctx.BajaLogica
@@ -131,7 +131,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Notificacion> GetByPacienteYEstados(int idPaciente, List<EnumEstadoNotificacion> estadosNotificaciones)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<int> estadosNotificacion = estadosNotificaciones.Select(x => Convert.ToInt32(x)).ToList();
 
@@ -148,7 +148,7 @@ namespace Yana.DataAccess.Repositories
 
         public IEnumerable<Notificacion> GetAllByProfesional(int idProfesional)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Notificacion> notificacion = (from ctx in context.Notificacion
                         .Include(n => n.IdEstadoNotificacionNavigation)
@@ -165,7 +165,7 @@ namespace Yana.DataAccess.Repositories
 
         public Notificacion GetWithFK(int idNotificacion)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Notificacion notificacion = (from ctx in context.Notificacion
                                                  .Include(n => n.NotificacionOpcion)
@@ -183,7 +183,7 @@ namespace Yana.DataAccess.Repositories
 
         public void UpdateStatus(int idNotificacion, EnumEstadoNotificacion estadoNotificacion)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Notificacion notificacion = (from ctx in context.Notificacion
                                              where !ctx.BajaLogica
@@ -203,7 +203,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Notificacion> GetByEstados(List<EnumEstadoNotificacion> estadosNotificaciones)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<int> estadosNotificacion = estadosNotificaciones.Select(x => Convert.ToInt32(x)).ToList();
 
@@ -219,7 +219,7 @@ namespace Yana.DataAccess.Repositories
 
         public int GetTotalNotificaciones()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 int cantidadNotificaciones = (from ctx in context.Notificacion
                                               where !ctx.BajaLogica

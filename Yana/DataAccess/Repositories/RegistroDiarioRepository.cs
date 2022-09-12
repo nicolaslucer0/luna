@@ -12,7 +12,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiario registroDiario = context.RegistroDiario.FirstOrDefault(a => a.IdRegistroDiario == id);
                 
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public RegistroDiario Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiario registroDiario = (from ctx in context.RegistroDiario
                                                  .Include(x => x.IdTipoEmocionNavigation)
@@ -43,7 +43,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<RegistroDiario> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<RegistroDiario> registroDiario = (from ctx in context.RegistroDiario
                                                        .Include(x => x.IdTipoEmocionNavigation)
@@ -57,7 +57,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(RegistroDiario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -74,7 +74,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(RegistroDiario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroDiario registroDiario = (from ctx in context.RegistroDiario
                                                  where !ctx.BajaLogica
@@ -103,7 +103,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<RegistroDiario> GetAllWithFk()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<RegistroDiario> registrosDiarios = context.RegistroDiario
                                                             .Include(x => x.IdTipoEmocionNavigation)
@@ -118,7 +118,7 @@ namespace Yana.DataAccess.Repositories
 
         public int GetTotalRegistrosDiarios()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 int cantidadRegistrosDiarios = (from ctx in context.RegistroDiario
                                                 where !ctx.BajaLogica

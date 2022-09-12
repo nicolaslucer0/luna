@@ -26,7 +26,7 @@ namespace Yana.BusinessLogic.Services.Utils
         {
             var emailNotificacion = new EmailsManager
             {
-                recipients = "yanapsico.oficial@gmail.com",
+                recipients = "ig.flytolive@gmail.com",
                 subject = "Notificación",
                 body = EmailsBodyGenerator.GetNotificacionBody(email)
             };
@@ -39,7 +39,7 @@ namespace Yana.BusinessLogic.Services.Utils
             var emailNotificacion = new EmailsManager
             {
                 //recipients = usuario.Email,
-                recipients = "yanapsico.oficial@gmail.com",
+                recipients = "ig.flytolive@gmail.com",
                 subject = "Nueva Notificación",
                 body = EmailsBodyGenerator.GetNotificacionUsuarioBody(usuario)
             };

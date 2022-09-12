@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalInstitucion profesionalInstitucion = context.ProfesionalInstitucion.FirstOrDefault(a => a.IdProfesionalInstitucion == id);
                 
@@ -27,7 +27,7 @@ namespace Yana.DataAccess.Repositories
 
         public ProfesionalInstitucion Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalInstitucion profesionalInstitucion = (from ctx in context.ProfesionalInstitucion
                                                                  where !ctx.BajaLogica
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<ProfesionalInstitucion> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<ProfesionalInstitucion> profesionalInstitucion = (from ctx in context.ProfesionalInstitucion
                                                                        where !ctx.BajaLogica
@@ -50,7 +50,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(ProfesionalInstitucion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -65,7 +65,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(ProfesionalInstitucion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalInstitucion profesionalInstitucion = (from ctx in context.ProfesionalInstitucion
                                                                  where !ctx.BajaLogica
@@ -85,7 +85,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<ProfesionalInstitucion> GetProfesionalesByInstitucion(int idInstitucionUsuario)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<ProfesionalInstitucion> profesionalInstitucion = (from ctx in context.ProfesionalInstitucion
                                                                        where !ctx.BajaLogica

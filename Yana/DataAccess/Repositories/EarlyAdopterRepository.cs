@@ -16,7 +16,7 @@ namespace Yana.DataAccess.Repositories
 
         public EarlyAdopter Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 EarlyAdopter adopter = (from ctx in context.EarlyAdopter
                                                  where ctx.IdEarlyAdopter == id
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<EarlyAdopter> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<EarlyAdopter> adopters = (from ctx in context.EarlyAdopter
                                                             select ctx).ToList();
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(EarlyAdopter entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.FechaAlta = DateTime.Now;
 
@@ -52,7 +52,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(EarlyAdopter entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 EarlyAdopter adopter = (from ctx in context.EarlyAdopter
                                                      where ctx.IdEarlyAdopter == entity.IdEarlyAdopter

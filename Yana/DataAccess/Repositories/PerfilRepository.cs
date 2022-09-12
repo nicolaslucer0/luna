@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {        
         public Perfil Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Perfil perfil = (from ctx in context.Perfil
                                        where !ctx.BajaLogica
@@ -23,7 +23,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Perfil> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Perfil> perfiles = (from ctx in context.Perfil
                                          where !ctx.BajaLogica

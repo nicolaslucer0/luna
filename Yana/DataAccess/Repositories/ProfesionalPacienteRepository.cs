@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalPaciente profesionalPaciente = context.ProfesionalPaciente.FirstOrDefault(a => a.IdProfesionalPaciente == id);
                 
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public ProfesionalPaciente Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalPaciente profesionalPaciente = (from ctx in context.ProfesionalPaciente
                                                            where !ctx.BajaLogica
@@ -40,7 +40,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<ProfesionalPaciente> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<ProfesionalPaciente> profesionalPaciente = (from ctx in context.ProfesionalPaciente
                                                                  where !ctx.BajaLogica
@@ -51,7 +51,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(ProfesionalPaciente entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -68,7 +68,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(ProfesionalPaciente entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 ProfesionalPaciente profesionalPaciente = (from ctx in context.ProfesionalPaciente
                                                            where !ctx.BajaLogica
@@ -89,7 +89,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<ProfesionalPaciente> GetPacientesByProfesional(int idProfesional)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<ProfesionalPaciente> profesionalPaciente = (from ctx in context.ProfesionalPaciente
                                                                  where !ctx.BajaLogica
@@ -101,7 +101,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<ProfesionalPaciente> GetPacientesByIdsProfesionales(List<int> idsProfesionales)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<ProfesionalPaciente> profesionalPaciente = (from ctx in context.ProfesionalPaciente
                                                                  where !ctx.BajaLogica
