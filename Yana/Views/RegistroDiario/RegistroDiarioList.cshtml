@@ -55,21 +55,25 @@
     $(document).ready(function () {
         $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = 3})', function (data) {
             let registros = data.registroDiarios;
-            let headers = `  <thead><tr>
-                                <th scope="col">Qué paso?</th>
-                                <th scope="col">Por qué paso?</th>
-                                <th scope="col">Sentimiento automatico</th>
-                                <th scope="col">Respuesta racional</th>
-                                <th scope="col">Sentimiento final</th>
-                           </tr></thead>`
+            let headers = `
+                <thead>
+                    <tr>
+                        <th style="font-family: 'poppinsbold'" scope="col">Qué pasó?</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Por qué paso?</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Sentimiento automatico</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Respuesta racional</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Sentimiento final</th>
+                    </tr>
+                </thead>
+            `;
             let rows = '<tbody>';
             registros.forEach(r => {
-                rows += `<tr>
+                rows += `<tr style="font-size: 12px">
                             <td>${r.situacion}</td>
                             <td>${r.motivoSituacion}</td>
-                            <td class='emoji'>${getEmojiByFeeling(r.idTipoEmocionNavigation.descripcion)}</td>
+                            <td>${r.idTipoEmocionNavigation.descripcion}</td>
                             <td>${r.respuestaRacional}</td>
-                            <td class='emoji'>${getEmojiByFeeling(r.idTipoEmocionResultadoNavigation.descripcion)}</td>
+                            <td>${r.idTipoEmocionResultadoNavigation.descripcion}</td>
                         </tr>`
             });
             rows += `</tbody>`;

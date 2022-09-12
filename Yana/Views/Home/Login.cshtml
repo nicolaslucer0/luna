@@ -52,7 +52,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>a
+                </div>
                 <div class="modal-body">
                     <div id="divMessagesP" class="ui-corner-all" style="display: none; margin-top: 0">
                         <p align="left">
@@ -70,40 +70,40 @@
             </div>
         </div>
     </div>
+    <div class="container flex-container">
+        <div class="row m-4">
+            <a class="login-back" href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 
-    <div class="row card">
-        <a class="login-back" href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-
-        <div class="col-xs-12 col-md-7 login-image-container">
-            <img class="login-image" src="/img/login.jpg" />
-        </div>
-        <div class="col-xs-12 col-md-5 card-body">
-            <div class="logo-yana">
-                <h2 class="panel-title">YANA - Ingreso</h2>
+            <div class="col-xs-12 col-md-6 login-image-container p-5">
+                <img class="login-image" src="/img/login.jpg" />
             </div>
-            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-            {
-                <form role="form">
-                    <fieldset>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Password" name="Password" type="password" value="">
-                        </div>
-                        <div style="text-align: center;">
-                            <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    </fieldset>
+            <div class="col-xs-12 col-md-6 card-body p-5">
+                <div class="logo-yana">
+                    <h1 class="panel-title"><span style="font-family: 'poppinsbold'">Luna</span> - Ingreso</h1>
+                </div>
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    <form role="form">
+                        <fieldset>
+                            <div class="mb-3">
+                                <input class="form-control" placeholder="Email" name="Email" type="text" autofocus>
+                            </div>
+                            <div class="mb-2">
+                                <input class="form-control" placeholder="Password" name="Password" type="password" value="">
+                            </div>
+                            <div style="text-align: center;">
+                                <a id="forgotPassword" data-toggle="modal" data-target="#exampleModal" style="cursor: pointer">¿Olvidaste tu contraseña?</a>
+                            </div>
+                        </fieldset>
 
-                    @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
+                        @Html.ValidationSummary(true, "Email o password incorrectos. Por favor, verifique sus datos.")
 
-                    <div style="text-align: center; padding: 1em; display: flex; justify-content: center;">
-                        <button type="submit" class="btn yanaButton">Ingresar</button>
-                    </div>
-                </form>
-            }
+                        <div style="text-align: center; padding: 1em; display: flex; justify-content: center;">
+                            <button type="submit" class="btn yanaButton">Ingresar</button>
+                        </div>
+                    </form>
+                }
+            </div>
         </div>
-
     </div>
 </body>

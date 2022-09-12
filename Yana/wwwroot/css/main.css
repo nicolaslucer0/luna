@@ -1,16 +1,4 @@
 
-/* =================================== */
-/*	Basic Style 
-/* =================================== */
-
-/*body {
-    background-color: #fff;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 21px;
-	font-size: 13px;
-    color: #6a737b;
-}*/
-
 ol, ul {
     margin: 0;
     padding: 0;
@@ -199,7 +187,8 @@ nav li a {
 
 .landing-p {
 	padding: 1em;
-	font-size: 25px;
+	font-size: 17px;
+	font-family: poppinslight;
 }
 
 .landing-image {
@@ -704,3 +693,10 @@ label.error {
 	color: white !important;
 }
 
+.nav-link {
+	font-family: 'poppinslight';
+}
+
+.light-font {
+	font-family: 'poppinslight';
+}

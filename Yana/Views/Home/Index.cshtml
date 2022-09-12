@@ -6,26 +6,23 @@
 
 @using (Html.BeginForm("AddEarlyAdopter", "Home", FormMethod.Post))
 {
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Enterate de las novedades de Luna</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email">
-                    <br />
                     <div style="text-align: center;">
-                        <label class="radio-inline">
+                        <label class="radio-inline" style="margin: 10px;">
                             <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Profesional)" checked>Profesional
                         </label>
-                        <label class="radio-inline">
+                        <label class="radio-inline" style="margin: 10px;">
                             <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Paciente)">Paciente
                         </label>
-                        <label class="radio-inline">
+                        <label class="radio-inline" style="margin: 10px;">
                             <input type="radio" name="tipoAdopter" value="@Convert.ToInt32(EnumTipoEarlyAdopter.Otro)">Otro
                         </label>
                     </div>
@@ -42,10 +39,10 @@
 <div class="container-fluid landing-container">
     <div class="centered row">
         <div class="landing-text col-xs-12 col-md-6">
-            <h1 data-wow-duration="=800ms" class="landing-title wow fadeIn animated"><span> L U N A</span></h1>
-            <h2 data-wow-duration="1000ms" data-wow-delay="500ms" class="landing-subtitle wow fadeIn animated"><span class="color">Si lo sentís,</span> importa.</h2>
-            <p data-wow-duration="1000ms" data-wow-delay="500ms" class="landing-p wow fadeIn animated">Construimos una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
-            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#exampleModal">
+            <h1 class="landing-title wow fadeIn animated"><span style="font-family: 'poppinsbold'">Luna</span></h1>
+            <h2 class="landing-subtitle"><span class="color">Si lo sentís,</span> importa.</h2>
+            <p class="landing-p ">Construimos una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
+            <button type="button" class="btn yanaButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Conocenos
             </button>
 
@@ -69,8 +66,8 @@
             <div class="sec-title text-center mb50 wow fadeIn animated" data-wow-duration="500ms">
                 <h2 class="blue-text">Psicólogos</h2>
                 <div class="sec-sub-title text-center">
-                    <p>
-                        Luna ofrece una serie de herramientas para el tratamiento y seguimiento de diferentes patologías.
+                    <p style="color: black;">
+                        <b>Luna</b> ofrece una serie de herramientas para el tratamiento y seguimiento de diferentes patologías.
                         Nos enfocamos en brindar información precisa y detallada,
                         como así brindar una mayor sensación de acompañamiento durante el tratamiento
                     </p>
@@ -82,7 +79,7 @@
 
 <div class="container key-feature">
     <div class="centered row ">
-        <div class="col-md-6 wow fadeInLeft" data-wow-duration="500ms">
+        <div class="col-md-6">
             <div class="service-item">
                 <div class="service-desc">
                     <h3>Notificaciones programadas y personalizadas</h3>
@@ -122,7 +119,7 @@
 </div>
 <div class="container key-feature">
     <div class="centered row">
-        <div class="col-md-4 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="900ms">
+        <div class="col-md-4">
             <div class="service-item">
                 <div class="service-desc">
                     <h3>Estadísticas</h3>
@@ -130,7 +127,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6 fadeInLeft" data-wow-duration="500ms" data-wow-delay="900ms">
+        <div class="col-xs-12 col-md-6">
             <img class="landing-image" src="./img/reporting.jpg" />
         </div>
     </div>
@@ -141,16 +138,16 @@
     <div class="container">
         <div class="row mb50">
 
-            <div class="sec-title text-center mb50 wow fadeInDown animated" data-wow-duration="500ms">
+            <div class="sec-title text-center mb50">
                 <h2 class="blue-text">Contacto</h2>
             </div>
 
-            <div class="sec-sub-title text-center wow fadeIn animated" data-wow-duration="1000ms">
+            <div class="sec-sub-title text-center" >
                 <p>Si te interesa contar con los servicios de LUNA, dejanos tus datos y un asesor comercial se pondrá en contacto a la brevedad</p>
             </div>
 
             <!-- contact address -->
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 wow fadeInLeft animated" data-wow-duration="500ms">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                 <div class="contact-address">
                     <h3>LUNA ~ si lo sentís, importa.</h3>
                     <p>Florencio Varela 1903 (B1754JEC)</p>
@@ -160,7 +157,7 @@
             </div>
             <!-- end contact address -->
             <!-- contact form -->
-            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 wow fadeInDown animated" data-wow-duration="500ms" data-wow-delay="300ms">
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                 <div class="contact-form">
                     <h3>Dejanos tus datos!</h3>
                     @using (Html.BeginForm("AddContact", "Home", FormMethod.Post))
@@ -185,7 +182,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 wow fadeInRight animated" data-wow-duration="500ms" data-wow-delay="600ms">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
                 <ul class="footer-social">
                     <li><a href="https://www.facebook.com/yanapsico.oficial"><i class="fa fa-facebook fa-lg"></i></a></li>
                     <li><a href="https://www.instagram.com/yanapsico.oficial"><i class="fa fa-instagram fa-lg"></i></a></li>
