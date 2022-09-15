@@ -53,27 +53,62 @@
     }
     
     $(document).ready(function () {
+        var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        
         $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
             let registros = data.registroDiarios;
             let headers = `
                 <thead>
                     <tr>
-                        <th style="font-family: 'poppinsbold'" scope="col">Qué pasó?</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Por qué paso?</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Sentimiento automatico</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Respuesta racional</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Sentimiento final</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Fecha</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Situacion</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Motivo</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Sentimiento</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Respuesta adaptativa</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Resultado</th>
                     </tr>
                 </thead>
             `;
             let rows = '<tbody>';
             registros.forEach(r => {
                 rows += `<tr style="font-size: 12px">
+                            <td>${new Date(r.fechaModificacion).toLocaleDateString("es-ES", options)}</td>
                             <td>${r.situacion}</td>
                             <td>${r.motivoSituacion}</td>
-                            <td>${r.idTipoEmocionNavigation.descripcion}</td>
-                            <td>${r.respuestaRacional}</td>
-                            <td>${r.idTipoEmocionResultadoNavigation.descripcion}</td>
+                            <td>
+                                <div style="display: flex;justify-content: space-between;">
+                                    <div>${r.idTipoEmocionNavigation.descripcion}</div>
+                                    <div class="percentaje-container">
+                                      <div class="skills" style="width: ${r.gradoCreenciaPensamientoAutomatico}%; background: #dff3ff;"></div>
+                                      <div class="percentaje">
+                                          ${r.gradoCreenciaPensamientoAutomatico}%
+                                      </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display: flex;justify-content: space-between;">
+                                    <div>${r.respuestaRacional}</div>
+                                    <div class="percentaje-container">
+                                      <div class="skills" style="width: ${r.gradoCreenciaRespuestaRacional}%; background: #dff3ff;"></div>
+                                      <div class="percentaje">
+                                          ${r.gradoCreenciaRespuestaRacional}%
+                                      </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="display: flex;justify-content: space-between;">
+                                    <div>${r.idTipoEmocionResultadoNavigation.descripcion}</div>
+                                    
+                                    <div class="percentaje-container">
+                                      <div class="skills" style="width: ${r.gradoCreenciaResultado}%; background: #dff3ff;"></div>
+                                      <div class="percentaje">
+                                          ${r.gradoCreenciaResultado}%
+                                      </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>`
             });
             rows += `</tbody>`;
@@ -83,7 +118,32 @@
     });
 </script>
 
-<br />
+<style>
+    .percentaje-container {
+        width: 40px;
+        background-color: white;
+        position: relative;
+        display: flex;
+        height: 20px;
+        border: 1px solid #ececec;
+        align-items: center;
+    }
+    .skills {
+        
+        text-align: right;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: white;
+        height: 20px;
+    }
+
+    .percentaje {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        font-weight: bolder;
+    }
+</style>
 <div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row mb50">
