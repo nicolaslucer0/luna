@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public TipoEmocion Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 TipoEmocion tipoEmocion = (from ctx in context.TipoEmocion
                                            where !ctx.BajaLogica
@@ -24,7 +24,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<TipoEmocion> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<TipoEmocion> tipoEmociones = (from ctx in context.TipoEmocion
                                                    where !ctx.BajaLogica

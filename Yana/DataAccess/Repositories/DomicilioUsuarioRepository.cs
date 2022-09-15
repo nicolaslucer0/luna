@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 DomicilioUsuario domicilioUsuario = context.DomicilioUsuario.FirstOrDefault(a => a.IdDomicilioUsuario == id);
 
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public DomicilioUsuario Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 DomicilioUsuario domicilioUsuario = (from ctx in context.DomicilioUsuario
                                                      where !ctx.BajaLogica
@@ -41,7 +41,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<DomicilioUsuario> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<DomicilioUsuario> domiciliosUsuario = (from ctx in context.DomicilioUsuario
                                                             where !ctx.BajaLogica
@@ -53,7 +53,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(DomicilioUsuario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -68,7 +68,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(DomicilioUsuario entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 DomicilioUsuario domicilioUsuario = (from ctx in context.DomicilioUsuario
                                                      where !ctx.BajaLogica

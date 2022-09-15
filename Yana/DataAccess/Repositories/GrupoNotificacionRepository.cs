@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoNotificacion grupoNotificacion = context.GrupoNotificacion.FirstOrDefault(a => a.IdGrupoNotificacion == id);
                 
@@ -27,7 +27,7 @@ namespace Yana.DataAccess.Repositories
 
         public GrupoNotificacion Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoNotificacion grupoNotificacion = (from ctx in context.GrupoNotificacion
                                                        where !ctx.BajaLogica
@@ -40,7 +40,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<GrupoNotificacion> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<GrupoNotificacion> grupoNotificacion = (from ctx in context.GrupoNotificacion
                                                              where !ctx.BajaLogica
@@ -52,7 +52,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(GrupoNotificacion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -67,7 +67,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(GrupoNotificacion entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoNotificacion grupoNotificacion = (from ctx in context.GrupoNotificacion
                                                        where !ctx.BajaLogica

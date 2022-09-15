@@ -11,7 +11,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 SeguimientoPaciente seguimientoPaciente = context.SeguimientoPaciente.FirstOrDefault(a => a.IdSeguimientoPaciente == id);
                 
@@ -27,7 +27,7 @@ namespace Yana.DataAccess.Repositories
 
         public SeguimientoPaciente Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 SeguimientoPaciente seguimientoPaciente = (from ctx in context.SeguimientoPaciente
                                                            where !ctx.BajaLogica
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<SeguimientoPaciente> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<SeguimientoPaciente> seguimientoPaciente = (from ctx in context.SeguimientoPaciente
                                                                  where !ctx.BajaLogica
@@ -50,7 +50,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(SeguimientoPaciente entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -68,7 +68,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(SeguimientoPaciente entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 SeguimientoPaciente seguimientoPaciente = (from ctx in context.SeguimientoPaciente
                                                            where !ctx.BajaLogica
@@ -87,7 +87,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<SeguimientoPaciente> GetByIdPaciente(int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<SeguimientoPaciente> seguimientoPaciente = (from ctx in context.SeguimientoPaciente
                                                                  where !ctx.BajaLogica

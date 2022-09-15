@@ -12,7 +12,7 @@ namespace Yana.DataAccess.Repositories
     {
         public Patologia Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Patologia patologia = (from ctx in context.Patologia
                                        where !ctx.BajaLogica
@@ -24,7 +24,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Patologia> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Patologia> patologia = (from ctx in context.Patologia
                                              where !ctx.BajaLogica
@@ -36,7 +36,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(Patologia entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -52,7 +52,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(Patologia entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Patologia patologia = (from ctx in context.Patologia
                                              where !ctx.BajaLogica
@@ -72,7 +72,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 Patologia patologia = context.Patologia.FirstOrDefault(a => a.IdPatologia == id);
 
@@ -88,7 +88,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<Patologia> GetByIdPaciente(int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<Patologia> patologias = context.PacientePatologia
                                                     .Include(x => x.IdPatologiaNavigation)

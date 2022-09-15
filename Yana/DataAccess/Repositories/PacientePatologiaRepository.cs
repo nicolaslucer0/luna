@@ -12,7 +12,7 @@ namespace Yana.DataAccess.Repositories
     {
         public void Delete(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 PacientePatologia pacientePatologia = context.PacientePatologia.FirstOrDefault(a => a.IdPacientePatologia == id);
                 
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public PacientePatologia Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 PacientePatologia pacientePatologia = (from ctx in context.PacientePatologia
                                                        where !ctx.BajaLogica
@@ -40,7 +40,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<PacientePatologia> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<PacientePatologia> pacientePatologia = (from ctx in context.PacientePatologia
                                                              where !ctx.BajaLogica
@@ -51,7 +51,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(PacientePatologia entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
@@ -66,7 +66,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(PacientePatologia entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 PacientePatologia pacientePatologia = (from ctx in context.PacientePatologia
                                                        where !ctx.BajaLogica
@@ -86,7 +86,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<PacientePatologia> GetAllWithFk()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<PacientePatologia> pacientesPatologias = context.PacientePatologia
                                                                     .Include(x => x.IdPacienteNavigation)
@@ -100,7 +100,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<PacientePatologia> GetByIdPaciente(int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<PacientePatologia> pacientesPatologias = context.PacientePatologia
                                                       .Include(x => x.IdPacienteNavigation)
@@ -114,7 +114,7 @@ namespace Yana.DataAccess.Repositories
 
         public void DeleteByPatologiaYPaciente(int idPatologia, int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 PacientePatologia pacientePatologia = context.PacientePatologia.FirstOrDefault(a => !a.BajaLogica && a.IdPatologia == idPatologia && a.IdPaciente == idPaciente);
                 
@@ -131,7 +131,7 @@ namespace Yana.DataAccess.Repositories
 
         public void DeleteByIdPaciente(int idPaciente)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<PacientePatologia> pacientePatologias = context.PacientePatologia.Where(a => a.IdPaciente == idPaciente).ToList();
                 

@@ -16,7 +16,7 @@ namespace Yana.DataAccess.Repositories
 
         public RegistroNewsletter Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroNewsletter adopter = (from ctx in context.RegistroNewsletter
                                               where ctx.IdRegistroNewsletter == id
@@ -28,7 +28,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<RegistroNewsletter> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<RegistroNewsletter> adopters = (from ctx in context.RegistroNewsletter
                                                      select ctx).ToList();
@@ -39,7 +39,7 @@ namespace Yana.DataAccess.Repositories
 
         public int Insert(RegistroNewsletter entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 entity.FechaAlta = DateTime.Now;
 
@@ -52,7 +52,7 @@ namespace Yana.DataAccess.Repositories
 
         public void Update(RegistroNewsletter entity)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 RegistroNewsletter adopter = (from ctx in context.RegistroNewsletter
                                               where ctx.IdRegistroNewsletter == entity.IdRegistroNewsletter

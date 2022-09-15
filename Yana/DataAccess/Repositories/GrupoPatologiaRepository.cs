@@ -9,7 +9,7 @@ namespace Yana.DataAccess.Repositories
     {
         public GrupoPatologia Get(int id)
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 GrupoPatologia grupoPatologia = (from ctx in context.GrupoPatologia
                                       where !ctx.BajaLogica
@@ -22,7 +22,7 @@ namespace Yana.DataAccess.Repositories
 
         public List<GrupoPatologia> GetAll()
         {
-            using (var context = new YanaContext())
+            using (var context = new LunaContext())
             {
                 List<GrupoPatologia> grupoPatologia = (from ctx in context.GrupoPatologia
                                                        where !ctx.BajaLogica

@@ -127,7 +127,7 @@ namespace Yana.Controllers
         [HttpGet]
         public ActionResult NotificacionManager(int idNotificacion, int idPaciente)
         {
-            var _context = new YanaContext();
+            var _context = new LunaContext();
 
             if (idNotificacion == 0)
             {
