@@ -6,72 +6,68 @@
 
 <!-- Css datepicker -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+
+<link rel="stylesheet" href="~/css/notificaciones/bootstrap-5.2.1.css">
+<link rel="stylesheet" href="~/css/site.css">
+<link rel="stylesheet" href="~/css/siteLoggedLayout.css">
 <link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
+
 <!-- js datepicker -->
-<script src="~/js/notificaciones/bootstrap.min.js"></script>
+<script src="~/js/notificaciones/bootstrap-5.2.1.min.js"></script>
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
 
 <script>
     function PostForm() {
-        if (IsValid()) {
-            $("#lblErrorP").text("");
+        if (!IsValid())
+            return false;
 
+        $("#lblErrorP").text("");
             try {
-                var gridData1 = jQuery("#jqPatologias").getRowData();
-                var postData1 = JSON.stringify(gridData1);
-                $("#txSerializedPatologias").val(postData1);
-
+                let form = document.forms["frmUsuario"];
                 document.forms["frmUsuario"].submit();
             } catch (err) {
                 alert(err.Description);
             }
-        }
+        
     }
 
     function IsValid() {
         HideDivMessageP();
 
-        var field;
-
-        field = $("#Nombre").val();
-        if (field.length == 0) {
+        if (!$("#Nombre").val()) {
             $("#lblErrorP").text("Debe ingresar el Nombre.");
             ShowDivMessageP();
             return false;
         }
 
-        field = $("#Apellido").val();
-        if (field.length == 0) {
+        
+        if (!$("#Apellido").val()) {
             $("#lblErrorP").text("Debe ingresar el Apellido.");
             ShowDivMessageP();
             return false;
         }
 
-        field = $("#Dni").val();
-        if (field.length == 0) {
+
+        if (!$("#Dni").val()) {
             $("#lblErrorP").text("Debe ingresar el DNI/Otro tipo de Documento.");
             ShowDivMessageP();
             return false;
         }
 
-        field = $("#FechaNacimiento").val();
-        if (field.length == 0) {
+        if (!$("#FechaNacimiento").val()) {
             $("#lblErrorP").text("Debe ingresar la Fecha de Nacimiento.");
             ShowDivMessageP();
             return false;
         }
 
-        field = $("#Sexo").val();
-        if (field.length == 0) {
+        if (!$("#Sexo").val()) {
             $("#lblErrorP").text("Debe seleccionar el Sexo.");
             ShowDivMessageP();
             return false;
         }
 
-        field = $("#Email").val();
-        if (field.length == 0) {
+        if (!$("#Email").val()) {
             $("#lblErrorP").text("Debe ingresar el Email.");
             ShowDivMessageP();
             return false;
@@ -92,7 +88,7 @@
         var idPatologia = $('#cboPatologia').val();
         var nombrePatologia = $("#cboPatologia option:selected").text();
 
-        var ids = jQuery("#jqPatologias").jqGrid('getDataIDs');
+        var ids = $("#jqPatologias").jqGrid('getDataIDs');
 
         for (var i = 0; i < ids.length; i++) {
             var sintomaGrid = $("#jqPatologias").jqGrid('getRowData')[i].idPatologia;
@@ -104,14 +100,14 @@
         }
 
         var datarow = { idPatologia: idPatologia, nombrePatologia: nombrePatologia };
-        var su = jQuery("#jqPatologias").jqGrid('addRowData', idPatologia, datarow);
+        var su = $("#jqPatologias").jqGrid('addRowData', idPatologia, datarow);
         if (!su) alert("Error al agregar");
     }
 
     function DelPatologia() {
         HideDivMessageP();
 
-        var gr = jQuery("#jqPatologias").jqGrid('getGridParam', 'selrow');
+        var gr = $("#jqPatologias").jqGrid('getGridParam', 'selrow');
 
         if (gr != null) {
             $("#jqPatologias").jqGrid('delRowData', gr);
@@ -122,9 +118,6 @@
         }
     }
 
-    $(window).bind('resize', function () {
-        $("#jqPatologias").setGridWidth($("#divPanelBody").width() - 20);
-    }).trigger('resize');
 
     function ShowDivMessageP() {
         scroll(0, 0);
@@ -190,46 +183,6 @@
             }
             return errorText;
         };
-
-        //jQuery("#jqPatologias").tableDnD();
-        $('#jqPatologias').jqGrid({
-            url: '@Url.Action("GetPatologiasByIdPaciente", "Paciente", new { idPaciente = Model.IdUsuario })',
-            datatype: 'json',
-            mtype: 'POST',
-            colNames: ['IdPatologia', 'Patologías del Paciente'],
-            colModel: [
-                { name: 'idPatologia', index: 'idPatologia', key: true, hidden: true },
-                { name: 'nombrePatologia', index: 'nombrePatologia', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
-            ],
-            pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
-            rowNum: 10000, rowList: [10, 20, 30], sortname: 'idPatologia', sortorder: 'desc', rownumbers: true, viewrecords: true,
-            height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
-            jsonReader: { cell: "" },
-            caption: '',
-            loadError: function (jqXHR, textStatus, errorThrown) {
-                $('#' + this.id + '_err').remove();
-                $('#jqPatologias').closest('div.ui-jqgrid').before(
-                    '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                    ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                    decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-            },
-            loadComplete: function () {
-                $('#' + this.id + '_err').remove();
-            },
-            gridComplete: function() {
-                $("#_empty", "#jqPatologias").addClass("nodrag nodrop");
-                //jQuery("#jqPatologias").tableDnDUpdate();
-            },
-            onclickSubmit: function (options) {
-                options.processing = true;
-                $.jgrid.hideModal("#delmodjqPatologias",
-                {
-                    gb: "#gbox_jqPatologias",
-                    jqm: options.jqModal,
-                    onClose: options.onClose
-                });
-            }
-        });
     });
 </script>
 

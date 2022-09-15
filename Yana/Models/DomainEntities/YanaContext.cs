@@ -53,8 +53,11 @@ namespace Yana.Models.DomainEntities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                // Uncomment this to make it work on mac
                 optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;User=sa;Password=Strong.Pwd-123;");
-                optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;");
+
+                // Uncomment this to make it work on windows
+                // optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;");
             }
         }
 
