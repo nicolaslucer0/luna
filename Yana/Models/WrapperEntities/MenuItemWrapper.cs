@@ -14,5 +14,7 @@ namespace Yana.Models.WrapperEntities
         public string Controller { get; set; }
         public string Action { get; set; }
         public string Orden { get; set; }
+        public List<MenuItemWrapper> childs { get; set; }
     }
+
 }

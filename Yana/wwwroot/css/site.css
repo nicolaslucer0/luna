@@ -136,6 +136,12 @@ html {
     align-items: center;
 }
 
+@media only screen and (max-width: 800px) {
+    .yanaButton {
+        padding: 5px;
+    }
+}
+
 .yanaButton:hover {
     background-position: right center; /* change the direction of the change here */
     color: white !important;

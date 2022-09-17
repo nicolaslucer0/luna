@@ -53,7 +53,28 @@ i {
 .login-image {
     width: 100%;
 }
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menu-icon {
+    height: 30px;
+    width: 30px;
+    transition: .4s;
+}
 
+.menu-container:hover {
+    transform: scale(1.1);
+    color: black;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .sidebar {
+        width: 15% !important;
+    }
+}
 
 .panel-title {
     font-size: 25px;
@@ -82,6 +103,9 @@ header h1 {
         flex-direction: column;
         width: 70%;
     }
+    .hide-mobile {
+        display: none !important;
+    }
 }
 
 .form-control:focus {
@@ -102,7 +126,7 @@ header h1 {
     display: flex;
     flex-direction: column;
     border: 1px solid #ebebeb;
-    width: 17%;
+    width: 10%;
     position: fixed;
     background: white;
     z-index: 20;
@@ -112,8 +136,9 @@ header h1 {
 .sidebar .sidebar-menu {
     display: flex;
     flex-direction: column;
-    padding: 4em;
     flex-grow: 1;
+    align-items: center;
+    justify-content: center;
     font-size: 13px;
 }
 
@@ -125,17 +150,14 @@ header h1 {
 
 .dashboard-content {
     padding: 3em;
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 .user-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2em;
-    margin: 2em;
-    border-radius: 20px;
-    box-shadow: -5px -1px 20px 0px #00000026;
+    margin: 2em 0;
 }
 
 .user-image img {
@@ -181,3 +203,5 @@ header h1 {
     justify-content: space-between;
     align-items: center;
 }
+
+

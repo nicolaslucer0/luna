@@ -6,58 +6,100 @@
 
 <script type="text/javascript" language="javascript">
 
-    function Create() {
-        window.location.assign("./PacienteManager/0");
-    };
+    const Create = () => window.location.assign("./PacienteManager/0");
 
-    function Edit(id) {
-        window.location.assign("./PacienteManager/" + id);
-    };
+    const Edit = (id) => window.location.assign("./PacienteManager/" + id);
 
-    function Notificaciones(id) {
-        window.location.href = "@Url.Action("NotificacionList", "Notificacion")" + "?idPaciente=" + id;
-    };
+    const Notificaciones = (id) => window.location.href = "@Url.Action("NotificacionList", "Notificacion")" + "?idPaciente=" + id;
 
-    function Seguimiento(id) {
-        window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
-    };
+    const Seguimiento = (id) => window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
 
-    function RegistroDiario(id) {
-        window.location.href = "@Url.Action("RegistroDiarioList", "RegistroDiario")" + "?idPaciente=" + id;
-    };
+    const RegistroDiario = (id) => window.location.href = "@Url.Action("RegistroDiarioList", "RegistroDiario")" + "?idPaciente=" + id;
 
-    
+    const buildCard = (paciente) => `
+        <div class="d-flex align-items-center luna-card" style="width: 18rem;">
+            <div class="card-info">
+                <div class="user-image"><img src="/img/team/1.png"></div>
+            </div>
+            <div class="luna-card--body flex-grow-1">
+                <h5 class="card-title">${paciente.edad} - ${paciente.apellido}, ${paciente.nombre}</h5>
+                <h6 class="card-subtitle">${paciente.dni}</h6>
+                <p class="card-text">${paciente.email}</p>
+            
+                <div class="d-flex justify-content-end luna-card--actions">
+                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})">Notificaciones <i class="fa fa-bell" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
+
     $(document).ready(function () {
         $.get('@Url.Action("GetPacientes", "Paciente")', function (data) {
-            let registros = data.paciente;
-            console.log(data);
-
-            let registros = data.paciente;
-            let headers = `
-                <thead>
-                    <tr>
-                        <th style="font-family: 'poppinsbold'" scope="col">Fecha</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Situacion</th>
-                    </tr>
-                </thead>
-            `;
-            let rows = '<tbody>';
-            registros.forEach(r => {
-                rows += `<tr style="font-size: 12px">
-                            <td>${r.codigo}</td>
-                            <td>${r.nombre}</td>
-                        </tr>`
+            let pacientes = data;
+            console.log("la data", pacientes);
+            if (!pacientes || pacientes.length == 0) {
+                $('#list').append("No hay ningun paciente creado.");
+                return;
+            }
+                        
+            let cards = '';
+            pacientes.forEach(p => {
+                cards += buildCard(p)
             });
-            rows += `</tbody>`;
-            $('#list').append(headers);
-            $('#list').append(rows);
-        });
+            
+            $('#list').append(cards);
+        
 
         });
     });
 </script>
 
-<br />
+<style>
+    .luna-card {
+        border: 1px solid #ededed;
+        margin: 10px;
+        box-sizing: border-box;
+        min-width: 20%;
+        position: relative;
+        min-width: 30%;
+        border-radius: 20px;
+        transition: .4s;
+    }
+
+    .luna-card:hover {
+        box-shadow: 0 0 10px 0 #8080803d;
+        transform: scale(1.01);
+    }
+
+    .luna-card--body {
+        margin: 20px 10px 0 10px;
+        width: 20%;
+        text-overflow: ellipsis;
+    }
+
+    .card-info {
+        margin: 0 15px 0 20px;
+    }
+    
+    .card-subtitle {
+        margin: 5px 0;
+    }
+
+   .card-text {
+        font-size: 12px;
+        margin: 5px 0;
+   }
+
+   .luna-card--actions {
+   }
+
+    .luna-card--button {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #2196f3;
+    }
+</style>
+
 <div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row">
@@ -69,6 +111,7 @@
                         </div>
                         <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
                     </div>
+
                     <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
                         <p align="left">
                             <div class="alert alert-danger">
@@ -76,10 +119,13 @@
                             </div>
                         </p>
                     </div>
+
+                    <div id="list" class="d-flex flex-wrap" cellpadding="0" cellspacing="0" style="margin: 4em 0;">
+                    </div>
+
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
                             <div id="pager" class="scroll" style="text-align: center;"></div>
                         </div>
                     </div>
