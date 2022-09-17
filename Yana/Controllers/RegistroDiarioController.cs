@@ -58,7 +58,12 @@ namespace Yana.Controllers
                 if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
                     registroDiarios = registroDiarios.Where(x => x.IdPaciente == UserCache.IdUsuario).ToList();
                 else
-                    registroDiarios = registroDiarios.Where(x => x.IdPaciente == idPaciente).ToList();
+                {
+                    if (idPaciente != 0)
+                        registroDiarios = registroDiarios.Where(x => x.IdPaciente == idPaciente).ToList();
+                    else
+                        registroDiarios = registroDiarios.ToList();
+                }
 
                 var totalRecords = registroDiarios.Count();
 

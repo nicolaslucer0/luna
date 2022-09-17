@@ -12,97 +12,33 @@
         window.location.assign("./PatologiaManager/" + id);
     };
 
-    $(window).bind('resize', function () {
-        $("#list").setGridWidth($("#panelHead").width());
-    }).trigger('resize');
-
     $(document).ready(function () {
-        var myGrid = $('#list'),
-            decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
-                var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
-                if (jqXHR.responseText.charAt(0) === '[') {
-                    try {
-                        errorInfo = $.parseJSON(jqXHR.responseText);
-                        errorText = "";
-                        for (i = 0; i < errorInfo.length; i++) {
-                            if (errorText.length !== 0) {
-                                errorText += "<hr/>";
-                            }
-                            errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
-                        }
-                    }
-                    catch (e) { }
-                } else {
-                    html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
-                    if (html !== null && html.length > 1) {
-                        errorText = html[1];
-                    }
-                }
-                return errorText;
-            };
 
-        try {
-
-            myGrid.jqGrid({
-                url: '@Url.Action("GetPatologias", "Patologia")',
-                datatype: 'json',
-                mtype: 'POST',
-                colNames: ['Codigo', 'Nombre', 'Descripcion',''],
-                colModel: [
-                    { name: 'idPatologia', index: 'idPatologia', key: true, sorttype: 'int', align: 'center', search: true },
-                    { name: 'nombre', index: 'nombre', align: 'left', search: true },
-                    { name: 'descripcion', index: 'descripcion', align: 'left', search: false, hidden: true},
-                    { name: 'action', index: 'action', align: 'center', sortable: false, search: false }
-                ],
-                pager: '#pager',
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                sortname: 'Patologia',
-                sortorder: 'desc',
-                rownumbers: true,
-                viewrecords: true,
-                height: 'auto',
-                gridview: true,
-                loadonce: true,
-                jsonReader: { cell: "" },
-                caption: 'Patologias',
-                loadError: function (jqXHR, textStatus, errorThrown) {
-                    // remove error div if exist
-                    $('#' + this.id + '_err').remove();
-                    // insert div with the error description before the grid
-                    myGrid.closest('div.ui-jqgrid').before(
-                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-                },
-                gridComplete: function () {
-                    var ids = myGrid.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var rowId = ids[i];
-
-                        var checkOut = "<button onclick=\"Edit(" + rowId + ");\" title='Editar/Eliminar' class='btn yanaButton'><i class='fa fa-pencil fa-lg'></i><i class='fa fa-trash fa-lg' style='margin-left: 5px;'></i></button>"
-
-                        myGrid.jqGrid('setRowData', rowId, { action: checkOut });
-                    }
-                }
+        $.get('@Url.Action("GetPatologias", "Patologia")', function (data) {
+            let pacientes = data;
+            console.log(data);
+            let registros = data.patologias;
+            let headers = `
+                <thead>
+                    <tr>
+                        <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
+                        <th style="font-family: 'poppinsbold'" scope="col">Descripcion</th>
+                    </tr>
+                </thead>
+            `;
+            let rows = '<tbody>';
+            registros.forEach(r => {
+                rows += `<tr style="font-size: 12px">
+                            <td>${r.nombre}</td>
+                            <td>${r.descripcion}</td>
+                        </tr>`
             });
-        }
-        catch (err) {
-            alert("Error:" + err.message);
-        }
+            rows += `</tbody>`;
+            $('#list').append(headers);
+            $('#list').append(rows);
+        });
 
-        myGrid.jqGrid('navGrid', '#pager', { add: false, edit: false, del: false },
-            {}, {}, {}, { multipleSearch: true, overlay: false });
-        myGrid.jqGrid('filterToolbar', { autosearch: true, stringResult: false, defaultSearch: 'cn' });
-        myGrid.jqGrid('navButtonAdd', '#pager',
-            {
-                caption: "Filtrar", title: "Mostrar/Ocultar barra de filtro",
-                buttonicon: 'ui-icon-pin-s',
-                onClickButton: function () { myGrid[0].toggleToolbar(); }
-            });
-        myGrid.jqGrid('navGrid', "#pager", { edit: false, add: false, del: false });
 
-        $("#list").setGridWidth($("#panelHead").width());
     });
 </script>
 
@@ -128,9 +64,7 @@
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
-                            <div id="pager" class="scroll" style="text-align: center;">
-                            </div>
+                            <table id="list" class="table scroll" cellpadding="0" cellspacing="0"></table>
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,6 @@
     $(document).ready(function () {
         $.get('@Url.Action("GetPacientes", "Paciente")', function (data) {
             let pacientes = data;
-            console.log("la data", pacientes);
             if (!pacientes || pacientes.length == 0) {
                 $('#list').append("No hay ningun paciente creado.");
                 return;

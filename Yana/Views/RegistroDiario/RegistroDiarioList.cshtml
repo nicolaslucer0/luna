@@ -21,41 +21,11 @@
         else if (cellvalue == 0)
             return "<img src='../img/red_bullet.png' alt='red_bullet' title='Sin Responder' />";
     };
-
-    function getEmojiByFeeling(feelingId) {
-        switch (feelingId) {
-            case "Tristeza":
-                return "😢";
-                break;
-            case "Felicidad":
-                return "😊";
-                break;
-            case "Miedo":
-                return "😱";
-                break;
-            case "Sorpresa":
-                return "😲";
-                break;
-            case "Asco":
-                return "🤢";
-                break;
-            case "Ira":
-                return "😡";
-                break;
-            case "Frustracion":
-                return "😖";
-                break;
-            default:
-                return feelingId;
-                break;
-        }
-        
-    }
     
     $(document).ready(function () {
         var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
         
-        $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
+        $.get('@Url.Action("GetRegistroDiario", "RegistroDiario")', function (data) {
             let registros = data.registroDiarios;
             let headers = `
                 <thead>

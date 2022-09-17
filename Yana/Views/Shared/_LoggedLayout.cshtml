@@ -51,7 +51,14 @@
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
                             {
-                                <div>Paciente</div>
+                                <a class="menu-container" href="@Url.Action("Default", "Home")">
+                                    <img class="menu-icon" src="~/img/icon/home.png" />
+                                    <small class="hide-mobile">Inicio</small>
+                                </a>
+                                <a class="menu-container" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                    <img class="menu-icon" src="~/img/icon/book.png" />
+                                    <small class="hide-mobile">Registro diario</small>
+                                </a>
                             }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
