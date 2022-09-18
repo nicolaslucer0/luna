@@ -25,20 +25,20 @@
             var postData1 = JSON.stringify(gridData1);
             $("#txSerializedOpciones").val(postData1);
 
-            @*var formData = $('#frmNotificacion').serialize();
-            $.ajax({
+    @*var formData = $('#frmNotificacion').serialize();
+                $.ajax({
                 url: '@Url.Action("NotificacionManager", "Notificacion")',
                 type: "POST",
                 data: formData,
                 success: function (data) {
-                    window.location.assign("./NotificacionList?idPaciente=" + @Model.IdPaciente);
+                window.location.assign("./NotificacionList?idPaciente=" + @Model.IdPaciente);
                 },
                 failure: function (data) {
-                    alert("failure");
+                alert("failure");
                 }
-            });*@
+                });*@
 
-            document.forms["frmNotificacion"].submit();
+                document.forms["frmNotificacion"].submit();
         }
     }
 
@@ -60,7 +60,7 @@
             //04:00 AM - 11:59 AM
             var hhM = $("#HoraM").val().split(":")[0];
             var adM = $("#HoraM").val().split(":")[1].split(" ")[1].trim();
-            
+
             if (adM == "PM" || (parseInt(hhM) < 4 || parseInt(hhM) > 11)) {
                 $("#lblErrorP").text("El horario de la mañana debe ser entre las 04:00 AM y las 11:59 AM");
                 ShowDivMessageP();
@@ -91,7 +91,42 @@
         return true;
     }
 
-    
+    function AddOpcion() {
+        HideDivMessageP();
+
+        var descripcionOpcion = $("#DescripcionOpcion").val();
+
+        if (!descripcionOpcion.trim()) {
+            return false;
+        }
+
+        var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
+
+        var maxValue = 0;
+
+        for (var i = 0; i < ids.length; i++) {
+            var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
+
+            var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
+            if (parseInt(currentIdent) > parseInt(maxValue))
+                maxValue = currentIdent;
+
+            if (opcionGrid.trim() === descripcionOpcion.trim()) {
+                $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
+                ShowDivMessageP();
+                return false;
+            }
+        }
+
+        maxValue++;
+
+        var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
+        var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
+        if (!su) alert("Error al agregar");
+
+        $("#DescripcionOpcion").val("");
+        $("#DescripcionOpcion").focus();
+    }
 
     function DelOpcion() {
         HideDivMessageP();
@@ -106,7 +141,7 @@
             return false;
         }
     }
-    
+
     function ShowDivMessageP() {
         scroll(0, 0);
         $("#divMessagesP").show("slow", function () { });
@@ -185,52 +220,48 @@
         };
 
         //jQuery("#jqPatologias").tableDnD();
-        try {
-            $('#jqOpciones').jqGrid({
-                url: '@Url.Action("GetOpcionesByIdNotificacion", "Notificacion", new { idNotificacion = Model.IdNotificacion })',
-                datatype: 'json',
-                mtype: 'POST',
-                colNames: ['IdNotificacionOpcion', 'Opciones'],
-                colModel: [
-                    { name: 'idNotificacionOpcion', index: 'idNotificacionOpcion', key: true, hidden: true },
-                    { name: 'descripcionOpcion', index: 'descripcionOpcion', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
-                ],
-                pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
-                rowNum: 10000, rowList: [10, 20, 30], sortname: 'idNotificacionOpcion', sortorder: 'desc', rownumbers: true, viewrecords: true,
-                height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
-                jsonReader: { cell: "" },
-                caption: '',
-                loadError: function (jqXHR, textStatus, errorThrown) {
-                    $('#' + this.id + '_err').remove();
-                    $('#jqOpciones').closest('div.ui-jqgrid').before(
-                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-                },
-                loadComplete: function () {
-                    $('#' + this.id + '_err').remove();
-                },
-                gridComplete: function () {
-                    $("#_empty", "#jqOpciones").addClass("nodrag nodrop");
-                    //jQuery("#jqPatologias").tableDnDUpdate();
-                },
-                onclickSubmit: function (options) {
-                    options.processing = true;
-                    $.jgrid.hideModal("#delmodjqOpciones",
-                        {
-                            gb: "#gbox_jqOpciones",
-                            jqm: options.jqModal,
-                            onClose: options.onClose
-                        });
-                }
-            });
-        }
-        catch (err) {
-            alert(err.description);
-        }
+
+        $('#jqOpciones').jqGrid({
+            url: '@Url.Action("GetOpcionesByIdNotificacion", "Notificacion", new { idNotificacion = Model.IdNotificacion })',
+            datatype: 'json',
+            mtype: 'POST',
+            colNames: ['IdNotificacionOpcion', 'Opciones'],
+            colModel: [
+                { name: 'idNotificacionOpcion', index: 'idNotificacionOpcion', key: true, hidden: true },
+                { name: 'descripcionOpcion', index: 'descripcionOpcion', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
+            ],
+            pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
+            rowNum: 10000, rowList: [10, 20, 30], sortname: 'idNotificacionOpcion', sortorder: 'desc', rownumbers: true, viewrecords: true,
+            height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
+            jsonReader: { cell: "" },
+            caption: '',
+            loadError: function (jqXHR, textStatus, errorThrown) {
+                $('#' + this.id + '_err').remove();
+                $('#jqOpciones').closest('div.ui-jqgrid').before(
+                    '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
+                    ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
+                    decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
+            },
+            loadComplete: function () {
+                $('#' + this.id + '_err').remove();
+            },
+            gridComplete: function () {
+                $("#_empty", "#jqOpciones").addClass("nodrag nodrop");
+                //jQuery("#jqPatologias").tableDnDUpdate();
+            },
+            onclickSubmit: function (options) {
+                options.processing = true;
+                $.jgrid.hideModal("#delmodjqOpciones",
+                    {
+                        gb: "#gbox_jqOpciones",
+                        jqm: options.jqModal,
+                        onClose: options.onClose
+                    });
+            }
+        });
     });
 
-    
+
 </script>
 
 <!-- Modal Delete-->
@@ -351,7 +382,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-1">
                                         <label>Dias:</label>
                                         <input type="number" class="form-control" value="@Model.CantDias" min="1" max="7" step="1" name="CantDias" />
@@ -380,7 +411,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-3" align="center">
                                         <label>Horario Noche: (08:00 PM - 03:59 AM)</label>
                                         <div class="form-group" style="width: 50%">
@@ -415,7 +446,9 @@
                                     <table id="jqOpciones" class="scroll" cellpadding="0" cellspacing="0"></table>
                                 </div>
                             </div>
-                            <br /><br />
+                            <br />
+
+                            <br />
                             <div class="row" align="right">
 
                                 @{
@@ -449,6 +482,7 @@
                                 </div>
                             </div>
                         }
+
                     </div>
                 </div>
             </div>

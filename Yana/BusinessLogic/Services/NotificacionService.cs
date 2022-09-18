@@ -64,7 +64,6 @@ namespace Yana.BusinessLogic.Services
 
         #region Public Methods
 
-
         public IEnumerable<Notificacion> GetNotificacionesProfesionalAndPaciente(int idProfesional, int idPaciente)
         {
             return this.notificacionRepository.GetAllByProfesionalAndPaciente(idProfesional, idPaciente);
@@ -77,7 +76,7 @@ namespace Yana.BusinessLogic.Services
                 notificacion.IdProfesional = UserCache.IdUsuario;
                 notificacion.IdNotificacion = this.notificacionRepository.Insert(notificacion);
 
-                if (listaOpciones.Any())
+                if (listaOpciones != null && listaOpciones.Any())
                     BuildNotificacionOpcion(notificacion, listaOpciones);
             }
         }
