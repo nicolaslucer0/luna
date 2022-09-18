@@ -28,7 +28,7 @@ namespace Yana.Utils.Utils.NotificacionesManager
                         {
                             if (notificacion.IdPacienteNavigation != null)
                             {
-                                EmailService.SendMailNotificacionUsuario(notificacion.IdPacienteNavigation);
+                                //EmailService.SendMailNotificacionUsuario(notificacion.IdPacienteNavigation);
 
                                 notificacionService.UpdateStatus(notificacion.IdNotificacion, EnumEstadoNotificacion.Entregada);
                             }
