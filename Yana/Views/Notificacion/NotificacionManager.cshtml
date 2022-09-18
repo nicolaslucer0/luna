@@ -91,42 +91,7 @@
         return true;
     }
 
-    function AddOpcion() {
-        HideDivMessageP();
-
-        var descripcionOpcion = $("#DescripcionOpcion").val();
-
-        if (!descripcionOpcion.trim()) {
-            return false;
-        }
-
-        var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
-        
-        var maxValue = 0;
-
-        for (var i = 0; i < ids.length; i++) {
-            var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
-            
-            var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
-            if (parseInt(currentIdent) > parseInt(maxValue))
-                maxValue = currentIdent;
-
-            if (opcionGrid.trim() === descripcionOpcion.trim()) {
-                $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
-                ShowDivMessageP();
-                return false;
-            }
-        }
-        
-        maxValue++;
-
-        var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
-        var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
-        if (!su) alert("Error al agregar");
-
-        $("#DescripcionOpcion").val("");
-        $("#DescripcionOpcion").focus();
-    }
+    
 
     function DelOpcion() {
         HideDivMessageP();
@@ -265,9 +230,7 @@
         }
     });
 
-    $(window).bind('resize', function () {
-        $("#jqOpciones").setGridWidth($("#divPanelBody").width() - 20);
-    }).trigger('resize');
+    
 </script>
 
 <!-- Modal Delete-->
@@ -522,6 +485,3 @@
 </script>
 
 <script src="./src/bootstrap-input-spinner.js"></script>
-<script>
-    $("input[type='number']").inputSpinner()
-</script>
