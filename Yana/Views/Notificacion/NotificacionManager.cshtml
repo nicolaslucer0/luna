@@ -91,56 +91,56 @@
         return true;
     }
 
-    function AddOpcion() {
-        HideDivMessageP();
+    //function AddOpcion() {
+    //    HideDivMessageP();
 
-        var descripcionOpcion = $("#DescripcionOpcion").val();
+    //    var descripcionOpcion = $("#DescripcionOpcion").val();
 
-        if (!descripcionOpcion.trim()) {
-            return false;
-        }
+    //    if (!descripcionOpcion.trim()) {
+    //        return false;
+    //    }
 
-        var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
+    //    var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
 
-        var maxValue = 0;
+    //    var maxValue = 0;
 
-        for (var i = 0; i < ids.length; i++) {
-            var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
+    //    for (var i = 0; i < ids.length; i++) {
+    //        var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
 
-            var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
-            if (parseInt(currentIdent) > parseInt(maxValue))
-                maxValue = currentIdent;
+    //        var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
+    //        if (parseInt(currentIdent) > parseInt(maxValue))
+    //            maxValue = currentIdent;
 
-            if (opcionGrid.trim() === descripcionOpcion.trim()) {
-                $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
-                ShowDivMessageP();
-                return false;
-            }
-        }
+    //        if (opcionGrid.trim() === descripcionOpcion.trim()) {
+    //            $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
+    //            ShowDivMessageP();
+    //            return false;
+    //        }
+    //    }
 
-        maxValue++;
+    //    maxValue++;
 
-        var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
-        var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
-        if (!su) alert("Error al agregar");
+    //    var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
+    //    var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
+    //    if (!su) alert("Error al agregar");
 
-        $("#DescripcionOpcion").val("");
-        $("#DescripcionOpcion").focus();
-    }
+    //    $("#DescripcionOpcion").val("");
+    //    $("#DescripcionOpcion").focus();
+    //}
 
-    function DelOpcion() {
-        HideDivMessageP();
+    //function DelOpcion() {
+    //    HideDivMessageP();
 
-        var gr = jQuery("#jqOpciones").jqGrid('getGridParam', 'selrow');
+    //    var gr = jQuery("#jqOpciones").jqGrid('getGridParam', 'selrow');
 
-        if (gr != null) {
-            $("#jqOpciones").jqGrid('delRowData', gr);
-        } else {
-            $("#lblErrorP").text("Debe seleccionar la Opción a eliminar.");
-            ShowDivMessageP();
-            return false;
-        }
-    }
+    //    if (gr != null) {
+    //        $("#jqOpciones").jqGrid('delRowData', gr);
+    //    } else {
+    //        $("#lblErrorP").text("Debe seleccionar la Opción a eliminar.");
+    //        ShowDivMessageP();
+    //        return false;
+    //    }
+    //}
 
     function ShowDivMessageP() {
         scroll(0, 0);
@@ -221,43 +221,31 @@
 
         //jQuery("#jqPatologias").tableDnD();
 
-        $('#jqOpciones').jqGrid({
-            url: '@Url.Action("GetOpcionesByIdNotificacion", "Notificacion", new { idNotificacion = Model.IdNotificacion })',
-            datatype: 'json',
-            mtype: 'POST',
-            colNames: ['IdNotificacionOpcion', 'Opciones'],
-            colModel: [
-                { name: 'idNotificacionOpcion', index: 'idNotificacionOpcion', key: true, hidden: true },
-                { name: 'descripcionOpcion', index: 'descripcionOpcion', width: 500, align: 'left', search: false, sortable: false, editable: true, editoptions: { size: 25 } }
-            ],
-            pager: '#pager', cellurl: 'null', cellsubmit: 'clientArray', restoreAfterSelect: false,
-            rowNum: 10000, rowList: [10, 20, 30], sortname: 'idNotificacionOpcion', sortorder: 'desc', rownumbers: true, viewrecords: true,
-            height: 'auto', width: 'auto', autowidth: true, shrinkToFit: true, gridview: true, hidegrid: false, editurl: 'null',
-            jsonReader: { cell: "" },
-            caption: '',
-            loadError: function (jqXHR, textStatus, errorThrown) {
-                $('#' + this.id + '_err').remove();
-                $('#jqOpciones').closest('div.ui-jqgrid').before(
-                    '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                    ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                    decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-            },
-            loadComplete: function () {
-                $('#' + this.id + '_err').remove();
-            },
-            gridComplete: function () {
-                $("#_empty", "#jqOpciones").addClass("nodrag nodrop");
-                //jQuery("#jqPatologias").tableDnDUpdate();
-            },
-            onclickSubmit: function (options) {
-                options.processing = true;
-                $.jgrid.hideModal("#delmodjqOpciones",
-                    {
-                        gb: "#gbox_jqOpciones",
-                        jqm: options.jqModal,
-                        onClose: options.onClose
-                    });
+        $.get('@Url.Action("GetOpcionesByIdNotificacion", "Notificacion", new { idNotificacion = @Model.IdNotificacion })', function (data) {
+            let registros = data.opciones;
+
+            if (registros == null || registros.length == 0) {
+                return;
             }
+
+            let headers = `
+                        <thead>
+                            <tr>
+                                    <th style="font-family: 'poppinsbold'" scope="col">idNotificacionOpcion</th>
+                                <th style="font-family: 'poppinsbold'" scope="col">descripcionOpcion</th>
+                            </tr>
+                        </thead>
+                    `;
+            let rows = '<tbody>';
+            registros.forEach(r => {
+                rows += `<tr style="font-size: 12px">
+                                    <td>${r.idNotificacionOpcion}</td>
+                                    <td>${r.descripcionOpcion}</td>
+                                </tr>`
+            });
+            rows += `</tbody>`;
+            $('#jqOpciones').append(headers);
+            $('#jqOpciones').append(rows);
         });
     });
 
@@ -443,7 +431,7 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="jqOpciones" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                    <table id="jqOpciones" class="table" cellpadding="0" cellspacing="0" style="margin: 4em 0;"></table>
                                 </div>
                             </div>
                             <br />

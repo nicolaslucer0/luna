@@ -245,10 +245,7 @@ namespace Yana.Controllers
 
                 JsonResult json = Json(new
                 {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in opcionesNotificacion
+                    opciones = (from item in opcionesNotificacion
                             select new
                         {
                             idNotificacionOpcion = item.IdNotificacionOpcion,
