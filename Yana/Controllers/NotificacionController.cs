@@ -66,14 +66,9 @@ namespace Yana.Controllers
 
                 if (notificaciones != null)
                 {
-                    var totalRecords = notificaciones.Count();
-
                     JsonResult json = Json(new
                     {
-                        total = (totalRecords + rows - 1) / rows,
-                        page,
-                        records = totalRecords,
-                        rows = (from item in notificaciones
+                        notificaciones = (from item in notificaciones
                             select new
                             {
                                 idNotificacion = item.IdNotificacion,

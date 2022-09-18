@@ -6,25 +6,56 @@
 <script type="text/javascript" language="javascript">
 
     function Create() {
-        window.location.assign("./NotificacionManager/0?idPaciente="+ @idPaciente);
+        window.location.assign("./NotificacionManager/0?idPaciente=" + @idPaciente);
     };
 
     function Copy() {
-        window.location.assign("./NotificacionCopyList?idPaciente="+ @idPaciente);
+        window.location.assign("./NotificacionCopyList?idPaciente=" + @idPaciente);
     };
 
     function Standar() {
-        window.location.assign("./NotificacionStandarManager?idPaciente="+ @idPaciente);
+        window.location.assign("./NotificacionStandarManager?idPaciente=" + @idPaciente);
     };
 
     function Edit(idNotificacion) {
         window.location.assign("./NotificacionManager?idNotificacion=" + idNotificacion + "&idPaciente=" + @idPaciente);
     };
-   
 
-    
-      // url: '@Url.Action("GetNotificaciones", "Notificacion", new {idPaciente = idPaciente})'          
-    
+    $(document).ready(function () {
+        var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+
+        $.get('@Url.Action("GetNotificaciones", "Notificacion", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
+            let registros = data.notificaciones;
+
+            if (registros == null || registros.length == 0) {
+                $('#list').append("No hay registros.");
+                return;
+            }
+
+            let headers = `
+                        <thead>
+                            <tr>
+                                <th style="font-family: 'poppinsbold'" scope="col">Fecha</th>
+                                <th style="font-family: 'poppinsbold'" scope="col">Mensaje</th>
+                                <th style="font-family: 'poppinsbold'" scope="col">Estado</th>
+                                <th style="font-family: 'poppinsbold'" scope="col">Respuesta</th>
+                            </tr>
+                        </thead>
+                    `;
+            let rows = '<tbody>';
+            registros.forEach(r => {
+                rows += `<tr style="font-size: 12px">
+                                    <td>${new Date(r.fecha).toLocaleDateString("es-ES", options)}</td>
+                                    <td>${r.mensaje}</td>
+                                    <td>${r.estado}</td>
+                                    <td>${r.respuesta}</td>
+                                </tr>`
+            });
+            rows += `</tbody>`;
+            $('#list').append(headers);
+            $('#list').append(rows);
+        });
+    });
 </script>
 
 
@@ -65,15 +96,18 @@
 
 
                             </div>
-                            <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
-                            <div id="pager" class="scroll" style="text-align: center;">
-                            </div>
-                            <br />
-                            <div class="row">
-                                <div class="col-md-10"></div>
-                                <div class="col-md-2">
-                                    <button onclick="window.location.assign('@Url.Action("PacienteList", "Paciente")'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
+                            <div>
+                                <table id="list" class="table" cellpadding="0" cellspacing="0" style="margin: 4em 0;">
+                                </table>
+                                <div id="pager" class="scroll" style="text-align: center;">
                                 </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button onclick="window.location.assign('@Url.Action("PacienteList", "Paciente")'); return false;" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
                             </div>
                         </div>
                     </div>
@@ -81,5 +115,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
