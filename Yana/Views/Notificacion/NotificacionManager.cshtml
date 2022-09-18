@@ -8,8 +8,10 @@
 
 <!-- Css Notificaciones -->
 <link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+<link rel="stylesheet" href="~/css/main.css">
+<link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
-
+<link rel="stylesheet" href="~/css/siteLoggedLayout.css">
 <!-- Js Notificaciones -->
 @*<script src="~/js/notificaciones/jquery-v3.2.1.js"></script>*@
 <script src="~/js/notificaciones/bootstrap.min.js"></script>
@@ -91,56 +93,7 @@
         return true;
     }
 
-    //function AddOpcion() {
-    //    HideDivMessageP();
-
-    //    var descripcionOpcion = $("#DescripcionOpcion").val();
-
-    //    if (!descripcionOpcion.trim()) {
-    //        return false;
-    //    }
-
-    //    var ids = jQuery("#jqOpciones").jqGrid('getDataIDs');
-
-    //    var maxValue = 0;
-
-    //    for (var i = 0; i < ids.length; i++) {
-    //        var opcionGrid = $("#jqOpciones").jqGrid('getRowData')[i].descripcionOpcion;
-
-    //        var currentIdent = $("#jqOpciones").jqGrid('getRowData')[i].idNotificacionOpcion;
-    //        if (parseInt(currentIdent) > parseInt(maxValue))
-    //            maxValue = currentIdent;
-
-    //        if (opcionGrid.trim() === descripcionOpcion.trim()) {
-    //            $("#lblErrorP").text("La Opción ingresada ya está agregada a la Notificación.");
-    //            ShowDivMessageP();
-    //            return false;
-    //        }
-    //    }
-
-    //    maxValue++;
-
-    //    var datarow = { idNotificacionOpcion: maxValue, descripcionOpcion: descripcionOpcion };
-    //    var su = jQuery("#jqOpciones").jqGrid('addRowData', maxValue, datarow);
-    //    if (!su) alert("Error al agregar");
-
-    //    $("#DescripcionOpcion").val("");
-    //    $("#DescripcionOpcion").focus();
-    //}
-
-    //function DelOpcion() {
-    //    HideDivMessageP();
-
-    //    var gr = jQuery("#jqOpciones").jqGrid('getGridParam', 'selrow');
-
-    //    if (gr != null) {
-    //        $("#jqOpciones").jqGrid('delRowData', gr);
-    //    } else {
-    //        $("#lblErrorP").text("Debe seleccionar la Opción a eliminar.");
-    //        ShowDivMessageP();
-    //        return false;
-    //    }
-    //}
+   
 
     function ShowDivMessageP() {
         scroll(0, 0);
@@ -273,11 +226,10 @@
     </div>
 </div>
 
-<div class="container" style="width: 90%;">
+<div class="container dashboard-content" style="width: 90%;">
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
+        <div class="col-lg-12">
                     <div class="panel-heading">
                         @{
                             string titulo = Model.IdNotificacion <= 0 ? "Nueva Notificación" : "Editar Notificación";
@@ -449,10 +401,10 @@
                                     }
                                     else
                                     {
-                                        <div class="col-md-8 col-sm-12"></div>
+                                        <div class="col-md-4 col-sm-12"></div>
                                     }
                                 }
-                                <div class="col-md-2 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     @{
                                         if (Model.Copia)
                                         {
@@ -465,14 +417,13 @@
                                         }
                                     }
                                 </div>
-                                <div class="col-md-2 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
                                 </div>
                             </div>
                         }
 
                     </div>
-                </div>
             </div>
         </div>
     </div>

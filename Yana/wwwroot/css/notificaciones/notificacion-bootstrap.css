@@ -5455,10 +5455,13 @@ button.list-group-item-danger.active:focus {
           box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 }
 .panel-body {
-    background: #E6F5F9;
+    background: #ffffff;
     border: none;
     margin: 2em;
     padding: 2em;
+    border-radius: 10px;
+    box-shadow: 1px 1px 15px 0 #cecece;
+    box-sizing: border-box;
 }
 .panel-heading {
   padding: 10px 15px;
