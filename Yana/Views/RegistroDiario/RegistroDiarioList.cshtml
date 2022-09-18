@@ -27,7 +27,7 @@
         
         $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
             let registros = data.registroDiarios;
-            console.log(registros == null);
+            
             if (registros == null || registros.length == 0) {
                 $('#list').append("No hay registros.");
                 return;

@@ -62,6 +62,7 @@ i {
     height: 30px;
     width: 30px;
     transition: .4s;
+    filter: invert(11%) sepia(38%) saturate(7362%) hue-rotate(230deg) brightness(86%) contrast(91%);
 }
 
 .menu-container:hover {
