@@ -25,8 +25,14 @@
     $(document).ready(function () {
         var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
         
-        $.get('@Url.Action("GetRegistroDiario", "RegistroDiario")', function (data) {
+        $.get('@Url.Action("GetRegistroDiario", "RegistroDiario", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
             let registros = data.registroDiarios;
+            console.log(registros == null);
+            if (registros == null || registros.length == 0) {
+                $('#list').append("No hay registros.");
+                return;
+            }
+
             let headers = `
                 <thead>
                     <tr>

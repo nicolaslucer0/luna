@@ -41,7 +41,6 @@
         <div class="dashboard">
             @if (UserCache.Email != null)
             {
-                    
                     <div class="sidebar">
                         <div id="sidebar-menu" class="sidebar-menu">
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
@@ -72,7 +71,7 @@
                                     <small class="hide-mobile">Patologia</small>
                                 </a>
                                 <a class="menu-container" href="@Url.Action("PacienteList", "Paciente")">
-                                    <img class="menu-icon" src="~/img/icon/user-patient.png" />
+                                    <img class="menu-icon" src="~/img/icon/patient.png" />
                                     <small class="hide-mobile">Pacientes</small>
                                 </a>
                                 <a class="menu-container" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
