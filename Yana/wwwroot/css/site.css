@@ -118,9 +118,8 @@ html {
 
 .yanaButton {
     border-radius: 20px !important;
-    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%);
+    background: linear-gradient(to right, #6385DC 0%, #274E93 51%, #6385DC 100%);
     margin: 5px 0;
-    padding: 10px 45px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
