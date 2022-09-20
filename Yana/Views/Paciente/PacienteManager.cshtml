@@ -3,10 +3,10 @@
     ViewData["Title"] = "PacienteManager";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
 
 <!-- Css datepicker -->
 <link rel="stylesheet" href="~/css/siteLoggedLayout.css">
-
 
 
 <!-- js datepicker -->
@@ -270,7 +270,7 @@
                             <div class="col-md-4">
                                 <div class="form-group" style="text-align: left;">
                                     <label>Fecha de Nacimiento*</label>
-                                    <div class='input-group date mb-3' id='datetimepicker'>
+                                    <div class='input-group date mb-3' id='datetimepicker0'>
                                         <input type='text' class="form-control" name="FechaNacimiento" id="FechaNacimiento" value="@Model.FechaNacimiento" />
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>

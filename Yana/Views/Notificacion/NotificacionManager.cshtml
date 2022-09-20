@@ -7,13 +7,13 @@
 }
 
 <!-- Css Notificaciones -->
-<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
+
 <link rel="stylesheet" href="~/css/main.css">
 <link rel="stylesheet" href="~/css/site.css">
 <link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="~/css/siteLoggedLayout.css">
 <!-- Js Notificaciones -->
-@*<script src="~/js/notificaciones/jquery-v3.2.1.js"></script>*@
+
 <script src="~/js/notificaciones/bootstrap.min.js"></script>
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
@@ -22,25 +22,10 @@
     function PostForm() {
         if (IsValid()) {
             $("#lblErrorP").text("");
-
             var gridData1 = jQuery("#jqOpciones").getRowData();
             var postData1 = JSON.stringify(gridData1);
             $("#txSerializedOpciones").val(postData1);
-
-    @*var formData = $('#frmNotificacion').serialize();
-                $.ajax({
-                url: '@Url.Action("NotificacionManager", "Notificacion")',
-                type: "POST",
-                data: formData,
-                success: function (data) {
-                window.location.assign("./NotificacionList?idPaciente=" + @Model.IdPaciente);
-                },
-                failure: function (data) {
-                alert("failure");
-                }
-                });*@
-
-                document.forms["frmNotificacion"].submit();
+            document.forms["frmNotificacion"].submit();
         }
     }
 
@@ -48,7 +33,6 @@
         HideDivMessageP();
 
         var field;
-
         field = $("#Mensaje").val();
         if (field.length == 0) {
             $("#lblErrorP").text("Debe completar todos los campos de requeridos para crear una notificación.");

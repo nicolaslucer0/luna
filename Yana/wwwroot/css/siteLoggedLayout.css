@@ -149,6 +149,16 @@ header h1 {
     text-decoration: none;
 }
 
+.sidebar-logo--container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.sidebar-logo {
+    width: 40px;
+}
+
 .dashboard-content {
     padding: 3em;
     margin-left: 10%;
@@ -206,3 +216,9 @@ header h1 {
 }
 
 
+.logo-yana {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
