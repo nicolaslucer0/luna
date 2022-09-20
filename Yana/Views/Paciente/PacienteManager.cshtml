@@ -18,17 +18,19 @@
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
 
 <script>
+    const patologias = [];
+
     function PostForm() {
         if (!IsValid())
             return false;
-
-        $("#lblErrorP").text("");
-            try {
-                let form = document.forms["frmUsuario"];
-                document.forms["frmUsuario"].submit();
-            } catch (err) {
-                alert(err.Description);
-            }
+        try {
+            debugger;
+            const postData = JSON.stringify(patologias);
+            $('#txSerializedPatologias').val(postData);
+            document.forms["frmUsuario"].submit();
+        } catch (err) {
+            alert(err.Description);
+        }
         
     }
 
@@ -83,39 +85,47 @@
     }
 
     function AddPatologia() {
-        HideDivMessageP();
-
-        var idPatologia = $('#cboPatologia').val();
-        var nombrePatologia = $("#cboPatologia option:selected").text();
-
-        var ids = $("#jqPatologias").jqGrid('getDataIDs');
-
-        for (var i = 0; i < ids.length; i++) {
-            var sintomaGrid = $("#jqPatologias").jqGrid('getRowData')[i].idPatologia;
-            if (parseInt(sintomaGrid) == parseInt(idPatologia)) {
-                $("#lblErrorP").text("La patología seleccionada ya está vinculada al paciente.");
-                ShowDivMessageP();
-                return false;
-            }
+        $("#pathology-table").show();
+        if (!patologias.find(p => p.idPatologia == $('#cboPatologia').val())) {
+            patologias.push({
+                idPatologia: $('#cboPatologia').val(),
+                nombrePatologia: $('#cboPatologia option:selected').text()
+            });
+            if (!$('#pathology-table-header').text()) {
+                $("#pathology-table").append(`
+                    <thead id="pathology-table-header">
+                        <tr>
+                            <th style="font-family: 'poppinsbold'" scope="col">Patología agregada</th>
+                        </tr>
+                    </thead>
+                    `);
+                $("#pathology-table").append(
+                    `<tbody id="pathology-table-body">
+                        <tr style="font-size: 12px" id="${$('#cboPatologia').val()}">
+                            <td>${$('#cboPatologia option:selected').text()}</td>
+                        </tr>
+                    </tbody>`
+                );
+            } else {
+                $("#pathology-table-body").append(`
+                        <tr style="font-size: 12px" id="${$('#cboPatologia').val()}">
+                            <td>${$('#cboPatologia option:selected').text()}</td>
+                        </tr>`);
+            }                
+            
+        } else {
+            alert("Patología ya agregada");
         }
-
-        var datarow = { idPatologia: idPatologia, nombrePatologia: nombrePatologia };
-        var su = $("#jqPatologias").jqGrid('addRowData', idPatologia, datarow);
-        if (!su) alert("Error al agregar");
     }
 
     function DelPatologia() {
-        HideDivMessageP();
-
-        var gr = $("#jqPatologias").jqGrid('getGridParam', 'selrow');
-
-        if (gr != null) {
-            $("#jqPatologias").jqGrid('delRowData', gr);
-        } else {
-            $("#lblErrorP").text("Debe seleccionar la Patología a eliminar.");
-            ShowDivMessageP();
-            return false;
+        if (patologias.find(p => p.idPatologia == $('#cboPatologia').val())) {
+            patologias.splice(patologias.findIndex(p => p.idPatologia ==$('#cboPatologia').val()), 1);
+            $(`#${$('#cboPatologia').val()}`).remove();
+            if (patologias.length == 0)
+                $("#pathology-table").hide();
         }
+        
     }
 
 
@@ -313,10 +323,13 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="jqPatologias" class="scroll" cellpadding="0" cellspacing="0"></table>
+                                    <table id="pathology-table" class="table" cellpadding="0" cellspacing="0"></table>
                                 </div>
                             </div>
-                            <br /><br />
+
+
+                            
+
                             <div class="row">
                                 @{
                                     if (Model.IdUsuario != 0)
