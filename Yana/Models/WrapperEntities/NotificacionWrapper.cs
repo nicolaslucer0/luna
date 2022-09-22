@@ -29,9 +29,5 @@ namespace Yana.Models.WrapperEntities
                 return null;
             }
         }
-
-        public DateTime? Maniana { get; set; }
-        public DateTime? Tarde { get; set; }
-        public DateTime? Noche { get; set; }
     }
 }

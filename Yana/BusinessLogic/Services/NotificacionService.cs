@@ -83,9 +83,9 @@ namespace Yana.BusinessLogic.Services
 
         public List<Notificacion> BuildNotificaciones(NotificacionWrapper notificacionWrapper)
         {
-            DateTime fecha = new DateTime(Convert.ToDateTime(notificacionWrapper.FechaDesde).Year
-                                        , Convert.ToDateTime(notificacionWrapper.FechaDesde).Month
-                                        , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day
+            DateTime fecha = new DateTime(Convert.ToDateTime(notificacionWrapper.Hora).Year
+                                        , Convert.ToDateTime(notificacionWrapper.Hora).Month
+                                        , Convert.ToDateTime(notificacionWrapper.Hora).Day
                                         , Convert.ToDateTime(notificacionWrapper.Hora).Hour
                                         , Convert.ToDateTime(notificacionWrapper.Hora).Minute
                                         , Convert.ToDateTime(notificacionWrapper.Hora).Second);
@@ -321,24 +321,15 @@ namespace Yana.BusinessLogic.Services
 
             DateTime fechaManana = new DateTime(Convert.ToDateTime(notificacionWrapper.FechaDesde).Year
                 , Convert.ToDateTime(notificacionWrapper.FechaDesde).Month
-                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day
-                , Convert.ToDateTime(notificacionWrapper.Maniana).Hour
-                , Convert.ToDateTime(notificacionWrapper.Maniana).Minute
-                , Convert.ToDateTime(notificacionWrapper.Maniana).Second);
+                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day);
 
             DateTime fechaTarde = new DateTime(Convert.ToDateTime(notificacionWrapper.FechaDesde).Year
                 , Convert.ToDateTime(notificacionWrapper.FechaDesde).Month
-                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day
-                , Convert.ToDateTime(notificacionWrapper.Tarde).Hour
-                , Convert.ToDateTime(notificacionWrapper.Tarde).Minute
-                , Convert.ToDateTime(notificacionWrapper.Tarde).Second);
+                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day);
 
             DateTime fechaNoche = new DateTime(Convert.ToDateTime(notificacionWrapper.FechaDesde).Year
                 , Convert.ToDateTime(notificacionWrapper.FechaDesde).Month
-                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day
-                , Convert.ToDateTime(notificacionWrapper.Noche).Hour
-                , Convert.ToDateTime(notificacionWrapper.Noche).Minute
-                , Convert.ToDateTime(notificacionWrapper.Noche).Second);
+                , Convert.ToDateTime(notificacionWrapper.FechaDesde).Day);
 
             horarios.Add(fechaManana);
             horarios.Add(fechaTarde);

@@ -129,7 +129,6 @@ namespace Yana.Controllers
                 return View(new NotificacionWrapper()
                 {
                     IdPaciente = idPaciente,
-                    FechaDesde = DateTime.Now,
                     CantDias = 1
                 });
             }
@@ -145,88 +144,86 @@ namespace Yana.Controllers
         [HttpPost]
         public ActionResult NotificacionManager(NotificacionWrapper notificacion)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
+            using var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
+            try
             {
-                try
+                int auxId = notificacion.IdNotificacion;
+
+                if (notificacion.Copia)
+                    notificacion.IdNotificacion = 0;
+
+                if (notificacion.IdNotificacion == 0)
                 {
-                    int auxId = notificacion.IdNotificacion;
+                    if (!this.NotificacionService.ValidarNotificaciones(notificacion))
+                    {
+                        TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
+                        transactionScope.Dispose();
 
-                    if (notificacion.Copia)
-                        notificacion.IdNotificacion = 0;
+                        if (notificacion.Copia)
+                        {
+                            return RedirectToAction("NotificacionCopyManager", "Notificacion", new { idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
+                        }
+                        return View("NotificacionManager", notificacion);
+                    }
 
-                    if (notificacion.IdNotificacion == 0)
+                    List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
+
+                    if (notificaciones.Any())
+                        this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                }
+                else if (notificacion.IdNotificacion == -1)
+                {
+                    try
+                    {
+                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
+
+                        if (notificaciones.Any())
+                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                    }
+                    catch (Exception e)
+                    {
+                        TempData["messageWARNING"] = "Algo salió mal.";
+                        transactionScope.Dispose();
+
+                        return View("NotificacionManager", notificacion);
+                    }
+                }
+                else
+                {
+                    if (notificacion.IdEstadoNotificacion != null
+                        && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
+                            || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
+                        )
                     {
                         if (!this.NotificacionService.ValidarNotificaciones(notificacion))
                         {
                             TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
                             transactionScope.Dispose();
 
-                            if (notificacion.Copia)
-                            {
-                                return RedirectToAction("NotificacionCopyManager","Notificacion", new {idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
-                            }
                             return View("NotificacionManager", notificacion);
                         }
 
-                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
-
-                        if (notificaciones.Any())
-                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                    }
-                    else if (notificacion.IdNotificacion == -1)
-                    {
-                        try
-                        {
-                            List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
-
-                            if (notificaciones.Any())
-                                this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                        }
-                        catch (Exception e)
-                        {
-                            TempData["messageWARNING"] = "Algo salió mal.";
-                            transactionScope.Dispose();
-
-                            return View("NotificacionManager", notificacion);
-                        }
+                        this.NotificacionService.UpdateNotificaciones(notificacion);
                     }
                     else
                     {
-                        if (notificacion.IdEstadoNotificacion != null
-                            && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
-                                || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
-                            )
-                        {
-                            if (!this.NotificacionService.ValidarNotificaciones(notificacion))
-                            {
-                                TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
-                                transactionScope.Dispose();
+                        TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
+                        transactionScope.Dispose();
 
-                                return View("NotificacionManager", notificacion);
-                            }
-
-                            this.NotificacionService.UpdateNotificaciones(notificacion);
-                        }
-                        else
-                        {
-                            TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
-                            transactionScope.Dispose();
-
-                            return View("NotificacionManager", notificacion);
-                        }
+                        return View("NotificacionManager", notificacion);
                     }
-
-                    transactionScope.Complete();
-
-                    return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
                 }
-                catch (Exception ex)
-                {
-                    TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
-                    transactionScope.Dispose();
 
-                    return View("NotificacionManager", notificacion);
-                }
+                transactionScope.Complete();
+
+                return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
+            }
+            catch (Exception ex)
+            {
+                TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
+                transactionScope.Dispose();
+
+                return View("NotificacionManager", notificacion);
             }
         }
 
@@ -516,9 +513,6 @@ namespace Yana.Controllers
                 IdPaciente = idPaciente,
                 Mensaje = "¿Cómo estás?",
                 FechaDesde = DateTime.Now.AddDays(1),
-                Maniana = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0),
-                Tarde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 0, 0),
-                Noche = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0),
                 CantDias = 1
             };
 
