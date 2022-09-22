@@ -69,14 +69,14 @@ namespace Yana.Controllers
                     JsonResult json = Json(new
                     {
                         notificaciones = (from item in notificaciones
-                            select new
-                            {
-                                idNotificacion = item.IdNotificacion,
-                                fecha = item.FechaHora,
-                                mensaje = item.Mensaje,
-                                estado = item.IdEstadoNotificacionNavigation.Descripcion,
-                                respuesta = this.BuildNotificacionRespuesta(item)
-                            }).OrderByDescending(x => x.fecha).ToArray()
+                                          select new
+                                          {
+                                              idNotificacion = item.IdNotificacion,
+                                              fecha = item.FechaHora,
+                                              mensaje = item.Mensaje,
+                                              estado = item.IdEstadoNotificacionNavigation.Descripcion,
+                                              respuesta = this.BuildNotificacionRespuesta(item)
+                                          }).OrderByDescending(x => x.fecha).ToArray()
                     });
 
                     return json;
@@ -110,7 +110,7 @@ namespace Yana.Controllers
                 }
             }
 
-            return notificacionRespuestaBuilder.ToString();       
+            return notificacionRespuestaBuilder.ToString();
         }
 
         #endregion
@@ -144,89 +144,91 @@ namespace Yana.Controllers
         [HttpPost]
         public ActionResult NotificacionManager(NotificacionWrapper notificacion)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
-            try
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
-                int auxId = notificacion.IdNotificacion;
-
-                if (notificacion.Copia)
-                    notificacion.IdNotificacion = 0;
-
-                if (notificacion.IdNotificacion == 0)
+                try
                 {
-                    if (!this.NotificacionService.ValidarNotificaciones(notificacion))
-                    {
-                        TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
-                        transactionScope.Dispose();
+                    int auxId = notificacion.IdNotificacion;
 
-                        if (notificacion.Copia)
-                        {
-                            return RedirectToAction("NotificacionCopyManager", "Notificacion", new { idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
-                        }
-                        return View("NotificacionManager", notificacion);
-                    }
+                    if (notificacion.Copia)
+                        notificacion.IdNotificacion = 0;
 
-                    List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
-
-                    if (notificaciones.Any())
-                        this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                }
-                else if (notificacion.IdNotificacion == -1)
-                {
-                    try
-                    {
-                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
-
-                        if (notificaciones.Any())
-                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                    }
-                    catch (Exception e)
-                    {
-                        TempData["messageWARNING"] = "Algo salió mal.";
-                        transactionScope.Dispose();
-
-                        return View("NotificacionManager", notificacion);
-                    }
-                }
-                else
-                {
-                    if (notificacion.IdEstadoNotificacion != null
-                        && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
-                            || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
-                        )
+                    if (notificacion.IdNotificacion == 0)
                     {
                         if (!this.NotificacionService.ValidarNotificaciones(notificacion))
                         {
                             TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
                             transactionScope.Dispose();
 
+                            if (notificacion.Copia)
+                            {
+                                return RedirectToAction("NotificacionCopyManager", "Notificacion", new { idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
+                            }
                             return View("NotificacionManager", notificacion);
                         }
 
-                        this.NotificacionService.UpdateNotificaciones(notificacion);
+                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
+
+                        if (notificaciones.Any())
+                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                    }
+                    else if (notificacion.IdNotificacion == -1)
+                    {
+                        try
+                        {
+                            List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
+
+                            if (notificaciones.Any())
+                                this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                        }
+                        catch (Exception e)
+                        {
+                            TempData["messageWARNING"] = "Algo salió mal.";
+                            transactionScope.Dispose();
+
+                            return View("NotificacionManager", notificacion);
+                        }
                     }
                     else
                     {
-                        TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
-                        transactionScope.Dispose();
+                        if (notificacion.IdEstadoNotificacion != null
+                            && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
+                                || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
+                            )
+                        {
+                            if (!this.NotificacionService.ValidarNotificaciones(notificacion))
+                            {
+                                TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
+                                transactionScope.Dispose();
 
-                        return View("NotificacionManager", notificacion);
+                                return View("NotificacionManager", notificacion);
+                            }
+
+                            this.NotificacionService.UpdateNotificaciones(notificacion);
+                        }
+                        else
+                        {
+                            TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
+                            transactionScope.Dispose();
+
+                            return View("NotificacionManager", notificacion);
+                        }
+
                     }
+
+                    transactionScope.Complete();
+
+                    return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
                 }
+                catch (Exception ex)
+                {
+                    TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
+                    transactionScope.Dispose();
 
-                transactionScope.Complete();
-
-                return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
-            }
-            catch (Exception ex)
-            {
-                TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
-                transactionScope.Dispose();
-
-                return View("NotificacionManager", notificacion);
+                    return View("NotificacionManager", notificacion);
+                }
             }
         }
-
 
         public JsonResult GetOpcionesByIdNotificacion(string sidx, string sord, int page, int rows, bool _search, string filters, int idNotificacion)
         {
@@ -234,8 +236,8 @@ namespace Yana.Controllers
             {
                 TempData["messageERROR"] = string.Empty;
 
-                var opcionesNotificacion = idNotificacion != -1 ? 
-                    this.NotificacionOpcionService.GetByIdNotificacion(idNotificacion).ToList() 
+                var opcionesNotificacion = idNotificacion != -1 ?
+                    this.NotificacionOpcionService.GetByIdNotificacion(idNotificacion).ToList()
                     : this.NotificacionOpcionService.GetOpcionesStandar().ToList();
 
                 var totalRecords = opcionesNotificacion.Count;
@@ -243,11 +245,11 @@ namespace Yana.Controllers
                 JsonResult json = Json(new
                 {
                     opciones = (from item in opcionesNotificacion
-                            select new
-                        {
-                            idNotificacionOpcion = item.IdNotificacionOpcion,
-                            descripcionOpcion = item.Descripcion
-                        }).ToArray()
+                                select new
+                                {
+                                    idNotificacionOpcion = item.IdNotificacionOpcion,
+                                    descripcionOpcion = item.Descripcion
+                                }).ToArray()
                 });
 
                 return json;
@@ -443,7 +445,7 @@ namespace Yana.Controllers
 
         #endregion
 
-        
+
         #region NotificacionRespuestaMensaje
 
         public IActionResult NotificacionRespuestaMensaje(int idNotificacion)
@@ -496,7 +498,7 @@ namespace Yana.Controllers
                     return View("NotificacionRespuestaManager", notificacionRespuesta);
                 }
             }
-        }        
+        }
 
         #endregion
 
