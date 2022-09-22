@@ -65,7 +65,7 @@
                     plotLines: [{
                         value: 0,
                         width: 2,
-                        color: '#808080'
+                        color: '#3661ED'
                     }]
                 },
                 tooltip: {
@@ -138,7 +138,7 @@
                     plotLines: [{
                         value: 0,
                         width: 2,
-                        color: '#808080'
+                        color: '#3661ED'
                     }]
                 },
                 tooltip: {
@@ -211,7 +211,7 @@
                     plotLines: [{
                         value: 0,
                         width: 2,
-                        color: '#808080'
+                        color: '#3661ED'
                     }]
                 },
                 tooltip: {
@@ -249,8 +249,10 @@
             $('#container4').highcharts({
                 chart: {
                     type: 'pie',
-                    
+                    size: '80%',
+                    innerSize: '60%',    
                 },
+                
                 title: {
                     text: ''
                 },
@@ -260,6 +262,7 @@
                 xAxis: {
                     type: 'category'
                 },
+                
                 yAxis: {
                     title: {
                         text: ''
@@ -270,9 +273,13 @@
                 },
                 plotOptions: {
                     pie: {
+                        center: ['50%', '50%'],
+                        shadow: false,
                         allowPointSelect: true,
                         cursor: 'pointer',
                         depth: 0,
+                        size: '80%',
+                        innerSize: '60%', 
                         dataLabels: {
                             enabled: true,
                             format: '{point.name} ({point.y})',
@@ -282,6 +289,7 @@
                         }
                     },
                     series: {
+                        size: '60%',
                         borderWidth: 0,
                         dataLabels: {
                             enabled: true
@@ -337,15 +345,6 @@
                                     <div class="panel-heading" style="margin: 20px 0">Respuestas a notificaciones</div>
                                     <div class="panel-body" id="container3" style="height: 400px; margin: 0 auto"></div>
                                 </div>
-                                @{
-                                    if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                                    {
-                                        <div class="col-lg-6">
-                                            <div class="page-header" style="margin: 20px 0">Notificaciones Respondidas x Edad x Sexo</div>
-                                            <div id="panel-body container6" class="panel-body" style="height: 450px; margin: 0 auto"></div>
-                                        </div>
-                                    }
-                                }
                             </div>
                         </div>
 
@@ -383,17 +382,6 @@
                                     <h1 class="page-header"></h1>
                                     <div class="panel-body" id="container2" style="height: 400px; margin: 0 auto"></div>
                                 </div>
-                                @{
-                                    if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                                    {
-                                        <div class="col-md-6">
-                                            <div class="panel-heading" style="margin: 20px 0">
-                                                Registros diarios x Edad x Sexo
-                                            </div>
-                                            <div id="container5" class="panel-body" style="height: 450px; margin: 0 auto"></div>
-                                        </div>
-                                    }
-                                }
                             </div>
                         </div>
                     </div>

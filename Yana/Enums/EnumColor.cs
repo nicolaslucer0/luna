@@ -5,23 +5,23 @@ namespace Yana.Models.Enums
 
     public enum EnumColor
     {
-        [Description("#c517e8")]
+        [Description("#3661ed")]
         Violeta,
-        [Description("#e5e817")]
+        [Description("#3661ed")]
         Amarillo,
-        [Description("#85807f")]
+        [Description("#e5e5e5")]
         Gris,
-        [Description("#FF952B")]
+        [Description("#3661ed")]
         Naranja,
-        [Description("#FF0000")]
+        [Description("#3661ed")]
         Rojo,
-        [Description("#15528E")]
+        [Description("#1b59f8")]
         AzulOscuro,
-        [Description("#000000")]
+        [Description("#3661ed")]
         Negro,
-        [Description("#7CB5EC")]
+        [Description("#1b59f8")]
         Celeste,
-        [Description("#90ED7D")]
+        [Description("#3661ed")]
         Verde
     }
 }
