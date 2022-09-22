@@ -69,14 +69,14 @@ namespace Yana.Controllers
                     JsonResult json = Json(new
                     {
                         notificaciones = (from item in notificaciones
-                            select new
-                            {
-                                idNotificacion = item.IdNotificacion,
-                                fecha = item.FechaHora,
-                                mensaje = item.Mensaje,
-                                estado = item.IdEstadoNotificacionNavigation.Descripcion,
-                                respuesta = this.BuildNotificacionRespuesta(item)
-                            }).OrderByDescending(x => x.fecha).ToArray()
+                                          select new
+                                          {
+                                              idNotificacion = item.IdNotificacion,
+                                              fecha = item.FechaHora,
+                                              mensaje = item.Mensaje,
+                                              estado = item.IdEstadoNotificacionNavigation.Descripcion,
+                                              respuesta = this.BuildNotificacionRespuesta(item)
+                                          }).OrderByDescending(x => x.fecha).ToArray()
                     });
 
                     return json;
@@ -110,7 +110,7 @@ namespace Yana.Controllers
                 }
             }
 
-            return notificacionRespuestaBuilder.ToString();       
+            return notificacionRespuestaBuilder.ToString();
         }
 
         #endregion
@@ -213,6 +213,7 @@ namespace Yana.Controllers
 
                             return View("NotificacionManager", notificacion);
                         }
+
                     }
 
                     transactionScope.Complete();
@@ -229,15 +230,14 @@ namespace Yana.Controllers
             }
         }
 
-
         public JsonResult GetOpcionesByIdNotificacion(string sidx, string sord, int page, int rows, bool _search, string filters, int idNotificacion)
         {
             try
             {
                 TempData["messageERROR"] = string.Empty;
 
-                var opcionesNotificacion = idNotificacion != -1 ? 
-                    this.NotificacionOpcionService.GetByIdNotificacion(idNotificacion).ToList() 
+                var opcionesNotificacion = idNotificacion != -1 ?
+                    this.NotificacionOpcionService.GetByIdNotificacion(idNotificacion).ToList()
                     : this.NotificacionOpcionService.GetOpcionesStandar().ToList();
 
                 var totalRecords = opcionesNotificacion.Count;
@@ -245,11 +245,11 @@ namespace Yana.Controllers
                 JsonResult json = Json(new
                 {
                     opciones = (from item in opcionesNotificacion
-                            select new
-                        {
-                            idNotificacionOpcion = item.IdNotificacionOpcion,
-                            descripcionOpcion = item.Descripcion
-                        }).ToArray()
+                                select new
+                                {
+                                    idNotificacionOpcion = item.IdNotificacionOpcion,
+                                    descripcionOpcion = item.Descripcion
+                                }).ToArray()
                 });
 
                 return json;
@@ -445,7 +445,7 @@ namespace Yana.Controllers
 
         #endregion
 
-        
+
         #region NotificacionRespuestaMensaje
 
         public IActionResult NotificacionRespuestaMensaje(int idNotificacion)
@@ -498,7 +498,7 @@ namespace Yana.Controllers
                     return View("NotificacionRespuestaManager", notificacionRespuesta);
                 }
             }
-        }        
+        }
 
         #endregion
 
