@@ -25,6 +25,7 @@ namespace Yana.Helpers
         public static int IdUsuario { get; set; }
         public static string Email { get; set; }
         public static int IdPerfil { get; set; }
+        public static string Nombre { get; set; }
         public static List<MenuItemWrapper> MenuItems { get; set; }
         public static int IdInstitucionUsuario { get; set; }
     }

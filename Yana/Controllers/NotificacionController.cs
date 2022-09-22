@@ -144,86 +144,88 @@ namespace Yana.Controllers
         [HttpPost]
         public ActionResult NotificacionManager(NotificacionWrapper notificacion)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew);
-            try
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
-                int auxId = notificacion.IdNotificacion;
-
-                if (notificacion.Copia)
-                    notificacion.IdNotificacion = 0;
-
-                if (notificacion.IdNotificacion == 0)
+                try
                 {
-                    if (!this.NotificacionService.ValidarNotificaciones(notificacion))
-                    {
-                        TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
-                        transactionScope.Dispose();
+                    int auxId = notificacion.IdNotificacion;
 
-                        if (notificacion.Copia)
-                        {
-                            return RedirectToAction("NotificacionCopyManager", "Notificacion", new { idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
-                        }
-                        return View("NotificacionManager", notificacion);
-                    }
+                    if (notificacion.Copia)
+                        notificacion.IdNotificacion = 0;
 
-                    List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
-
-                    if (notificaciones.Any())
-                        this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                }
-                else if (notificacion.IdNotificacion == -1)
-                {
-                    try
-                    {
-                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
-
-                        if (notificaciones.Any())
-                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
-                    }
-                    catch (Exception e)
-                    {
-                        TempData["messageWARNING"] = "Algo salió mal.";
-                        transactionScope.Dispose();
-
-                        return View("NotificacionManager", notificacion);
-                    }
-                }
-                else
-                {
-                    if (notificacion.IdEstadoNotificacion != null
-                        && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
-                            || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
-                        )
+                    if (notificacion.IdNotificacion == 0)
                     {
                         if (!this.NotificacionService.ValidarNotificaciones(notificacion))
                         {
                             TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
                             transactionScope.Dispose();
 
+                            if (notificacion.Copia)
+                            {
+                                return RedirectToAction("NotificacionCopyManager", "Notificacion", new { idNotificacion = auxId, idPaciente = notificacion.IdPaciente });
+                            }
                             return View("NotificacionManager", notificacion);
                         }
 
-                        this.NotificacionService.UpdateNotificaciones(notificacion);
+                        List<Notificacion> notificaciones = this.NotificacionService.BuildNotificaciones(notificacion);
+
+                        if (notificaciones.Any())
+                            this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                    }
+                    else if (notificacion.IdNotificacion == -1)
+                    {
+                        try
+                        {
+                            List<Notificacion> notificaciones = this.NotificacionService.BuildNotificacionesStandar(notificacion);
+
+                            if (notificaciones.Any())
+                                this.NotificacionService.InsertNotificaciones(notificaciones, notificacion.ListOpciones);
+                        }
+                        catch (Exception e)
+                        {
+                            TempData["messageWARNING"] = "Algo salió mal.";
+                            transactionScope.Dispose();
+
+                            return View("NotificacionManager", notificacion);
+                        }
                     }
                     else
                     {
-                        TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
-                        transactionScope.Dispose();
+                        if (notificacion.IdEstadoNotificacion != null
+                            && (notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Pendiente)
+                                || notificacion.IdEstadoNotificacion == Convert.ToInt32(EnumEstadoNotificacion.Entregada))
+                            )
+                        {
+                            if (!this.NotificacionService.ValidarNotificaciones(notificacion))
+                            {
+                                TempData["messageWARNING"] = "No se generará ninguna notificacion ya que los parametros ingresados son invalidos.";
+                                transactionScope.Dispose();
 
-                        return View("NotificacionManager", notificacion);
+                                return View("NotificacionManager", notificacion);
+                            }
+
+                            this.NotificacionService.UpdateNotificaciones(notificacion);
+                        }
+                        else
+                        {
+                            TempData["messageERROR"] = "La notificación seleccionada fué respondida.";
+                            transactionScope.Dispose();
+
+                            return View("NotificacionManager", notificacion);
+                        }
                     }
+
+                    transactionScope.Complete();
+
+                    return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
                 }
+                catch (Exception ex)
+                {
+                    TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
+                    transactionScope.Dispose();
 
-                transactionScope.Complete();
-
-                return RedirectToAction("NotificacionList", "Notificacion", new { idPaciente = notificacion.IdPaciente });
-            }
-            catch (Exception ex)
-            {
-                TempData["messageERROR"] = "Se produjo un error en la aplicación. " + ex.Message;
-                transactionScope.Dispose();
-
-                return View("NotificacionManager", notificacion);
+                    return View("NotificacionManager", notificacion);
+                }
             }
         }
 

@@ -314,113 +314,89 @@
 </script>
 
 <div class="container dashboard-content" style="width: 100%">
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Dashboard - Gráficos Seguimiento
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="col-lg-12">
-                                <h1 class="page-header"></h1>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4><i class="fa fa-fw fa-bar-chart"></i>&nbsp;Respuestas a Notificaciones</h4>
-                                    </div>
-                                    <div class="panel-body" id="container3" style="height: 400px; margin: 0 auto">
-                                    </div>
-                                </div>
-                            </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                    <strong style="font-family: 'poppinsbold'">Bienvenido de nuevo,</strong> @UserCache.Nombre
+                </div>
+                <div class="row">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Respuestas</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pacientes por Patologías</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Registros diarios</button>
+                            <button class="nav-link" id="nav-contact2-tab" data-bs-toggle="tab" data-bs-target="#nav-contact2" type="button" role="tab" aria-controls="nav-emocion" aria-selected="false">Emociones recibidas</button>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="col-lg-12">
-                                <h1 class="page-header"></h1>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4><i class="fa fa-fw fa-pie-chart"></i>&nbsp;Pacientes por Patologías</h4>
-                                    </div>
-                                    <div class="panel-body" id="container4" style="height: 400px; margin: 0 auto">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </nav>
 
-                    <div class="panel-body" id="divPanelBody">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="col-lg-12">
-                                    <h1 class="page-header"></h1>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="panel-heading" style="margin: 20px 0">Respuestas a notificaciones</div>
+                                    <div class="panel-body" id="container3" style="height: 400px; margin: 0 auto"></div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4><i class="fa fa-fw fa-line-chart"></i>&nbsp;Registros diarios cargados por paciente</h4>
+                                @{
+                                    if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                                    {
+                                        <div class="col-lg-6">
+                                            <div class="page-header" style="margin: 20px 0">Notificaciones Respondidas x Edad x Sexo</div>
+                                            <div id="panel-body container6" class="panel-body" style="height: 450px; margin: 0 auto"></div>
                                         </div>
-                                        <div class="panel-body" id="container1" style="height: 400px; margin: 0 auto">
-                                        </div>
-                                    </div>
-                                </div>
+                                    }
+                                }
                             </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                             <div class="col-lg-6">
                                 <div class="col-lg-12">
                                     <h1 class="page-header"></h1>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4><i class="fa fa-fw fa-line-chart"></i>&nbsp;Emociones por paciente en Registros Diarios</h4>
-                                        </div>
-                                        <div class="panel-body" id="container2" style="height: 400px; margin: 0 auto">
+                                        <div class="panel-body" id="container4" style="height: 400px; margin: 0 auto">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @{
-                        if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                        {
-                            <div class="panel-body" id="divPanelBody">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-12">
-                                            <h1 class="page-header"></h1>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4><i class="fa fa-fw fa-area-chart"></i>&nbsp;Registros Diarios x Edad x Sexo</h4>
-                                                </div>
-                                                <div id="container5" class="panel-body" style="height: 450px; margin: 0 auto">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="col-lg-12">
-                                            <h1 class="page-header"></h1>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h4><i class="fa fa-fw fa-area-chart"></i>&nbsp;Notificaciones Respondidas x Edad x Sexo</h4>
-                                                </div>
-                                                <div id="container6" class="panel-body" style="height: 450px; margin: 0 auto">
-                                                </div>
+
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h1 class="page-header"></h1>
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body" id="container1" style="height: 400px; margin: 0 auto">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        }
-                    }
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1 class="page-header"></h1>
+                                    <div class="panel-body" id="container2" style="height: 400px; margin: 0 auto"></div>
+                                </div>
+                                @{
+                                    if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="panel-heading" style="margin: 20px 0">
+                                                Registros diarios x Edad x Sexo
+                                            </div>
+                                            <div id="container5" class="panel-body" style="height: 450px; margin: 0 auto"></div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

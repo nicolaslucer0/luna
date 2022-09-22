@@ -133,6 +133,7 @@ namespace Yana.Controllers
                 {
                     UserCache.IdUsuario = usuario.IdUsuario;
                     UserCache.Email = usuario.Email;
+                    UserCache.Nombre = usuario.Nombre;
                     UserCache.IdPerfil = Convert.ToInt32(usuario.IdPerfil);
 
                     if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
