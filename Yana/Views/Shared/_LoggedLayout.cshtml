@@ -28,9 +28,6 @@
     <script src='@Url.Content("~/js/jquery-3.6.1.min.js")' type="text/javascript"></script>
     <script src='@Url.Content("~/js/bootstrap.bundle.min.js")' type="text/javascript"></script>
     <script src='@Url.Content("~/js/bootstrap-5.2.1.min.js")' type="text/javascript"></script>
-    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/highcharts.js")' type="text/javascript"></script>
-    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/highcharts-3d.js")' type="text/javascript"></script>
-    <script src='@Url.Content("~/lib/Highcharts-4.2.5/js/modules/exporting.js")' type="text/javascript"></script>
     <script src="~/js/custom.js"></script>
     <script src="~/js/validators.js"></script>
 
@@ -51,34 +48,38 @@
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
                             {
-                                <a class="menu-container" href="@Url.Action("Default", "Home")">
-                                    <img class="menu-icon" src="~/img/icon/home.png" />
-                                    <small class="hide-mobile">Inicio</small>
-                                </a>
-                                <a class="menu-container" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                    <img class="menu-icon" src="~/img/icon/book.png" />
-                                    <small class="hide-mobile">Registro diario</small>
-                                </a>
+                                <div class="menu-container">
+                                    <a class="menu-item" href="@Url.Action("Default", "Home")">
+                                        <img class="menu-icon" src="~/img/icon/home.png" />
+                                        <small class="hide-mobile">Inicio</small>
+                                    </a>
+                                    <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                        <img class="menu-icon" src="~/img/icon/book.png" />
+                                        <small class="hide-mobile">Registro diario</small>
+                                    </a>
+                                </div>
                             }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
                             {
-                                <a class="menu-container" href="@Url.Action("Default", "Home")">
-                                    <img class="menu-icon" src="~/img/icon/home.png" />
-                                    <small class="hide-mobile">Inicio</small>
-                                </a>
-                                <a class="menu-container" href="@Url.Action("PatologiaList", "Patologia")">
-                                    <img class="menu-icon" src="~/img/icon/pathology.png" />
-                                    <small class="hide-mobile">Patologia</small>
-                                </a>
-                                <a class="menu-container" href="@Url.Action("PacienteList", "Paciente")">
-                                    <img class="menu-icon" src="~/img/icon/patient.png" />
-                                    <small class="hide-mobile">Pacientes</small>
-                                </a>
-                                <a class="menu-container" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                    <img class="menu-icon" src="~/img/icon/book.png" />
-                                    <small class="hide-mobile">Registro diario</small>
-                                </a>
+                                <div class="menu-container">
+                                    <a class="menu-item" href="@Url.Action("Default", "Home")">
+                                        <img class="menu-icon" src="~/img/icon/home.png" />
+                                        <small class="hide-mobile">Inicio</small>
+                                    </a>
+                                    <a class="menu-item" href="@Url.Action("PatologiaList", "Patologia")">
+                                        <img class="menu-icon" src="~/img/icon/pathology.png" />
+                                        <small class="hide-mobile">Patologia</small>
+                                    </a>
+                                    <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
+                                        <img class="menu-icon" src="~/img/icon/patient.png" />
+                                        <small class="hide-mobile">Pacientes</small>
+                                    </a>
+                                    <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                        <img class="menu-icon" src="~/img/icon/book.png" />
+                                        <small class="hide-mobile">Registro diario</small>
+                                    </a>
+                                </div>
                             }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))

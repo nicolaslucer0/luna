@@ -3,89 +3,35 @@
 @{
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
+<script src='@Url.Content("~/js/charts.js")' type="text/javascript"></script>
+<style>
+    .yana-card {
+        background: white;
+        padding: 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 2px 2px 0 #f7f7f7;
+    }
 
+    .chart-header {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+</style>
 <script type="text/javascript">
 
     $(function () {
-
         var url1 = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
-            $.get(url1, {}, function (data) {
-                
-                var categorias = [];
-                var series = [];
+        $.get(url1, {}, function (data) {
+            var categorias = [];
+            var series = [];
+        });
 
-                var firstElement = true;
-
-                $.each(data, function (i, obj) {
-                    if (firstElement) {
-                        $.each(obj['listCategory'], function (i2, category) {
-                            categorias.push(category);
-                        }); 
-
-                        firstElement = false;
-                    }
-
-                    var dataArray = [];
-
-                    $.each(obj['listValue'], function (i2, obj2) {
-                        dataArray.push(obj2);
-                    });
-                    debugger;
-                    series.push({
-                        name: '' + obj['nameSerie'] + '',
-                        color: obj['Color'],
-                        data: dataArray
-                    });
-
-                });
-
-                bindRegistrosDiariosPaciente(categorias, series);
-            });
-
-        function bindRegistrosDiariosPaciente(categorias, seriesData) {
-            $('#container1').highcharts({
-                chart: {
-                    type: 'line',
-                    width: 300,
-                    height: 300
-                },
-                title: {
-                    text: '',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: '',
-                    x: -20
-                },
-                xAxis: {
-                    categories: categorias
-                },
-                yAxis: {
-                    title: {
-                        text: 'Cantidad de Registros Diarios'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        width: 2,
-                        color: '#3661ED'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: seriesData
-            });
-        }
-
+        
         var url2 = '@Url.Action("GetEmocionesUltimaSemana", "Home")';
             $.get(url2, {}, function (data) {
-                
+                console.log("Emociones ultima semana", data);
                 var categorias = [];
                 var series = [];
 
@@ -95,7 +41,7 @@
                     if (firstElement) {
                         $.each(obj['listCategory'], function (i2, category) {
                             categorias.push(category);
-                        }); 
+                        });
 
                         firstElement = false;
                     }
@@ -118,49 +64,38 @@
             });
 
         function bindEmocionesSemana(categorias, seriesData) {
-            $('#container2').highcharts({
-                chart: {
-                    type: 'line',
-                    width: 300,
-                    height: 300
+            const ctx = $('#emotionsChart');
+            const labels = seriesData.map(s => s.name);
+            const colors = ["#f08f0077", "#998f9477", "#f0559477", "#558f9477", "#f08f6677", "#f0877477", "#f0888477", "#998f9477", "#f0009477", "#f0811477", "#998f9477", "#f08ee477", "#f08dd477"];
+            const datasets = seriesData.map((d, index) => {
+                let data = seriesData && seriesData.length > 0 ? seriesData.filter(s => s.name == d.name) : [];
+                const dataset = data && data.length > 0 ? data[0].data : [];
+                return {
+                    label: d.name,
+                    data: dataset,
+                    backgroundColor: colors[index]
+                }
+                });
+            
+
+            const notificationChart2 = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
                 },
-                title: {
-                    text: '',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: '',
-                    x: -20
-                },
-                xAxis: {
-                    categories: categorias
-                },
-                yAxis: {
-                    title: {
-                        text: 'Cantidad de Registros Diarios'
+                options: {
+                    plugins: { legend: { display: false }, },
+                    legend: {
+                        display: false
                     },
-                    plotLines: [{
-                        value: 0,
-                        width: 2,
-                        color: '#3661ED'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: seriesData
-            });
+                }
+            })
         }
 
+        // DE BARRAS
         var url3 = '@Url.Action("GetRespuestasNotificaciones", "Home")';
-            $.get(url3, {}, function (data) {
-                
+        $.get(url3, {}, function (data) {
                 var categorias = [];
                 var series = [];
 
@@ -170,7 +105,7 @@
                     if (firstElement) {
                         $.each(obj['listCategory'], function (i2, category) {
                             categorias.push(category);
-                        }); 
+                        });
 
                         firstElement = false;
                     }
@@ -180,7 +115,7 @@
                     $.each(obj['listValue'], function (i2, obj2) {
                         dataArray.push(obj2);
                     });
-                    
+
                     series.push({
                         name: '' + obj.nameSerie + '',
                         color: obj.Color,
@@ -191,50 +126,28 @@
 
                 bindRespuestaNotificaciones(categorias, series);
             });
-
         function bindRespuestaNotificaciones(categorias, seriesData) {
-            $('#container3').highcharts({
-                chart: {
-                    type: 'column',
-                    width: 300,
-                    height: 300
-                },
-                title: {
-                    text: '',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: '',
-                    x: -20
-                },
-                xAxis: {
-                    categories: categorias
-                },
-                yAxis: {
-                    title: {
-                        text: 'Cantidad de respuesta a notificaciones'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        width: 2,
-                        color: '#3661ED'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: ''
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: seriesData
-            });
+            const ctx = $('#myChart')
+            const data = seriesData.filter(d => d.name == "Respondidas").map(r => r.data)[0];
+            const notificationChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categorias,
+                    datasets: [{
+                        label: 'Notificaciones respondidas',
+                        data: !!data && data.length > 0 ? data : [],
+                        backgroundColor: ["#3661ed", "#3661ed", "#3661ed", "#3661ed", "#3661ed", "#3661ed"],
+                        borderRadius: 8
+                    }],
+                    options: {
+                        responsive: true,
+                    }   
+                }
+            })
         }
 
+        // DONITA
         var url4 = '@Url.Action("GetPacientesPorPatologia", "Home")';
-
         $.get(url4, {}, function (data) {
 
             var series = [];
@@ -250,115 +163,84 @@
 
             bindPacientesPatologia(series);
         });
-
         function bindPacientesPatologia(seriesData) {
-            $('#container4').highcharts({
-                chart: {
-                    type: 'pie',
-                    innerSize: '60%',
-                    width: 300,
-                    height: 300
-                },
-                
-                title: {
-                    text: ''
-                },
-                subtitle: {
-                    text: ''
-                },
-                xAxis: {
-                    type: 'category'
-                },
-                
-                yAxis: {
-                    title: {
-                        text: ''
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                plotOptions: {
-                    pie: {
-                        center: ['50%', '50%'],
-                        shadow: false,
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        depth: 0,
-                        size: '80%',
-                        innerSize: '60%', 
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.name} ({point.y})',
-                            style: {
-                                fontSize: '10px',
-                                width: '30px'
-                            }
-                        }
+            const ctx = $('#pathologyChart');
+            const labels = seriesData.map(r => r.name);
+            const data = seriesData.map(r => r.y);
+            const notificationChart2 = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    legend: {
+                        display: false
                     },
-                    series: {
-                        size: '30%',
-                        borderWidth: 0,
-                        dataLabels: {
-                            enabled: true,
-                        }
-                    }
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ["#3661ed"]
+                    }]
                 },
-                tooltip: {
-                    headerFormat: '<span style="font-size:8px">{series.name}</span><br>',
-                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b><br/>'
-                },
-                series: [{
-                    name: 'Total',
-                    colorByPoint: true,
-                    data: seriesData,
-                    pointWidth: 30
-                }]
-            });
+                options: {
+                    plugins: { legend: { display: false }, },
+                    legend: {
+                        display: false
+                    },
+                    cutout: '70%',
+                }
+            })
         }
 
-        if (@UserCache.IdPerfil != @Convert.ToInt32(EnumPerfilUsuario.Paciente)) {
-            $.get('@Url.Action("DispersionRegistroDiario", "Home")', null, function (content) {
-                $("#container5").html(content);
-            });
-
-            $.get('@Url.Action("DispersionNotificacionesRespondidas", "Home")', null, function(content){
-                $("#container6").html(content);
-            });
-        }
+        
     });
 </script>
 
 <div class="container dashboard-content" style="width: 100%">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
-                    <strong style="font-family: 'poppinsbold'">Bienvenido de nuevo,</strong> @UserCache.Nombre
-                </div>
-                <div class="d-flex">
-                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
-                        <div class="page-header">Pacientes por patologia</div>
-                        <div class="panel-body" id="container4" style="margin: 0 auto"></div>
-                    </div>
-                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
-                        <div class="panel-heading" style="margin: 20px 0">Respuestas a notificaciones</div>
-                        <div class="panel-body" id="container3" style="margin: 0 auto"></div>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
-                        <div class="page-header">Registros diarios</div>
-                        <div class="panel-body" id="container1" style="margin: 0 auto"></div>
-                    </div>
 
-                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
-                        <div class="page-header">Emociones recibidas</div>
-                        <div class="panel-body" id="container2" style="margin: 0 auto"></div>
-                    </div>
+    <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+        <strong style="font-family: 'poppinsbold'">Bienvenido de nuevo,</strong> @UserCache.Nombre
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 yana-card">
+            <div class="chart-header">Pacientes por patologia</div>
+            <canvas id="pathologyChart" width="100"></canvas>
+        </div>
+        <div class="col-md-3 yana-card">
+            <div class="chart-header">Emociones recibidas</div>
+            <canvas id="emotionsChart" width="200" height="200"></canvas>        
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center">
+                    <div style="font-size: 12px; margin-bottom: 10px;">Tus pacientes</div>
+                    <div style="font-family: 'poppinsbold';">52</div>
+                </div>
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center">
+                    <div style="font-size: 12px;">Pacientes con patologias</div>
+                    <div style="font-family: 'poppinsbold';">20</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center" style="text-align: center;">
+                    <div style="font-size: 12px;">Notificaciones enviadas</div>
+                    <div style="font-family: 'poppinsbold';">20</div>
+                </div>
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center" style="text-align: center;">
+                    <div style="font-size: 12px;">Notificaciones recibidas</div>
+                    <div style="font-family: 'poppinsbold';">20</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center" style="text-align: center;">
+                    <div style="font-size: 12px;">Emociones recibidas</div>
+                    <div style="font-family: 'poppinsbold';">20</div>
+                </div>
+                <div class="col-md-5 yana-card d-flex flex-column align-items-center justify-content-center" style="text-align: center;">
+                    <div style="font-size: 12px;"></div>
+                    <div style="font-family: 'poppinsbold';">20</div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 
