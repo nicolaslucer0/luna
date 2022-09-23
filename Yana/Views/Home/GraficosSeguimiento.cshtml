@@ -30,7 +30,7 @@
                     $.each(obj['listValue'], function (i2, obj2) {
                         dataArray.push(obj2);
                     });
-
+                    debugger;
                     series.push({
                         name: '' + obj['nameSerie'] + '',
                         color: obj['Color'],
@@ -45,7 +45,9 @@
         function bindRegistrosDiariosPaciente(categorias, seriesData) {
             $('#container1').highcharts({
                 chart: {
-                    type: 'line'
+                    type: 'line',
+                    width: 300,
+                    height: 300
                 },
                 title: {
                     text: '',
@@ -118,7 +120,9 @@
         function bindEmocionesSemana(categorias, seriesData) {
             $('#container2').highcharts({
                 chart: {
-                    type: 'line'
+                    type: 'line',
+                    width: 300,
+                    height: 300
                 },
                 title: {
                     text: '',
@@ -176,10 +180,10 @@
                     $.each(obj['listValue'], function (i2, obj2) {
                         dataArray.push(obj2);
                     });
-
+                    
                     series.push({
-                        name: '' + obj['nameSerie'] + '',
-                        color: obj['Color'],
+                        name: '' + obj.nameSerie + '',
+                        color: obj.Color,
                         data: dataArray
                     });
 
@@ -191,7 +195,9 @@
         function bindRespuestaNotificaciones(categorias, seriesData) {
             $('#container3').highcharts({
                 chart: {
-                    type: 'column'
+                    type: 'column',
+                    width: 300,
+                    height: 300
                 },
                 title: {
                     text: '',
@@ -249,8 +255,9 @@
             $('#container4').highcharts({
                 chart: {
                     type: 'pie',
-                    size: '80%',
-                    innerSize: '60%',    
+                    innerSize: '60%',
+                    width: 300,
+                    height: 300
                 },
                 
                 title: {
@@ -284,20 +291,21 @@
                             enabled: true,
                             format: '{point.name} ({point.y})',
                             style: {
-                                width: '90px'
+                                fontSize: '10px',
+                                width: '30px'
                             }
                         }
                     },
                     series: {
-                        size: '60%',
+                        size: '30%',
                         borderWidth: 0,
                         dataLabels: {
-                            enabled: true
+                            enabled: true,
                         }
                     }
                 },
                 tooltip: {
-                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    headerFormat: '<span style="font-size:8px">{series.name}</span><br>',
                     pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}%</b><br/>'
                 },
                 series: [{
@@ -328,62 +336,25 @@
                 <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
                     <strong style="font-family: 'poppinsbold'">Bienvenido de nuevo,</strong> @UserCache.Nombre
                 </div>
-                <div class="row">
-                    <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Respuestas</button>
-                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Pacientes por Patologías</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Registros diarios</button>
-                            <button class="nav-link" id="nav-contact2-tab" data-bs-toggle="tab" data-bs-target="#nav-contact2" type="button" role="tab" aria-controls="nav-emocion" aria-selected="false">Emociones recibidas</button>
-                        </div>
-                    </nav>
+                <div class="d-flex">
+                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
+                        <div class="page-header">Pacientes por patologia</div>
+                        <div class="panel-body" id="container4" style="margin: 0 auto"></div>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
+                        <div class="panel-heading" style="margin: 20px 0">Respuestas a notificaciones</div>
+                        <div class="panel-body" id="container3" style="margin: 0 auto"></div>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
+                        <div class="page-header">Registros diarios</div>
+                        <div class="panel-body" id="container1" style="margin: 0 auto"></div>
+                    </div>
 
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="panel-heading" style="margin: 20px 0">Respuestas a notificaciones</div>
-                                    <div class="panel-body" id="container3" style="height: 400px; margin: 0 auto"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                            <div class="col-lg-6">
-                                <div class="col-lg-12">
-                                    <h1 class="page-header"></h1>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body" id="container4" style="height: 400px; margin: 0 auto">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h1 class="page-header"></h1>
-                                    <div class="col-md-12">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body" id="container1" style="height: 400px; margin: 0 auto">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h1 class="page-header"></h1>
-                                    <div class="panel-body" id="container2" style="height: 400px; margin: 0 auto"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center card" style="width: 400px;">
+                        <div class="page-header">Emociones recibidas</div>
+                        <div class="panel-body" id="container2" style="margin: 0 auto"></div>
                     </div>
                 </div>
             </div>
