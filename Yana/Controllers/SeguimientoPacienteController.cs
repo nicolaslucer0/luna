@@ -49,21 +49,7 @@ namespace Yana.Controllers
 
                 var totalRecords = seguimientoPaciente.Count();
 
-                JsonResult json = Json(new
-                {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in seguimientoPaciente
-                            select new
-                            {
-                                idSeguimientoPaciente = item.IdSeguimientoPaciente,
-                                fechaAlta = item.FechaAlta,
-                                nota = item.Nota
-                            }).OrderByDescending(x => x.idSeguimientoPaciente).ToArray()
-                });
-
-                return json;
+                return Json(new{ seguimientoPaciente });
             }
             catch (Exception ex)
             {

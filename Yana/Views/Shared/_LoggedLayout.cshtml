@@ -34,7 +34,7 @@
 </head>
     <body>
         <div class="dashboard">
-            @if (UserCache.Email != null)
+            @if (UserCache.IdPerfil != 0)
             {
                     <div class="sidebar">
                         <div class="sidebar-logo--container">
@@ -92,17 +92,9 @@
                                         <img class="menu-icon" src="~/img/icon/home.png" />
                                         <small class="hide-mobile">Inicio</small>
                                     </a>
-                                    <a class="menu-item" href="@Url.Action("PatologiaList", "Patologia")">
-                                        <img class="menu-icon" src="~/img/icon/pathology.png" />
-                                        <small class="hide-mobile">Patologia</small>
-                                    </a>
                                     <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
                                         <img class="menu-icon" src="~/img/icon/patient.png" />
                                         <small class="hide-mobile">Pacientes</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                        <img class="menu-icon" src="~/img/icon/book.png" />
-                                        <small class="hide-mobile">Registro diario</small>
                                     </a>
                                 </div>
                             }

@@ -25,9 +25,12 @@
                 <h5 class="card-title">${paciente.edad} - ${paciente.apellido}, ${paciente.nombre}</h5>
                 <h6 class="card-subtitle">${paciente.dni}</h6>
                 <p class="card-text">${paciente.email}</p>
-            
+                
                 <div class="d-flex justify-content-end luna-card--actions">
-                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})">Notificaciones <i class="fa fa-bell" aria-hidden="true"></i></button>
+                    <button class="btn luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/book.png" /></button>
+                    <button class="btn luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/seguimiento.png" /></button>
+                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/notification.png" /></button>
+                    <button class="btn luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/pencil.png" /></button>
                 </div>
             </div>
         </div>
@@ -47,8 +50,6 @@
             });
             
             $('#list').append(cards);
-        
-
         });
     });
 </script>
@@ -61,7 +62,7 @@
         transition: .4s;
         background: white;
         background: white;
-        padding: 15px;
+        padding: 10px;
         margin: 10px;
         border: none;
         border-radius: 30px;

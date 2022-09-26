@@ -171,8 +171,8 @@ namespace Yana.Controllers
 
         public ActionResult Logout()
         {
-            UserCache.MenuItems = null;
-
+            UserCache.IdPerfil = 0;
+            UserCache.Nombre = "";
             return RedirectToAction("Index", "Home");
         }
 

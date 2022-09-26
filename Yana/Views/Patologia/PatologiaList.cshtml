@@ -15,9 +15,7 @@
     $(document).ready(function () {
 
         $.get('@Url.Action("GetPatologias", "Patologia")', function (data) {
-            let pacientes = data;
-            console.log(data);
-            let registros = data.patologias;
+            let { patologias } = data;
             let headers = `
                 <thead>
                     <tr>
@@ -27,7 +25,7 @@
                 </thead>
             `;
             let rows = '<tbody>';
-            registros.forEach(r => {
+            patologias.forEach(r => {
                 rows += `<tr style="font-size: 12px">
                             <td>${r.nombre}</td>
                             <td>${r.descripcion}</td>
