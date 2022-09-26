@@ -49,20 +49,7 @@ namespace Yana.Controllers
 
                 var totalRecords = instituciones.Count();
 
-                JsonResult json = Json(new
-                {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in instituciones
-                        select new
-                        {
-                            idinstitucion = item.IdInstitucion,
-                            nombre = item.Nombre
-                        }).OrderByDescending(x => x.idinstitucion).ToArray()
-                });
-
-                return json;
+                return Json(new{instituciones});
             }
             catch (Exception ex)
             {
