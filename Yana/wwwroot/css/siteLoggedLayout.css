@@ -113,8 +113,8 @@ header h1 {
 .dashboard {
     display: flex;
     box-sizing: border-box;
-    height: 100vh;
     background: #F9F9F9;
+    height: 100vh;
 }
 
 

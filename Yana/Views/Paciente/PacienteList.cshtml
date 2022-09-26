@@ -55,14 +55,17 @@
 
 <style>
     .luna-card {
-        border: 1px solid #ededed;
-        margin: 10px;
         box-sizing: border-box;
-        min-width: 20%;
         position: relative;
         min-width: 30%;
-        border-radius: 20px;
         transition: .4s;
+        background: white;
+        background: white;
+        padding: 15px;
+        margin: 10px;
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 2px 2px 0 #f7f7f7;
     }
 
     .luna-card:hover {
@@ -105,8 +108,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="flex-container">
-                        <div class="panel-heading" id="panelHead">
-                            Pacientes
+                        <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                            <strong style="font-family: 'poppinsbold'">Sus pacientes</strong>
                         </div>
                         <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
                     </div>
@@ -119,13 +122,13 @@
                         </p>
                     </div>
 
-                    <div id="list" class="d-flex flex-wrap" cellpadding="0" cellspacing="0" style="margin: 4em 0;">
+                    <div id="list" class="d-flex flex-wrap overflow-scroll" cellpadding="0" cellspacing="0" style="margin: 4em 0;">
                     </div>
 
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            <div id="pager" class="scroll" style="text-align: center;"></div>
+                            <div id="pager" class="" style="text-align: center;"></div>
                         </div>
                     </div>
                 </div>
