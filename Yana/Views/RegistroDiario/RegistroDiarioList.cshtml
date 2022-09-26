@@ -126,11 +126,11 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
 
+                    <div class="flex-container">
                     <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
                         <strong style="font-family: 'poppinsbold'">Registro diario</strong>
                     </div>
 
-                    <div class="flex-container">
                         @{
                             if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
                             {
@@ -139,7 +139,7 @@
                         }
                     </div>
 
-                    <div class="overflow-scroll" style="margin-top: 4em;">
+                    <div class="overflow-scroll" style="margin-top: 2em;">
                         <table id="list" class="table" cellpadding="0" cellspacing="0"></table>
                     </div>
 

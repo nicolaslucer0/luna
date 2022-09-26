@@ -3,7 +3,54 @@
     ViewData["Title"] = "PsicologoList";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
+<style>
+    .luna-card {
+        box-sizing: border-box;
+        position: relative;
+        min-width: 30%;
+        transition: .4s;
+        background: white;
+        background: white;
+        padding: 15px;
+        margin: 10px;
+        border: none;
+        border-radius: 30px;
+        box-shadow: 0 2px 2px 0 #f7f7f7;
+    }
 
+        .luna-card:hover {
+            box-shadow: 0 0 10px 0 #8080803d;
+            transform: scale(1.01);
+        }
+
+    .luna-card--body {
+        margin: 20px 10px 0 10px;
+        width: 20%;
+        text-overflow: ellipsis;
+    }
+
+    .card-info {
+        margin: 0 15px 0 20px;
+    }
+
+    .card-subtitle {
+        margin: 5px 0;
+    }
+
+    .card-text {
+        font-size: 12px;
+        margin: 5px 0;
+    }
+
+    .luna-card--actions {
+    }
+
+    .luna-card--button {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #6385DC;
+    }
+</style>
 <script type="text/javascript" language="javascript">
 
     function Create() {
@@ -13,114 +60,54 @@
     function Edit(id) {
         window.location.assign("./PsicologoManager/" + id);
     };
+    const buildCard = (psicologo) => `
+        <div class="d-flex align-items-center luna-card" style="width: 18rem;">
+            <div class="card-info">
+                <div class="user-image"><img src="/img/team/1.png"></div>
+            </div>
+            <div class="luna-card--body flex-grow-1">
+                <h5 class="card-title">${psicologo.edad} - ${psicologo.apellido}, ${psicologo.nombre}</h5>
+                <h6 class="card-subtitle">${psicologo.dni}</h6>
+                <p class="card-text">${psicologo.email}</p>
 
-    $(window).bind('resize', function () {
-        $("#list").setGridWidth($("#panelHead").width());
-    }).trigger('resize');
+                <div class="d-flex justify-content-end luna-card--actions">
+                    <button class="btn luna-card--button" onclick="Notificaciones(${psicologo.idUsuario})">Notificaciones <i class="fa fa-bell" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
 
     $(document).ready(function () {
-        var myGrid = $('#list'),
-            decodeErrorMessage = function (jqXHR, textStatus, errorThrown) {
-                var html, errorInfo, i, errorText = textStatus + '\n' + errorThrown;
-                if (jqXHR.responseText.charAt(0) === '[') {
-                    try {
-                        errorInfo = $.parseJSON(jqXHR.responseText);
-                        errorText = "";
-                        for (i = 0; i < errorInfo.length; i++) {
-                            if (errorText.length !== 0) {
-                                errorText += "<hr/>";
-                            }
-                            errorText += errorInfo[i].Source + ": " + errorInfo[i].Message;
-                        }
-                    }
-                    catch (e) { }
-                } else {
-                    html = /<body.*?>([\s\S]*)<\/body>/i.exec(jqXHR.responseText);
-                    if (html !== null && html.length > 1) {
-                        errorText = html[1];
-                    }
-                }
-                return errorText;
-            };
+        $.get('@Url.Action("GetPsicologos", "Psicologo")', function (data) {
+            let { psicologos }= data;
+            if (!psicologos || psicologos.length == 0) {
+                $('#list').append("No hay ningun paciente creado.");
+                return;
+            }
 
-        try {
-
-            myGrid.jqGrid({
-                url: '@Url.Action("GetPsicologos", "Psicologo")',
-                datatype: 'json',
-                mtype: 'POST',
-                colNames: ['Codigo', 'Nombre', 'Apellido', 'Institución', ''],
-                colModel: [
-                    { name: 'idusuario', index: 'idusuario', sorttype: 'int', key: true, align: 'center', search: true },
-                    { name: 'nombre', index: 'nombre', align: 'left', search: true },
-                    { name: 'apellido', index: 'apellido', align: 'left', search: true },
-                    { name: 'institucion', index: 'institucion', align: 'center', search: true },
-                    { name: 'action', index: 'action', align: 'center', sortable: false, search: false }
-                ],
-                pager: '#pager',
-                rowNum: 10,
-                rowList: [10, 20, 30],
-                sortname: 'idusuario',
-                sortorder: 'desc',
-                rownumbers: true,
-                viewrecords: true,
-                height: 'auto',
-                gridview: true,
-                loadonce: true,
-                jsonReader: { cell: "" },
-                caption: 'Psicólogos',
-                loadError: function (jqXHR, textStatus, errorThrown) {
-                    // remove error div if exist
-                    $('#' + this.id + '_err').remove();
-                    // insert div with the error description before the grid
-                    myGrid.closest('div.ui-jqgrid').before(
-                        '<div id="' + this.id + '_err" style="max-width:' + this.style.width +
-                        ';"><div class="ui-state-error ui-corner-all" style="padding:0.7em;float:left;"><span class="ui-icon ui-icon-alert" style="float:left; margin-right: .3em;"></span><span style="clear:left">' +
-                        decodeErrorMessage(jqXHR, textStatus, errorThrown) + '</span></div><div style="clear:left"/></div>');
-                },
-                gridComplete: function () {
-                    var ids = myGrid.jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var rowId = ids[i];
-
-                        var checkOut = "<button onclick=\"Edit(" + rowId + ");\" class='btn yanaButton' title='Editar/Eliminar'><i class='fa fa-pencil fa-lg'></i> <i class='fa fa-trash fa-lg' style='margin-left: 5px;'></i> </button>"
-
-                        myGrid.jqGrid('setRowData', rowId, { action: checkOut });
-                    }
-                }
+            let cards = '';
+            psicologos.forEach(p => {
+                cards += buildCard(p)
             });
-        }
-        catch (err) {
-            alert("Error:" + err.message);
-        }
 
-        myGrid.jqGrid('navGrid', '#pager', { add: false, edit: false, del: false },
-            {}, {}, {}, { multipleSearch: true, overlay: false });
-        myGrid.jqGrid('filterToolbar', { autosearch: true, stringResult: false, defaultSearch: 'cn' });
-        myGrid.jqGrid('navButtonAdd', '#pager',
-            {
-                caption: "Filtrar", title: "Mostrar/Ocultar barra de filtro",
-                buttonicon: 'ui-icon-pin-s',
-                onClickButton: function () { myGrid[0].toggleToolbar(); }
-            });
-        myGrid.jqGrid('navGrid', "#pager", { edit: false, add: false, del: false });
-
-        $("#list").setGridWidth($("#panelHead").width());
+            $('#list').append(cards);
+        });
     });
 </script>
 
-<br />
+
 <div class="container dashboard-content">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="flex-container">
-                        <div class="panel-heading" id="panelHead">
-                            Psicólogos
+                        <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                            <strong style="font-family: 'poppinsbold'">Especialistas</strong>
                         </div>
-                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Psicólogo</button>
+                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
                     </div>
+
                     <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
                         <p align="left">
                             <div class="alert alert-danger">
@@ -128,12 +115,14 @@
                             </div>
                         </p>
                     </div>
+
+                    <div id="list" class="d-flex flex-wrap overflow-scroll" cellpadding="0" cellspacing="0" style="margin-top: 2em;">
+                    </div>
+
                     <div class="panel-body">
                         <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
                         <div>
-                            <table id="list" class="scroll" cellpadding="0" cellspacing="0"></table>
-                            <div id="pager" class="scroll" style="text-align: center;">
-                            </div>
+                            <div id="pager" class="" style="text-align: center;"></div>
                         </div>
                     </div>
                 </div>

@@ -58,22 +58,9 @@ namespace Yana.Controllers
 
                 var totalRecords = psicologos.Count();
 
-                JsonResult json = Json(new
-                {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in psicologos
-                            select new
-                            {
-                                idusuario = item.IdUsuario,
-                                nombre = item.Nombre,
-                                apellido = item.Apellido,
-                                institucion = this.GetNombreInstitucion(item.ProfesionalInstitucion, instituciones)
-                            }).OrderByDescending(x => x.idusuario).ToArray()
-                });
+                return Json(new{psicologos});
 
-                return json;
+                
             }
             catch (Exception ex)
             {
