@@ -185,3 +185,20 @@ input {
 .overflow-scroll {
     height: 70vh;
 }
+
+
+@media only screen and (max-width: 800px) {
+    .overflow-scroll.full {
+        height: 100vh !important;
+    }
+
+    .overflow-scroll {
+        height: 82vh;
+    }
+
+    .panel-heading {
+        font-size: 15px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+}

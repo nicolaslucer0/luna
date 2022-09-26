@@ -516,7 +516,7 @@ nav li a {
 ==========================================*/
 
 .contact {
-	/*padding-bottom: 0;*/
+	background: #f4f7f9;
 }
 
 .contact-address h3 {
@@ -573,16 +573,6 @@ label.error {
   text-transform: capitalize;
 }
 
-.contact-form #form-submit {
-  background: url("../img/envelop.png") no-repeat scroll 0 15px transparent;
-  border: 0 none;
-  color: #000;
-  font-size: 16px;
-  line-height: 24px;
-  padding: 10px;
-  text-align: right;
-  width: 150px;
-}
 
 .footer-social {
 	margin-top: 17px;
