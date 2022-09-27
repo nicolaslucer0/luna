@@ -125,7 +125,6 @@ html {
     transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    box-shadow: 0 0 20px #eee;
     display: block;
     font-size: 14px;
     display: flex;
@@ -186,6 +185,15 @@ input {
     height: 70vh;
 }
 
+.panel-heading {
+    font-size: 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: white;
+}
+
+    
+
 
 @media only screen and (max-width: 800px) {
     #nav {
@@ -199,9 +207,6 @@ input {
         height: 82vh;
     }
 
-    .panel-heading {
-        font-size: 15px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
+    
+
 }

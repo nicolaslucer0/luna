@@ -41,6 +41,7 @@
                             <img class="sidebar-logo" src="~/img/logo.png"/>
                         </div>
                         <div id="sidebar-menu" class="sidebar-menu">
+
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
                             {
                                 <div class="menu-container">
@@ -103,7 +104,8 @@
                             {
                                 <div>Insti</div>
                             }
-                        </div>
+                            </div>
+                        
 
                         <div href="#"
                              class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none flex-column"

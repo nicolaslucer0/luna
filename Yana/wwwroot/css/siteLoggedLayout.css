@@ -56,13 +56,14 @@ i {
 .menu-item {
     display: flex;
     align-items: center;
+    color: white !important;
 }
 .menu-icon {
     margin-right: 5px;
     height: 15px;
     width: 15px;
     transition: .4s;
-    filter: invert(11%) sepia(38%) saturate(7362%) hue-rotate(230deg) brightness(86%) contrast(91%);
+    filter: invert(100%);
 }
 
 .menu-item:hover {
@@ -115,7 +116,12 @@ header h1 {
     box-sizing: border-box;
     background: #F9F9F9;
     height: 100vh;
+    background-image: url('../img/pattern.png');
+    background-repeat: no-repeat;
+    background-position: left top ;
+    background-size: 50% 100%;
 }
+
 
 
 .sidebar {
@@ -123,10 +129,10 @@ header h1 {
     flex-direction: column;
     width: 10%;
     position: fixed;
-    background: white;
     z-index: 20;
     height: 100vh;
-    box-shadow: 0 0 10px 0 #e2e2e2;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 13px 0px #0000002e;
 }
 
 
@@ -158,6 +164,7 @@ header h1 {
 }
 
 .sidebar-logo {
+    filter: invert(100%);
     width: 40px;
 }
 
