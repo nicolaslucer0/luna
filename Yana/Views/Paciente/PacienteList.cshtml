@@ -27,10 +27,10 @@
                 <p class="card-text">${paciente.email}</p>
                 
                 <div class="d-flex justify-content-end luna-card--actions">
-                    <button class="btn luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/book.png" /></button>
-                    <button class="btn luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/seguimiento.png" /></button>
-                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/notification.png" /></button>
-                    <button class="btn luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="menu-icon" src="/img/icon/pencil.png" /></button>
+                    <button class="btn luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" /></button>
+                        <button class="btn luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
+                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" /></button>
+                        <button class="btn luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
                 </div>
             </div>
         </div>
@@ -106,6 +106,14 @@
     #list {
         flex-shrink: 1;
         align-content: flex-start;
+    }
+
+
+    .card-icon {
+        margin-right: 5px;
+        height: 15px;
+        width: 15px;
+        transition: .4s;
     }
 </style>
 
