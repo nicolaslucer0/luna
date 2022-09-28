@@ -37,7 +37,7 @@ namespace Yana.Utils.Utils.EmailsManager
 
             this.SetCertificateValidation();
 
-            smtp.Send(mail);
+            //smtp.Send(mail);
         }
 
         #region HelperMethods

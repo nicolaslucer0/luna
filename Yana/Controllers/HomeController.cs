@@ -91,7 +91,7 @@ namespace Yana.Controllers
 
                     registroService.Insert(registro);
 
-                    //EmailService.SendMailNotificacionYana(registro.Email);
+                    EmailService.SendMailNotificacionYana(registro.Email);
                 }
                 catch (Exception e)
                 {
