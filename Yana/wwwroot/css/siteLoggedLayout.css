@@ -116,10 +116,7 @@ header h1 {
     box-sizing: border-box;
     background: #F9F9F9;
     height: 100vh;
-    background-image: url('../img/pattern.png');
-    background-repeat: no-repeat;
-    background-position: left top ;
-    background-size: 50% 100%;
+    
 }
 
 
@@ -131,8 +128,11 @@ header h1 {
     position: fixed;
     z-index: 20;
     height: 100vh;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 13px 0px #0000002e;
+    box-shadow: 0 0 13px 0px #00000088;
+    background-image: url(../img/pattern3.jpeg);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 100% 100%;
 }
 
 
@@ -171,6 +171,7 @@ header h1 {
 .dashboard-content {
     padding: 3em;
     margin-left: 10%;
+    width: 100%;
 }
 
 .user-profile {
@@ -201,12 +202,8 @@ header h1 {
     cursor: pointer;
 }
 
-.user-name{
-
-}
-
-.user-role {
-
+.link-light a {
+    color: white !important;
 }
 
 .section {
