@@ -23,7 +23,7 @@
             </div>
             <div class="luna-card--body flex-grow-1">
                 <h5 class="card-title">${paciente.apellido}, ${paciente.nombre}</h5>
-                <small class="card-legend">${paciente.edad} años</small>
+                <div class="card-legend">${paciente.edad} años</div>
                 <div class="luna-card-body">
                     <div class='card-item--container'><i class="fa fa-address-card-o" aria-hidden="true"></i><h6 class="card-subtitle">${paciente.dni}</h6></div>
                     <div class='card-item--container'><i class="fa fa-envelope-o" aria-hidden="true"></i><p class="card-subtitle">${paciente.email}</p></div>
@@ -82,10 +82,11 @@
 
     .card-legend {
         color: #9f9f9f;
+        font-size: 12px;
     }
 
     .luna-card-body {
-
+        font-size: 10px;
     }
 
     .card-item--container {
@@ -112,7 +113,7 @@
     }
     
     .card-subtitle {
-        margin: 5px 0;
+        margin: 2px 0;
         font-size: 12px;
     }
 
