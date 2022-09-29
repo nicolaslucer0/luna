@@ -22,17 +22,25 @@
                 <div class="user-image"><img src="/img/team/1.png"></div>
             </div>
             <div class="luna-card--body flex-grow-1">
-                <h5 class="card-title">${paciente.edad} - ${paciente.apellido}, ${paciente.nombre}</h5>
-                <h6 class="card-subtitle">${paciente.dni}</h6>
-                <p class="card-text">${paciente.email}</p>
+                <h5 class="card-title">${paciente.apellido}, ${paciente.nombre}</h5>
+                <small>${paciente.edad} años</small>
+                <div class='card-item--container'><i class="fa fa-address-card-o" aria-hidden="true"></i><h6 class="card-subtitle">${paciente.dni}</h6></div>
+                <div class='card-item--container'><i class="fa fa-envelope-o" aria-hidden="true"></i><p class="card-text">${paciente.email}</p></div>
                 
                 <div class="d-flex justify-content-end luna-card--actions">
-                    <button class="btn luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" /></button>
-                        <button class="btn luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
-                    <button class="btn luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" /></button>
-                        <button class="btn luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
+                    
                 </div>
             </div>
+            <div class="dropdown dropstart">
+              <div data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+              <ul class="dropdown-menu">
+                    <li><button class="dropdown-item luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" />Registro diario</button></li>
+                    <li><button class="dropdown-item luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" />Seguimiento</button></li>
+                    <li><button class="dropdown-item luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" />Notificaciones</button></li>
+                    <li><button class="dropdown-item luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" />Editar</button></li>
+              </ul>
+            </div>
+            
         </div>
     `;
 
@@ -46,6 +54,7 @@
                         
             let cards = '';
             pacientes.forEach(p => {
+                console.log(p);
                 cards += buildCard(p)
             });
             
@@ -67,22 +76,30 @@
         margin: 10px;
         border: none;
         border-radius: 30px;
-        box-shadow: 0 2px 2px 0 #f7f7f7;
+        box-shadow: 0 0 2px 0 #00000021;
     }
 
+    .card-item--container {
+        display: flex;
+        align-items: center;
+    }
     .luna-card:hover {
         box-shadow: 0 0 10px 0 #8080803d;
-        transform: scale(1.01);
+        
     }
 
     .luna-card--body {
-        margin: 20px 10px 0 10px;
+        margin: 20px 10px;
         width: 20%;
         text-overflow: ellipsis;
     }
 
     .card-info {
         margin: 0 15px 0 20px;
+    }
+
+    .card-title {
+        font-family: poppinsbold;
     }
     
     .card-subtitle {
@@ -115,6 +132,17 @@
         width: 15px;
         transition: .4s;
     }
+
+    .dropdown {
+        align-self: flex-start;
+        padding-top: 20px;
+        cursor: pointer;
+    }
+
+        .dropdown button {
+            text-transform: none;
+            color: black;
+        }
 </style>
 
 <div class=" dashboard-content">

@@ -23,103 +23,104 @@
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/siteLoggedLayout.css">
     <link rel="stylesheet" href="~/css/Menu.css" type="text/css" />
-    
+
 
     <script src='@Url.Content("~/js/jquery-3.6.1.min.js")' type="text/javascript"></script>
+    <script src="~/js/popper.js"></script>
     <script src='@Url.Content("~/js/bootstrap.bundle.min.js")' type="text/javascript"></script>
-    <script src='@Url.Content("~/js/bootstrap-5.2.1.min.js")' type="text/javascript"></script>
+    
     <script src="~/js/custom.js"></script>
     <script src="~/js/validators.js"></script>
-
 </head>
-    <body>
-        <div class="dashboard">
-            @if (UserCache.IdPerfil != 0)
-            {
-                    <div class="sidebar">
-                        <div class="sidebar-logo--container">
-                            <img class="sidebar-logo" src="~/img/logo.png"/>
+<body>
+    <div class="dashboard">
+        @if (UserCache.IdPerfil != 0)
+        {
+            <div class="sidebar">
+                <div class="sidebar-logo--container">
+                    <img class="sidebar-logo" src="~/img/logo.png" />
+                </div>
+                <div id="sidebar-menu" class="sidebar-menu">
+
+                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
+                    {
+                        <div class="menu-container">
+                            <a class="menu-item" href="@Url.Action("Default", "Home")">
+                                <img class="menu-icon" src="~/img/icon/home.png" />
+                                <small class="hide-mobile">Inicio</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("InstitucionList", "Institucion")">
+                                <img class="menu-icon" src="~/img/icon/institution.png" />
+                                <small class="hide-mobile">Instituciones</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("PsicologoList", "Psicologo")">
+                                <img class="menu-icon" src="~/img/icon/psychologist.png" />
+                                <small class="hide-mobile">Psicologos</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("PatologiaList", "Patologia")">
+                                <img class="menu-icon" src="~/img/icon/pathology.png" />
+                                <small class="hide-mobile">Patologia</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
+                                <img class="menu-icon" src="~/img/icon/patient.png" />
+                                <small class="hide-mobile">Pacientes</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                <img class="menu-icon" src="~/img/icon/book.png" />
+                                <small class="hide-mobile">Registro diario</small>
+                            </a>
                         </div>
-                        <div id="sidebar-menu" class="sidebar-menu">
+                    }
 
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
-                            {
-                                <div class="menu-container">
-                                    <a class="menu-item" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/home.png" />
-                                        <small class="hide-mobile">Inicio</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("InstitucionList", "Institucion")">
-                                        <img class="menu-icon" src="~/img/icon/institution.png" />
-                                        <small class="hide-mobile">Instituciones</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("PsicologoList", "Psicologo")">
-                                        <img class="menu-icon" src="~/img/icon/psychologist.png" />
-                                        <small class="hide-mobile">Psicologos</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("PatologiaList", "Patologia")">
-                                        <img class="menu-icon" src="~/img/icon/pathology.png" />
-                                        <small class="hide-mobile">Patologia</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
-                                        <img class="menu-icon" src="~/img/icon/patient.png" />
-                                        <small class="hide-mobile">Pacientes</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                        <img class="menu-icon" src="~/img/icon/book.png" />
-                                        <small class="hide-mobile">Registro diario</small>
-                                    </a>
-                                </div>
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                            {
-                                <div class="menu-container">
-                                    <a class="menu-item" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/home.png" />
-                                        <small class="hide-mobile">Inicio</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                        <img class="menu-icon" src="~/img/icon/book.png" />
-                                        <small class="hide-mobile">Registro diario</small>
-                                    </a>
-                                </div>
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
-                            {
-                                <div class="menu-container">
-                                    <a class="menu-item" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/home.png" />
-                                        <small class="hide-mobile">Inicio</small>
-                                    </a>
-                                    <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
-                                        <img class="menu-icon" src="~/img/icon/patient.png" />
-                                        <small class="hide-mobile">Pacientes</small>
-                                    </a>
-                                </div>
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
-                            {
-                                <div>Insti</div>
-                            }
-                            </div>
-                        
-
-                        <div href="#"
-                             class="d-flex align-items-center justify-content-center p-3 link-light text-decoration-none flex-column"
-                             aria-expanded="false">
-                            <img src="https://github.com/mdo.png"
-                                 alt="mdo"
-                                 width="40"
-                                 height="40"
-                                 class="rounded-circle" />
-                            <a class="dropdown-item link-light">@Html.ActionLink("Salir", "Logout", "Home")</a>
+                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                    {
+                        <div class="menu-container">
+                            <a class="menu-item" href="@Url.Action("Default", "Home")">
+                                <img class="menu-icon" src="~/img/icon/home.png" />
+                                <small class="hide-mobile">Inicio</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                <img class="menu-icon" src="~/img/icon/book.png" />
+                                <small class="hide-mobile">Registro diario</small>
+                            </a>
                         </div>
-                    </div>
-            }
-            @RenderBody()
-        </div>
-    </body>
+                    }
+
+                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
+                    {
+                        <div class="menu-container">
+                            <a class="menu-item" href="@Url.Action("Default", "Home")">
+                                <img class="menu-icon" src="~/img/icon/home.png" />
+                                <small class="hide-mobile">Inicio</small>
+                            </a>
+                            <a class="menu-item" href="@Url.Action("PacienteList", "Paciente")">
+                                <img class="menu-icon" src="~/img/icon/patient.png" />
+                                <small class="hide-mobile">Pacientes</small>
+                            </a>
+                        </div>
+                    }
+
+                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
+                    {
+                        <div>Insti</div>
+                    }
+                </div>
+
+
+                <div href="#"
+                     class="d-flex align-items-center justify-content-center p-3 link-light text-decoration-none flex-column"
+                     aria-expanded="false">
+                    <img src="https://github.com/mdo.png"
+                         alt="mdo"
+                         width="40"
+                         height="40"
+                         class="rounded-circle" />
+                    <a class="dropdown-item link-light">@Html.ActionLink("Salir", "Logout", "Home")</a>
+                </div>
+            </div>
+        }
+        @RenderBody()
+    </div>
+    
+</body>
 </html>
