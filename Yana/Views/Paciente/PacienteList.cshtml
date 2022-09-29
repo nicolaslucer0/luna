@@ -23,10 +23,11 @@
             </div>
             <div class="luna-card--body flex-grow-1">
                 <h5 class="card-title">${paciente.apellido}, ${paciente.nombre}</h5>
-                <small>${paciente.edad} años</small>
-                <div class='card-item--container'><i class="fa fa-address-card-o" aria-hidden="true"></i><h6 class="card-subtitle">${paciente.dni}</h6></div>
-                <div class='card-item--container'><i class="fa fa-envelope-o" aria-hidden="true"></i><p class="card-text">${paciente.email}</p></div>
-                
+                <small class="card-legend">${paciente.edad} años</small>
+                <div class="luna-card-body">
+                    <div class='card-item--container'><i class="fa fa-address-card-o" aria-hidden="true"></i><h6 class="card-subtitle">${paciente.dni}</h6></div>
+                    <div class='card-item--container'><i class="fa fa-envelope-o" aria-hidden="true"></i><p class="card-subtitle">${paciente.email}</p></div>
+                </div>
                 <div class="d-flex justify-content-end luna-card--actions">
                     
                 </div>
@@ -79,6 +80,14 @@
         box-shadow: 0 0 2px 0 #00000021;
     }
 
+    .card-legend {
+        color: #9f9f9f;
+    }
+
+    .luna-card-body {
+
+    }
+
     .card-item--container {
         display: flex;
         align-items: center;
@@ -104,6 +113,7 @@
     
     .card-subtitle {
         margin: 5px 0;
+        font-size: 12px;
     }
 
    .card-text {
