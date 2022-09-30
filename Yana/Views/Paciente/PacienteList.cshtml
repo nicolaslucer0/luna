@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="dropdown dropstart">
-              <div data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+              <div class="dropdown-button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
               <ul class="dropdown-menu">
                     <li><button class="dropdown-item luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" />Registro diario</button></li>
                     <li><button class="dropdown-item luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" />Seguimiento</button></li>
@@ -147,13 +147,21 @@
     .dropdown {
         align-self: flex-start;
         cursor: pointer;
-        padding: 10px;
     }
 
-        .dropdown button {
-            text-transform: none;
-            color: black;
-        }
+    .dropdown-button {
+        padding: 10px;
+        transition: .5s;
+    }
+
+    .dropdown-button:hover {
+        color: gray;
+    }
+
+    .dropdown button {
+        text-transform: none;
+        color: black;
+    }
 </style>
 
 <div class=" dashboard-content">
