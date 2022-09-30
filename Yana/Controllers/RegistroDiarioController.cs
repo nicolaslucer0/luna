@@ -53,19 +53,24 @@ namespace Yana.Controllers
             {
                 TempData["messageERROR"] = string.Empty;
 
-                IEnumerable<RegistroDiario> registroDiarios = this.RegistroDiarioService.GetAll();
+                List<RegistroDiario> registroDiarios = new List<RegistroDiario>();
 
                 if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                    registroDiarios = registroDiarios.Where(x => x.IdPaciente == UserCache.IdUsuario).ToList();
+                
+                    registroDiarios = this.RegistroDiarioService.GetAllById(UserCache.IdUsuario);
+                
                 else
                 {
-                    if (idPaciente != 0)
-                        registroDiarios = registroDiarios.Where(x => x.IdPaciente == idPaciente).ToList();
-                    else
-                        registroDiarios = registroDiarios.ToList();
-                }
 
-                var totalRecords = registroDiarios.Count();
+
+                    List<RegistroDiario> registros = this.RegistroDiarioService.GetAllById(idPaciente);
+                    
+                    registros.ForEach(r => {
+                        registroDiarios.Add(new RegistroDiario(r));
+                        r.Seen = true;
+                        this.RegistroDiarioService.Update(r);
+                    });
+                }
 
                 return Json(new {registroDiarios});
 

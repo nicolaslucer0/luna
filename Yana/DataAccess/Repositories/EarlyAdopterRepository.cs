@@ -26,6 +26,17 @@ namespace Yana.DataAccess.Repositories
             }
         }
 
+        public List<EarlyAdopter> GetAllById(int id)
+        {
+            using (var context = new LunaContext())
+            {
+                List<EarlyAdopter> adopters = (from ctx in context.EarlyAdopter
+                                               where ctx.IdEarlyAdopter == id
+                                               select ctx).ToList();
+                return adopters;
+            }
+        }
+
         public List<EarlyAdopter> GetAll()
         {
             using (var context = new LunaContext())

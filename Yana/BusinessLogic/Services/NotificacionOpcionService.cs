@@ -76,5 +76,10 @@ namespace Yana.BusinessLogic.Services
 
             return opciones;
         }
+
+        public List<NotificacionOpcion> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

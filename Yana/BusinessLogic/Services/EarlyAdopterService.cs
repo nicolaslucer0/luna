@@ -43,6 +43,15 @@ namespace Yana.BusinessLogic.Services
             this.earlyAdopterRepository.Delete(id);
         }
 
+        public void GetAllById(int id)
+        {
+            this.earlyAdopterRepository.GetAllById(id);
+        }
+
+        List<EarlyAdopter> IGetterService<EarlyAdopter>.GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
         #region NotImplementedMembers
 
 

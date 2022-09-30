@@ -43,6 +43,11 @@ namespace Yana.BusinessLogic.Services
             this.grupoNotificacionRepository.Delete(id);
         }
 
+        public List<GrupoNotificacion> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

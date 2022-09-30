@@ -24,6 +24,11 @@ namespace Yana.BusinessLogic.Services
             return this.TipoEmocionRepository.GetAll();
         }
 
+        public List<TipoEmocion> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public TipoEmocion GetById(int id)
         {
             return this.TipoEmocionRepository.Get(id);

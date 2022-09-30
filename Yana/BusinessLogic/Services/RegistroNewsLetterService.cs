@@ -43,6 +43,11 @@ namespace Yana.BusinessLogic.Services
             this.registroNewsletterRepository.Delete(id);
         }
 
+        public List<RegistroNewsletter> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

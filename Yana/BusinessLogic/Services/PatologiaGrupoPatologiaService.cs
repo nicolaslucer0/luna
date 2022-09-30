@@ -23,6 +23,11 @@ namespace Yana.BusinessLogic.Services
             return this.patologiaGrupoPatologiaRepository.GetAll();
         }
 
+        public List<PatologiaGrupoPatologia> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public PatologiaGrupoPatologia GetById(int id)
         {
             return this.patologiaGrupoPatologiaRepository.Get(id);

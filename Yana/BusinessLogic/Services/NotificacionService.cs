@@ -424,11 +424,16 @@ namespace Yana.BusinessLogic.Services
             return this.notificacionRepository.GetAllByIdGrupo(Convert.ToInt32(idGrupo));
         }
 
+        public List<Notificacion> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region NotImplementedMembers
 
 
-        #endregion        
+        #endregion
     }
 }

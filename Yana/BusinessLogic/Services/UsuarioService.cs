@@ -98,5 +98,10 @@ namespace Yana.BusinessLogic.Services
         {
             return this._usuarioRepository.GetCantidadUsuariosByPerfil(perfilUsuario);
         }
+
+        public List<Usuario> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

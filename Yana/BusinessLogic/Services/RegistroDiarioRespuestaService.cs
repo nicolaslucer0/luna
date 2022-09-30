@@ -43,6 +43,11 @@ namespace Yana.BusinessLogic.Services
             this.registroDiarioRespuestaRepository.Delete(id);
         }
 
+        public List<RegistroDiarioRespuesta> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

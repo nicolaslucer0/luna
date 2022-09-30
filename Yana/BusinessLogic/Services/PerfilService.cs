@@ -30,5 +30,10 @@ namespace Yana.BusinessLogic.Services
         {
             throw new NotImplementedException();
         }
+
+        public List<Perfil> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

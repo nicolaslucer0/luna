@@ -48,6 +48,11 @@ namespace Yana.BusinessLogic.Services
             return this.registroDiarioRepository.GetTotalRegistrosDiarios();
         }
 
+        public List<RegistroDiario> GetAllById(int id)
+        {
+            return this.registroDiarioRepository.GetAllById(id);
+        }
+
         #region NotImplementedMembers
 
 

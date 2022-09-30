@@ -39,7 +39,22 @@ namespace Yana.DataAccess.Repositories
                                                  select ctx).FirstOrDefault();
                 return registroDiario;
             }
-        }        
+        }
+
+        public List<RegistroDiario> GetAllById(int id)
+        {
+            using (var context = new LunaContext())
+            {
+                List<RegistroDiario> registroDiario = (from ctx in context.RegistroDiario
+                                                       .Include(x => x.IdTipoEmocionNavigation)
+                                                       .Include(x => x.IdTipoEmocionResultadoNavigation)
+                                                       .Include(y => y.RegistroDiarioRespuesta)
+                                                       where !ctx.BajaLogica
+                                                       && ctx.IdPaciente == id
+                                                       select ctx).ToList();
+                return registroDiario;
+            }
+        }
 
         public List<RegistroDiario> GetAll()
         {
@@ -93,7 +108,7 @@ namespace Yana.DataAccess.Repositories
                     registroDiario.RegistroDiarioRespuesta = entity.RegistroDiarioRespuesta;
                     registroDiario.RespuestaRacional = entity.RespuestaRacional;
                     registroDiario.Situacion = entity.Situacion;
-
+                    registroDiario.Seen = entity.Seen;
                     registroDiario.FechaModificacion = DateTime.Now;
                     registroDiario.IdUsuarioModificacion = UserCache.IdUsuario;
                 }

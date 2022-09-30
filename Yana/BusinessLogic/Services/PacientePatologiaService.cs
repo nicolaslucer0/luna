@@ -76,6 +76,11 @@ namespace Yana.BusinessLogic.Services
             }
         }
 
+        public List<PacientePatologia> GetAllById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

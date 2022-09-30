@@ -47,7 +47,7 @@
             `;
             let rows = '<tbody>';
             registros.forEach(r => {
-                rows += `<tr style="font-size: 12px">
+                rows += `<tr style="font-size: 12px" class="${r.seen ? 'seen' : 'not-seen'}">
                             <td>${new Date(r.fechaModificacion).toLocaleDateString("es-ES", options)}</td>
                             <td>${r.situacion}</td>
                             <td>${r.motivoSituacion}</td>
@@ -119,6 +119,15 @@
         width: 100%;
         font-weight: bolder;
     }
+
+    .seen {
+        
+    }
+
+    .not-seen {
+        background: white;
+    }
+
 </style>
 <div class="dashboard-content">
     <div id="page-wrapper">

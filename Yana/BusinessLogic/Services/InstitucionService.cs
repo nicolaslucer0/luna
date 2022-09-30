@@ -43,6 +43,11 @@ namespace Yana.BusinessLogic.Services
             this.institucionRepository.Delete(id);
         }
 
+        public List<Institucion> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

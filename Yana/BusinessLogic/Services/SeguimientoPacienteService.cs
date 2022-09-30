@@ -48,6 +48,11 @@ namespace Yana.BusinessLogic.Services
             return this.seguimientoPacienteRepository.GetByIdPaciente(idPaciente);
         }
 
+        public List<SeguimientoPaciente> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 

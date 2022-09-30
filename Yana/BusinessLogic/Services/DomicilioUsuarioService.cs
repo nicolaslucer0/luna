@@ -43,6 +43,11 @@ namespace Yana.BusinessLogic.Services
             this.domicilioUsuarioRepository.Delete(id);
         }
 
+        public List<DomicilioUsuario> GetAllById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         #region NotImplementedMembers
 
 
