@@ -47,7 +47,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
                         <ul id="nav" class="navbar-nav">
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
-                                {
+                            {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Default", "Home")">
                                         <img class="menu-icon" src="~/img/icon/home.png" />
@@ -64,7 +64,7 @@
 
                                     <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
                                         <img class="menu-icon" src="~/img/icon/psychologist.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Psicologos</div>
+                                        <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -74,22 +74,28 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-
                                     <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
                                         <img class="menu-icon" src="~/img/icon/patient.png" />
                                         <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                        <img class="menu-icon" src="~/img/icon/book.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
-                                    </a>
+                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">Salir</a>
                                 </li>
-                                }
+                                <li class="nav-item d-flex align-items-center"
+                                    aria-expanded="false">
+                                    <img src="https://github.com/mdo.png"
+                                         alt="mdo"
+                                         width="20"
+                                         height="20"
+                                         class="rounded-circle" />
+                                </li>
+
+
+                            }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                                {
+                            {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Default", "Home")">
                                         <img class="menu-icon" src="~/img/icon/home.png" />
@@ -102,10 +108,22 @@
                                         <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
                                     </a>
                                 </li>
-                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">Salir</a>
+                                </li>
+                                <li href="#"
+                                    class="nav-item d-flex align-items-center"
+                                    aria-expanded="false">
+                                    <img src="https://github.com/mdo.png"
+                                         alt="mdo"
+                                         width="20"
+                                         height="20"
+                                         class="rounded-circle" />
+                                </li>
+                            }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
-                                {
+                            {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Default", "Home")">
                                         <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
@@ -117,14 +135,33 @@
                                     </a>
                                 </li>
 
-                                }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
+                                        <img class="menu-icon" src="~/img/icon/patient.png" />
+                                        <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
+                                    </a>
+                                </li>
 
-                                    @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
-                                        {
-                                        <li>Insti</li>
-                                        }
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">Salir</a>
+                                </li>
+                                <li href="#"
+                                    class="nav-item  d-flex align-items-center"
+                                    aria-expanded="false">
+                                    <img src="https://github.com/mdo.png"
+                                         alt="mdo"
+                                         width="20"
+                                         height="20"
+                                         class="rounded-circle" />
+                                </li>
+                            }
 
-                            </ul>
+                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
+                            {
+                                <li>Insti</li>
+                            }
+
+                        </ul>
                     </div>
 
                 </div>
