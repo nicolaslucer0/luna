@@ -53,17 +53,20 @@ i {
 .login-image {
     width: 100%;
 }
-.menu-item {
+
+.nav-link {
     display: flex;
     align-items: center;
-    color: white !important;
+}
+
+.nav-link a {
+    text-decoration: none;    
 }
 .menu-icon {
     margin-right: 5px;
     height: 15px;
     width: 15px;
     transition: .4s;
-    filter: invert(100%);
 }
 
 .menu-item:hover {
@@ -112,7 +115,7 @@ header h1 {
 
 
 .dashboard {
-    display: flex;
+    
     box-sizing: border-box;
     background: #F9F9F9;
     height: 100vh;
@@ -164,7 +167,6 @@ header h1 {
 }
 
 .sidebar-logo {
-    filter: invert(100%);
     width: 40px;
 }
 
@@ -183,11 +185,33 @@ header h1 {
 
 .user-image img {
     border-radius: 100%;
-    height: 20px;
-    width: 20px;
+    height: 60px;
+    width: 60px;
     position: relative;
     object-fit: cover;
     box-sizing: border-box;
+}
+.user-image .edit-button {
+    border-radius: 100%;
+    font-size: 10px;
+    color: white;
+    height: 60px;
+    width: 60px;
+    position: relative;
+    object-fit: cover;
+    box-sizing: border-box;
+    background: #0000004f;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
 }
 
 .logout-button {

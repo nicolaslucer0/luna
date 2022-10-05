@@ -27,6 +27,9 @@ namespace Yana.Models.DomainEntities
         public int IdInstitucion { get; set; }
 
         [NotMapped]
+        public int NotSeenNotifications { get; set; }
+
+        [NotMapped]
         public int Edad 
         {
             get

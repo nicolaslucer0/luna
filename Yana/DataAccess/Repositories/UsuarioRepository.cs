@@ -55,7 +55,7 @@ namespace Yana.DataAccess.Repositories
             }
         }
 
-        internal IEnumerable<Usuario> GetByIdPerfil(EnumPerfilUsuario perfilUsuario)
+        internal List<Usuario> GetByIdPerfil(EnumPerfilUsuario perfilUsuario)
         {
             using (var context = new LunaContext())
             {

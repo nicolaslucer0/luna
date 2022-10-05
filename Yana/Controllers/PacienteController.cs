@@ -52,16 +52,15 @@ namespace Yana.Controllers
             {
                 TempData["messageERROR"] = string.Empty;
 
-                IEnumerable<Usuario> pacientes = this.UsuarioService.GetByIdPerfil(EnumPerfilUsuario.Paciente);
+                List<Usuario> pacientes = this.UsuarioService.GetByIdPerfil(EnumPerfilUsuario.Paciente);
 
                 if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
                 {
                     pacientes = pacientes.Where(x =>  x.ProfesionalPacienteIdPacienteNavigation != null
                                                         && x.ProfesionalPacienteIdPacienteNavigation.Any(y => y.IdProfesional == UserCache.IdUsuario)
                                                  ).ToList();
+                    pacientes.ForEach(p => p.NotSeenNotifications = this.UsuarioService.GetNotSeenRegistrosDiariosById(p.IdUsuario));
                 }
-
-                var totalRecords = pacientes.Count();
 
                 return Json(pacientes);
                 

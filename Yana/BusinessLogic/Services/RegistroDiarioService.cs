@@ -53,6 +53,10 @@ namespace Yana.BusinessLogic.Services
             return this.registroDiarioRepository.GetAllById(id);
         }
 
+        public int GetNotSeenRegistrosDiariosByUserId(int id)
+        {
+            return this.registroDiarioRepository.GetNotSeenRegistrosDiariosByUserId(id);
+        }
         #region NotImplementedMembers
 
 

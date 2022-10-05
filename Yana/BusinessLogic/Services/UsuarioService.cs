@@ -15,10 +15,12 @@ namespace Yana.BusinessLogic.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly UsuarioRepository _usuarioRepository;
+        private readonly RegistroDiarioService registroDiarioService;
 
         public UsuarioService()
         {
             this._usuarioRepository = new UsuarioRepository();
+            this.registroDiarioService = new RegistroDiarioService();
         }
 
         public Usuario Authenticate(string email, string password)
@@ -46,7 +48,7 @@ namespace Yana.BusinessLogic.Services
             return this._usuarioRepository.Insert(entity);
         }
 
-        internal IEnumerable<Usuario> GetByIdPerfil(EnumPerfilUsuario perfilUsuario)
+        internal List<Usuario> GetByIdPerfil(EnumPerfilUsuario perfilUsuario)
         {
             return this._usuarioRepository.GetByIdPerfil(perfilUsuario);
         }
@@ -102,6 +104,11 @@ namespace Yana.BusinessLogic.Services
         public List<Usuario> GetAllById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetNotSeenRegistrosDiariosById (int id)
+        {
+            return this.registroDiarioService.GetNotSeenRegistrosDiariosByUserId(id);
         }
     }
 }

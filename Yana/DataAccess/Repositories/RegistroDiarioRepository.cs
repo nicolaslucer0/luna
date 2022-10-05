@@ -142,5 +142,33 @@ namespace Yana.DataAccess.Repositories
                 return cantidadRegistrosDiarios;
             }
         }
+
+
+        public int GetNotSeenRegistrosDiarios()
+        {
+            using (var context = new LunaContext())
+            {
+                int cantidadRegistrosDiarios = (from ctx in context.RegistroDiario
+                                                where !ctx.BajaLogica
+                                                && ctx.Seen == false
+                                                select ctx).Count();
+
+                return cantidadRegistrosDiarios;
+            }
+        }
+
+        public int GetNotSeenRegistrosDiariosByUserId(int id)
+        {
+            using (var context = new LunaContext())
+            {
+                int cantidadRegistrosDiarios = (from ctx in context.RegistroDiario
+                                                where !ctx.BajaLogica
+                                                && ctx.Seen == false
+                                                && ctx.IdPaciente == id
+                                                select ctx).Count();
+
+                return cantidadRegistrosDiarios;
+            }
+        }
     }
 }
