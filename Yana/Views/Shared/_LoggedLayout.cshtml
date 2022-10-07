@@ -79,18 +79,6 @@
                                         <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
-                                </li>
-                                <li class="nav-item d-flex align-items-center"
-                                    aria-expanded="false">
-                                    <img src="https://github.com/mdo.png"
-                                         alt="mdo"
-                                         width="20"
-                                         height="20"
-                                         class="rounded-circle" />
-                                </li>
-
 
                             }
 
@@ -108,44 +96,21 @@
                                         <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
-                                </li>
-                                <li href="#"
-                                    class="nav-item d-flex align-items-center"
-                                    aria-expanded="false">
-                                    <img src="https://github.com/mdo.png"
-                                         alt="mdo"
-                                         width="20"
-                                         height="20"
-                                         class="rounded-circle" />
-                                </li>
                             }
 
                             @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("Default", "Home")">
+                                        <img class="menu-icon" src="~/img/icon/chart.png" />
                                         <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
+                                        <img class="menu-icon" src="~/img/icon/patient.png" />
                                         <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
                                     </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
-                                </li>
-                                <li href="#"
-                                    class="nav-item  d-flex align-items-center"
-                                    aria-expanded="false">
-                                    <img src="https://github.com/mdo.png"
-                                         alt="mdo"
-                                         width="20"
-                                         height="20"
-                                         class="rounded-circle" />
                                 </li>
                             }
 
@@ -153,7 +118,28 @@
                             {
                                 <li>Insti</li>
                             }
+                            <li class="nav-item notification-container">
+                                <div class="notification-bell">
+                                    <img src="~/img/icon/notification.png"
+                                         alt="mdo"
+                                         width="20"
+                                         height="20"
+                                         class="rounded-circle" />
+                                </div>
+                            </li>
 
+                            <li href="#"
+                                class="nav-item d-flex align-items-center ml-3"
+                                aria-expanded="false">
+                                <img src="https://github.com/mdo.png"
+                                     alt="mdo"
+                                     width="30"
+                                     height="30"
+                                     class="rounded-circle" />
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
+                            </li>
                         </ul>
                     </div>
 

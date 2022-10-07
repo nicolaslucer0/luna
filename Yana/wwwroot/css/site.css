@@ -138,6 +138,12 @@ html {
     }
 }
 
+nav {
+    position: fixed !important;
+    width: 100%;
+    background: white;
+}
+
 .yanaButton:hover {
     background-position: right center !important; /* change the direction of the change here */
     color: white !important;
@@ -179,14 +185,6 @@ input {
     opacity: .5;
 }
 
-
-
-.overflow-scroll {
-    overflow-y: scroll;
-    overflow-x: auto;
-    height: 70vh;
-}
-
 .panel-heading {
     font-size: 15px;
     margin-bottom: 20px;
@@ -199,9 +197,7 @@ input {
     #nav {
         text-align: center;
     }
-    .overflow-scroll.full {
-        height: 100vh !important;
-    }
+    
 
     .overflow-scroll {
         height: 82vh;

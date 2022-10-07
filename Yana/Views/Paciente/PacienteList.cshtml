@@ -18,6 +18,8 @@
 
     const RenderBadge = (number) => `<div class="badge" > ${number}</div>`;
 
+
+
     const buildCard = (paciente) => `
         <div class="d-flex align-items-center luna-card" style="width: 18rem;">
             ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
@@ -33,18 +35,11 @@
                     <div class='card-item--container'><i class="fa fa-envelope-o" aria-hidden="true"></i><p class="card-subtitle">${paciente.email}</p></div>
                 </div>
                 <div class="d-flex justify-content-end luna-card--actions">
-                    
+                    <button class="luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" /></button>
+                    <button class="luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
+                    <button class="luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" /></button>
                 </div>
-            </div>
-            <div class="dropdown dropstart">
-              <div class="dropdown-button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
-              <ul class="dropdown-menu">
-                    <li><button class="dropdown-item luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" />Registro diario</button></li>
-                    <li><button class="dropdown-item luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" />Seguimiento</button></li>
-                    <li><button class="dropdown-item luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" />Notificaciones</button></li>
-              </ul>
-            </div>
-            
+            </div>            
         </div>
     `;
 
@@ -144,9 +139,8 @@
    }
 
     .luna-card--button {
-        font-size: 12px;
-        text-transform: uppercase;
-        color: #6385DC;
+        background: white;
+        border: none;
     }
 
     #list {
