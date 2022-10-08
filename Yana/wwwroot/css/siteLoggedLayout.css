@@ -43,7 +43,6 @@ i {
 
 .card-body {
     padding: 0;
-    width: 100%;
 }
 
 .login-image-container {
@@ -296,10 +295,13 @@ header h1 {
     width: 100%;
     border-bottom: 1px solid lightgray;
     padding: 10px;
-    margin: 10px 0;
     justify-content: space-between;
+    transition: .5s;
 }
 
+.notification-tile:hover {
+    background: lightgray;
+}
 .notification-icon {
     background: #f6f6f6;
     border-radius: 100%;
@@ -318,12 +320,20 @@ header h1 {
     width: 80%;
 }
 
-
-
 .notification-actions {
     font-size: 10px;
     justify-content: center;
     display: flex;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
+.notification-badge {
+    position: absolute;
+    background: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    top: 10px;
+    right: 25px;
+    display: none;
+}

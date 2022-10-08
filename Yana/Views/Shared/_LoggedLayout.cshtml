@@ -65,25 +65,24 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-
                                 <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
                                     <img class="menu-icon" src="~/img/icon/psychologist.png" />
                                     <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("PatologiaList", "Patologia")">
-                                    <img class="menu-icon" src="~/img/icon/brain.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Patologia</div>
-                                </a>
-                            </li>
+                         
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
                                     <img class="menu-icon" src="~/img/icon/patient.png" />
                                     <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PatologiaList", "Patologia")">
+                                    <img class="menu-icon" src="~/img/icon/brain.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Patologias</div>
+                                </a>
+                            </li>
                         }
 
                         @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
@@ -129,33 +128,11 @@
                                      width="20"
                                      height="20"
                                      class="rounded-circle" />
+                                <div class="notification-badge"></div>
                             </div>
                             <div class="notification-overlay" id="notification-overlay">
-                                <div class="notification-list">
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Nicolas Lucero</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Sabrina Casado</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Ignacio Baldo</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Camila Minetti</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Tomas Nunez</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
-                                    <div class="notification-tile">
-                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
-                                        <div class="notification-description"><b>Gabriel Cascallares</b> ha creado 2 <b>registros diarios</b></div>
-                                    </div>
+                                <div class="notification-list" id="notification-list">
+       
                                 </div>
                                 <div class="notification-actions">Ver todas las notificaciones.</div>
                             </div>

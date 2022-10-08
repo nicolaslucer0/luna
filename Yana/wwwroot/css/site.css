@@ -198,11 +198,6 @@ input {
     #nav {
         text-align: center;
     }
-    
-
-    .overflow-scroll {
-        height: 82vh;
-    }
 }
 
 @media only screen and (min-width: 1500px) {
@@ -210,11 +205,5 @@ input {
         text-align: center;
     }
 
-    .overflow-scroll.full {
-        height: 100vh !important;
-    }
 
-    .overflow-scroll {
-        height: 82vh;
-    }
 }

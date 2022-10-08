@@ -119,7 +119,7 @@ Layout = "~/Views/Shared/_LoggedLayout.cshtml";
                             </div>
                         </p>
                     </div>
-                    <div class="panel-body overflow-scroll" id="divPanelBody">
+                    <div class="panel-body" id="divPanelBody">
                         @using (Html.BeginForm("RegistroDiarioManager", "RegistroDiario", Model, FormMethod.Post, false, new { id = "frmRegistroDiario" }))
                         {
                             <input id="IdRegistroDiario" name="IdRegistroDiario" value="@Model.IdRegistroDiario" style="display:none;" />
