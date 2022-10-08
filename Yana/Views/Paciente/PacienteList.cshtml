@@ -7,17 +7,10 @@
 <script type="text/javascript" language="javascript">
 
     const Create = () => window.location.assign("./PacienteManager/0");
-
     const Edit = (id) => window.location.assign("./PacienteManager/" + id);
-
     const Notificaciones = (id) => window.location.href = "@Url.Action("NotificacionList", "Notificacion")" + "?idPaciente=" + id;
-
     const Seguimiento = (id) => window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
-
-
     const RenderBadge = (number) => `<div class="badge" > ${number}</div>`;
-
-
     const buildCard = (paciente) => `
         <div class="d-flex align-items-center luna-card">
             ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
@@ -40,9 +33,6 @@
         </div>
     `;
 
-
-
-
     $(document).ready(function () {
         $.get('@Url.Action("GetPacientes", "Paciente")', function (data) {
             let pacientes = data;
@@ -58,7 +48,7 @@
             });
             
             $('#list').append(cards);
-
+            
            
         });
     });

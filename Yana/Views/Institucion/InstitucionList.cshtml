@@ -27,16 +27,6 @@
                 return;
             }
             
-            let headers = `
-                <thead>
-                    <tr>
-                        <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Profesionales</th>
-                        <th style="font-family: 'poppinsbold'" scope="col">Usuarios</th>
-                    </tr>
-                </thead>
-            `;
-            
             let rows = '<tbody>';
             instituciones.forEach(i => {
                 rows += `<tr style="font-size: 12px">
@@ -46,8 +36,8 @@
                         </tr>`
             });
             rows += `</tbody>`;
-            $('#list').append(headers);
             $('#list').append(rows);
+            $('#list').DataTable();
         });
     });
 </script>
@@ -66,7 +56,15 @@
                     </div>
 
                     <div class="" style="margin-top: 2em;">
-                        <table id="list" class="table" cellpadding="0" cellspacing="0"></table>
+                        <table id="list" class="table" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
+                                    <th style="font-family: 'poppinsbold'" scope="col">Profesionales asignados</th>
+                                    <th style="font-family: 'poppinsbold'" scope="col">Pacientes asignados</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
