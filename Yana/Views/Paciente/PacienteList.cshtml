@@ -14,18 +14,9 @@
 
     const Seguimiento = (id) => window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
 
-    const RegistroDiario = (id) => window.location.href = "@Url.Action("RegistroDiarioList", "RegistroDiario")" + "?idPaciente=" + id;
 
     const RenderBadge = (number) => `<div class="badge" > ${number}</div>`;
 
-    const buildNotifications = (paciente) => `
-             <div class="notification-tile">
-                <div class="notification-icon"><img class="notification-image" src="/img/icon/book.png" /></div>
-                <div class="notification-description" onclick="RegistroDiario(${paciente.idUsuario})">
-                    <b>${paciente.nombre} ${paciente.apellido}</b> ha creado ${paciente.notSeenNotifications} <b>${paciente.notSeenNotifications == 1 ? "registro diario" : "registros diarios"}</b>
-                </div>
-            </div>
-    `;
 
     const buildCard = (paciente) => `
         <div class="d-flex align-items-center luna-card">
@@ -63,22 +54,12 @@
             let cards = '';
             let notifications = '';
             pacientes.forEach(p => {
-                console.log(p);
                 cards += buildCard(p)
-                if (p.notSeenNotifications > 0)
-                    notifications += buildNotifications(p);
             });
             
             $('#list').append(cards);
 
-            if (notifications) {
-                $('#notification-list').append(notifications);
-                $('.notification-badge').show();
-            }
-               
-            else 
-                $('#notification-list').append("<div class='notification-tile text-center' style='font-size: 11px; justify-content: center;'>No hay nuevas notificaciones</div>");
-
+           
         });
     });
 </script>

@@ -31,6 +31,38 @@
 
     <script src="~/js/custom.js"></script>
     <script src="~/js/validators.js"></script>
+
+    <script>
+        const RegistroDiario = (id) => window.location.href = "@Url.Action("RegistroDiarioList", "RegistroDiario")" + "?idPaciente=" + id;
+
+        const buildNotifications = (paciente) => `
+                     <div class="notification-tile">
+                        <div class="notification-icon"><img class="notification-image" src="/img/icon/book.png" /></div>
+                        <div class="notification-description" onclick="RegistroDiario(${paciente.idUsuario})">
+                            <b>${paciente.nombre} ${paciente.apellido}</b> ha creado ${paciente.notSeenNotifications} <b>${paciente.notSeenNotifications == 1 ? "registro diario" : "registros diarios"}</b>
+                        </div>
+                    </div>
+            `;
+
+        $.get('@Url.Action("GetPacientes", "Paciente")', function (data) {
+            let pacientes = data;
+  
+            let notifications = '';
+            pacientes.filter(p => p.notSeenNotifications > 0).forEach(p => {
+                notifications += buildNotifications(p);
+            });
+
+            if (notifications) {
+            $('#notification-list').append(notifications);
+            $('.notification-badge').show();
+        }
+
+        else
+            $('#notification-list').append("<div class='notification-tile text-center' style='font-size: 11px; justify-content: center;'>No hay nuevas notificaciones</div>");
+
+        });
+        
+        </script>
 </head>
 
 
