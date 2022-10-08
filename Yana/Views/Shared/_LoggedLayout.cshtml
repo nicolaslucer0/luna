@@ -115,28 +115,28 @@
                                     <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
                                 </a>
                             </li>
+                            <li class="nav-item notification-container" id="notification-button">
+                                <div class="notification-bell">
+                                    <img src="~/img/icon/notification.png"
+                                 alt="mdo"
+                                 width="20"
+                                 height="20"
+                                 class="rounded-circle" />
+                                    <div class="notification-badge"></div>
+                                </div>
+                                <div class="notification-overlay" id="notification-overlay">
+                                    <div class="notification-list" id="notification-list">
+                                    </div>
+                                    <div class="notification-actions">Ver todas las notificaciones.</div>
+                                </div>
+                            </li>
                         }
 
                         @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
                         {
                             <li>Insti</li>
                         }
-                        <li class="nav-item notification-container" id="notification-button">
-                            <div class="notification-bell">
-                                <img src="~/img/icon/notification.png"
-                                     alt="mdo"
-                                     width="20"
-                                     height="20"
-                                     class="rounded-circle" />
-                                <div class="notification-badge"></div>
-                            </div>
-                            <div class="notification-overlay" id="notification-overlay">
-                                <div class="notification-list" id="notification-list">
-       
-                                </div>
-                                <div class="notification-actions">Ver todas las notificaciones.</div>
-                            </div>
-                        </li>
+                        
 
                         <li href="#"
                             class="nav-item d-flex align-items-center ml-3"
