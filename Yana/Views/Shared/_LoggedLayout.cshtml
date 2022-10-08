@@ -26,129 +26,172 @@
 
 
     <script src='@Url.Content("~/js/jquery-3.6.1.min.js")' type="text/javascript"></script>
-    <script src="~/js/popper.js"></script>
     <script src='@Url.Content("~/js/bootstrap.bundle.min.js")' type="text/javascript"></script>
-    
+    <script src="~/js/popper.js"></script>
+
     <script src="~/js/custom.js"></script>
     <script src="~/js/validators.js"></script>
 </head>
+
+
+
+
 <body>
-        @if (UserCache.IdPerfil != 0)
-            {
-            <nav class="navbar navbar-expand-lg ">
-                <div class="container-fluid">
-                    <div class="navbar-brand">
-                        <a class="navbar-brand" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="~/img/logo.png" /></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
+    @if (UserCache.IdPerfil != 0)
+    {
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <div class="navbar-brand">
+                    <a class="navbar-brand" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="~/img/logo.png" /></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
 
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
-                        <ul id="nav" class="navbar-nav">
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/home.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Inicio</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("InstitucionList", "Institucion")">
-                                        <img class="menu-icon" src="~/img/icon/institution.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Instituciones</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-
-                                    <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
-                                        <img class="menu-icon" src="~/img/icon/psychologist.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("PatologiaList", "Patologia")">
-                                        <img class="menu-icon" src="~/img/icon/pathology.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Patologia</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
-                                        <img class="menu-icon" src="~/img/icon/patient.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
-                                    </a>
-                                </li>
-
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/home.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Inicio</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
-                                        <img class="menu-icon" src="~/img/icon/book.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
-                                    </a>
-                                </li>
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Default", "Home")">
-                                        <img class="menu-icon" src="~/img/icon/chart.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
-                                        <img class="menu-icon" src="~/img/icon/patient.png" />
-                                        <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
-                                    </a>
-                                </li>
-                            }
-
-                            @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
-                            {
-                                <li>Insti</li>
-                            }
-                            <li class="nav-item notification-container">
-                                <div class="notification-bell">
-                                    <img src="~/img/icon/notification.png"
-                                         alt="mdo"
-                                         width="20"
-                                         height="20"
-                                         class="rounded-circle" />
-                                </div>
-                            </li>
-
-                            <li href="#"
-                                class="nav-item d-flex align-items-center ml-3"
-                                aria-expanded="false">
-                                <img src="https://github.com/mdo.png"
-                                     alt="mdo"
-                                     width="30"
-                                     height="30"
-                                     class="rounded-circle" />
+                <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+                    <ul id="nav" class="navbar-nav">
+                        @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Administrador))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Default", "Home")">
+                                    <img class="menu-icon" src="~/img/icon/chart.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
+                                <a class="nav-link" href="@Url.Action("InstitucionList", "Institucion")">
+                                    <img class="menu-icon" src="~/img/icon/institution.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Instituciones</div>
+                                </a>
                             </li>
-                        </ul>
-                    </div>
+                            <li class="nav-item">
 
+                                <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
+                                    <img class="menu-icon" src="~/img/icon/psychologist.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PatologiaList", "Patologia")">
+                                    <img class="menu-icon" src="~/img/icon/brain.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Patologia</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
+                                    <img class="menu-icon" src="~/img/icon/patient.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
+                                </a>
+                            </li>
+
+                        }
+
+                        @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Default", "Home")">
+                                    <img class="menu-icon" src="~/img/icon/home.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Inicio</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
+                                    <img class="menu-icon" src="~/img/icon/book.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
+                                </a>
+                            </li>
+                        }
+
+                        @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Profesional))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Default", "Home")">
+                                    <img class="menu-icon" src="~/img/icon/chart.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
+                                    <img class="menu-icon" src="~/img/icon/patient.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
+                                </a>
+                            </li>
+                        }
+
+                        @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
+                        {
+                            <li>Insti</li>
+                        }
+                        <li class="nav-item notification-container" id="notification-button">
+                            <div class="notification-bell">
+                                <img src="~/img/icon/notification.png"
+                                     alt="mdo"
+                                     width="20"
+                                     height="20"
+                                     class="rounded-circle" />
+                            </div>
+                            <div class="notification-overlay" id="notification-overlay">
+                                <div class="notification-list">
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Nicolas Lucero</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Sabrina Casado</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Ignacio Baldo</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Camila Minetti</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Tomas Nunez</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                    <div class="notification-tile">
+                                        <div class="notification-icon"><img class="notification-image" src="~/img/icon/patient.png" /></div>
+                                        <div class="notification-description"><b>Gabriel Cascallares</b> ha creado 2 <b>registros diarios</b></div>
+                                    </div>
+                                </div>
+                                <div class="notification-actions">Ver todas las notificaciones.</div>
+                            </div>
+                        </li>
+
+                        <li href="#"
+                            class="nav-item d-flex align-items-center ml-3"
+                            aria-expanded="false">
+                            <img src="https://github.com/mdo.png"
+                                 alt="mdo"
+                                 width="30"
+                                 height="30"
+                                 class="rounded-circle" />
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-            }
-    <div class="dashboard"> 
+
+            </div>
+        </nav>
+    }
+    <div class="dashboard">
         @RenderBody()
     </div>
-    
+
 </body>
+
+
 </html>
+<script>
+    $('#notification-button').click(function () {
+        if ($('#notification-overlay').is(":visible"))
+            $('#notification-overlay').hide();
+        else
+            $('#notification-overlay').show();
+    });
+</script>

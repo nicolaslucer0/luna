@@ -148,8 +148,8 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <div class="card">
+                    <div class="panel-heading mb-3" style="font-size: 25px;">
                         @{
                             string titulo = Model.IdUsuario == 0 ? "Nuevo Psicólogo" : "Modificar Psicólogo";
                         }
@@ -162,11 +162,14 @@
                             </div>
                         </p>
                     </div>
-                    <div class="panel-body" id="divPanelBody">
+                    <div class="card-body" id="divPanelBody">
                         @{
                             if (Model.IdUsuario == 0)
                             {
-                                <label style="font-style: italic; font-size: 15px; color: purple;">Importante: cuando se crea un nuevo psicólogo, la contraseña por defecto para el ingreso al sistema es su DNI.</label><br /><br />
+                                <div class="alert alert-info mb-4" role="alert">
+                                    <small>Importante: cuando se crea un nuevo psicólogo, la contraseña por defecto para el ingreso al sistema es su DNI.</small>
+                                </div>
+                                
                             }
                         }
                         @using (Html.BeginForm("PsicologoManager", "Psicologo", Model, FormMethod.Post, false, new { id = "frmUsuario" }))

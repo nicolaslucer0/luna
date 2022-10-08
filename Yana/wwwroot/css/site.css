@@ -141,7 +141,8 @@ html {
 nav {
     position: fixed !important;
     width: 100%;
-    background: white;
+    background: #f9f9f9;
+    z-index: 9999999;
 }
 
 .yanaButton:hover {
