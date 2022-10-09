@@ -98,7 +98,7 @@ namespace Yana.Controllers
 
             ViewBag.Patologias = this.GetPatologias();
             ViewBag.Sexos = this.GetSexos(usuario.Sexo != null ? Convert.ToChar(usuario.Sexo) : '\0');
-
+            
             return View(usuario);
         }
 
