@@ -92,7 +92,7 @@ namespace Yana.DataAccess.Repositories
                     usuario.GrupoFamiliar = entity.GrupoFamiliar;
                     usuario.Sexo = entity.Sexo;
                     usuario.FechaNacimiento = entity.FechaNacimiento;
-
+                    usuario.ImageUrl = entity.ImageUrl;
                     usuario.IdUsuarioModificacion = UserCache.IdUsuario;
                     usuario.FechaModificacion = DateTime.Now;
                 }

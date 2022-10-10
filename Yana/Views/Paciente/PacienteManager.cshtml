@@ -23,31 +23,13 @@
         const images = $(".avatar-image");
 
         $('.avatar-image').each(function (i, obj) {
-            $(obj).removeClass("selected")
+            $(obj).removeClass("selected");
         });
            
-        $(images[number]).addClass("selected")
-    };
-
-    function PostForm() {
-        if (!IsValid())
-            return false;
-        try {
-            
-            const postData = JSON.stringify(patologias);
-            $('#txSerializedPatologias').val(postData);
-
-            const avatar = $('.avatar-image.selected');
-            $('#image').val(avatar);
-            document.forms["frmUsuario"].submit();
-        } catch (err) {
-            alert(err.Description);
-        }
+        $(images[number]).addClass("selected");
     }
 
-    function IsValid() {
-        HideDivMessageP();
-
+    const IsValid = () => {
         if (!$("#Nombre").val()) {
             $("#lblErrorP").text("Debe ingresar el Nombre.");
             ShowDivMessageP();
@@ -94,6 +76,22 @@
 
         return true;
     }
+
+    const PostForm = () => {
+        
+        try {
+            const postData = JSON.stringify(patologias);
+            $('#txSerializedPatologias').val(postData);
+
+            const avatar = $('.avatar-image.selected').attr("src");
+            $('#ImageUrl').val(avatar);
+            document.forms["frmUsuario"].submit();
+        } catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    
 
     function AddPatologia() {
         $("#pathology-table").show();
@@ -324,7 +322,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.HiddenFor(u => u.SerializedPatologias, new { id = "image" })
+                                    @Html.HiddenFor(u => u.ImageUrl, new { id = "ImageUrl" })
                                     <div class="form-group mb-3" style="text-align: left;">
                                         <label>Seleccione un avatar</label>
                                         <div id="avatars">

@@ -36,7 +36,7 @@ namespace Yana.Models.DomainEntities
         public int IdUsuarioModificacion { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public string Sexo { get; set; }
-        public string Image { get; set; }
+        public string ImageUrl { get; set; }
 
         public virtual Perfil IdPerfilNavigation { get; set; }
         public virtual ICollection<DomicilioUsuario> DomicilioUsuario { get; set; }

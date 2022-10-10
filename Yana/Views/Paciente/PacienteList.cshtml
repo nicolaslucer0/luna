@@ -15,7 +15,7 @@
         <div class="d-flex align-items-center luna-card">
             ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
             <div class="card-info">
-                <div class="user-image"><div class="edit-button" onclick="Edit(${paciente.idUsuario})">Editar</div><img src="/img/team/1.png"></div>
+                <div class="user-image"><div class="edit-button" onclick="Edit(${paciente.idUsuario})">Editar</div><img src="${paciente.imageUrl}"></div>
             </div>
             <div class="luna-card--body flex-grow-1">
                 <h5 class="card-title">${paciente.apellido}, ${paciente.nombre}</h5>
@@ -40,6 +40,8 @@
                 $('#list').append("No hay ningun paciente creado.");
                 return;
             }
+
+            console.log(pacientes);
                         
             let cards = '';
             let notifications = '';
