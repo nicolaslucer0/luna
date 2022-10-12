@@ -347,3 +347,136 @@ header h1 {
     border: 2px solid #3070b5;
     border-radius: 100%;
 }
+
+
+
+.preview {
+    background: white;
+    border-radius: 30px;
+    margin: 30px 10px;
+    box-shadow: 0 0 2px 0 #00000040;
+
+}
+
+.preview-body {
+    display: flex;
+    border-radius: 0 0 20px 20px;
+}
+
+#preview-nav {
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+}
+
+
+.luna-card {
+    height: fit-content;
+    box-sizing: border-box;
+    position: relative;
+    min-width: 30%;
+    transition: .4s;
+    background: white;
+    background: white;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 0 2px 0 #00000021;
+}
+
+.card-legend {
+    color: #9f9f9f;
+    font-size: 12px;
+}
+
+.luna-card-body {
+    font-size: 10px;
+}
+
+.card-item--container {
+    display: flex;
+    align-items: center;
+}
+
+.luna-card:hover {
+    box-shadow: 0 0 10px 0 #8080803d;
+}
+
+.luna-card--body {
+    margin: 20px 10px;
+    width: 20%;
+    text-overflow: ellipsis;
+}
+
+.card-info {
+    margin: 0 15px 0 20px;
+}
+
+.card-title {
+    font-family: poppinsbold;
+}
+
+.card-subtitle {
+    margin: 2px 0;
+    font-size: 12px;
+}
+
+.card-text {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.badge {
+    background: red;
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+    font-size: 10px;
+    padding: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.luna-card--actions {
+}
+
+.luna-card--button {
+    background: white;
+    border: none;
+}
+
+#list {
+    flex-shrink: 1;
+    align-content: flex-start;
+}
+
+
+.card-icon {
+    margin-right: 5px;
+    height: 15px;
+    width: 15px;
+    transition: .4s;
+}
+
+.dropdown {
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.dropdown-button {
+    padding: 10px;
+    transition: .5s;
+}
+
+.dropdown-button:hover {
+    color: gray;
+}
+
+.dropdown button {
+    text-transform: none;
+    color: black;
+}

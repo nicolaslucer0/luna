@@ -79,7 +79,10 @@ namespace Yana.DataAccess.Repositories
                 {
                     institucion.Nombre = entity.Nombre;
                     institucion.ProfesionalInstitucion = entity.ProfesionalInstitucion;
-
+                    institucion.FontColor = entity.FontColor;
+                    institucion.LogoUrl = entity.LogoUrl;
+                    institucion.MainColor = entity.MainColor;
+                    institucion.SecondaryColor = entity.SecondaryColor;
                     institucion.IdUsuarioModificacion = UserCache.IdUsuario;
                     institucion.FechaModificacion = DateTime.Now;
                 }

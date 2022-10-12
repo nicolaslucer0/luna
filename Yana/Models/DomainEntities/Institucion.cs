@@ -13,6 +13,10 @@ namespace Yana.Models.DomainEntities
 
         public int IdInstitucion { get; set; }
         public string Nombre { get; set; }
+        public string MainColor { get; set; }
+        public string SecondaryColor { get; set; }
+        public string FontColor { get; set; }
+        public string LogoUrl { get; set; }
         public bool BajaLogica { get; set; }
         public DateTime FechaModificacion { get; set; }
         public int IdUsuarioModificacion { get; set; }

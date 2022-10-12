@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
 
+
+
 <script>
 
     function PostForm() {
@@ -46,7 +48,82 @@
         $("#divMessagesP").hide();
     }
 
+    
+
+
     $(document).ready(function () {
+        $('#MainColor').minicolors({
+            animationSpeed: 50,
+            animationEasing: 'swing',
+            changeDelay: 0,
+            control: 'hue',
+            format: 'hex',
+            showSpeed: 100,
+            defaultValue: '#ffffff',
+            hideSpeed: 100,
+            // is inline mode?
+            inline: false,
+            letterCase: 'lowercase',
+            opacity: false,
+            position: 'bottom left',
+        });
+
+        $('#SecondaryColor').minicolors({
+            animationSpeed: 50,
+            animationEasing: 'swing',
+            changeDelay: 0,
+            control: 'hue',
+            format: 'hex',
+            defaultValue: '#ffffff',
+            showSpeed: 100,
+            hideSpeed: 100,
+            // is inline mode?
+            inline: false,
+            letterCase: 'lowercase',
+            opacity: false,
+            position: 'bottom left',
+        });
+
+        $('#FontColor').minicolors({
+            animationSpeed: 50,
+            animationEasing: 'swing',
+            changeDelay: 0,
+            control: 'hue',
+            format: 'hex',
+            showSpeed: 100,
+            defaultValue: '#000000',
+            hideSpeed: 100,
+            // is inline mode?
+            inline: false,
+            letterCase: 'lowercase',
+            opacity: false,
+            position: 'bottom left',
+        });
+
+
+        $('#MainColor').on('change', function () {
+            $("#preview-nav").css('background', $('#MainColor').val())
+        })
+
+        $('#SecondaryColor').on('change', function () {
+            $(".preview-body").css('background', $('#SecondaryColor').val())
+        })
+
+        $('#FontColor').on('change', function () {
+            $('.preview .nav-link').css('color', $('#FontColor').val())
+        })
+
+        $('#logoUrl').on('change', function () {
+            const validFormats = 'jpg, png, svg, jpeg';
+            let fileName = $("#logoUrl").val();
+            const extension = fileName.substring(fileName.lastIndexOf('.'));
+            console.log('valid', validFormats.toLowerCase().indexOf(extension) < 0);
+            if (validFormats.toLowerCase().indexOf(extension) < 0)
+                $('#company-logo').attr('src', fileName);
+        });
+
+
+        
         if ($("#lblErrorP").text().length > 0)
             ShowDivMessageP();
     });
@@ -75,7 +152,7 @@
         });
     }
 
-    
+
 </script>
 
 <!-- Modal -->
@@ -120,16 +197,142 @@
                     <div class="" id="divPanelBody">
                         @using (Html.BeginForm("InstitucionManager", "Institucion", Model, FormMethod.Post, false, new { id = "frmInstitucion" }))
                         {
+                            <input id="IdInstitucion" name="IdInstitucion" value="@Model.IdInstitucion" style="display:none;" />
                             <div class="row mb-5 mt-5">
-                                <div class="col-md-4">
-                                    <input id="IdInstitucion" name="IdInstitucion" value="@Model.IdInstitucion" style="display:none;" />
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nombre*</label>
+                                        <label>Nombre *</label>
                                         <input type="text" class="form-control" placeholder="" id="Nombre" name="Nombre" value="@Model.Nombre" maxlength="200" autofocus />
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Logo url *</label>
+                                        <input type="text" class="form-control" placeholder="" id="logoUrl" name="LogoUrl" value="@Model.LogoUrl" maxlength="200" autofocus />
+                                    </div>
+                                </div>
                             </div>
-                            
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Color principal *</label>
+                                        <input type="text" id="MainColor" class="form-control demo" value="@Model.MainColor">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Color secundario *</label>
+                                        <input type="text" id="SecondaryColor" class="form-control demo" value="@Model.SecondaryColor">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Color de fuente *</label>
+                                        <input type="text" id="FontColor" class="form-control demo" value="@Model.FontColor">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row preview">
+                                    <div id="preview-nav" class="col-md-12 navbar navbar-expand-lg">
+                                        <div class="navbar-brand">
+                                            <a class="navbar-brand" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="~/img/logo.png" /></a>
+                                            <a class="navbar-brand" href="#"><img id="company-logo" class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="" /></a>
+                                        </div>
+
+                                            <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+                                                <ul id="nav" class="navbar-nav">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="">
+                                                            <img class="menu-icon" src="~/img/icon/bell.png" />
+                                                            <div class="hide-mobile" style=" font-size: 15px;">Notificaciones</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="">
+                                                            <img class="menu-icon" src="~/img/icon/book.png" />
+                                                            <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
+                                                        </a>
+                                                    </li>
+
+                                                    <li href="#"
+                                                        class=""
+                                                        aria-expanded="false">
+
+                                                        <img src="/img/icon/user.png"
+                                                             alt="mdo"
+                                                             width="30"
+                                                             height="30"
+                                                             class="rounded-circle" />
+
+
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="">Salir</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="preview-body">
+                                        <div class="d-flex align-items-center luna-card">
+                                            <div class="card-info">
+                                                <div class="user-image"><div class="edit-button">Editar</div><img src="~/img/icon/user.png"></div>
+                                            </div>
+                                            <div class="luna-card--body flex-grow-1">
+                                                <h5 class="card-title">Nombre, Apellido</h5>
+                                                <div class="card-legend">28 años</div>
+                                                <div class="luna-card-body">
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/id.png" /><h6 class="card-subtitle">12.345.678</h6></div>
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/mail.png" /><p class="card-subtitle">paciente@gmail.com</p></div>
+                                                </div>
+                                                <div class="d-flex justify-content-end luna-card--actions">
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Registro diario" class="luna-card--button"><img class="card-icon" src="/img/icon/book.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Seguimiento" class="luna-card--button"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button"><img class="card-icon" src="/img/icon/notification.png" /></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center luna-card">
+                                            <div class="card-info">
+                                                <div class="user-image"><div class="edit-button">Editar</div><img src="~/img/icon/user.png"></div>
+                                            </div>
+                                            <div class="luna-card--body flex-grow-1">
+                                                <h5 class="card-title">Nombre, Apellido</h5>
+                                                <div class="card-legend">28 años</div>
+                                                <div class="luna-card-body">
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/id.png" /><h6 class="card-subtitle">12.345.678</h6></div>
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/mail.png" /><p class="card-subtitle">paciente@gmail.com</p></div>
+                                                </div>
+                                                <div class="d-flex justify-content-end luna-card--actions">
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Registro diario" class="luna-card--button"><img class="card-icon" src="/img/icon/book.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Seguimiento" class="luna-card--button"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button"><img class="card-icon" src="/img/icon/notification.png" /></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center luna-card">
+                                            <div class="card-info">
+                                                <div class="user-image"><div class="edit-button">Editar</div><img src="~/img/icon/user.png"></div>
+                                            </div>
+                                            <div class="luna-card--body flex-grow-1">
+                                                <h5 class="card-title">Nombre, Apellido</h5>
+                                                <div class="card-legend">28 años</div>
+                                                <div class="luna-card-body">
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/id.png" /><h6 class="card-subtitle">12.345.678</h6></div>
+                                                    <div class='card-item--container'><img class="card-icon" src="/img/icon/mail.png" /><p class="card-subtitle">paciente@gmail.com</p></div>
+                                                </div>
+                                                <div class="d-flex justify-content-end luna-card--actions">
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Registro diario" class="luna-card--button"><img class="card-icon" src="/img/icon/book.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Seguimiento" class="luna-card--button"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
+                                                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button"><img class="card-icon" src="/img/icon/notification.png" /></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
 
                             <div class="row">
 
@@ -152,8 +355,8 @@
                                 <div class="col-md-2">
                                     <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
                                 </div>
-                          </div>
-                     }
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
