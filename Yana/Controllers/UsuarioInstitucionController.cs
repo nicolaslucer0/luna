@@ -48,12 +48,9 @@ namespace Yana.Controllers
 
                 var totalRecords = usuariosInstitucion.Count();
 
-                JsonResult json = Json(new
+                return Json(new
                 {
-                    total = (totalRecords + rows - 1) / rows,
-                    page,
-                    records = totalRecords,
-                    rows = (from item in usuariosInstitucion
+                    usuarioInstitucion = (from item in usuariosInstitucion
                             select new
                             {
                                 idusuario = item.IdUsuario,
@@ -62,7 +59,7 @@ namespace Yana.Controllers
                             }).OrderByDescending(x => x.idusuario).ToArray()
                 });
 
-                return json;
+                
             }
             catch (Exception ex)
             {

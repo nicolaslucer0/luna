@@ -5,6 +5,7 @@
 }
 
 <script>
+
     function PostForm() {
         if (IsValid()) {
             $("#lblErrorP").text("");
@@ -74,6 +75,7 @@
         });
     }
 
+    
 </script>
 
 <!-- Modal -->
@@ -115,15 +117,20 @@
                             </div>
                         </p>
                     </div>
-                    <div class="panel-body" id="divPanelBody">
+                    <div class="" id="divPanelBody">
                         @using (Html.BeginForm("InstitucionManager", "Institucion", Model, FormMethod.Post, false, new { id = "frmInstitucion" }))
                         {
-                            <input id="IdInstitucion" name="IdInstitucion" value="@Model.IdInstitucion" style="display:none;" />
-                            <div class="form-group mt-5" style="text-align: left;">
-                                <label>Nombre*</label>
-                                <input type="text" class="form-control" placeholder="" id="Nombre" name="Nombre" value="@Model.Nombre" maxlength="200" autofocus />
+                            <div class="row mb-5 mt-5">
+                                <div class="col-md-4">
+                                    <input id="IdInstitucion" name="IdInstitucion" value="@Model.IdInstitucion" style="display:none;" />
+                                    <div class="form-group">
+                                        <label>Nombre*</label>
+                                        <input type="text" class="form-control" placeholder="" id="Nombre" name="Nombre" value="@Model.Nombre" maxlength="200" autofocus />
+                                    </div>
+                                </div>
                             </div>
-                            <br />
+                            
+
                             <div class="row">
 
                                 @{
@@ -143,10 +150,10 @@
                                     <button onclick="window.location.assign('@Url.Action("InstitucionList", "Institucion")')" class="btn yanaButton"><i class='fa fa-undo fa-lg'></i>Volver</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button onclick="PostForm();return false;" class="btn yanaButton" ><i class='fa fa-save fa-lg'></i>Guardar</button>
+                                    <button onclick="PostForm();return false;" class="btn yanaButton"><i class='fa fa-save fa-lg'></i>Guardar</button>
                                 </div>
-                            </div>
-                        }
+                          </div>
+                     }
                     </div>
                 </div>
             </div>

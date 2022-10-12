@@ -103,7 +103,7 @@
                                     <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
                                 </a>
                             </li>
-                         
+
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
                                     <img class="menu-icon" src="~/img/icon/patient.png" />
@@ -151,10 +151,10 @@
                             <li class="nav-item notification-container" id="notification-button">
                                 <div class="notification-bell">
                                     <img src="~/img/icon/notification.png"
-                                 alt="mdo"
-                                 width="20"
-                                 height="20"
-                                 class="rounded-circle" />
+                                         alt="mdo"
+                                         width="20"
+                                         height="20"
+                                         class="rounded-circle" />
                                     <div class="notification-badge"></div>
                                 </div>
                                 <div class="notification-overlay" id="notification-overlay">
@@ -167,19 +167,44 @@
 
                         @if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
                         {
-                            <li>Insti</li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Default", "Home")">
+                                    <img class="menu-icon" src="~/img/icon/chart.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
+                                    <img class="menu-icon" src="~/img/icon/psychologist.png" />
+                                    <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
+                                </a>
+                            </li>
+                            
                         }
-                        
 
-                        <li href="#"
-                            class="nav-item d-flex align-items-center ml-3"
-                            aria-expanded="false">
-                            <img src="https://github.com/mdo.png"
+
+                    <li href="#"
+                        class=""
+                        aria-expanded="false">
+                        @if (UserCache.ImageUrl != null && UserCache.ImageUrl != "")
+                        {
+                            <img src="@UserCache.ImageUrl"
                                  alt="mdo"
                                  width="30"
                                  height="30"
                                  class="rounded-circle" />
-                        </li>
+                        }
+                        else
+                        {
+                            <img src="/img/icon/user.png"
+                                 alt="mdo"
+                                 width="30"
+                                 height="30"
+                                 class="rounded-circle" />
+                        }
+
+                    </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
                         </li>

@@ -18,6 +18,10 @@
         window.location.assign("./InstitucionManager/" + id);
     };
 
+    function AssignUsers() {
+        window.location.assign("/UsuarioInstitucion/UsuarioInstitucionList");
+    };
+
     $(document).ready(function () {
         $.get('@Url.Action("GetInstituciones", "Institucion")', function (data) {
             let { instituciones } = data;
@@ -52,7 +56,10 @@
                         <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
                             <strong style="font-family: 'poppinsbold'">Instituciones</strong>
                         </div>
-                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nueva Institución</button>
+                        <div class="d-flex">
+                            <button class="btn yanaButton" onclick="AssignUsers();"><i class='fa fa-plus-square fa-lg'></i> Usuarios institución</button>
+                            <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nueva Institución</button>
+                        </div>
                     </div>
 
                     <div class="" style="margin-top: 2em;">

@@ -4,6 +4,7 @@ using System.Linq;
 using Yana.DataAccess.Repositories.Interfaces;
 using Yana.Models.DomainEntities;
 using Yana.Helpers;
+using Yana.Utils;
 
 namespace Yana.DataAccess.Repositories
 {
@@ -58,7 +59,6 @@ namespace Yana.DataAccess.Repositories
                 entity.BajaLogica = false;
                 entity.FechaModificacion = DateTime.Now;
                 entity.IdUsuarioModificacion = UserCache.IdUsuario;
-
                 context.Institucion.Add(entity);
 
                 context.SaveChanges();
