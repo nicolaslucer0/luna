@@ -3,11 +3,11 @@
     ViewData["Title"] = "PacienteManager";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
-
 <!-- Css datepicker -->
 <link rel="stylesheet" href="~/css/siteLoggedLayout.css">
 
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
 
 <!-- js datepicker -->
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
@@ -231,8 +231,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="">
-
-
                     <div class="panel-heading mb-3" style="font-size: 25px;">
                         @{
                             string titulo = Model.IdUsuario == 0 ? "Nuevo Paciente" : "Modificar Paciente";

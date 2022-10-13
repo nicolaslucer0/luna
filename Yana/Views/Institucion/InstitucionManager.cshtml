@@ -12,7 +12,9 @@
         if (IsValid()) {
             $("#lblErrorP").text("");
 
+            
             var formData = $('#frmInstitucion').serialize();
+            
             $.ajax({
                 url: '@Url.Action("InstitucionManager", "Institucion")',
                 type: "POST",
@@ -100,6 +102,9 @@
             position: 'bottom left',
         });
 
+        
+        if (!!$("logoUrl").val())
+            $('#company-logo').attr('src', $("logoUrl").val());
 
         $('#MainColor').on('change', function () {
             $("#preview-nav").css('background', $('#MainColor').val())
@@ -117,11 +122,15 @@
             const validFormats = 'jpg, png, svg, jpeg';
             let fileName = $("#logoUrl").val();
             const extension = fileName.substring(fileName.lastIndexOf('.'));
-            console.log('valid', validFormats.toLowerCase().indexOf(extension) < 0);
+            console.log(extension)
             if (validFormats.toLowerCase().indexOf(extension) < 0)
                 $('#company-logo').attr('src', fileName);
         });
 
+
+        $("#preview-nav").css('background', $('#MainColor').val())
+        $(".preview-body").css('background', $('#SecondaryColor').val())
+        $('.preview .nav-link').css('color', $('#FontColor').val())
 
         
         if ($("#lblErrorP").text().length > 0)
@@ -208,7 +217,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Logo url *</label>
-                                        <input type="text" class="form-control" placeholder="" id="logoUrl" name="LogoUrl" value="@Model.LogoUrl" maxlength="200" autofocus />
+                                        <input type="text" class="form-control" placeholder="Inserte logo" id="logoUrl" name="LogoUrl" value="@Model.LogoUrl" maxlength="200" autofocus />
                                     </div>
                                 </div>
                             </div>
@@ -217,19 +226,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Color principal *</label>
-                                        <input type="text" id="MainColor" class="form-control demo" value="@Model.MainColor">
+                                        <input type="text" class="form-control demo" id="MainColor" name="MainColor" value="@Model.MainColor">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Color secundario *</label>
-                                        <input type="text" id="SecondaryColor" class="form-control demo" value="@Model.SecondaryColor">
+                                        <input type="text" id="SecondaryColor" class="form-control demo" name="SecondaryColor" value="@Model.SecondaryColor">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Color de fuente *</label>
-                                        <input type="text" id="FontColor" class="form-control demo" value="@Model.FontColor">
+                                        <input type="text" id="FontColor" class="form-control demo" name="FontColor" value="@Model.FontColor">
                                     </div>
                                 </div>
                             </div>
@@ -331,7 +340,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                
                             </div>
 
                             <div class="row">

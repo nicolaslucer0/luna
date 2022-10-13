@@ -19,18 +19,20 @@
         try {
             $.get('@Url.Action("GetUsuariosInstitucion", "UsuarioInstitucion")', function (data) {
                 
-                let { usuarioInstitucion } = data;
-                
-                if (usuarioInstitucion == null || usuarioInstitucion.length == 0) {
+                let { usuariosInstitucion } = data;
+                console.log(data )
+                if (usuariosInstitucion == null || usuariosInstitucion.length == 0) {
                     $('#list').append("No hay registros.");
                     return;
                 }
 
                 let rows = '<tbody>';
-                usuarioInstitucion.forEach(i => {
+                usuariosInstitucion.forEach(i => {
                     rows += `<tr style="font-size: 12px">
                                 <td>${i.nombre}</td>
                                 <td>${i.apellido}</td>
+                                <td>${i.email}</td>
+                                <td onclick="Edit(${i.idUsuario})"><img style='width: 10px; height: 10px;' src='/img/icon/pencil.png'/></td>
                             </tr>`
                 });
                 rows += `</tbody>`;
@@ -72,6 +74,8 @@
                                         <tr>
                                             <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
                                             <th style="font-family: 'poppinsbold'" scope="col">Apellido</th>
+                                            <th style="font-family: 'poppinsbold'" scope="col">Email</th>
+                                            <th style="font-family: 'poppinsbold'" scope="col">Editar</th>
                                         </tr>
                                     </thead>
                                 </table>

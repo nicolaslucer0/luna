@@ -126,16 +126,36 @@ namespace Yana.Controllers
             if (ModelState.IsValid)
             {
                 var usuarioService = new UsuarioService();
-        
+                var institucionService = new InstitucionService();
+                var usuarioInstitucionService = new UsuarioInstitucionService();
+                UsuarioInstitucion usuarioInstitucion = null;
+                Institucion institucion = null;
+
                 Usuario usuario = usuarioService.Authenticate(usuarioLogin.Email, usuarioLogin.Password);
-        
+                
                 if (usuario != null)
                 {
+                    usuarioInstitucion = usuarioInstitucionService.GetByUserId(usuario.IdUsuario);
                     UserCache.IdUsuario = usuario.IdUsuario;
                     UserCache.Email = usuario.Email;
                     UserCache.Nombre = usuario.Nombre;
                     UserCache.IdPerfil = Convert.ToInt32(usuario.IdPerfil);
                     UserCache.ImageUrl = usuario.ImageUrl;
+                    if (usuarioInstitucion != null)
+                        institucion = institucionService.GetById((int)(usuarioInstitucion.IdInstitucion));
+
+                    if (institucion != null)
+                    {
+                        UserCache.FontColor = institucion.FontColor;
+                        UserCache.MainColor = institucion.MainColor;
+                        UserCache.SecondaryColor = institucion.SecondaryColor;
+                        UserCache.LogoUrl = institucion.LogoUrl;
+                    } else
+                    {
+                        UserCache.FontColor = "black";
+                        UserCache.MainColor = "white";
+                        UserCache.SecondaryColor = "#F9F9F9";
+                    }
 
                     if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
                     {

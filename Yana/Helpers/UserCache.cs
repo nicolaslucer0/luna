@@ -27,6 +27,10 @@ namespace Yana.Helpers
         public static int IdPerfil { get; set; }
         public static string ImageUrl { get; set; }
         public static string Nombre { get; set; }
+        public static string FontColor { get; set; }
+        public static string MainColor { get; set; }
+        public static string SecondaryColor { get; set; }
+        public static string LogoUrl { get; set; }
         public static List<MenuItemWrapper> MenuItems { get; set; }
         public static int IdInstitucionUsuario { get; set; }
     }

@@ -44,6 +44,11 @@ namespace Yana.BusinessLogic.Services
             throw new System.NotImplementedException();
         }
 
+        public UsuarioInstitucion GetByUserId(int id)
+        {
+            return this.usuarioInstitucionRepository.GetByUserId(id);
+        }
+
         #region NotImplementedMembers
 
 

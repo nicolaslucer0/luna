@@ -68,19 +68,19 @@
     </script>
 </head>
 
-
-
-
 <body>
     @if (UserCache.IdPerfil != 0)
     {
-        <nav class="navbar navbar-expand-lg ">
+        <nav class="navbar navbar-expand-lg" style="background: @UserCache.MainColor;">
             <div class="container-fluid">
-                <div class="navbar-brand">
-                    <a class="navbar-brand" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="~/img/logo.png" /></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <div class="flex-grow-1">
+                    <a class="" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="~/img/logo.png" /></a>
+
+                    @if (UserCache.LogoUrl != null && UserCache.LogoUrl != "")
+                    {
+                        <a class="" href="#"><img class="sidebar-logo" style="width: 40px; margin-left: 20px;" src="@UserCache.LogoUrl" /></a>
+                    }
+
                 </div>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
@@ -90,32 +90,32 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Default", "Home")">
                                     <img class="menu-icon" src="~/img/icon/chart.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Dashboard</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("InstitucionList", "Institucion")">
                                     <img class="menu-icon" src="~/img/icon/institution.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Instituciones</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Instituciones</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
                                     <img class="menu-icon" src="~/img/icon/psychologist.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Profesionales</div>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
                                     <img class="menu-icon" src="~/img/icon/patient.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Pacientes</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PatologiaList", "Patologia")">
                                     <img class="menu-icon" src="~/img/icon/brain.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Patologias</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Patologias</div>
                                 </a>
                             </li>
                         }
@@ -125,13 +125,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Default", "Home")">
                                     <img class="menu-icon" src="~/img/icon/bell.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Notificaciones</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Notificaciones</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("RegistroDiarioList", "RegistroDiario")">
                                     <img class="menu-icon" src="~/img/icon/book.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Registro diario</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Registro diario</div>
                                 </a>
                             </li>
                         }
@@ -141,13 +141,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Default", "Home")">
                                     <img class="menu-icon" src="~/img/icon/chart.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Dashboard</div>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PacienteList", "Paciente")">
                                     <img class="menu-icon" src="~/img/icon/patient.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Pacientes</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Pacientes</div>
                                 </a>
                             </li>
                             <li class="nav-item notification-container" id="notification-button">
@@ -172,47 +172,52 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Default", "Home")">
                                     <img class="menu-icon" src="~/img/icon/chart.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Dashboard</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Dashboard</div>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("PsicologoList", "Psicologo")">
                                     <img class="menu-icon" src="~/img/icon/psychologist.png" />
-                                    <div class="hide-mobile" style=" font-size: 15px;">Profesionales</div>
+                                    <div class="" style=" font-size: 15px; color: @UserCache.FontColor;">Profesionales</div>
                                 </a>
                             </li>
-                            
+
                         }
 
 
-                    <li href="#"
-                        class=""
-                        aria-expanded="false">
-                        @if (UserCache.ImageUrl != null && UserCache.ImageUrl != "")
-                        {
-                            <img src="@UserCache.ImageUrl"
-                                 alt="mdo"
-                                 width="30"
-                                 height="30"
-                                 class="rounded-circle" />
-                        }
-                        else
-                        {
-                            <img src="/img/icon/user.png"
-                                 alt="mdo"
-                                 width="30"
-                                 height="30"
-                                 class="rounded-circle" />
-                        }
 
-                    </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Logout", "Home")">Salir</a>
-                        </li>
+
                     </ul>
+
                 </div>
 
+                <div class=""
+                     aria-expanded="false">
+                    @if (UserCache.ImageUrl != null && UserCache.ImageUrl != "")
+                    {
+                        <img src="@UserCache.ImageUrl"
+                             alt="mdo"
+                             width="30"
+                             height="30"
+                             class="rounded-circle" />
+                    }
+                    else
+                    {
+                        <img src="/img/icon/user.png"
+                             alt="mdo"
+                             width="30"
+                             height="30"
+                             class="rounded-circle" />
+                    }
+
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Logout", "Home")" style="color: @UserCache.FontColor;">Salir</a>
+                </div>
             </div>
         </nav>
     }
@@ -224,11 +229,19 @@
 
 
 </html>
-<script>
-    $('#notification-button').click(function () {
+<script>$('#notification-button').click(function () {
         if ($('#notification-overlay').is(":visible"))
             $('#notification-overlay').hide();
         else
             $('#notification-overlay').show();
-    });
-</script>
+    });</script>
+
+<style>
+
+    body {
+        color: @UserCache.FontColor;
+    }
+    .dashboard {
+        background-color: @UserCache.SecondaryColor !important;
+    }
+</style>

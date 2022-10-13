@@ -4,6 +4,7 @@ using System.Linq;
 using Yana.DataAccess.Repositories.Interfaces;
 using Yana.Models.DomainEntities;
 using Yana.Helpers;
+using Twilio.TwiML.Voice;
 
 namespace Yana.DataAccess.Repositories
 {
@@ -83,6 +84,19 @@ namespace Yana.DataAccess.Repositories
                 }
 
                 context.SaveChanges();
+            }
+        }
+
+        public UsuarioInstitucion GetByUserId (int id)
+        {
+            using (var context = new LunaContext())
+            {
+                return (
+                    from ctx in context.UsuarioInstitucion
+                    where !ctx.BajaLogica &&
+                    ctx.IdUsuario == id
+                    select ctx
+                ).FirstOrDefault();
             }
         }
     }

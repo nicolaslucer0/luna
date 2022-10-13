@@ -46,19 +46,7 @@ namespace Yana.Controllers
 
                 IEnumerable<Usuario> usuariosInstitucion = this.UsuarioService.GetByIdPerfil(EnumPerfilUsuario.Institucion);
 
-                var totalRecords = usuariosInstitucion.Count();
-
-                return Json(new
-                {
-                    usuarioInstitucion = (from item in usuariosInstitucion
-                            select new
-                            {
-                                idusuario = item.IdUsuario,
-                                nombre = item.Nombre,
-                                apellido = item.Apellido
-                            }).OrderByDescending(x => x.idusuario).ToArray()
-                });
-
+                return Json(new{usuariosInstitucion});
                 
             }
             catch (Exception ex)

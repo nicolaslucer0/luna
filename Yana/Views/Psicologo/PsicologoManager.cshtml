@@ -4,12 +4,9 @@
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
 
-<!-- Css datepicker -->
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/notificaciones/notificacion-bootstrap.css">
 <link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
-<!-- js datepicker -->
-<script src="~/js/notificaciones/bootstrap.min.js"></script>
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
 
@@ -148,7 +145,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card">
+                <div class="">
                     <div class="panel-heading mb-3" style="font-size: 25px;">
                         @{
                             string titulo = Model.IdUsuario == 0 ? "Nuevo Psicólogo" : "Modificar Psicólogo";
