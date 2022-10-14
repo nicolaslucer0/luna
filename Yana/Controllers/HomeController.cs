@@ -194,6 +194,10 @@ namespace Yana.Controllers
         {
             UserCache.IdPerfil = 0;
             UserCache.Nombre = "";
+            UserCache.FontColor = "black";
+            UserCache.MainColor = "white";
+            UserCache.SecondaryColor = "#F9F9F9";
+            UserCache.LogoUrl = "";
             return RedirectToAction("Index", "Home");
         }
 
