@@ -42,7 +42,7 @@
                      <div class="notification-tile">
                         <div class="notification-icon"><img class="notification-image" src="/img/icon/book.png" /></div>
                         <div class="notification-description" onclick="RegistroDiario(${paciente.idUsuario})">
-                            <b>${paciente.nombre} ${paciente.apellido}</b> ha creado ${paciente.notSeenNotifications} <b>${paciente.notSeenNotifications == 1 ? "registro diario" : "registros diarios"}</b>
+                            <b style="font-family: poppinsbold;">${paciente.nombre} ${paciente.apellido}</b> ha creado ${paciente.notSeenNotifications} <b style="font-family: poppinsbold;">${paciente.notSeenNotifications == 1 ? "registro diario" : "registros diarios"}</b>
                         </div>
                     </div>
             `;
@@ -238,7 +238,7 @@
 
 <style>
 
-    body {
+    nav {
         color: @UserCache.FontColor;
     }
     .dashboard {
