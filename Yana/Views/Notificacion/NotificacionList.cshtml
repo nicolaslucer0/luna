@@ -4,7 +4,7 @@
 }
 
 <script type="text/javascript" language="javascript">
-
+    var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     function Create() {
         window.location.assign("./NotificacionManager/0?idPaciente=" + @idPaciente);
     };
@@ -21,8 +21,46 @@
         window.location.assign("./NotificacionManager?idNotificacion=" + idNotificacion + "&idPaciente=" + @idPaciente);
     };
 
+    const buildCard = (notification) => `
+        
+            <div class="d-flex align-items-center luna-card flex-column justify-items-center">
+                <div class="d-flex justify-content-between card-header">
+                    <div class="card-legend">${new Date(notification.fecha).toLocaleDateString("es-ES", options)}</div>
+                    <div class="card-status ${notification.estado}">${notification.estado}</div>
+                </div>
+                <div class="">
+                    
+                </div>
+                <div class="d-flex flex-grow-1 p-3 flex-column text-center align-items-center" style="width: 100%;">
+                    <table id="list" class="" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td scope="col" style="font-size: 14px;">${notification.mensaje}</td>
+                                    </tr>
+                                    ${notification.respuesta ? 
+                                        `<tr>
+                                            <td scope="col">
+                                                <div class="notification-answer">${notification.respuesta}</div>
+                                            </td>
+                                        </tr>`:  "" 
+                                    }
+                                    ${notification.descripcion ? `
+                                        <tr>
+                                            <td scope="col">
+                                                <div class="notification-comment">${notification.descripcion}</div>
+                                            </td>
+                                        </tr>`:  "" 
+                                    }
+                                </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+
+    `;
+
     $(document).ready(function () {
-        var options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        
 
         $.get('@Url.Action("GetNotificaciones", "Notificacion", new { idPaciente = @ViewBag.IdPaciente })', function (data) {
             let registros = data.notificaciones;
@@ -32,28 +70,15 @@
                 return;
             }
 
-            let headers = `
-                        <thead>
-                            <tr>
-                                <th style="font-family: 'poppinsbold'" scope="col">Fecha</th>
-                                <th style="font-family: 'poppinsbold'" scope="col">Mensaje</th>
-                                <th style="font-family: 'poppinsbold'" scope="col">Estado</th>
-                                <th style="font-family: 'poppinsbold'" scope="col">Respuesta</th>
-                            </tr>
-                        </thead>
-                    `;
-            let rows = '<tbody>';
-            registros.forEach(r => {
-                rows += `<tr style="font-size: 12px">
-                                    <td>${new Date(r.fecha).toLocaleDateString("es-ES", options)}</td>
-                                    <td>${r.mensaje}</td>
-                                    <td>${r.estado}</td>
-                                    <td>${r.respuesta}</td>
-                                </tr>`
+            let cards = '';
+            let notifications = '';
+            registros.forEach(p => {
+                console.log(p)
+                cards += buildCard(p)
             });
-            rows += `</tbody>`;
-            $('#list').append(headers);
-            $('#list').append(rows);
+            
+            $('#list').append(cards);
+
         });
     });
 </script>
@@ -85,7 +110,8 @@
                                 </div>
                             </div>
                             <div>
-                                <table id="list" class="table" cellpadding="0" cellspacing="0" style="margin: 4em 0;">
+                                <table id="list" class="d-flex flex-wrap align-items-stretch" cellpadding="0" cellspacing="0" style="margin: 1em 0;">
+
                                 </table>
                                 <div id="pager" class="scroll" style="text-align: center;">
                                 </div>

@@ -118,7 +118,7 @@ html {
 
 .yanaButton {
     border-radius: 20px !important;
-    background: linear-gradient(to right, #103867 0%, #072444 51%, #113766 100%);
+    background: #6385dc;
     margin: 5px 0;
     text-align: center;
     text-transform: uppercase;
@@ -129,7 +129,6 @@ html {
     font-size: 14px;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(to right, #3274c0 0%, #316195 51%, #3274c0 100%) !important;
 }
 
 @media only screen and (max-width: 800px) {
@@ -146,9 +145,9 @@ nav {
 }
 
 .yanaButton:hover {
-    background-position: right center !important; /* change the direction of the change here */
     color: white !important;
     text-decoration: none !important;
+    background: #8ba5ea !important;
 }
 
 .yanaButtonGrey {

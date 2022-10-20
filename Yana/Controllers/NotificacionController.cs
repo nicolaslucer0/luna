@@ -75,7 +75,8 @@ namespace Yana.Controllers
                                               fecha = item.FechaHora,
                                               mensaje = item.Mensaje,
                                               estado = item.IdEstadoNotificacionNavigation.Descripcion,
-                                              respuesta = this.BuildNotificacionRespuesta(item)
+                                              respuesta = getRespuesta(item),
+                                              descripcion = getComentario(item)
                                           }).OrderByDescending(x => x.fecha).ToArray()
                     });
 
@@ -89,28 +90,34 @@ namespace Yana.Controllers
 
             return new JsonResult(new { });
         }
-
-        private string BuildNotificacionRespuesta(Notificacion notificacion)
+        private string getRespuesta(Notificacion notificacion)
         {
-            var notificacionRespuestaBuilder = new StringBuilder();
+            if (notificacion.NotificacionRespuesta.Any())
+            {
+                NotificacionRespuesta notificacionRespuesta = notificacion.NotificacionRespuesta.FirstOrDefault();
+                if (notificacionRespuesta != null)
+                {
+                    NotificacionOpcion notificacionOpcion = notificacionRespuesta.IdNotificacionOpcionNavigation;
+                    if (notificacionOpcion != null)
+                        return notificacionOpcion.Descripcion;
+                }
+            }
+            return "";
+        }
+        private string getComentario(Notificacion notificacion)
+        {
 
             if (notificacion.NotificacionRespuesta.Any())
             {
                 NotificacionRespuesta notificacionRespuesta = notificacion.NotificacionRespuesta.FirstOrDefault();
-
                 if (notificacionRespuesta != null)
                 {
-                    NotificacionOpcion notificacionOpcion = notificacionRespuesta.IdNotificacionOpcionNavigation;
-
-                    if (notificacionOpcion != null)
-                        notificacionRespuestaBuilder.Append(string.Format("<b>Opción:</b>{0}&nbsp;", notificacionOpcion.Descripcion));
-
+                    NotificacionOpcion notificacionOpcion = notificacionRespuesta.IdNotificacionOpcionNavigation;                    
                     if (!string.IsNullOrEmpty(notificacionRespuesta.Respuesta))
-                        notificacionRespuestaBuilder.Append(string.Format("<b>Respuesta:</b>{0}", notificacionRespuesta.Respuesta));
+                        return notificacionRespuesta.Respuesta;
                 }
             }
-
-            return notificacionRespuestaBuilder.ToString();
+            return "";
         }
 
         #endregion
