@@ -391,7 +391,7 @@ header h1 {
     .luna-card {
         
         max-width: 100%;
-        width: 100%;
+        flex-grow: 1;
     }
 }
 .card-legend {
