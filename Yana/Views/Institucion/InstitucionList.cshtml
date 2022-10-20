@@ -29,12 +29,12 @@
             console.log(instituciones);
             let rows = '<tbody>';
             instituciones.forEach(i => {
-                rows += `<tr style="font-size: 12px">
-                            <td><img style='width: 10px; height: 10px;' src='${i.logoUrl ? i.logoUrl : ""}'/></td>
-                            <td>${i.nombre}</td>
-                            <td>${renderStringList(i.profesionalInstitucion)}</td>
-                            <td>${renderStringList(i.usuarioInstitucion)}</td>
-                            <td onclick="Edit(${i.idInstitucion})"><img style='width: 10px; height: 10px;' src='/img/icon/pencil.png'/></td>
+                rows += `<tr class="luna-card" style="font-size: 12px">
+                            <td><div style="color: #6385dc; font-family: poppinsbold;">Logo</div><img style='width: 10px; height: 10px;' src='${i.logoUrl ? i.logoUrl : ""}'/></td>
+                            <td><div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>${i.nombre}</td>
+                            <td><div style="color: #6385dc; font-family: poppinsbold;">Profesionales asignados</div>${renderStringList(i.profesionalInstitucion)}</td>
+                            <td><div style="color: #6385dc; font-family: poppinsbold;">Pacientes asignados</div>${renderStringList(i.usuarioInstitucion)}</td>
+                            <td onclick="Edit(${i.idInstitucion})"><div style="color: #6385dc; font-family: poppinsbold;">Editar</div><img style='width: 10px; height: 10px;' src='/img/icon/pencil.png'/></td>
                         </tr>`
             });
             rows += `</tbody>`;
@@ -55,15 +55,16 @@
                             <strong style="font-family: 'poppinsbold'">Instituciones</strong>
                         </div>
                         <div class="d-flex">
-                            <button class="btn yanaButton" onclick="AssignUsers();"><i class='fa fa-plus-square fa-lg'></i> Usuarios institución</button>
-                            <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nueva Institución</button>
+                            <button class="btn yanaButton" style="margin-right: 10px;" onclick="AssignUsers();">Usuarios institución</button>
+                            <button class="btn yanaButton" onclick="Create();"></i> Nueva Institución</button>
                         </div>
                     </div>
 
                     <div class="" style="margin-top: 2em;">
-                        <table id="list" class="table" cellpadding="0" cellspacing="0">
+                    <div class="card" style="overflow-x: auto;">
+                    <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;">
                             <thead>
-                                <tr>
+                                <tr style="display: none;">
                                     <th style="font-family: 'poppinsbold'" scope="col">Logo</th>
                                     <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
                                     <th style="font-family: 'poppinsbold'" scope="col">Profesionales asignados</th>
@@ -71,7 +72,9 @@
                                     <th style="font-family: 'poppinsbold'" scope="col">Editar</th>
                                 </tr>
                             </thead>
-                        </table>
+                    </table>
+                    </div>
+                    
                     </div>
                 </div>
             </div>

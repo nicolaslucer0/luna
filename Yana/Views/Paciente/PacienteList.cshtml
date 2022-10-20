@@ -12,8 +12,7 @@
     const Seguimiento = (id) => window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
     const RenderBadge = (number) => `<div class="badge" > ${number}</div>`;
     const buildCard = (paciente) => `
-        <tr class="luna-card">
-            
+        <tr class="luna-card"> 
                 <td>
                     <div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>
                     ${paciente.apellido}, ${paciente.nombre}

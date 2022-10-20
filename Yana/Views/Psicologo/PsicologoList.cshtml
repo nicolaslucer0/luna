@@ -3,119 +3,6 @@
     ViewData["Title"] = "PsicologoList";
     Layout = "~/Views/Shared/_LoggedLayout.cshtml";
 }
-<style>
-    .luna-card {
-        height: fit-content;
-        box-sizing: border-box;
-        position: relative;
-        min-width: 30%;
-        transition: .4s;
-        background: white;
-        background: white;
-        padding: 10px;
-        margin: 10px;
-        border: none;
-        border-radius: 30px;
-        box-shadow: 0 0 2px 0 #00000021;
-    }
-
-    .card-legend {
-        color: #9f9f9f;
-        font-size: 12px;
-    }
-
-    .luna-card-body {
-        font-size: 10px;
-    }
-
-    .card-item--container {
-        display: flex;
-        align-items: center;
-    }
-
-    .luna-card:hover {
-        box-shadow: 0 0 10px 0 #8080803d;
-    }
-
-    .luna-card--body {
-        margin: 20px 10px;
-        width: 20%;
-        text-overflow: ellipsis;
-    }
-
-    .card-info {
-        margin: 0 15px 0 20px;
-    }
-
-    .card-title {
-        font-family: poppinsbold;
-    }
-
-    .card-subtitle {
-        margin: 2px 0;
-        font-size: 12px;
-    }
-
-    .card-text {
-        font-size: 12px;
-        margin: 5px 0;
-    }
-
-    .badge {
-        background: red;
-        border-radius: 100%;
-        height: 10px;
-        width: 10px;
-        font-size: 10px;
-        padding: 9px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    .luna-card--actions {
-    }
-
-    .luna-card--button {
-        background: white;
-        border: none;
-    }
-
-    #list {
-        flex-shrink: 1;
-        align-content: flex-start;
-    }
-
-
-    .card-icon {
-        margin-right: 5px;
-        height: 15px;
-        width: 15px;
-        transition: .4s;
-    }
-
-    .dropdown {
-        align-self: flex-start;
-        cursor: pointer;
-    }
-
-    .dropdown-button {
-        padding: 10px;
-        transition: .5s;
-    }
-
-        .dropdown-button:hover {
-            color: gray;
-        }
-
-    .dropdown button {
-        text-transform: none;
-        color: black;
-    }
-</style>
 <script type="text/javascript" language="javascript">
 
     function Create() {
@@ -126,19 +13,26 @@
         window.location.assign("./PsicologoManager/" + id);
     };
     const buildCard = (psicologo) => `
-        <div class="d-flex align-items-center luna-card">
-            <div class="card-info">
-                <div class="user-image"><div class="edit-button" onclick="Edit(${psicologo.idUsuario})">Editar</div><img src="/img/team/1.png"></div>
-            </div>
-            <div class="luna-card--body flex-grow-1">
-                <h5 class="card-title">${psicologo.apellido}, ${psicologo.nombre}</h5>
-                <div class="card-legend">${psicologo.edad} años</div>
-                <div class="luna-card-body">
-                    <div class='card-item--container'><img class="card-icon" src="/img/icon/id.png" /><h6 class="card-subtitle">${psicologo.dni}</h6></div>
-                    <div class='card-item--container'><img class="card-icon" src="/img/icon/mail.png" /><p class="card-subtitle">${psicologo.email}</p></div>
-                </div>
-            </div>            
-        </div>
+        <tr class="luna-card"> 
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>
+                    ${psicologo.apellido}, ${psicologo.nombre}
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Edad</div>
+                    ${psicologo.edad} años
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">DNI</div>
+                    ${psicologo.dni}
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Email</div>
+                    ${psicologo.email}
+                </td>
+                <td>
+                </td>
+        </tr>
     `;
 
     $(document).ready(function () {
@@ -149,12 +43,27 @@
                 return;
             }
 
-            let cards = '';
+            let cards = '<tbody>';
+            let headers = `
+            <thead>
+            <tr style="display: none;">
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Detalles</th>
+            </tr>
+            </thead>`;
+
             psicologos.forEach(p => {
                 cards += buildCard(p)
             });
-
+            cards += '</tbody>';
+            
+            $('#list').append(headers);
             $('#list').append(cards);
+            $('#list').DataTable();
+            
         });
     });
 </script>
@@ -171,23 +80,8 @@
                         </div>
                         <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Especialista</button>
                     </div>
-
-                    <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
-                        <p align="left">
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong><label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
-                            </div>
-                        </p>
-                    </div>
-
-                    <div id="list" class="d-flex flex-wrap" cellpadding="0" cellspacing="0" style="margin-top: 2em;">
-                    </div>
-
-                    <div class="panel-body">
-                        <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
-                        <div>
-                            <div id="pager" class="" style="text-align: center;"></div>
-                        </div>
+                    <div class="card" style="overflow-x: auto;">
+                        <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;"></table>
                     </div>
                 </div>
             </div>
