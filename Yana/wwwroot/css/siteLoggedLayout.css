@@ -473,6 +473,21 @@ header h1 {
   background: #6385dc;
   color: white;
 }
+.card-status.Vencida {
+  background: #c84c42;
+  color: white;
+}
+
+.card-status.Nueva {
+    background: #a7d39f;
+    color: white;
+}
+
+.card-status.Por-vencer {
+    background: #ffb17e;
+    color: white;
+}
+
 
 .notification-answer {
   font-family: poppinsbold;

@@ -20,7 +20,7 @@
                     <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
                         <strong style="font-family: 'poppinsbold'">Dashboard</strong>
                     </div>
-                    <div class="panel-body" id="divPanelBody">
+                    <div class="panel-body d-flex flex-wrap" id="divPanelBody">
                         @{
                             if (Model.Any())
                             {
@@ -31,22 +31,29 @@
 
                                     if (minutosVencidos > 0 && minutosVencidos <= (int)EnumLimiteVencimientoNotificacion.AlDia)
                                     {
-                                        notificationCssClass = "alert alert-success";
+                                        notificationCssClass = "Nueva";
                                     }
                                     else if (Math.Abs(minutosVencidos) > (int)EnumLimiteVencimientoNotificacion.AlDia && Math.Abs(minutosVencidos) <= (int)EnumLimiteVencimientoNotificacion.Demorada)
                                     {
-                                        notificationCssClass = "alert alert-warning";
+                                        notificationCssClass = "Por-vencer";
                                     }
                                     else if (Math.Abs(minutosVencidos) > (int)EnumLimiteVencimientoNotificacion.Demorada)
                                     {
-                                        notificationCssClass = "alert alert-danger";
+                                        notificationCssClass = "Vencida";
                                     }
-                                    <div class="@notificationCssClass" role="alert">
-                                        <label style="font-size: 10px;">@notificacion.FechaHora.ToString()</label>
-                                        @notificacion.Mensaje
-                                        <br /><br />
-                                        <div style="text-align: center;">
-                                            <button class="btn yanaButtonGrey" onclick="Answer(@notificacion.IdNotificacion);"><i class='fa fa-comment-o fa-lg'></i>Responder</button>
+                                    
+                                    <div class="d-flex align-items-center luna-card flex-column justify-items-center">
+                                        <div class="d-flex justify-content-between card-header">
+                                            <div class="card-legend">@notificacion.FechaHora.ToString()</div>
+                                            <div class="card-status @notificationCssClass">@notificationCssClass.Replace('-', ' ')</div>
+                                        </div>
+                                        <div class="d-flex flex-grow-1 p-3 flex-column text-center align-items-center" style="width: 100%;">
+                                            <table id="list" class="" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    <tr><td scope="col" style="font-size: 14px;">@notificacion.Mensaje</td></tr>
+                                                </tbody>
+                                            </table>
+                                            <button class="btn yanaButton" onclick="Answer(@notificacion.IdNotificacion);"><i class='fa fa-comment-o fa-lg'></i>Responder</button>
                                         </div>
                                     </div>
                                 }

@@ -21,13 +21,15 @@ function Answer(idNotificacionOpcion) {
                     <div class="panel-heading">
                         Notificaciones Pendientes
                     </div>
-                    <div class="panel-body" id="divPanelBody">
+                    <div style="margin-bottom:10px; font-family: poppinsbold;">
+                        @Model.Mensaje
+                    </div>
+                    <div class="panel-body d-flex" id="divPanelBody">
                         @foreach (NotificacionOpcion notificacionOpcion in Model.NotificacionOpcion)
                         {
-                            <div style="text-align: center;">
+                            <div style="text-align: center; margin-right: 10px;">
                                 <button class="btn btn-lg yanaButton" onclick="Answer(@notificacionOpcion.IdNotificacionOpcion);"><i class='fa fa-comment-o fa-lg'></i>@notificacionOpcion.Descripcion</button>
                             </div>
-                            <br />
                         }
                     </div>
                 </div>

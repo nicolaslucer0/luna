@@ -137,6 +137,7 @@ namespace Yana.DataAccess.Repositories
 
                 List<Notificacion> notificacion = (from ctx in context.Notificacion
                                                         .Include(n => n.NotificacionOpcion)
+                                                        .Include(n => n.IdEstadoNotificacionNavigation)
                                                    where !ctx.BajaLogica
                                                           && estadosNotificacion.Contains((int)ctx.IdEstadoNotificacion)
                                                           && ctx.IdPaciente == idPaciente
