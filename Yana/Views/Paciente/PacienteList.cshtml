@@ -25,15 +25,16 @@
                     <div style="color: #6385dc; font-family: poppinsbold;">DNI</div>
                     ${paciente.dni}
                 </td>
-                <td>
+                <td class="important-column">
                     <div style="color: #6385dc; font-family: poppinsbold;">Email</div>
                     ${paciente.email}
                 </td>
                 
-                <td>
+                <td style="width: 20%; text-align: end !important;">
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Registro diario" class="luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" /></button>
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Seguimiento" class="luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" /></button>
+                    <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Edit(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
                     ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
                 </td>
         </tr>

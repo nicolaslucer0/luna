@@ -19,6 +19,22 @@ for details on configuring this project to bundle and minify static web assets. 
   src: url("/fonts/poppins/poppinslight.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "montserratthin";
+  src: url("/fonts/montserrat/montserratthin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "montserratlight";
+  src: url("/fonts/montserrat/montserratlight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "montserratregular";
+  src: url("/fonts/montserrat/montserratregular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "montserratbold";
+  src: url("/fonts/montserrat/montserratbold.ttf") format("truetype");
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;

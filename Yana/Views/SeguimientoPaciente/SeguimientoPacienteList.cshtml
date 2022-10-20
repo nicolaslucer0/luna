@@ -21,7 +21,8 @@
                 let { seguimientoPaciente } = data;
                 
                 if (!seguimientoPaciente || seguimientoPaciente.length == 0) {
-                    $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5 flex-grow"
+                    $('#list').append(`
+                            <div class="d-flex align-items-center luna-card justify-content-between pl-5 flex-grow"
                                      style="max-width: 100% !important">
                                     <div class="d-flex align-items-center justify-content-center flex-grow-1">
                                         No se han tomado notas.
@@ -34,7 +35,7 @@
 
                 let headers = `
                     <thead>
-                        <tr>
+                        <tr style="display: none;">
                             <th style="font-family: 'poppinsbold'" scope="col">Fecha creacion</th>
                             <th style="font-family: 'poppinsbold'" scope="col">Nota</th>
                             <th style="font-family: 'poppinsbold'" scope="col">Editar</th>  
@@ -43,15 +44,26 @@
                 `;
                 let rows = '<tbody>';
                 seguimientoPaciente.forEach(r => {
-                    rows += `<tr style="font-size: 12px">
-                            <td>${new Date(r.fechaAlta).toLocaleDateString("es-ES", options)}</td>
-                            <td>${splitString(r.nota)}</td>
-                            <td><button class="btn yanaButton" onclick="Edit(${r.idSeguimientoPaciente})"><i class="fa fa-pencil"></i></button></td>
+                    rows += `<tr class="luna-card" style="font-size: 12px">
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Fecha</div>
+                                ${new Date(r.fechaAlta).toLocaleDateString("es-ES", options)}
+                            </td>
+                            <td class="important-column">
+                                <div style="color: #6385dc; font-family: poppinsbold;">Nota</div>
+                                ${r.nota}
+                            </td>
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Acción</div>
+                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Edit(${r.idSeguimientoPaciente})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
+                                
+                            </td>
                         </tr>`
                 });
                 rows += `</tbody>`;
                 $('#list').append(headers);
                 $('#list').append(rows);
+                $('#list').DataTable();
                 
         });
 
@@ -71,11 +83,11 @@
                             <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
                                 <strong style="font-family: 'poppinsbold'">Seguimiento de pacientes</strong>
                             </div>
-                            <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i>Nuevo Seguimiento Paciente</button>
+                            <button class="btn yanaButton" onclick="Create();">Nuevo Seguimiento Paciente</button>
                         </div>
-                        <div class="">
-                            <table id="list" class="table" cellpadding="0" cellspacing="0"></table>
-                        </div>            
+                        <div class="card">
+                            <table id="list" class="luna-table dataTable"></table>
+                        </div>
                         <div class="row">
                             <div class="col-md-10"></div>
                             <div class="col-md-2">
