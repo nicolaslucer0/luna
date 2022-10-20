@@ -386,6 +386,14 @@ header h1 {
   color: black !important;
 }
 
+
+@media only screen and (max-width: 800px) {
+    .luna-card {
+        
+        max-width: 100%;
+        width: 100%;
+    }
+}
 .card-legend {
   color: #9f9f9f;
   font-size: 12px;
