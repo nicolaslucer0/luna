@@ -290,6 +290,21 @@ header h1 {
   display: none;
 }
 
+
+.user-overlay {
+    position: absolute;
+    top: 50px;
+    background: white;
+    padding: 0 20px;
+    z-index: 99999;
+    right: 0;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    display: none;
+}
+
+
 .notification-list {
   max-height: 400px;
   overflow: auto;
