@@ -154,7 +154,7 @@ namespace Yana.Controllers
                     {
                         UserCache.FontColor = "black";
                         UserCache.MainColor = "white";
-                        UserCache.SecondaryColor = "#F9F9F9";
+                        UserCache.SecondaryColor = "#F5F5FF";
                     }
 
                     if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Institucion))
@@ -196,7 +196,7 @@ namespace Yana.Controllers
             UserCache.Nombre = "";
             UserCache.FontColor = "black";
             UserCache.MainColor = "white";
-            UserCache.SecondaryColor = "#F9F9F9";
+            UserCache.SecondaryColor = "#F5F5FF";
             UserCache.LogoUrl = "";
             return RedirectToAction("Index", "Home");
         }

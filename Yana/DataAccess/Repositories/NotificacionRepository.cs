@@ -229,5 +229,19 @@ namespace Yana.DataAccess.Repositories
                 return cantidadNotificaciones;
             }
         }
+
+        public int CountNotificationsByProfesionalAndStatus(int idProfesional, int estado)
+        {
+            using (var context = new LunaContext())
+            {
+                return (from ctx in context.Notificacion
+                        where !ctx.BajaLogica
+                            && ctx.IdProfesional == idProfesional
+                            && ctx.IdEstadoNotificacion == estado
+                        select ctx).Count();
+
+                
+            }
+        }
     }
 }

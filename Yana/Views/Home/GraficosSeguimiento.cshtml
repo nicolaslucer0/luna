@@ -5,7 +5,35 @@
 }
 <script src='@Url.Content("~/js/charts.js")' type="text/javascript"></script>
 <style>
-    .luna-card{
+
+    .notification-card {
+        padding: 10px;
+        display: flex;
+    }
+
+    .notification-icon-image {
+        border-radius: 10px;
+        padding: 10px;
+        margin-right: 10px;
+    }
+    .notification-icon-image.blue {
+        background: #6385dc;
+    }
+    .notification-icon-image.green {
+        background: #a7d39f;
+    }
+    .notification-icon-image.yellow {
+        background: #ffb17e;
+    }
+    .notification-icon-image.red {
+        background: #c84c42;
+    }
+
+    .notification-icon-image img {
+        width: 30px;
+        filter: brightness(100);
+    }
+        .luna-card{
         max-width: none !important;
         margin-bottom: 10px;
     }
@@ -18,12 +46,31 @@
 <script type="text/javascript">
 
     $(function () {
+        var notificacionesPendientes = '@Url.Action("GetNotificacionesCount", "Notificacion", new {estado= 1})';
 
-        var getPacientes = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
-        var getPatologias = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
-        var sentNotifications = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
-        var receivedNotifications = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
-        var emotionsReceived = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
+        $.get(notificacionesPendientes, {}, function (data) {
+            var categorias = [];
+            var series = [];
+        });
+
+        var notificacionesEntregadas = '@Url.Action("GetNotificacionesCount", "Notificacion", new {estado= 2})';
+        $.get(notificacionesEntregadas, {}, function (data) {
+            var categorias = [];
+            var series = [];
+        });
+
+        var notificacionesRespondidas = '@Url.Action("GetNotificacionesCount", "Notificacion", new {estado= 3})';
+        $.get(notificacionesRespondidas, {}, function (data) {
+            var categorias = [];
+            var series = [];
+        });
+
+
+        var notificacionesVencidas = '@Url.Action("GetNotificacionesCount", "Notificacion", new {estado= 4})';
+        $.get(notificacionesVencidas, {}, function (data) {
+            var categorias = [];
+            var series = [];
+        });
 
         var url1 = '@Url.Action("GetRegistrosDiariosPorPaciente", "Home")';
         $.get(url1, {}, function (data) {
@@ -198,60 +245,78 @@
 
 <div class="container full" style="width: 100%">
 
-    <div class="panel-heading" style="color: white; font-size: 25px; margin-bottom: 20px;">
-        <strong style="font-family: 'poppinsbold'">Hola,</strong> @UserCache.Nombre
-    </div>
-    <div class="row">
+    
+                <div class="col-md-4 panel-heading" style="color: white; font-size: 25px; margin-bottom: 20px;">
+                    <strong style="font-family: 'poppinsbold'">Hola,</strong> @UserCache.Nombre
+                </div>
+    <div class="row card" style="max-height: none !important;">
 
-
-        <div class="col-md-8">
-            <div class="row">
+        <div class="col-md-12">
+            <div class="row mb-5">
                 <div class="col-md-3" style="text-align: center;">
-                    <div class="luna-card d-flex flex-column align-items-center justify-content-center">
-                        <div style="font-size: 12px;">Notificaciones enviadas</div>
-                        <div style="font-family: 'poppinsbold';">20</div>
+                    <div class="notification-card d-flex align-items-center justify-content-center">
+                        <div class="notification-icon-image blue">
+                            <img src="~/img/icon/notification.png" />
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <div style="font-size: 12px;">Entregadas</div>
+                            <div style="font-family: 'poppinsbold';">20</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" style="text-align: center;">
-                    <div class="luna-card d-flex flex-column align-items-center justify-content-center">
-                        <div style="font-size: 12px;">Notificaciones recibidas</div>
-                        <div style="font-family: 'poppinsbold';">20</div>
+                    <div class="notification-card d-flex align-items-center justify-content-center">
+                        <div class="notification-icon-image green">
+                            <img src="~/img/icon/notification.png" />
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <div style="font-size: 12px;">Respondidas</div>
+                            <div style="font-family: 'poppinsbold';">20</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" style="text-align: center;">
-                    <div class="luna-card d-flex flex-column align-items-center justify-content-center">
-                        <div style="font-size: 12px;">Pacientes con patologias</div>
-                        <div style="font-family: 'poppinsbold';">20</div>
+                    <div class="notification-card d-flex align-items-center justify-content-center">
+                        <div class="notification-icon-image yellow">
+                            <img src="~/img/icon/notification.png" />
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <div style="font-size: 12px;">Por vencer</div>
+                            <div style="font-family: 'poppinsbold';">20</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" style="text-align: center;">
-                    <div class="luna-card d-flex flex-column align-items-center justify-content-center">
-                        <div style="font-size: 12px;">Pacientes</div>
-                        <div style="font-family: 'poppinsbold';">20</div>
+                    <div class="notification-card d-flex align-items-center justify-content-center">
+                        <div class="notification-icon-image red">
+                            <img src="~/img/icon/notification.png" />
+                        </div>
+                        <div class="d-flex flex-column justify-content-between">
+                            <div style="font-size: 12px;">Vencidas</div>
+                            <div style="font-family: 'poppinsbold';">20</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="luna-card asd">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="luna-card">
                         <div class="chart-header">Pacientes por patologia</div>
                         <canvas id="pathologyChart" width="100"></canvas>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="luna-card">
                         <div class="chart-header">Emociones recibidas</div>
                         <canvas id="emotionsChart" width="200" height="200"></canvas>
                     </div>
                 </div>
+                <div class="col-md-2"></div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="luna-card">
-                <img src="../img/dashboard.jpg" style="width: 100%;" />
             </div>
-        </div>
+        
     </div>
 </div>
 

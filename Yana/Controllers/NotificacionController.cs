@@ -90,6 +90,24 @@ namespace Yana.Controllers
 
             return new JsonResult(new { });
         }
+
+
+        public int GetNotificacionesCount(int estado)
+        {
+            try
+            {
+                TempData["messageERROR"] = string.Empty;
+                int notificaciones = this.NotificacionService.CountNotificationsByProfesionalAndStatus(UserCache.IdUsuario, estado);
+            }
+            catch (Exception ex)
+            {
+                TempData["messageERROR"] = "Se produjo un error en la aplicacion. " + ex.Message;
+            }
+
+            return 0;
+        }
+
+
         private string getRespuesta(Notificacion notificacion)
         {
             if (notificacion.NotificacionRespuesta.Any())

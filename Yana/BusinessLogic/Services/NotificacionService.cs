@@ -265,6 +265,17 @@ namespace Yana.BusinessLogic.Services
             return this.notificacionRepository.GetByPacienteYEstados(idPaciente, estadosNotificaciones);
         }
 
+        public int CountNotificationsByProfesionalAndStatus(int idProfesional, int estado)
+        {
+            int notificaciones =  notificacionRepository.CountNotificationsByProfesionalAndStatus(idProfesional, 3);
+            return notificaciones;
+        }
+
+
+        public int CountNotificationsAnsweredByProfesional(int idProfesional)
+        {
+            return notificacionRepository.CountNotificationsByProfesionalAndStatus(idProfesional, 3);
+        }
         public IEnumerable<Notificacion> GetNotificacionesProfesional(int idProfesional)
         {
             List<Notificacion> notificaciones = new List<Notificacion>();

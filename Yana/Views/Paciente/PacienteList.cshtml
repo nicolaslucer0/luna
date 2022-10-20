@@ -12,25 +12,32 @@
     const Seguimiento = (id) => window.location.href = "@Url.Action("SeguimientoPacienteList", "SeguimientoPaciente")" + "?idPaciente=" + id;
     const RenderBadge = (number) => `<div class="badge" > ${number}</div>`;
     const buildCard = (paciente) => `
-        <div class="d-flex align-items-center luna-card">
-            ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
-            <div class="card-info">
-                <div class="user-image"><div class="edit-button" onclick="Edit(${paciente.idUsuario})">Editar</div><img src="${paciente.imageUrl}"></div>
-            </div>
-            <div class="luna-card--body flex-grow-1">
-                <h5 class="card-title">${paciente.apellido}, ${paciente.nombre}</h5>
-                <div class="card-legend">${paciente.edad} años</div>
-                <div class="luna-card-body">
-                    <div class='card-item--container'><img class="card-icon" src="/img/icon/id.png" /><h6 class="card-subtitle">${paciente.dni}</h6></div>
-                    <div class='card-item--container'><img class="card-icon" src="/img/icon/mail.png" /><p class="card-subtitle">${paciente.email}</p></div>
-                </div>
-                <div class="d-flex justify-content-end luna-card--actions">
+        <tr class="luna-card">
+            
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>
+                    ${paciente.apellido}, ${paciente.nombre}
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Edad</div>
+                    ${paciente.edad} años
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">DNI</div>
+                    ${paciente.dni}
+                </td>
+                <td>
+                    <div style="color: #6385dc; font-family: poppinsbold;">Email</div>
+                    ${paciente.email}
+                </td>
+                
+                <td>
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Registro diario" class="luna-card--button" onclick="RegistroDiario(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/book.png" /></button>
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Seguimiento" class="luna-card--button" onclick="Seguimiento(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/seguimiento.png" /></button>
                     <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Notificaciones(${paciente.idUsuario})"><img class="card-icon" src="/img/icon/notification.png" /></button>
-                </div>
-            </div>            
-        </div>
+                    ${paciente.notSeenNotifications > 0 ? RenderBadge(paciente.notSeenNotifications) : ''}
+                </td>
+        </tr>
     `;
 
     $(document).ready(function () {
@@ -40,14 +47,31 @@
                 $('#list').append("No hay ningun paciente creado.");
                 return;
             }
-                        
-            let cards = '';
+             
+            let headers = `
+            <thead>
+            <tr style="display: none;">
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Detalles</th>
+            </tr>
+            </thead>
+            `;
+
+            
+            let cards = '<tbody>';
             let notifications = '';
             pacientes.forEach(p => {
                 cards += buildCard(p)
             });
             
+            cards += '</tbody>';
+            
+            $('#list').append(headers);
             $('#list').append(cards);
+            $('#list').DataTable();
             
            
         });
@@ -62,31 +86,14 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="flex-container">
-                        <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
-                            <strong style="font-family: 'poppinsbold'">Sus pacientes</strong>
-                        </div>
-                        <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Paciente</button>
+                <div class="flex-container">
+                    <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                        <strong style="font-family: 'poppinsbold'">Sus pacientes</strong>
                     </div>
-
-                    <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
-                        <p align="left">
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong><label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
-                            </div>
-                        </p>
-                    </div>
-
-                    <div id="list" class="d-flex flex-wrap" cellpadding="0" cellspacing="0" style="margin-top: 2em;">
-                    </div>
-
-                    <div class="panel-body">
-                        <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
-                        <div>
-                            <div id="pager" class="" style="text-align: center;"></div>
-                        </div>
-                    </div>
+                    <button class="btn yanaButton" onclick="Create();">Nuevo Paciente</button>
+                </div>
+                <div class="card" style="overflow-x: auto;">
+                    <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;"></table>
                 </div>
             </div>
         </div>

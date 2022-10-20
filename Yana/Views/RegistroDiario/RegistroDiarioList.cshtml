@@ -41,7 +41,7 @@
 
             let headers = `
                 <thead>
-                    <tr>
+                    <tr style="display: none;">
                         <th style="font-family: 'poppinsbold'" scope="col">Fecha</th>
                         <th style="font-family: 'poppinsbold'" scope="col">Situacion</th>
                         <th style="font-family: 'poppinsbold'" scope="col">Motivo</th>
@@ -53,11 +53,21 @@
             `;
             let rows = '<tbody>';
             registros.forEach(r => {
-                rows += `<tr style="font-size: 12px" class="${r.seen ? 'seen' : 'not-seen'}">
-                            <td>${new Date(r.fechaModificacion).toLocaleDateString("es-ES", options)}</td>
-                            <td>${r.situacion}</td>
-                            <td>${r.motivoSituacion}</td>
+                rows += `<tr class="luna-card"> 
                             <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Fecha</div>
+                                ${new Date(r.fechaModificacion).toLocaleDateString("es-ES", options)}
+                            </td>     
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Situacion</div>
+                                ${r.situacion}
+                            </td>
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Motivo</div>
+                                ${r.motivoSituacion}
+                            </td>
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Sentimiento</div>
                                 <div style="display: flex;justify-content: space-between;">
                                     <div>${r.idTipoEmocionNavigation.descripcion}</div>
                                     <div class="percentaje-container">
@@ -69,17 +79,13 @@
                                 </div>
                             </td>
                             <td>
+                            <div style="color: #6385dc; font-family: poppinsbold;">Respuesta adaptativa</div>
                                 <div style="display: flex;justify-content: space-between;">
                                     <div>${r.respuestaRacional}</div>
-                                    <div class="percentaje-container">
-                                      <div class="skills" style="width: ${r.gradoCreenciaRespuestaRacional}%; background: #dff3ff;"></div>
-                                      <div class="percentaje">
-                                          ${r.gradoCreenciaRespuestaRacional}%
-                                      </div>
-                                    </div>
                                 </div>
                             </td>
                             <td>
+                            <div style="color: #6385dc; font-family: poppinsbold;">Resultado</div>
                                 <div style="display: flex;justify-content: space-between;">
                                     <div>${r.idTipoEmocionResultadoNavigation.descripcion}</div>
                                     
@@ -140,12 +146,10 @@
     <div id="page-wrapper">
         <div class="row mb50">
             <div class="col-md-12">
-                <div class="panel panel-default">
-
                     <div class="flex-container">
-                    <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
-                        <strong style="font-family: 'poppinsbold'">Registro diario</strong>
-                    </div>
+                        <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                            <strong style="font-family: 'poppinsbold'">Registro diario</strong>
+                        </div>
 
                         @{
                             if (UserCache.IdPerfil == Convert.ToInt32(EnumPerfilUsuario.Paciente))
@@ -155,8 +159,9 @@
                         }
                     </div>
 
+                <div class="card">
                     <div class="" style="margin-top: 2em;">
-                        <table id="list" class="table" cellpadding="0" cellspacing="0"></table>
+                        <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;"></table>
                     </div>
 
 

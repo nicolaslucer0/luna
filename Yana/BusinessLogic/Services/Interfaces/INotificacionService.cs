@@ -21,5 +21,6 @@ namespace Yana.BusinessLogic.Services.Interfaces
         void UpdateStatus(int idNotificacion, EnumEstadoNotificacion estadoNotificacion);
         List<Notificacion> GetByEstados(List<EnumEstadoNotificacion> estadosNotificaciones);
         int GetTotalNotificaciones();
+        int CountNotificationsByProfesionalAndStatus(int idProfesional, int estado);
     }
 }

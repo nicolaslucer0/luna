@@ -22,36 +22,29 @@
     };
 
     const buildCard = (notification) => `
-            <div class="d-flex align-items-center luna-card flex-column justify-items-center">
-                <div class="d-flex justify-content-between card-header">
-                    <div class="card-legend">${new Date(notification.fecha).toLocaleDateString("es-ES", options)}</div>
-                    <div class="card-status ${notification.estado}">${notification.estado}</div>
-                </div>
-                <div class="d-flex flex-grow-1 p-3 flex-column text-center align-items-center" style="width: 100%;">
-                    <table id="list" class="" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td scope="col" style="font-size: 14px;">${notification.mensaje}</td>
-                                    </tr>
-                                    ${notification.respuesta ? 
-                                        `<tr>
-                                            <td scope="col">
-                                                <div class="notification-answer">${notification.respuesta}</div>
-                                            </td>
-                                        </tr>`:  "" 
-                                    }
-                                    ${notification.descripcion ? `
-                                        <tr>
-                                            <td scope="col">
-                                                <div class="notification-comment">${notification.descripcion}</div>
-                                            </td>
-                                        </tr>`:  "" 
-                                    }
-                                </tbody>
-                    </table>
-                    
-                </div>
-            </div>
+        <tr class="luna-card">            
+            <td>
+                <div style="color: #6385dc; font-family: poppinsbold;">Fecha</div>
+                ${new Date(notification.fecha).toLocaleDateString("es-ES", options)}
+            </td>
+            <td>
+                <div style="color: #6385dc; font-family: poppinsbold;">Mensaje</div>
+                ${notification.mensaje}
+            </td>
+            <td>
+                <div style="color: #6385dc; font-family: poppinsbold;">Respuesta</div>
+                ${notification.respuesta ? notification.respuesta : 'No se ha respondido.'}
+            </td>
+            <td>
+                <div style="color: #6385dc; font-family: poppinsbold;">Comentario</div>
+                ${notification.descripcion ? notification.descripcion : 'No se ha respondido.' }
+            </td>
+            
+            <td>
+                <div style="color: #6385dc; font-family: poppinsbold;">Estado</div>
+                <div class="card-status ${notification.estado}">${notification.estado}</div>
+            </td>
+        </tr>
 
     `;
 
@@ -62,24 +55,40 @@
             let registros = data.notificaciones;
 
             if (registros == null || registros.length == 0) {
-                $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5"
-                                     style="width: 100% !important; max-width: 100% !important">
-                                    <div class="d-flex align-items-center justify-content-center flex-grow-1">
-                                        No hay notificaciones creadas.
-                                    </div>
-                                    <img src="../img/no-notificacions.jpg" style="width: 20%;"/>
-                                </div>`);
+                $('#list').append(`
+                        <div class="d-flex align-items-center luna-card justify-content-between pl-5" style="width: 100% !important; max-width: 100% !important">
+                            <div class="d-flex align-items-center justify-content-center flex-grow-1">
+                                No hay notificaciones creadas.
+                            </div>
+                            <img src="../img/no-notificacions.jpg" style="width: 20%;"/>
+                        </div>`);
                 return;
             }
 
-            let cards = '';
+            
+
+            let headers = `
+            <thead>
+                <tr style="display: none;">
+                    <th>Fecha</th>
+                    <th>Mensaje</th>
+                    <th>Opción elegida</th>
+                    <th>Comentario</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            `;
+
+            let cards = '<tbody>';
             let notifications = '';
             registros.forEach(p => {
                 console.log(p)
                 cards += buildCard(p)
             });
-            
+            cards += '</tbody>';
+            $('#list').append(headers);
             $('#list').append(cards);
+            $('#list').DataTable();
 
         });
     });
@@ -90,36 +99,19 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading" id="panelHead">
-                        Notificaciones programadas para: @ViewBag.NombrePaciente
+                <div class="flex-container">
+                    <div class="panel-heading d-flex" style="font-size: 25px; margin-bottom: 20px;">
+                        Notificaciones programadas para:<div style="font-family: 'poppinsbold'; margin-left: 10px;"> @ViewBag.NombrePaciente</div>
                     </div>
-                    <div id="divMessagesP" class="ui-state-highlight ui-corner-all" style="display: none;">
-                        <p align="left">
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong><label id="lblErrorP" style="font-size: 12px; color: firebrick; font-weight: bold; margin-left: 5px;">@TempData["messageERROR"]</label>
-                            </div>
-                        </p>
-                    </div>
-                    <div class="panel-body">
-                        <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
-                        <div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p>
-                                        <button class="btn yanaButton" onclick="Create();"><i class="fa fa-plus-square fa-lg"></i>Nueva Notificación</button>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div id="list" class="d-flex flex-wrap align-items-stretch flex-sm-column flex-md-row" cellpadding="0" cellspacing="0" style="margin: 1em 0;">
+                    <button class="btn yanaButton" onclick="Create();">Nueva notificación</button>
+                </div>
 
-                                </div>
-                                <div id="pager" class="scroll" style="text-align: center;">
-                                </div>
-                            </div>
+                <div class="card" style="overflow-x: auto;">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;"></table>
                         </div>
-                        <br />
+                        
                         <div class="row">
                             <div class="col-md-10"></div>
                             <div class="col-md-2">
@@ -131,6 +123,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
