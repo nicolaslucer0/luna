@@ -21,7 +21,8 @@
                 let { seguimientoPaciente } = data;
                 
                 if (!seguimientoPaciente || seguimientoPaciente.length == 0) {
-                    $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5">
+                    $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5 flex-grow"
+                                     style="max-width: 100% !important">
                                     <div class="d-flex align-items-center justify-content-center flex-grow-1">
                                         No se han tomado notas.
                                     </div>
