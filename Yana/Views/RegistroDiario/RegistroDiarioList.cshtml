@@ -29,7 +29,13 @@
             let registros = data.registroDiarios;
             
             if (registros == null || registros.length == 0) {
-                $('#list').append("No hay registros.");
+                $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5"
+                                     style="width: 100% !important; max-width: 100% !important">
+                                    <div class="d-flex align-items-center justify-content-center flex-grow-1">
+                                        No hay registros diarios aún.
+                                    </div>
+                                    <img src="../img/no-notes.jpg" style="width: 20%;"/>
+                                </div>`);
                 return;
             }
 

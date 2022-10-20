@@ -21,7 +21,13 @@
                 let { seguimientoPaciente } = data;
                 
                 if (!seguimientoPaciente || seguimientoPaciente.length == 0) {
-                    $('#list').append("No hay ningun seguimiento iniciado.");
+                    $('#list').append(`<div class="d-flex align-items-center luna-card justify-content-between pl-5"
+                                     style="width: 100% !important; max-width: 100% !important">
+                                    <div class="d-flex align-items-center justify-content-center flex-grow-1">
+                                        No se han tomado notas.
+                                    </div>
+                                    <img src="../img/no-notes.jpg" style="width: 20%;"/>
+                                </div>`);
                     return;
                 }
                 
