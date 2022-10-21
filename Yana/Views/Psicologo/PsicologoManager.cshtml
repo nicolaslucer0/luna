@@ -120,15 +120,13 @@
 
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Eliminación de Psicólogo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
             </div>
             <div class="modal-body" style="text-align: left;">
                 ¿Seguro que desea eliminar?
@@ -142,16 +140,16 @@
 </div>
 
 <div class="container">
-    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <div class="">
+                
                     <div class="panel-heading mb-3" style="font-size: 25px;">
                         @{
                             string titulo = Model.IdUsuario == 0 ? "Nuevo Psicólogo" : "Modificar Psicólogo";
                         }
                         @titulo
                     </div>
+                    <div class="card">
                     <div id="divMessagesP" class="ui-corner-all" style="display: none;">
                         <p align="left">
                             <div class="alert alert-danger" style="text-align: left;">
@@ -159,7 +157,7 @@
                             </div>
                         </p>
                     </div>
-                    <div class="card-body" id="divPanelBody">
+                    <div class="col-md-12" id="divPanelBody">
                         @{
                             if (Model.IdUsuario == 0)
                             {
@@ -239,9 +237,6 @@
                                     if (Model.IdUsuario != 0)
                                     {
                                         <div class="col-md-6"></div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn yanaButton" data-toggle="modal" data-target="#deleteModal"><i class='fa fa-trash fa-lg'></i>Eliminar</button>
-                                        </div>
                                     }
                                     else
                                     {
@@ -257,9 +252,10 @@
                             </div>
                         }
                     </div>
+                    
                 </div>
             </div>
-        </div>
+
     </div>
 </div>
 

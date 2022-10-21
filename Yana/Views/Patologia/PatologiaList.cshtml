@@ -18,6 +18,7 @@
             let { patologias } = data;
             let rows = '<tbody>';
             patologias.forEach(r => {
+                
                 rows += `<tr class="luna-card" style="font-size: 12px">
                             <td>
                                 <div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>
@@ -26,6 +27,10 @@
                             <td>
                                 <div style="color: #6385dc; font-family: poppinsbold;">Descripcion</div>
                                 ${r.descripcion ? r.descripcion : 'Sin descripcion.'}
+                            </td>
+                            <td>
+                                <div style="color: #6385dc; font-family: poppinsbold;">Acción</div>
+                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Edit(${r.idPatologia})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
                             </td>
                         </tr>`
             });
@@ -55,6 +60,7 @@
                                 <tr style="display: none;">
                                     <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
                                     <th style="font-family: 'poppinsbold'" scope="col">Descripcion</th>
+                                    <th style="font-family: 'poppinsbold'" scope="col">Acción</th>
                                 </tr>
                             </thead>
                         </table>

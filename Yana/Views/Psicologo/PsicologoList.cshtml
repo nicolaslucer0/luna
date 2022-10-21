@@ -31,6 +31,7 @@
                     ${psicologo.email}
                 </td>
                 <td>
+                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Edit(${psicologo.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
                 </td>
         </tr>
     `;
@@ -55,9 +56,8 @@
             </tr>
             </thead>`;
 
-            psicologos.forEach(p => {
-                cards += buildCard(p)
-            });
+            psicologos.forEach(p => cards += buildCard(p))
+            
             cards += '</tbody>';
             
             $('#list').append(headers);
