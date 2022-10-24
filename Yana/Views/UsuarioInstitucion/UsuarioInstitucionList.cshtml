@@ -28,13 +28,29 @@
 
                 let rows = '<tbody>';
                 usuariosInstitucion.forEach(i => {
-                    rows += `<tr style="font-size: 12px">
-                                <td>${i.nombre}</td>
-                                <td>${i.apellido}</td>
-                                <td>${i.email}</td>
-                                <td onclick="Edit(${i.idUsuario})"><img style='width: 10px; height: 10px;' src='/img/icon/pencil.png'/></td>
-                            </tr>`
-                });
+                    rows += `
+                        <tr class="luna-card"> 
+                                <td>
+                                    <div style="color: #6385dc; font-family: poppinsbold;">Nombre</div>
+                                    ${i.apellido}, ${i.nombre}
+                                </td>
+                                <td>
+                                    <div style="color: #6385dc; font-family: poppinsbold;">Edad</div>
+                                    ${i.edad} años
+                                </td>
+                                <td>
+                                    <div style="color: #6385dc; font-family: poppinsbold;">DNI</div>
+                                    ${i.dni}
+                                </td>
+                                <td>
+                                    <div style="color: #6385dc; font-family: poppinsbold;">Email</div>
+                                    ${i.email}
+                                </td>
+                                <td>
+                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" class="luna-card--button" onclick="Edit(${i.idUsuario})"><img class="card-icon" src="/img/icon/pencil.png" /></button>
+                                </td>
+                        </tr>`;
+                    });
                 rows += `</tbody>`;
                 $('#list').append(rows);
                 $('#list').DataTable({
@@ -297,8 +313,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="flex-container">
-                        <div class="panel-heading" id="panelHead">
-                            Usuarios Institución
+                        <div class="panel-heading" style="font-size: 25px; margin-bottom: 20px;">
+                            <strong style="font-family: 'poppinsbold'">Usuarios Institución</strong>
                         </div>
                         <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i> Nuevo Usuario Institución</button>
                     </div>
@@ -311,19 +327,20 @@
                         </div>
                         <div class="panel-body">
                             <p style="color: red; font-weight: 900;">@TempData["messageERROR"]</p>
-                            <div>                          
-                                <table id="list" class="table" cellpadding="0" cellspacing="0">
+                            <div class="card" style="overflow-x: auto;">
+                                <table id="list" class="luna-table" style="border-spacing: 20px;margin-top: 2em;">
                                     <thead>
-                                        <tr>
+                                        <tr style="display: none;">
                                             <th style="font-family: 'poppinsbold'" scope="col">Nombre</th>
-                                            <th style="font-family: 'poppinsbold'" scope="col">Apellido</th>
+                                            <th style="font-family: 'poppinsbold'" scope="col">Edad </th>
+                                            <th style="font-family: 'poppinsbold'" scope="col">DNI</th>
                                             <th style="font-family: 'poppinsbold'" scope="col">Email</th>
                                             <th style="font-family: 'poppinsbold'" scope="col">Editar</th>
                                         </tr>
                                     </thead>
                                 </table>
-                                <div id="pager" class="scroll" style="text-align: center;">
-                                </div>
+                            </div>
+                                <div id="pager" class="scroll" style="text-align: center;"></div>
                             </div>
                         </div>
                     </div>
