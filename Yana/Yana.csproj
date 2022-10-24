@@ -14,9 +14,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Twilio" Version="5.35.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\font-awesome.min.css" />
     <None Include="wwwroot\lib\Highcharts-4.2.5\api\css\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -100,4 +104,7 @@
     <None Include="wwwroot\lib\Highcharts-4.2.5\js\themes\skies.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\img\mental.png" />
+  </ItemGroup>
 </Project>
