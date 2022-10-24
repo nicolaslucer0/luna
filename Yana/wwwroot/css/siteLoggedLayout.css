@@ -495,7 +495,7 @@ tr.luna-card {
   box-sizing: border-box;
   position: relative;
   flex-grow: 1;
-  transition: 0.4s;
+  transition: 0.5s;
   background: white;
   background: white;
   padding: 10px;
@@ -503,6 +503,10 @@ tr.luna-card {
   border-radius: 8px;
   box-shadow: 0 0 0 1px #eeeeee;
   color: black !important;
+}
+
+.luna-card:hover {
+    box-shadow: 0 20px 50px rgb(99 133 220 / 46%);
 }
 
 @media only screen and (max-width: 800px) {
@@ -525,9 +529,7 @@ tr.luna-card {
   align-items: center;
 }
 
-.luna-card:hover {
-  box-shadow: 0 0 10px 0 #8080803d;
-}
+
 
 .luna-card--body {
   margin: 20px 10px;

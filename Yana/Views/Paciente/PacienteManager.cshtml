@@ -13,7 +13,7 @@
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="~/css/notificaciones/bootstrap-datetimepicker.css">
-<script src="~/js/notificaciones/bootstrap-5.2.1.min.js"></script>
+<script src="~/js/bootstrap-5.2.1.min.js"></script>
 <script src="~/js/notificaciones/moment-v2.18.1.js"></script>
 <script src="~/js/notificaciones/bootstrap-datetimepicker.min.js"></script>
 <script>
@@ -29,7 +29,8 @@
         $(images[number]).addClass("selected");
     }
 
-    function IsValid () {
+    function IsValid() {
+        debugger;
         if (!$("#Nombre").val()) {
             $("#lblErrorP").text("Debe ingresar el Nombre.");
             ShowDivMessageP();
@@ -68,26 +69,22 @@
             return false;
         }
 
-        if (!IsEmail(field)) {
-            $("#lblErrorP").text("El E-mail ingresado es inválido.");
-            ShowDivMessageP();
-            return false;
-        }
-
         return true;
     }
 
     const PostForm = () => {
-        if (!IsValid()) return false;
-        try {
-            const postData = JSON.stringify(patologias);
-            $('#txSerializedPatologias').val(postData);
+        if (IsValid()) {
+            
+            try {
+                const postData = JSON.stringify(patologias);
+                $('#txSerializedPatologias').val(postData);
 
-            const avatar = $('.avatar-image.selected').attr("src");
-            $('#ImageUrl').val(avatar);
-            document.forms["frmUsuario"].submit();
-        } catch (err) {
-            alert(err.Description);
+                const avatar = $('.avatar-image.selected').attr("src");
+                $('#ImageUrl').val(avatar);
+                document.forms["frmUsuario"].submit();
+            } catch (err) {
+                alert(err.Description);
+            }
         }
     }
 
