@@ -70,7 +70,7 @@ namespace Yana
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
-
+            app.UseDefaultFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
