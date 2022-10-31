@@ -50,16 +50,16 @@ namespace Yana.Models.DomainEntities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "luna");
+            //optionsBuilder.UseInMemoryDatabase(databaseName: "luna");
 
-            //if (!optionsBuilder.IsConfigured)
-            //{
+            if (!optionsBuilder.IsConfigured)
+            {
                 // Uncomment this to make it work on mac
-                //optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;User=sa;Password=Strong.Pwd-123;");
+                optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;User=sa;Password=Strong.Pwd-123;");
 
                 // Uncomment this to make it work on windows
                 //optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=True;");
-            //}
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

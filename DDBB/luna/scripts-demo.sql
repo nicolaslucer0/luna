@@ -1,3 +1,625 @@
+-- Yana.dbo.EarlyAdopter definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.EarlyAdopter;
+
+CREATE TABLE Yana.dbo.EarlyAdopter (
+	IdEarlyAdopter int IDENTITY(1,1) NOT NULL,
+	Email varchar(150) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	TipoEarlyAdopter varchar(30) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	FechaAlta datetime DEFAULT getdate() NOT NULL,
+	CONSTRAINT PK_EarlyAdopter PRIMARY KEY (IdEarlyAdopter)
+);
+
+
+-- Yana.dbo.EstadoNotificacion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.EstadoNotificacion;
+
+CREATE TABLE Yana.dbo.EstadoNotificacion (
+	IdEstadoNotificacion int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_EstadoNotificacion PRIMARY KEY (IdEstadoNotificacion)
+);
+
+
+-- Yana.dbo.EstadoProfesionalPaciente definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.EstadoProfesionalPaciente;
+
+CREATE TABLE Yana.dbo.EstadoProfesionalPaciente (
+	IdEstadoProfesionalPaciente int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_EstadoProfesionalPaciente PRIMARY KEY (IdEstadoProfesionalPaciente)
+);
+
+
+-- Yana.dbo.GrupoNotificacion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.GrupoNotificacion;
+
+CREATE TABLE Yana.dbo.GrupoNotificacion (
+	IdGrupoNotificacion int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_GrupoNotificacion PRIMARY KEY (IdGrupoNotificacion)
+);
+
+
+-- Yana.dbo.GrupoPatologia definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.GrupoPatologia;
+
+CREATE TABLE Yana.dbo.GrupoPatologia (
+	IdGrupoPatologia int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_GrupoPatologia PRIMARY KEY (IdGrupoPatologia)
+);
+
+
+-- Yana.dbo.Institucion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Institucion;
+
+CREATE TABLE Yana.dbo.Institucion (
+	IdInstitucion int IDENTITY(1,1) NOT NULL,
+	Nombre varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	Password varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Email varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	MainColor varchar(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	SecondaryColor varchar(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	FontColor varchar(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Logourl varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	CONSTRAINT PK_Institucion PRIMARY KEY (IdInstitucion)
+);
+
+
+-- Yana.dbo.Metrica definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Metrica;
+
+CREATE TABLE Yana.dbo.Metrica (
+	IdMetrica int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Metrica PRIMARY KEY (IdMetrica)
+);
+
+
+-- Yana.dbo.Pais definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Pais;
+
+CREATE TABLE Yana.dbo.Pais (
+	IdPais int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Pais PRIMARY KEY (IdPais)
+);
+
+
+-- Yana.dbo.Parentesco definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Parentesco;
+
+CREATE TABLE Yana.dbo.Parentesco (
+	IdParentesco int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Parentesco PRIMARY KEY (IdParentesco)
+);
+
+
+-- Yana.dbo.Patologia definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Patologia;
+
+CREATE TABLE Yana.dbo.Patologia (
+	IdPatologia int IDENTITY(1,1) NOT NULL,
+	Nombre varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Descripcion varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Patologia PRIMARY KEY (IdPatologia)
+);
+
+
+-- Yana.dbo.Perfil definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Perfil;
+
+CREATE TABLE Yana.dbo.Perfil (
+	IdPerfil int IDENTITY(1,1) NOT NULL,
+	Nombre varchar(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Perfiles PRIMARY KEY (IdPerfil)
+);
+
+
+-- Yana.dbo.RegistroNewsletter definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.RegistroNewsletter;
+
+CREATE TABLE Yana.dbo.RegistroNewsletter (
+	IdRegistroNewsletter int IDENTITY(1,1) NOT NULL,
+	Nombre varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	Email varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	Mensaje varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	FechaAlta datetime DEFAULT getdate() NOT NULL,
+	CONSTRAINT PK_RegistroNewsletter PRIMARY KEY (IdRegistroNewsletter)
+);
+
+
+-- Yana.dbo.TipoDomicilio definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.TipoDomicilio;
+
+CREATE TABLE Yana.dbo.TipoDomicilio (
+	IdTipoDomicilio int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_TipoDomicilio PRIMARY KEY (IdTipoDomicilio)
+);
+
+
+-- Yana.dbo.TipoEmocion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.TipoEmocion;
+
+CREATE TABLE Yana.dbo.TipoEmocion (
+	IdTipoEmocion int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_TipoEmocion PRIMARY KEY (IdTipoEmocion)
+);
+
+
+-- Yana.dbo.MenuItem definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.MenuItem;
+
+CREATE TABLE Yana.dbo.MenuItem (
+	IdMenuItem int IDENTITY(1,1) NOT NULL,
+	IdParent int NULL,
+	Nivel int NULL,
+	Orden int NULL,
+	Descripcion varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Controller varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Accion varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Items PRIMARY KEY (IdMenuItem),
+	CONSTRAINT FK_MenuItem_Parent FOREIGN KEY (IdParent) REFERENCES Yana.dbo.MenuItem(IdMenuItem)
+);
+
+
+-- Yana.dbo.PatologiaGrupoPatologia definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.PatologiaGrupoPatologia;
+
+CREATE TABLE Yana.dbo.PatologiaGrupoPatologia (
+	IdPatologiaGrupoPatologia int IDENTITY(1,1) NOT NULL,
+	IdPatologia int NULL,
+	IdGrupoPatologia int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_PatologiaGrupoPatologia PRIMARY KEY (IdPatologiaGrupoPatologia),
+	CONSTRAINT FK_PatologiaGrupoPatologia_GrupoPatologia FOREIGN KEY (IdGrupoPatologia) REFERENCES Yana.dbo.GrupoPatologia(IdGrupoPatologia),
+	CONSTRAINT FK_PatologiaGrupoPatologia_Patologia FOREIGN KEY (IdPatologia) REFERENCES Yana.dbo.Patologia(IdPatologia)
+);
+
+
+-- Yana.dbo.PerfilMenuItem definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.PerfilMenuItem;
+
+CREATE TABLE Yana.dbo.PerfilMenuItem (
+	IdPerfilMenuItem int IDENTITY(1,1) NOT NULL,
+	IdPerfil int NOT NULL,
+	IdMenuItem int NOT NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_PerfilesItems PRIMARY KEY (IdPerfilMenuItem),
+	CONSTRAINT FK_PerfilMenuItem_MenuItem FOREIGN KEY (IdMenuItem) REFERENCES Yana.dbo.MenuItem(IdMenuItem),
+	CONSTRAINT FK_PerfilMenuItem_Perfil FOREIGN KEY (IdPerfil) REFERENCES Yana.dbo.Perfil(IdPerfil)
+);
+
+
+-- Yana.dbo.Provincia definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Provincia;
+
+CREATE TABLE Yana.dbo.Provincia (
+	IdProvincia int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdPais int NOT NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Provincia PRIMARY KEY (IdProvincia),
+	CONSTRAINT FK_Provincia_Pais FOREIGN KEY (IdPais) REFERENCES Yana.dbo.Pais(IdPais)
+);
+
+
+-- Yana.dbo.Usuario definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Usuario;
+
+CREATE TABLE Yana.dbo.Usuario (
+	IdUsuario int IDENTITY(1,1) NOT NULL,
+	Nombre varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Apellido varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	DNI int NULL,
+	TelefonoParticular varchar(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Celular varchar(20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Email varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Password varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdPerfil int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	FechaNacimiento datetime NULL,
+	Sexo char(1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	ImageUrl varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	CONSTRAINT PK_Usuario PRIMARY KEY (IdUsuario),
+	CONSTRAINT FK_Usuario_Perfil FOREIGN KEY (IdPerfil) REFERENCES Yana.dbo.Perfil(IdPerfil)
+);
+
+
+-- Yana.dbo.UsuarioInstitucion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.UsuarioInstitucion;
+
+CREATE TABLE Yana.dbo.UsuarioInstitucion (
+	IdUsuarioInstitucion int IDENTITY(1,1) NOT NULL,
+	IdUsuario int NULL,
+	IdInstitucion int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_UsuarioInstitucion PRIMARY KEY (IdUsuarioInstitucion),
+	CONSTRAINT FK_UsuarioInstitucion_Institucion FOREIGN KEY (IdInstitucion) REFERENCES Yana.dbo.Institucion(IdInstitucion),
+	CONSTRAINT FK_UsuarioInstitucion_Usuario FOREIGN KEY (IdUsuario) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+-- Yana.dbo.GrupoFamiliar definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.GrupoFamiliar;
+
+CREATE TABLE Yana.dbo.GrupoFamiliar (
+	IdGrupoFamiliar int IDENTITY(1,1) NOT NULL,
+	IdPaciente int NULL,
+	Nombre varchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdParentesco int NULL,
+	Observaciones varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_GrupoFamiliar PRIMARY KEY (IdGrupoFamiliar),
+	CONSTRAINT FK_GrupoFamiliar_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_GrupoFamiliar_Parentesco FOREIGN KEY (IdParentesco) REFERENCES Yana.dbo.Parentesco(IdParentesco)
+);
+
+
+-- Yana.dbo.Localidad definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Localidad;
+
+CREATE TABLE Yana.dbo.Localidad (
+	IdLocalidad int IDENTITY(1,1) NOT NULL,
+	Descripcion varchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdProvincia int NOT NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_Localidad PRIMARY KEY (IdLocalidad),
+	CONSTRAINT FK_Localidad_Provincia FOREIGN KEY (IdProvincia) REFERENCES Yana.dbo.Provincia(IdProvincia)
+);
+
+
+-- Yana.dbo.Notificacion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.Notificacion;
+
+CREATE TABLE Yana.dbo.Notificacion (
+	IdNotificacion int IDENTITY(1,1) NOT NULL,
+	IdProfesional int NULL,
+	IdPaciente int NULL,
+	Mensaje varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	FechaHora datetime NULL,
+	IdEstadoNotificacion int NULL,
+	IdGrupoNotificacion int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	EsTipoEstadoEmocional bit DEFAULT 0 NOT NULL,
+	CONSTRAINT PK_Notificacion PRIMARY KEY (IdNotificacion),
+	CONSTRAINT FK_Notificacion_EstadoNotificacion FOREIGN KEY (IdEstadoNotificacion) REFERENCES Yana.dbo.EstadoNotificacion(IdEstadoNotificacion),
+	CONSTRAINT FK_Notificacion_GrupoNotificacion FOREIGN KEY (IdGrupoNotificacion) REFERENCES Yana.dbo.GrupoNotificacion(IdGrupoNotificacion),
+	CONSTRAINT FK_Notificacion_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_Notificacion_Profesional FOREIGN KEY (IdProfesional) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+-- Yana.dbo.NotificacionOpcion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.NotificacionOpcion;
+
+CREATE TABLE Yana.dbo.NotificacionOpcion (
+	IdNotificacionOpcion int IDENTITY(1,1) NOT NULL,
+	IdNotificacion int NULL,
+	Descripcion varchar(300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Orden int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_NotificacionOpcion PRIMARY KEY (IdNotificacionOpcion),
+	CONSTRAINT FK_NotificacionOpcion_Notificacion FOREIGN KEY (IdNotificacion) REFERENCES Yana.dbo.Notificacion(IdNotificacion)
+);
+
+
+-- Yana.dbo.NotificacionRespuesta definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.NotificacionRespuesta;
+
+CREATE TABLE Yana.dbo.NotificacionRespuesta (
+	IdNotificacionRespuesta int IDENTITY(1,1) NOT NULL,
+	IdNotificacion int NULL,
+	IdNotificacionOpcion int NULL,
+	Respuesta varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_NotificacionRespuesta PRIMARY KEY (IdNotificacionRespuesta),
+	CONSTRAINT FK_NotificacionRespuesta_Notificacion FOREIGN KEY (IdNotificacion) REFERENCES Yana.dbo.Notificacion(IdNotificacion),
+	CONSTRAINT FK_NotificacionRespuesta_NotificacionOpcion FOREIGN KEY (IdNotificacionOpcion) REFERENCES Yana.dbo.NotificacionOpcion(IdNotificacionOpcion)
+);
+
+
+-- Yana.dbo.PacientePatologia definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.PacientePatologia;
+
+CREATE TABLE Yana.dbo.PacientePatologia (
+	IdPacientePatologia int IDENTITY(1,1) NOT NULL,
+	IdPaciente int NULL,
+	IdPatologia int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_PacientePatologia PRIMARY KEY (IdPacientePatologia),
+	CONSTRAINT FK_PacientePatologia_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_PacientePatologia_Patologia FOREIGN KEY (IdPatologia) REFERENCES Yana.dbo.Patologia(IdPatologia)
+);
+
+
+-- Yana.dbo.ProfesionalInstitucion definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.ProfesionalInstitucion;
+
+CREATE TABLE Yana.dbo.ProfesionalInstitucion (
+	IdProfesionalInstitucion int IDENTITY(1,1) NOT NULL,
+	IdProfesional int NULL,
+	IdInstitucion int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_ProfesionalInstitucion PRIMARY KEY (IdProfesionalInstitucion),
+	CONSTRAINT FK_ProfesionalInstitucion_Institucion FOREIGN KEY (IdInstitucion) REFERENCES Yana.dbo.Institucion(IdInstitucion),
+	CONSTRAINT FK_ProfesionalInstitucion_Profesional FOREIGN KEY (IdProfesional) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+-- Yana.dbo.ProfesionalPaciente definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.ProfesionalPaciente;
+
+CREATE TABLE Yana.dbo.ProfesionalPaciente (
+	IdProfesionalPaciente int IDENTITY(1,1) NOT NULL,
+	IdProfesional int NULL,
+	IdPaciente int NULL,
+	IdEstadoProfesionalPaciente int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_ProfesionalPaciente PRIMARY KEY (IdProfesionalPaciente),
+	CONSTRAINT FK_ProfesionalPaciente_EstadoProfesionalPaciente FOREIGN KEY (IdEstadoProfesionalPaciente) REFERENCES Yana.dbo.EstadoProfesionalPaciente(IdEstadoProfesionalPaciente),
+	CONSTRAINT FK_ProfesionalPaciente_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_ProfesionalPaciente_Profesional FOREIGN KEY (IdProfesional) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+-- Yana.dbo.RegistroDiario definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.RegistroDiario;
+
+CREATE TABLE Yana.dbo.RegistroDiario (
+	IdRegistroDiario int IDENTITY(1,1) NOT NULL,
+	IdPaciente int NULL,
+	Situacion varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	MotivoSituacion varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdTipoEmocion int NULL,
+	IntensidadEmocion int NULL,
+	PensamientoAutomatico varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	GradoCreenciaPensamientoAutomatico int NULL,
+	RespuestaRacional varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	GradoCreenciaRespuestaRacional int NULL,
+	GradoCreenciaResultado int NULL,
+	IdTipoEmocionResultado int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	seen bit NULL,
+	CONSTRAINT PK_RegistroDiario PRIMARY KEY (IdRegistroDiario),
+	CONSTRAINT FK_RegistroDiario_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_RegistroDiario_TipoEmocion FOREIGN KEY (IdTipoEmocion) REFERENCES Yana.dbo.TipoEmocion(IdTipoEmocion)
+);
+
+
+-- Yana.dbo.RegistroDiarioRespuesta definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.RegistroDiarioRespuesta;
+
+CREATE TABLE Yana.dbo.RegistroDiarioRespuesta (
+	IdRegistroDiarioRespuesta int IDENTITY(1,1) NOT NULL,
+	IdRegistroDiario int NULL,
+	IdProfesional int NULL,
+	Nota varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_RegistroDiarioRespuesta PRIMARY KEY (IdRegistroDiarioRespuesta),
+	CONSTRAINT FK_RegistroDiarioRespuesta_Profesional FOREIGN KEY (IdProfesional) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_RegistroDiarioRespuesta_RegistroDiario FOREIGN KEY (IdRegistroDiario) REFERENCES Yana.dbo.RegistroDiario(IdRegistroDiario)
+);
+
+
+-- Yana.dbo.SeguimientoPaciente definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.SeguimientoPaciente;
+
+CREATE TABLE Yana.dbo.SeguimientoPaciente (
+	IdSeguimientoPaciente int IDENTITY(1,1) NOT NULL,
+	IdProfesional int NULL,
+	IdPaciente int NULL,
+	Nota varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	FechaAlta datetime NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_SeguimientoPaciente PRIMARY KEY (IdSeguimientoPaciente),
+	CONSTRAINT FK_SeguimientoPaciente_Paciente FOREIGN KEY (IdPaciente) REFERENCES Yana.dbo.Usuario(IdUsuario),
+	CONSTRAINT FK_SeguimientoPaciente_Profesional FOREIGN KEY (IdProfesional) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+-- Yana.dbo.DomicilioUsuario definition
+
+-- Drop table
+
+-- DROP TABLE Yana.dbo.DomicilioUsuario;
+
+CREATE TABLE Yana.dbo.DomicilioUsuario (
+	IdDomicilioUsuario int IDENTITY(1,1) NOT NULL,
+	IdUsuario int NULL,
+	Calle varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Numero int NULL,
+	Piso int NULL,
+	Depto char(3) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	EntreCalle1 varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	EntreCalle2 varchar(200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Telefono1 varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Telefono2 varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Celular1 varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Celular2 varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	TelefonoEmergencia varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	Observaciones varchar(MAX) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	IdTipoDomicilio int NULL,
+	IdLocalidad int NULL,
+	BajaLogica bit DEFAULT 0 NOT NULL,
+	FechaModificacion datetime DEFAULT getdate() NOT NULL,
+	IdUsuarioModificacion int NOT NULL,
+	CONSTRAINT PK_DomicilioUsuario PRIMARY KEY (IdDomicilioUsuario),
+	CONSTRAINT FK_DomicilioUsuario_Localidad FOREIGN KEY (IdLocalidad) REFERENCES Yana.dbo.Localidad(IdLocalidad),
+	CONSTRAINT FK_DomicilioUsuario_TipoDomicilio FOREIGN KEY (IdTipoDomicilio) REFERENCES Yana.dbo.TipoDomicilio(IdTipoDomicilio),
+	CONSTRAINT FK_DomicilioUsuario_Usuario FOREIGN KEY (IdUsuario) REFERENCES Yana.dbo.Usuario(IdUsuario)
+);
+
+
+
+/* DATA */
 INSERT INTO Yana.dbo.Perfil (Nombre,BajaLogica,FechaModificacion,IdUsuarioModificacion) VALUES
 	 (N'Administrador',0,'2019-09-28 18:32:45.653',1),
 	 (N'Profesional',0,'2019-09-28 18:32:45.653',1),
