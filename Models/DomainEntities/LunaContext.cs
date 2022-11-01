@@ -58,7 +58,8 @@ namespace Yana.Models.DomainEntities
                 //optionsBuilder.UseSqlServer("Database=Yana;Trusted_Connection=False;User=sa;Password=Strong.Pwd-123;");
 
                 // Uncomment this to make it work on windows
-                optionsBuilder.UseSqlServer("Server=DESKTOP-1O5TC18\\SQLEXPRESS;Database=Yana;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Server=DESKTOP-1O5TC18\\SQLEXPRESS;Database=Yana;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Database=Luna;Trusted_Connection=True;");
             }
         }
 
