@@ -4,6 +4,181 @@
     //ViewData["Title"] = "Home Page";
 }
 
+<style>
+
+    #tarjeta .container {
+        margin: 20px auto;
+        width: 800px;
+        padding: 30px
+    }
+
+    #tarjeta .card.box1 {
+        width: 350px;
+        height: 500px;
+        background-color: #6385dc;
+        color: #FFF;
+        border-radius: 0
+    }
+
+    #tarjeta .card.box2 {
+        width: 450px;
+        height: 580px;
+        background-color: #ffffff;
+        border-radius: 0
+    }
+
+    #tarjeta .text {
+        font-size: 13px
+    }
+
+    #tarjeta .box2 .btn.btn-primary.bar {
+        width: 20px;
+        background-color: transparent;
+        border: none;
+        color: #6385dc
+    }
+
+    #tarjeta .box2 .btn.btn-primary.bar:hover {
+            color: #6385dc
+    }
+
+    #tarjeta .box1 .btn.btn-primary {
+        background-color: #6385dc;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ddd
+    }
+
+    #tarjeta .box1 .btn.btn-primary:hover {
+        background-color: #f6f8f7;
+        color: #6385dc
+    }
+
+    #tarjeta .btn.btn-success {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ddd;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none
+    }
+
+    #tarjeta .nav.nav-tabs {
+        border: none;
+        border-bottom: 2px solid #ddd
+    }
+
+    #tarjeta .nav.nav-tabs .nav-item .nav-link {
+        border: none;
+        color: black;
+        border-bottom: 2px solid transparent;
+        font-size: 14px
+    }
+
+    #tarjeta .nav.nav-tabs .nav-item .nav-link:hover {
+        border-bottom: 2px solid #6385dc;
+        color: #6385dc
+    }
+
+    #tarjeta .nav.nav-tabs .nav-item .nav-link.active {
+        border: none;
+        border-bottom: 2px solid #6385dc
+    }
+
+    #tarjeta .form-control {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        box-shadow: none;
+        height: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 15px 0px;
+        letter-spacing: 1.5px;
+        border-radius: 0
+    }
+
+    #tarjeta .inputWithIcon {
+        position: relative
+    }
+
+    #tarjeta img {
+        width: 50px;
+        height: 20px;
+        object-fit: cover
+    }
+
+    #tarjeta .inputWithIcon span {
+        position: absolute;
+        right: 0px;
+        bottom: 9px;
+        color: #6385dc;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 14px
+    }
+
+    #tarjeta .form-control:focus {
+        box-shadow: none;
+        border-bottom: 1px solid #ddd
+    }
+
+    #tarjeta .btn-outline-primary {
+        color: black;
+        background-color: #ddd;
+        border: 1px solid #ddd
+    }
+
+    #tarjeta .btn-outline-primary:hover {
+        background-color: #6385dc;
+        border: 1px solid #ddd
+    }
+
+    #tarjeta .btn-check:active+.btn-outline-primary,
+    #tarjeta .btn-check:checked+.btn-outline-primary,
+    #tarjeta .btn-outline-primary.active,
+    #tarjeta .btn-outline-primary.dropdown-toggle.show,
+    #tarjeta .btn-outline-primary:active {
+        color: #FFF;
+        background-color: #6385dc;
+        box-shadow: none;
+        border: 1px solid #ddd
+    }
+
+    #tarjeta .btn-group>.btn-group:not(:last-child)>.btn,
+    #tarjeta .btn-group>.btn:not(:last-child):not(.dropdown-toggle),
+    #tarjeta .btn-group>.btn-group:not(:first-child)>.btn,
+    #tarjeta .btn-group>.btn:nth-child(n+3),
+    #tarjeta .btn-group>:not(.btn-check)+.btn {
+        border-radius: 50px;
+        margin-right: 20px
+    }
+
+    #tarjeta form {
+        font-size: 14px
+    }
+
+    #tarjeta form .btn.btn-primary {
+        width: 100%;
+        height: 45px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #6385dc;
+        border: 1px solid #ddd
+    }
+
+    #tarjeta form .btn.btn-primary:hover {
+        background-color: #6385dc
+    }
+</style>
+
 
 <style>
     .body {
@@ -15,7 +190,7 @@
     }
 </style>
 
-<div class="body container">
+<div class="body container" id="comienzo">
     <div class="row">
         <h2 class="mb-5">Datos de pago</h2>
     </div>
@@ -24,13 +199,23 @@
         <div class="row card-container">
             <div class="col-md-8">
                 <select id="type-select" class="mb-2 form-select">
-                    <option>Profesional</option>
-                    <option>Institución</option>
+                    <option value="Institucion">Institución</option>
+                    <option value="Profesional">Profesional</option>
                 </select>
-                <input class="form-control mb-2" type="text" name="expiry" placeholder="Nombre y apellido" />
+                <select id="precioProf" class="mb-2 form-select">
+                    <option value="" disabled selected>Seleccione plan de profesional</option>
+                    <option value="USD 30.00">Estandar USD 30.00</option>
+                    <option value="USD 50.00">Premium USD 50.00</option>
+                </select>
+                <select id="precioInst" class="mb-2 form-select">
+                    <option value="" disabled selected>Seleccione plan de institución</option>
+                    <option value="USD 250.00">Estandar USD 250.00</option>
+                    <option value="USD 400.00">Premium USD 400.00</option>
+                </select>
+                <input class="form-control mb-2" type="text" name="expiry" id="nombreInput" placeholder="Nombre y apellido" />
                 <input class="form-control mb-2" type="text" name="number" placeholder="Email">
-                <input class="form-control mb-2" type="text" name="first-name" placeholder="DNI" />
-                <button class="btn yanaButton">Siguiente</button>
+                <input class="form-control mb-2" type="text" name="first-name" id="dni" placeholder="CUIL/CUIT" />
+                <button class="btn yanaButton" onclick="irAPagar()">Siguiente</button>
             </div>
             <div class="col-md-4">
                 <img class="pay-image" src="~/img/pay.jpg">
@@ -40,51 +225,70 @@
     </div>
 </div>
 
-<div class="body container">
-
-    <div class="card p-5">
-        <div class="row card-container">
-            <div class="col-md-6">
-                <input class="form-control mb-2" type="text" name="number" placeholder="Numero de tarjeta">
-                <input class="form-control mb-2" type="text" name="first-name" placeholder="Nombre en la tarjeta" />
-                <input class="form-control mb-2" type="text" name="expiry" placeholder="Vence" />
-                <input class="form-control mb-2" type="text" name="cvc" placeholder="Nombre en la tarjeta" />
-            </div>
-            <div class="col-md-6">
-                <div class="credit-card">
-                    <div class="card__front card__part">
-                        <img class="card__front-square card__square" src="~/img/chip.png">
-                        <img class="card__front-logo card__logo" src="~/img/visa_logo.png" style="filter: brightness(100);">
-                        <p class="card_numer">**** **** **** ****</p>
-                        <div class="card__space-75">
-                            <span class="card__label">NOMBRE EN TARJETA</span>
-                            <p class="card__info">XXXX</p>
-                        </div>
-                        <div class="card__space-25">
-                            <span class="card__label">VENCE</span>
-                            <p class="card__info">DD/MM</p>
-                        </div>
-                    </div>
-
-                    <div class="card__back card__part">
-                        <div class="card__black-line"></div>
-                        <div class="card__back-content">
-                            <div class="card__secret">
-                                <p class="card__secret--last">XXX</p>
-                            </div>
-                            <img class="card__back-square card__square" src="https://image.ibb.co/cZeFjx/little_square.png">
-                            <img class="card__back-logo card__logo" src="https://www.fireeye.com/partners/strategic-technology-partners/visa-fireeye-cyber-watch-program/_jcr_content/content-par/grid_20_80_full/grid-20-left/image.img.png/1505254557388.png">
-                        </div>
-                    </div>
-
+<section id="tarjeta">
+    <div class="container bg-light d-md-flex align-items-center">
+        <div class="card box1 shadow-sm p-md-5 p-md-5 p-4">
+            <div class="fw-bolder mb-4"><span class="fas fa-dollar-sign"></span><span class="ps-1 aPagar"></span></div>
+            <div class="d-flex flex-column">
+                <div class="d-flex align-items-center justify-content-between text mb-4"> <span>Total</span> <span class="fas fa-dollar-sign"><span class="ps-1 aPagar"></span></span> </div>
+                <div class="border-bottom mb-4"></div>
+                <div class="d-flex flex-column mb-4"> <span class="far fa-file-alt text"><span class="ps-2">Profesional:</span></span> <span class="ps-3 nombreInputResult" id="nombreInputResult"></span> </div>
+                <div class="d-flex flex-column mb-4"> <span class="far fa-file-alt text"><span class="ps-2">DNI:</span></span> <span class="ps-3" id="dniInputResult"></span> </div>
+                <div class="d-flex flex-column mb-5"> <span class="far fa-calendar-alt text"><span class="ps-2">Próximo pago:</span></span> <span class="ps-3" id="fechaPago"></span> </div>
+                <div class="d-flex align-items-center justify-content-between text mt-5">
+                    <div class="d-flex flex-column text"> <span>Soporte:</span> <span>online chat 24/7</span> </div>
+                    <div class="btn btn-primary rounded-circle"><span class="fa fa-comment-o"></span></div>
                 </div>
             </div>
-
+        </div>
+        <div class="card box2 shadow-sm">
+            <div class="d-flex align-items-center justify-content-between p-md-5 p-4">
+                <span class="h5 fw-bold m-0">Cobranza</span>
+            </div>
+            <ul class="nav nav-tabs mb-3 px-md-4 px-2">
+                <li class="nav-item"> <a class="nav-link px-2 active" aria-current="page" href="#">Tarjeta de crédito</a> </li>
+            </ul>
+            <div class="px-md-5 px-4 mb-4 d-flex align-items-center" style="display: none !important;">
+                <div class="btn btn-success me-4"><span class="fa fa-plus"></span></div>
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group"> <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked> <label class="btn btn-outline-primary" for="btnradio1"><span class="pe-1">+</span>5949</label> <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"> <label class="btn btn-outline-primary" for="btnradio2"><span class="lpe-1">+</span>3894</label> </div>
+            </div>
+            <form action="">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex flex-column px-md-5 px-4 mb-4">
+                            <span>Número de la tarjeta</span>
+                            <div class="inputWithIcon"> <input class="form-control" type="text" value="5136 1845 5468 3894"> <span class=""> <img src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png" alt=""></span> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-column ps-md-5 px-md-0 px-4 mb-4">
+                            <span>Fecha<span class="ps-1">vencimiento</span></span>
+                            <div class="inputWithIcon"> <input type="text" class="form-control" value="05/25"> <span class="fa fa-calendar"></span> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex flex-column pe-md-5 px-md-0 px-4 mb-4">
+                            <span>CVV</span>
+                            <div class="inputWithIcon"> <input type="password" class="form-control" value="123"> <span class="fa fa-lock"></span> </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-column px-md-5 px-4 mb-4">
+                            <span>Name</span>
+                            <div class="inputWithIcon"> <input class="form-control text-uppercase" type="text" value="" id="nombreInputResult2"> <span class="fa fa-user"></span> </div>
+                        </div>
+                    </div>
+                    <div class="col-12 px-md-5 px-4 mt-3">
+                        <div class="btn btn-primary w-100 aPagar2" onclick="irAFinalizar()"></div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</div>
+</section>
 
-<div class="body container">
+
+<div class="body container" id="finalizar">
     <div class="card p-5">
         <div class="row card-container">
             <div class="col-md-12">
@@ -94,7 +298,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn yanaButton" onclick="Create();"><i class='fa fa-plus-square fa-lg'></i>Iniciar sesión</button>
+            <a class="btn btn-primary" style="width: auto;padding: 1% 2%;" href="/Home/Login"><i class='fa fa-plus-square fa-lg'></i>  Iniciar sesión</a>
         </div>
     </div>
 </div>
@@ -106,5 +310,63 @@
              // mostrar nombre de institución al seleccionar institución
         });
 
+        $("#tarjeta").hide();
+        $("#finalizar").hide();
+
+        
+
+        ocultarInputs();
+
+        var d = new Date(); 
+        
+        var month = d.getMonth() + 2; 
+        var day = d.getDate(); 
+
+        var output = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + d.getFullYear();
+        $("#fechaPago").text(output);
+
+        $("#nombreInput").keyup(function () {
+            $("#nombreInputResult").text($("#nombreInput").val());
+            $("#nombreInputResult2").val($("#nombreInput").val());
+        }); 
+        
+        $("#dni").keyup(function () {
+            $("#dniInputResult").text($("#dni").val());
+        });
+
+        $("#type-select").on('change', function () {
+            ocultarInputs();
+        });
+
+        function ocultarInputs(){
+            if ($("#type-select").val() == 'Institucion') {
+                $("#precioProf").hide();
+                $("#precioInst").show();
+            } else {
+                $("#precioInst").hide();
+                $("#precioProf").show();
+            }
+        }
+
+        $("#precioProf").on('change', function () {
+            $(".aPagar").text($("#precioProf").val());
+            $(".aPagar2").text("Pagar " + $("#precioProf").val());
+        });
+
+        $("#precioInst").on('change', function () {
+            $(".aPagar").text($("#precioInst").val());
+            $(".aPagar2").text("Pagar " + $("#precioInst").val());
+        });
+
+        
     })
+
+    function irAPagar() {
+        $("#comienzo").hide(1000);
+        $("#tarjeta").show(1000);
+    }
+    function irAFinalizar() {
+        $("#tarjeta").hide(1000);
+        $("#finalizar").show(1000);
+    }
 </script>
