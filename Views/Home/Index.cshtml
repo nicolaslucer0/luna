@@ -1,7 +1,7 @@
 ﻿@using Yana.Enums
 
 @{
-    //ViewData["Title"] = "Home Page";
+            //ViewData["Title"] = "Home Page";
 }
 
 @using (Html.BeginForm("AddEarlyAdopter", "Home", FormMethod.Post))
@@ -36,115 +36,119 @@
 }
 
 
-<div class="container-fluid landing-container">
-    <div class="centered row">
-        <div class="landing-text col-xs-12 col-md-6">
-            <h1 class="landing-title wow fadeIn animated"><span style="font-family: 'poppinsbold'">Luna</span></h1>
-            <h2 class="landing-subtitle"><span class="color">Si lo sentís,</span> importa.</h2>
-            <p class="landing-p ">Construimos una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
-            <button type="button" class="btn yanaButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Conocenos
-            </button>
-            <a class="mt-3" href="https://www.instagram.com/luna.psico.app" target="_blank"><img style="width: 30px; height: 30px; filter: invert(44%) sepia(58%) saturate(458%) hue-rotate(185deg) brightness(105%) contrast(96%);" src="./img/icon/instagram.png" /></a>
-            
-        </div>
-        <!-- End Wrapper for slides -->
-        <div class="col-xs-12 col-md-6">
-            <img class="landing-image" src="./img/landing-image.png" />
+<section id="slider" class="slider">
+    <div class="container-fluid landing-container">
+        <div class="centered row">
+            <div class="landing-text col-xs-12 col-md-6">
+                <h1 class="landing-title wow fadeIn animated"><span style="font-family: 'poppinsbold'">Luna</span></h1>
+                <h2 class="landing-subtitle"><span class="color">Si lo sentís,</span> importa.</h2>
+                <p class="landing-p ">Construimos una herramienta que facilita el seguimiento y mejora la interacción entre psicólogos y pacientes</p>
+                <button type="button" class="btn yanaButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Conocenos
+                </button>
+                <a class="mt-3" href="https://www.instagram.com/luna.psico.app" target="_blank"><img style="width: 30px; height: 30px; filter: invert(44%) sepia(58%) saturate(458%) hue-rotate(185deg) brightness(105%) contrast(96%);" src="./img/icon/instagram.png" /></a>
+
+            </div>
+            <!-- End Wrapper for slides -->
+            <div class="col-xs-12 col-md-6">
+                <img class="landing-image" src="./img/landing-image.png" />
+            </div>
         </div>
     </div>
-</div>
+</section>
 
-
-
-<div class="container key-feature">
-    <div class="centered row">
-        <div class="col-xs-12 col-md-6">
-            <img class="landing-image" src="./img/mental.jpg" />
-        </div>
-        <div class="col-md-6">
-            <div class="service-item">
-                <div class="service-desc">
-                    <h3>Psicólogos</h3>
-                    <p>
-                        <b>Luna</b> ofrece una serie de herramientas para el tratamiento y seguimiento de diferentes patologías.
-                        Nos enfocamos en brindar información precisa y detallada,
-                        como así brindar una mayor sensación de acompañamiento durante el tratamiento
-                    </p>
+<section id="psico" class="psico">
+    <div class="container key-feature">
+        <div class="centered row">
+            <div class="col-xs-12 col-md-6">
+                <img class="landing-image" src="./img/mental.jpg" />
+            </div>
+            <div class="col-md-6">
+                <div class="service-item">
+                    <div class="service-desc">
+                        <h3>Psicólogos</h3>
+                        <p>
+                            <b>Luna</b> ofrece una serie de herramientas para el tratamiento y seguimiento de diferentes patologías.
+                            Nos enfocamos en brindar información precisa y detallada,
+                            como así brindar una mayor sensación de acompañamiento durante el tratamiento
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="container key-feature">
-    <div class="centered row ">
-        <div class="col-md-6">
-            <div class="service-item">
-                <div class="service-desc">
-                    <h3>Notificaciones programadas y personalizadas</h3>
-                    <p>
-                        A traves de notificaciones preestablecidas obtendremos la información necesaria para diseñar nuestras estadisticas
-                        y facilitar la deteccion de patrones. Con la posibilidad de generar notificaciones programadas,
-                        el paciente se sentira más contenido
-                    </p>
+<section id="about" class="about">
+    <div class="container key-feature">
+        <div class="centered row ">
+            <div class="col-md-6">
+                <div class="service-item">
+                    <div class="service-desc">
+                        <h3>Notificaciones programadas y personalizadas</h3>
+                        <p>
+                            A traves de notificaciones preestablecidas obtendremos la información necesaria para diseñar nuestras estadisticas
+                            y facilitar la deteccion de patrones. Con la posibilidad de generar notificaciones programadas,
+                            el paciente se sentira más contenido
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <img class="landing-image" src="./img/notifications.jpg" />
-        </div>
-    </div>
-</div>
-
-<div class="container key-feature">
-    <div class="centered row">
-        <div class="col-xs-12 col-md-6">
-            <img class="landing-image" src="./img/notebook.jpg" />
-        </div>
-        <div class="col-md-4 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
-            <div class="service-item">
-
-                <div class="service-desc">
-                    <h3>Registro diario de pensamiento</h3>
-                    <p>
-                        A traves de esta funcionalidad, no sera necesario llevar ningun tipo de anotador para llevar el registro.
-                        Simplemente con tu smartphone podras ingresar en nuestro sitio y cargar lo ocurrido.
-                        Además, podrás verificar las devoluciones de tu psicologo o ver el historico de los registros
-                    </p>
-                </div>
+            <div class="col-xs-12 col-md-6">
+                <img class="landing-image" src="./img/notifications.jpg" />
             </div>
         </div>
-
     </div>
-</div>
-<div class="container key-feature">
-    <div class="centered row">
-        <div class="col-md-4">
-            <div class="service-item">
-                <div class="service-desc">
-                    <h3>Estadísticas</h3>
-                    <p><br /> Mediante nuestras estadisticas del estado emocional se podrán detectar patrones o picos de los diferentes estados emocionales</p>
+
+    <div class="container key-feature">
+        <div class="centered row">
+            <div class="col-xs-12 col-md-6">
+                <img class="landing-image" src="./img/notebook.jpg" />
+            </div>
+            <div class="col-md-4 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
+                <div class="service-item">
+
+                    <div class="service-desc">
+                        <h3>Registro diario de pensamiento</h3>
+                        <p>
+                            A traves de esta funcionalidad, no sera necesario llevar ningun tipo de anotador para llevar el registro.
+                            Simplemente con tu smartphone podras ingresar en nuestro sitio y cargar lo ocurrido.
+                            Además, podrás verificar las devoluciones de tu psicologo o ver el historico de los registros
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-6">
-            <img class="landing-image" src="./img/reporting.jpg" />
+
         </div>
     </div>
-</div>
 
+    <div class="container key-feature">
+        <div class="centered row">
+            <div class="col-md-4">
+                <div class="service-item">
+                    <div class="service-desc">
+                        <h3>Estadísticas</h3>
+                        <p><br /> Mediante nuestras estadisticas del estado emocional se podrán detectar patrones o picos de los diferentes estados emocionales</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <img class="landing-image" src="./img/reporting.jpg" />
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="contact" class="contact">
     <div class="container">
 
-            <div class="sec-title text-center mb50">
-                <h2 class="blue-text">Contacto</h2>
-            </div>
+        <div class="sec-title text-center mb50">
+            <h2 class="blue-text">Contacto</h2>
+        </div>
 
-            <div class="mt-3 mb-5 text-center" >
-                <p>Si te interesa contar con los servicios de <b style="font-family: poppinsbold">Luna</b>, dejanos tus datos y un asesor comercial se pondrá en contacto a la brevedad</p>
-            </div>
+        <div class="mt-3 mb-5 text-center">
+            <p>Si te interesa contar con los servicios de <b style="font-family: poppinsbold">Luna</b>, dejanos tus datos y un asesor comercial se pondrá en contacto a la brevedad</p>
+        </div>
         <div class="row justify-content-center" style="width: 80%; margin: auto;">
 
             <!-- contact address -->
@@ -156,7 +160,7 @@
                     <p style="font-size: 12px;">(+5411) 4480-8900</p>
                 </div>
             </div>
-            
+
             <div class="col-md-6 col-xs-12">
                 <div class="contact-form">
                     <h3>Queres saber mas?</h3>
@@ -175,13 +179,13 @@
                         <div class="input-group">
                             <textarea name="message" id="message" placeholder="Mensaje" class="form-control" oninvalid="this.setCustomValidity('Este campo es obligatorio')" oninput="this.setCustomValidity('')"></textarea>
                         </div>
-                        
+
                         <button id="form-submit" class="pull-right btn yanaButton">Enviar mensaje</button>
-                        
+
                     }
                 </div>
             </div>
-            
+
             <div class="col-md-1 col-xs-12 d-flex justify-content-center">
                 <a class="mt-3" href="https://www.instagram.com/luna.psico.app" target="_blank"><img style="width: 30px; height: 30px; filter: invert(44%) sepia(58%) saturate(458%) hue-rotate(185deg) brightness(105%) contrast(96%);" src="./img/icon/instagram.png" /></a>
             </div>
