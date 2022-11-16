@@ -28,7 +28,6 @@
             const postData = JSON.stringify(respuestas);
             $('#txSerializedOpciones').val(postData);
             let formi = document.forms["frmNotificacion"];
-            debugger;
             document.forms["frmNotificacion"].submit();
         } catch (err) {
             alert(err.Description);

@@ -114,11 +114,13 @@
             });
 
         function bindEmocionesSemana(categorias, seriesData) {
+            console.log(seriesData);
             const ctx = $('#emotionsChart');
             const labels = seriesData.map(s => s.name);
-            const colors = ["#f08f0077", "#998f9477", "#f0559477", "#558f9477", "#f08f6677", "#f0877477", "#f0888477", "#998f9477", "#f0009477", "#f0811477", "#998f9477", "#f08ee477", "#f08dd477"];
+            const colors = ["#f08f00", "#f08f00", "#94f000", "#00f0b4", "#0058f0", "#8400f0", "#d800f0", "#f00094", "#f00050", "#f00000", "#f7af5c", "#f7af5c", "#90f75c"];
             const datasets = seriesData.map((d, index) => {
                 let data = seriesData && seriesData.length > 0 ? seriesData.filter(s => s.name == d.name) : [];
+                console.log('data', data)
                 const dataset = data && data.length > 0 ? data[0].data : [];
                 return {
                     label: d.name,
@@ -186,7 +188,7 @@
                     datasets: [{
                         label: 'Notificaciones respondidas',
                         data: !!data && data.length > 0 ? data : [],
-                        backgroundColor: ["#3661ed", "#3661ed", "#3661ed", "#3661ed", "#3661ed", "#3661ed"],
+                        backgroundColor: ["#f08f00", "#f08f00", "#94f000", "#00f0b4", "#0058f0", "#8400f0"],
                         borderRadius: 8
                     }],
                     options: {
@@ -226,11 +228,11 @@
                     labels: labels,
                     datasets: [{
                         data: data,
-                        backgroundColor: ["#3661ed"]
+                        backgroundColor: ["#f08f00", "#8196eb", "#94f000", "#00f0b4", "#0058f0", "#8400f0"],
                     }]
                 },
                 options: {
-                    plugins: { legend: { display: false }, },
+                    plugins: { legend: { display: true }, },
                     legend: {
                         display: false
                     },
